@@ -32,7 +32,7 @@
 	transform: scale(4, 4);
 	right: -55px;
 	padding-top: 10px;
-	color: #D5EDF5;
+	color: white;
 }	
 
 #top_container {
@@ -47,6 +47,7 @@
 
 #todo {
 	margin-left: 30px;
+	margin-top: 5px;
 }
 
 #todo a {
