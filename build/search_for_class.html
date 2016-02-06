@@ -33,7 +33,7 @@
 	<div class="row" id="top_container">
 		<div class="col-md-3 side-navbar">
 			<div class="panel panel-default" id="todo">
-				<div class="panel-heading">TODO List</div>
+				<div class="panel-heading" style="color:#354066;">TODO List</div>
 				<div class="panel-body">
 					<a href="#fafsa">2016-2017 FAFSA</a><br>
 					<a href="#grad">Graduation Paperwork</a><br>
@@ -41,20 +41,26 @@
 				</div>
 			</div>
 			<div class="panel panel-default" id="search-radios">
-					<div class="panel-heading">Class Search Filters</div>
+					<div class="panel-heading" style="color:#354066;">Class Search Filters</div>
+					<div class="checkbox">
+						<label><input type="checkbox" value="">Seats Available</label>
+					</div>
 					<div class="form-group">
 						<label for="keyword">Keyword:</label>
-						<input type="text" class="class-num" id="keyword">
+						<input type="text" class="class-num pull-right" id="keyword">
 					</div>
 					<div class="form-group">
 						<label for="class-num">Class Number:</label>
-						<input type="text" class="class-num" id="keyword">
+						<input type="text" class="class-num pull-right" id="keyword">
 					</div>
 					<div class="form-group">
 						<label for="subject">Subject:</label>
 						<select class="form-control" id="subject">
 							<option>Computer Science</option>
 						</select>
+					</div>
+					<div class="center-block">
+						<button id="singlebutton" name="singlebutton" class="btn btn-primary center-block" style="background-color:#354066;">Search</button>
 					</div>
 				</div>
 			</div>

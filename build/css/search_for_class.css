@@ -45,8 +45,24 @@
 	background-size: cover;
 }
 
+#todo {
+	margin-left: 30px;
+}
+
 #todo a {
 	color: #354066;
+}
+
+#search-radios {
+	margin-left: 30px;
+}
+
+#search-radios label {
+	margin-left: 15px;
+}
+
+#keyword {
+	margin-right: 5px;
 }
 
 html,body {
