@@ -1,6 +1,6 @@
 html, body {
 	/* Removing scrollbars on certain devices */
-	/* overflow: hidden; */
+	overflow: hidden;
 	height: 100%;
 	width: 100%;
 }
@@ -12,8 +12,12 @@ html, body {
 }
 
 .side-navbar {
-	background-color: red;
+	/* background-color: red; */
 	height: 100%;
+}
+
+#todo {
+	margin: 10px;
 }
 
 .pill {
