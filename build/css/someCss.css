@@ -3,19 +3,59 @@ html, body {
 	overflow: hidden;
 	height: 100%;
 	width: 100%;
+	position: relative;
 }
 
 #top_container {
 	height: 100%;
+	width: 100%;
 	background: url("/img/dubois_pond_chapel.jpg") no-repeat center center fixed;
 	background-size: cover;
+	position: absolute; 
+	top: 0px;
+	left: 1%;
+}
+
+#sidebar-container {
+	height: 100%;
+	width: 1%;
+	top: 0px;
+	position: absolute;
+	background-color: #354066;
+	z-index: 1;
+}
+
+#rotate-container {
+	transform: rotate(90deg);
+	position: absolute;
+	top: 45%;
+	left: -90px;
+	z-index: 1;
+}
+
+#trapezoid {
+	border-bottom: 100px solid #354066;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+	height: 0px;
+	width: 220px;
+	transform: scale(0.5, 0.5);
+}
+
+#glyph-scaling {
+	transform: scale(4, 4);
+	right: -55px;
+	padding-top: 10px;
 }
 
 #landing-panels {
-	/* background-color: red; */
 	height: 100%;
 }
 
 #landing-panels>.panel {
 	margin: 10px;
+}
+
+.glyphicon.glyphicon-chevron-up {
+	color: lightblue;
 }
