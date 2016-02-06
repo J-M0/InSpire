@@ -1,9 +1,14 @@
+/*	
+ *	#354066 = dark blue used for sidebar
+ * 	#D5EDF5 = light blue used for background 
+ */
+
 html, body {
 	/* Removing scrollbars on certain devices */
-	overflow: hidden;
 	height: 100%;
 	width: 100%;
 	position: relative;
+	overflow: hidden;
 }
 
 #top_container {
@@ -55,6 +60,12 @@ html, body {
 
 #landing-panels .panel {
 	margin-left: 30px;
+	color: #354066;
+}
+
+#landing-panels .panel-heading,
+#landing-panels .button {
+	color: #354066;
 }
 
 .glyphicon.glyphicon-chevron-up {
@@ -90,4 +101,17 @@ html, body {
 
 #calendar .thumbnail {
 	margin-bottom: 0px;
+}
+
+.center-block .glyphicon-search {
+	margin-left: 5px;
+	margin-bottom: 5px;
+}
+
+#search label {
+	margin-left: 15px;
+}
+
+#keyword, #class, #subject{
+	margin-right: 5px;
 }

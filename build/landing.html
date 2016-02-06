@@ -26,11 +26,30 @@
 						<a href="#etc">Etc.</a><br>
 					</div> <!-- End of todo panel body -->
 				</div> <!-- End of todo panel -->
-				<div class="panel panel-default" id="search-radios">
-					<div class="panel-heading">ApplesToApples</div>
-					<div class="panel-body">
-						Searching Panel
+				<div class="panel panel-default" id="search">
+					<div class="panel-heading"> Class Search Filters</div>
+					<div class="checkbox">
+						<label><input type="checkbox" value="">Seats Available</label>
 					</div>
+					<div class="form-group">
+						<label for="keyword">Keyword:</label>
+						<input type="text" class="class-num pull-right" id="keyword">
+					</div>
+					<div class="form-group">
+						<label for="class-num">Class Number:</label>
+						<input type="text" class="class-num pull-right" id="class">
+					</div>
+					<div class="form-group">
+						<label for="subject">Subject:</label>
+						<select class="form-control" id="subject">
+							<option>Computer Science</option>
+						</select>
+					</div> <!-- End of subject form-group -->
+					<div class="center-block">
+						<button id="singlebutton" name="singlebutton" class="btn btn-primary center-block">
+							Search <span class="glyphicon glyphicon-search"></span>
+						</button>
+					</div> <!-- End of center-block -->
 				</div> <!-- End of search panel -->
 			</div> <!-- End col-md-3 side-navbar -->
 			<div class="col-md-9" id="calendar">
