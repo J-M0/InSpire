@@ -24,23 +24,23 @@
 <!-- body stuff starts here -->
 <body>
 	<div id="sidebar-container">
-		<div id="rotate-container">
-			<div id="trapezoid">
-				<span class="glyphicon glyphicon-chevron-up" id="glyph-sclaing"></span>
-			</div>
-		</div>
-	</div>
-	<div class="row" id="top_container">
-		<div class="col-md-3 side-navbar">
-			<div class="panel panel-default" id="todo">
-				<div class="panel-heading" style="color:#354066;">TODO List</div>
-				<div class="panel-body">
-					<a href="#fafsa">2016-2017 FAFSA</a><br>
-					<a href="#grad">Graduation Paperwork</a><br>
-					<a href="#etc">Etc.</a><br>
-				</div>
-			</div>
-			<div class="panel panel-default" id="search-radios">
+			<div id="rotate-container">
+				<div id="trapezoid">
+					<span class="glyphicon glyphicon-chevron-up" id="glyph-scaling"></span>
+				</div> <!-- End of trapezoid -->
+			</div> <!-- End of rotate-container -->
+		</div> <!-- End of sidebar-container -->
+		<div class="row" id="top_container">
+			<div class="col-md-3" id="side-navbar">
+				<div class="panel panel-default" id="todo">
+					<div class="panel-heading">Important Notices</div>
+					<div class="panel-body">
+						<a href="#fafsa">2016-2017 FAFSA</a><br>
+						<a href="#grad">Graduation Paperwork</a><br>
+						<a href="#etc">Etc.</a><br>
+					</div> <!-- End of todo panel body -->
+				</div> <!-- End of todo panel -->
+				<div class="panel panel-default" id="search-radios">
 					<div class="panel-heading" style="color:#354066;">Class Search Filters</div>
 					<div class="checkbox">
 						<label><input type="checkbox" value="">Seats Available</label>
@@ -64,10 +64,21 @@
 							Search <span class="glyphicon glyphicon-search" style="margin-left:5px;margin-bottom:5px;"></span>
 						</button>
 					</div>
-				</div>
-			</div>
+				</div> <!-- End of search panel -->
+			</div> <!-- End col-md-3 side-navbar -->
+			<div class="col-md-9">
+				<div class="row" id="calendar">
+					<div class="col-md-3">
+						<div class="thumbnail">
+							<span class="day">Monday</span>
+						</div>
+						<div class="thumbnail">
+							<span class="day">Monday</span>
+						</div>
+					</div> <!-- End of col-md-3" -->
+				</div> <!-- End of col-md-9 row -->
+			</div> <!-- End of col-md-9 -->
 		</div>
-	</div>
 	<!-- necessary javascript -->
 	<script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
