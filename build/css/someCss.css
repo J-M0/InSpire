@@ -54,7 +54,7 @@ html, body {
 }
 
 #landing-panels .panel {
-	margin-left: 5px;
+	margin-left: 30px;
 }
 
 .glyphicon.glyphicon-chevron-up {
@@ -67,9 +67,21 @@ html, body {
 	display: block;
 }
 
+.time-55 {
+	height: 50px;
+}
+
+.time-75 {
+	height: 80px;
+}
+
 #calendar .col-md-3 {
-	width: 22%;
-	margin-left: -28px;
+	width: 21.5%;
+	margin-left: -2.5%;
+}
+
+#calendar .col-md-3:first-child {
+	margin-left: -2%;
 }
 
 #calendar .col-md-3:nth-child(2n) > .thumbnail {
