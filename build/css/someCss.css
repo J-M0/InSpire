@@ -56,6 +56,16 @@ html, body {
 	margin: 10px;
 }
 
+#calendar {
+	margin-top: 10px;
+}
+
 .glyphicon.glyphicon-chevron-up {
-	color: lightblue;
+	color: white;
+}
+
+.day {
+	font-weight: bold;
+	text-align: center;
+	display: block;
 }
