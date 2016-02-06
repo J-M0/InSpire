@@ -1,0 +1,21 @@
+html, body {
+	/* Removing scrollbars on certain devices */
+	/* overflow: hidden; */
+	height: 100%;
+	width: 100%;
+}
+
+#top_container {
+	height: 100%;
+	background: url("/img/dubois_pond_chapel.jpg") no-repeat center center fixed;
+	background-size: cover;
+}
+
+.side-navbar {
+	background-color: red;
+	height: 100%;
+}
+
+.pill {
+	background-color: blue;
+}
