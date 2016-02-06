@@ -11,15 +11,11 @@ html, body {
 	background-size: cover;
 }
 
-.side-navbar {
+#landing-panels {
 	/* background-color: red; */
 	height: 100%;
 }
 
-#todo {
+#landing-panels>.panel {
 	margin: 10px;
-}
-
-.pill {
-	background-color: blue;
 }
