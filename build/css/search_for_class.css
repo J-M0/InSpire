@@ -29,6 +29,7 @@ html, body {
 
 #side-navbar {
 	height: 100%;
+	padding-right: 20px;
 }
 
 #sidebar-container {
@@ -66,6 +67,10 @@ html, body {
 	color: #354066;
 }
 
+#search-results {
+	margin-left: 30px;
+}
+
 #search-radios {
 	margin-left: 30px;
 }
@@ -83,8 +88,8 @@ html, body {
 }
 
 #calendar .col-md-3 {
-	width: 21%;
-	margin-left: -28px;
+	width: 22%;
+	margin-left: -2%;
 }
 
 #calendar .col-md-3:nth-child(2n) > .thumbnail {
