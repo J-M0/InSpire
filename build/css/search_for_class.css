@@ -1,5 +1,10 @@
+/*
+ #354066; = dark blue, used for sidebar
+ #D5EDF5; = light blue, used for background
+*/
+
 #trapezoid {
-	border-bottom: 100px solid blue;
+	border-bottom: 100px solid #354066;
 	border-left: 50px solid transparent;
 	border-right: 50px solid transparent;
 	height: 0px;
@@ -12,29 +17,40 @@
 	position: absolute;
 	top: 45%;
 	left: -90px;
+	z-index: 1;
 }
 
 #sidebar-container {
 	height: 100%;
 	width: 1%;
 	position:relative;
-	background-color: blue;
+	background-color: #354066;
+	z-index: 1;
 }
 
 #glyph-sclaing {
 	transform: scale(4, 4);
 	right: -55px;
 	padding-top: 10px;
-}
+	color: #D5EDF5;
+}	
 
 #top_container {
 	height: 100%;
+	position: absolute;
+	width: 100%;
+	top: 0px;
+	left: 1%;
 	background: url("/img/dubois_pond_chapel.jpg") no-repeat center center fixed;
 	background-size: cover;
 }
 
+#todo a {
+	color: #354066;
+}
+
 html,body {
-	background-color: #D5EDF5;
 	height: 100%;
 	width: 100%;
+	
 }
