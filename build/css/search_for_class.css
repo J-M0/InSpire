@@ -82,15 +82,16 @@ html, body {
 
 #search-results {
 	margin-left: 30px;
+	padding-bottom: 5px;
 }
 
 #search-results .list-group-item {
-	
-	margin-left: -20px;
+	margin-left: -41px;
 }
 
 #search-radios {
 	margin-left: 30px;
+	padding-bottom: 13px;
 }
 
 #search-radios label {
@@ -120,6 +121,14 @@ html, body {
 
 #calendar .thumbnail {
 	margin-bottom: 0px;
+}
+
+.time-55 {
+	height: 50px;
+}
+
+.time-75 {
+	height: 80px;
 }
 
 .day, .time-55, .time-75{
