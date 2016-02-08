@@ -82,11 +82,11 @@ html, body {
 
 #search-results {
 	margin-left: 30px;
+	padding-bottom: 5px;
 }
 
 #search-results .list-group-item {
-	
-	margin-left: -20px;
+	margin-left: -41px;
 }
 
 #search-radios {
