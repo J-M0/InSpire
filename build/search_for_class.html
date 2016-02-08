@@ -26,37 +26,58 @@
 
 <!-- body stuff starts here -->
 <body>
+
+	<div class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Modal title</h4>
+				</div>
+				<div class="modal-body">
+					<p>One fine body&hellip;</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
 	<div id="sidebar-container">
-			<div id="rotate-container">
-				<div id="trapezoid">
-					<span class="glyphicon glyphicon-chevron-up" id="glyph-scaling"></span>
-				</div> <!-- End of trapezoid -->
-			</div> <!-- End of rotate-container -->
-		</div> <!-- End of sidebar-container -->
-		<div class="row" id="top_container">
-			<div class="col-md-3" id="side-navbar">
-				<div class="panel panel-default" id="todo">
-					<div class="panel-heading">Important Notices</div>
-					<div class="panel-body">
-						<a href="#fafsa">2016-2017 FAFSA</a><br>
-						<a href="#grad">Graduation Paperwork</a><br>
-						<a href="#etc">See More...</a><br>
-					</div> <!-- End of todo panel body -->
-				</div> <!-- End of todo panel -->
-				<div class="panel panel-default" id="search-radios">
-					<div class="panel-heading" style="color:#354066;">Class Search Filters</div>
-					<div class="checkbox">
-						<label><input type="checkbox" value="">Seats Available</label>
-					</div>
-					<div class="form-group">
-						<label for="keyword">Keyword:</label>
-						<input type="text" class="class-num pull-right" id="keyword">
-					</div>
-					<div class="form-group">
-						<label for="class-num">Class Number:</label>
-						<select class="form control" id="course-num-ops">
-							<option>=</option>
-							<option>>=</option>
+		<div id="rotate-container">
+			<div id="trapezoid">
+				<span class="glyphicon glyphicon-chevron-up" id="glyph-scaling"></span>
+			</div> <!-- End of trapezoid -->
+		</div> <!-- End of rotate-container -->
+	</div> <!-- End of sidebar-container -->
+	
+	<div class="row" id="top_container">
+		<div class="col-md-3" id="side-navbar">
+			<div class="panel panel-default" id="todo">
+				<div class="panel-heading">Important Notices</div>
+				<div class="panel-body">
+					<a href="#fafsa">2016-2017 FAFSA</a><br>
+					<a href="#grad">Graduation Paperwork</a><br>
+					<a href="#etc">See More...</a><br>
+				</div> <!-- End of todo panel body -->
+			</div> <!-- End of todo panel -->
+
+			<div class="panel panel-default" id="search-radios">
+				<div class="panel-heading" style="color:#354066;">Class Search Filters</div>
+				<div class="checkbox">
+					<label><input type="checkbox" value="">Seats Available</label>
+				</div>
+				<div class="form-group">
+					<label for="keyword">Keyword:</label>
+					<input type="text" class="class-num pull-right" id="keyword">
+				</div>
+				<div class="form-group">
+					<label for="class-num">Class Number:</label>
+					<select class="form control" id="course-num-ops">
+						<option>=</option>
+						<option>>=</option>
 						<input type="text" class="class-num pull-right" id="keyword">
 					</div>
 					<div class="form-group">
@@ -90,6 +111,7 @@
 					</div>
 				</div> <!-- End of search panel -->
 			</div> <!-- End col-md-3 side-navbar -->
+
 			<div class="col-md-9" id="calendar">
 				<div class="row">
 					<div class="col-md-3" id="monday">
@@ -151,9 +173,9 @@
 				</div> <!-- End of col-md-9 row -->
 			</div> <!-- End of col-md-9 -->
 		</div>
-	<!-- necessary javascript -->
-	<script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bundle.js"></script>
-</body>
+		<!-- necessary javascript -->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bundle.js"></script>
+	</body>
 <!-- body stuff ends here -->
