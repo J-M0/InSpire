@@ -40,7 +40,7 @@
 					<div class="panel-body">
 						<a href="#fafsa">2016-2017 FAFSA</a><br>
 						<a href="#grad">Graduation Paperwork</a><br>
-						<a href="#etc">Etc.</a><br>
+						<a href="#etc">See More...</a><br>
 					</div> <!-- End of todo panel body -->
 				</div> <!-- End of todo panel -->
 				<div class="panel panel-default" id="search-radios">
@@ -54,6 +54,9 @@
 					</div>
 					<div class="form-group">
 						<label for="class-num">Class Number:</label>
+						<select class="form control" id="course-num-ops">
+							<option>=</option>
+							<option>>=</option>
 						<input type="text" class="class-num pull-right" id="keyword">
 					</div>
 					<div class="form-group">
@@ -62,29 +65,30 @@
 							<option>Computer Science</option>
 						</select>
 					</div>
+					<div class="form-group">
+						<label for="gen-ed-cat">Gen Ed Category:</label>
+						<select class="form-control" id="gen-ed-cat">
+							<option>AL Literature</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="session">Session</label>
+						<select class="form-control" id="session">
+							<option>*University</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="instr-mode">Mode of Instruction</label>
+						<select class="form-control" id="instr-mode">
+							<option>Classroom</option>
+						</select>
+					</div>
 					<div class="center-block">
 						<button id="singlebutton" name="singlebutton" class="btn btn-primary center-block" style="background-color:#354066;">
 							Search <span class="glyphicon glyphicon-search" style="margin-left:5px;margin-bottom:5px;"></span>
 						</button>
 					</div>
 				</div> <!-- End of search panel -->
-				<div class="panel panel-default" id="search-results">
-					<div class="panel-heading" style="color:354066;">Search Results</div>
-					<ul class="list group">
-						<li class="list-group-item">
-							<span class="glyphicon glyphicon-asterisk" style="color:green;"></span>
-							CS 326 - Web Programming <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-							<br> 
-							<br>
-							A CLASS THAT WILL MAKE YOU TRULY HAVE SO MUCH FUN. TRUST ME. THIS IS FUN. TRUST ME.
-							<a href="#" style="text-align:right;">...More info</a>
-						</li>
-						<li class="list-group-item"> 
-							<span class="glyphicon glyphicon-play class-full-btn" style="color:blue;"></span>
-							CS 320 - Software Engineering <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-						</li>
-					</ul>
-				</div>
 			</div> <!-- End col-md-3 side-navbar -->
 			<div class="col-md-9" id="calendar">
 				<div class="row">
