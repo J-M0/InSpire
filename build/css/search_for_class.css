@@ -21,7 +21,7 @@ html, body {
 	display: block;
 }
 
-.day, .time-55, .time-75{
+.day, .time-55, .time-75, .time-2h{
 	font-weight: bold;
 	text-align: center;
 	display: block;
@@ -34,9 +34,41 @@ html, body {
 .time-75 {
 	height: 80px;
 }
+
+.time-2h {
+	height: 116px;
+}
+
+.nav a {
+    color: lightgrey;
+}
+
+.nav a:hover {
+    color: #354066;
+}
+
+.nav .nav a {
+    padding-left: 30px;
+}
+
+.nav .glyphicon-log-out,
+.nav .glyphicon-chevron-left,
+.nav .glyphicon-chevron-down {
+    padding-left: 5px;
+}
+
+.keyword {
+	margin-right: 5px;
+}
 /* class tags end here */
 
 /* id tags begin here */
+#spire {
+    color: lightgrey;
+    font-size: 30px;
+    vertical-align: middle;
+}
+
 #calendar {
 	margin-top: 5px;
 }
@@ -72,10 +104,6 @@ html, body {
 	right: -55px;
 	padding-top: 10px;
 	color: white;
-}
-
-#keyword {
-	margin-right: 5px;
 }
 
 #rotate-container {
@@ -145,4 +173,8 @@ html, body {
 	height: 0px;
 	width: 220px;
 	transform: scale(0.5, 0.5);
-}	
+}
+
+#trapezoid .glyphicon-chevron-down {
+  color: white;
+}
