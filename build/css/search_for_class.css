@@ -21,7 +21,7 @@ html, body {
 	display: block;
 }
 
-.day, .time-55, .time-75{
+.day, .time-55, .time-75, .time-2h{
 	font-weight: bold;
 	text-align: center;
 	display: block;
@@ -33,6 +33,10 @@ html, body {
 
 .time-75 {
 	height: 80px;
+}
+
+.time-2h {
+	height: 116px;
 }
 /* class tags end here */
 
@@ -145,4 +149,4 @@ html, body {
 	height: 0px;
 	width: 220px;
 	transform: scale(0.5, 0.5);
-}	
+}
