@@ -19,6 +19,10 @@ html, body {
     color: #354066;
 }
 
+.nav .nav a {
+    padding-left: 30px;
+}
+
 #spire {
     color: lightgrey;
     font-size: 30px;

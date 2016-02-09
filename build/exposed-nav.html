@@ -11,21 +11,24 @@
   <body>
 		<div id="sidebar-container">
 			<img src="img/umass_logo.png" alt="UMass Logo" width="102" height="100" id="logo">
-			<span id="spire"> SPIRE</span>
-			<ul class="nav nav-list">
+			<span id="spire"> InSPIRE</span>
+			<ul class="nav">
 				<li>
-					<a href="#">Student Home</a>
+					<a href="#">Student Home <span class="glyphicon glyphicon-chevron-left"></span></a>
 				</li>
 				<li>
-					<a href="#">Enrollment</a>
-					<ui class="nav nav-list">
-						<!-- I know this is bad, but the CSS is not working -->
-						<li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;Class Search</a></li>
-						<li><a href="#">&nbsp;&nbsp;&nbsp;&nbsp;Class Schedule</a></li>
-					</ui>
+					<a href="#">Enrollment <span class="glyphicon glyphicon-chevron-down"></span></a>
+				</li>
+				<ui class="nav">
+					<li><a href="#">Class Search</a></li>
+					<li><a href="#">Class Schedule</a></li>
+					<li><a href="#">Final Exam Schedule</a></li>
+				</ui>
+				<li>
+					<a href="#">Finances <span class="glyphicon glyphicon-chevron-left"></span></a>
 				</li>
 				<li>
-					<a href="#">Message Center</a>
+					<a href="#">Housing <span class="glyphicon glyphicon-chevron-left"></span></a>
 				</li>
 			</ul>
 			<div id="rotate-container">
