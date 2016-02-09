@@ -4,7 +4,7 @@
 <!-- class search page, initial commit -->
 
 <!-- TODO ITEMS -->
-<!-- fix css and get rid of inline styling --> 
+<!-- fix css and get rid of inline styling -->
 <!-- unify color scheme -->
 <!-- finish search results pane -->
 <!-- merge calendar with kevins code -->
@@ -52,14 +52,15 @@
 				</div>
 				<div class="form-group">
 					<label for="keyword">Keyword:</label>
-					<input type="text" class="class-num pull-right" id="keyword">
+					<input type="text" class="class-num pull-right keyword">
 				</div>
 				<div class="form-group">
 					<label for="class-num">Class Number:</label>
 					<select class="form control" id="course-num-ops">
 						<option>=</option>
-						<option>>=</option>
-						<input type="text" class="class-num pull-right" id="keyword">
+						<option>&gt;=</option>
+						<input type="text" class="class-num pull-right keyword">
+					</select>
 					</div>
 					<div class="form-group">
 						<label for="subject">Subject:</label>
@@ -160,3 +161,4 @@
 		<script src="js/bundle.js"></script>
 	</body>
 <!-- body stuff ends here -->
+</html>

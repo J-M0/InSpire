@@ -56,6 +56,10 @@ html, body {
 .nav .glyphicon-chevron-down {
     padding-left: 5px;
 }
+
+.keyword {
+	margin-right: 5px;
+}
 /* class tags end here */
 
 /* id tags begin here */
@@ -100,10 +104,6 @@ html, body {
 	right: -55px;
 	padding-top: 10px;
 	color: white;
-}
-
-#keyword {
-	margin-right: 5px;
 }
 
 #rotate-container {
