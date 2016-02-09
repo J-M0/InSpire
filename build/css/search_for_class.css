@@ -59,7 +59,7 @@ html, body {
 	right: -55px;
 	padding-top: 10px;
 	color: white;
-}	
+}
 
 #top_container {
 	height: 100%;
@@ -131,7 +131,11 @@ html, body {
 	height: 80px;
 }
 
-.day, .time-55, .time-75{
+.time-2h {
+	height: 116px;
+}
+
+.day, .time-55, .time-75, .time-2h {
 	font-weight: bold;
 	text-align: center;
 	display: block;
