@@ -29,6 +29,12 @@ html, body {
     vertical-align: middle;
 }
 
+.nav .glyphicon-log-out,
+.nav .glyphicon-chevron-left,
+.nav .glyphicon-chevron-down {
+    padding-left: 5px;
+}
+
 #top_container {
   height: 100%;
   width: 100%;
