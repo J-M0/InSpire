@@ -6,7 +6,7 @@ var startupName = "InSPIRE, Inc.";
 
 // Put your mock objects here, as in Workshop 4
 var initialData = {
-    // "Document" for students
+    // "Document" for students -- James Morris
     "students": {
         "12345678": {
             "studentId": "12345678",
@@ -14,7 +14,7 @@ var initialData = {
             "lastName": "Jackson",
             "gradYear": 2017,
             "major": "Gender Studies",
-            "birthDate": "1992-05-14",
+            "birthDate": "1992-03-14",
             "gender": "M",
             "mailStreetAddress": "58 Eastman Lane",
             "mailCity": "Amherst",
@@ -43,7 +43,7 @@ var initialData = {
             "lastName": "Thielen",
             "gradYear": 2018,
             "major": "Computer Science",
-            "birthDate": "1994-05-14",
+            "birthDate": "1994-12-14",
             "gender": "F",
             "mailStreetAddress": "160 Clark Hill Rd",
             "mailCity": "Amherst",
