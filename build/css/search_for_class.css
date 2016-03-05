@@ -6,7 +6,7 @@
 html, body {
 	height: 100%;
 	width: 100%;
-	overflow: hidden;
+	/*overflow: scroll;*/
 	position: relative;
 }
 
@@ -33,6 +33,7 @@ html, body {
 
 .time-75 {
 	height: 80px;
+
 }
 
 .time-2h {

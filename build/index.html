@@ -1,25 +1,232 @@
 <!DOCTYPE html>
+
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap Template</title>
-
-    <!-- Bootstrap -->
+    <title>InSPIRE</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Custom CSS goes here -->
-  </head>
-  <body>
-    <!-- Custom HTML goes here -->
-    Hello world!
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- App code -->
-    <script src="js/bundle.js"></script>
-  </body>
+    <link href="css/search_for_class.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="modal fade" tabindex="-1" role="dialog" id="!!Class!!Modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">More Info</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel panel-default" id="modal-list-items">
+                        <div class="panel-heading" style="color:#354066;"><span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> Class Information</div>
+                        <div class="panel-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Number</th>
+                                        <th>Section</th>
+                                        <th>Units</th>
+                                        <th>Enrolled</th>
+                                        <th>Cap</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>!!Class Number!!</td>
+                                        <td>!!Class section!!</td>
+                                        <td>!!Class units!!</td>
+                                        <td>!!Class enrolled!!</td>
+                                        <td>!!Class cap!!</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="panel-heading" style="color:#354066;"><span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> More Information</div>
+                        <div class="panel-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Time</th>
+                                        <th>Room</th>
+                                        <th>Instructor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>!!Class title!!</td>
+                                        <td>!!Class time!</td>
+                                        <td>!!Class location!!</td>
+                                        <td>!!Class instructor!!</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="panel-heading" style="color:#354066;"><span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> Class Description</div>
+                        <div class="panel-body"> !!Class Description!!
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add Class</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sidebar-container">
+        <div id="rotate-container">
+            <div id="trapezoid">
+                <span class="glyphicon glyphicon-chevron-up" id="glyph-scaling"></span>
+            </div> <!-- End of trapezoid -->
+        </div> <!-- End of rotate-container -->
+    </div> <!-- End of sidebar-container -->
+
+    <div class="row" id="top_container">
+        <div class="col-md-3" id="side-navbar">
+            <div class="panel panel-default" id="todo">
+                <div class="panel-heading">Important Notices</div>
+                <div class="panel-body">
+                    <a href="#fafsa">2016-2017 FAFSA</a><br>
+                    <a href="#grad">Graduation Paperwork</a><br>
+                    <a href="#etc">See More...</a><br>
+                </div> <!-- End of todo panel body -->
+            </div> <!-- End of todo panel -->
+
+            <div class="panel panel-default" id="search-radios">
+                <div class="panel-heading" style="color:#354066;">Class Search Filters</div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Seats Available</label>
+                </div>
+                <div class="form-group">
+                    <label for="keyword">Keyword:</label>
+                    <input type="text" class="class-num pull-right keyword">
+                </div>
+                <div class="form-group">
+                    <label for="class-num">Class Number:</label>
+                    <select class="form control" id="course-num-ops">
+                        <option>=</option>
+                        <option>&gt;=</option>
+                        <input type="text" class="class-num pull-right keyword">
+                    </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject:</label>
+                        <select class="form-control" id="subject">
+                            <option>!!Subject!!</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="gen-ed-cat">Gen Ed Category:</label>
+                        <select class="form-control" id="gen-ed-cat">
+                            <option>!!Gen Ed Category!!</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="session">Session</label>
+                        <select class="form-control" id="session">
+                            <option>!!Session!</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="instr-mode">Mode of Instruction</label>
+                        <select class="form-control" id="instr-mode">
+                            <option>!!Mode of instruction!!</option>
+                        </select>
+                    </div>
+                    <div class="center-block">
+                        <button id="singlebutton" name="singlebutton" class="btn btn-primary center-block" style="background-color:#354066;">
+                            Search <span class="glyphicon glyphicon-search" style="margin-left:5px;margin-bottom:5px;"></span>
+                        </button>
+                    </div>
+                </div>
+
+
+            <div class="panel panel-default" id="search-results">
+                <div class="panel-heading" style="color:354066;"><span class="glyphicon glyphicon-chevron-left" style="color:#354066;"></span> Search Results</div>
+                <ul class="list group">
+                    <li class="list-group-item">
+                        <span class="glyphicon glyphicon-!!glyphicon!!" style="color:green;"></span>
+                        !!Class name!! <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                        <br> 
+                        <br>
+                        !!Class description!!
+                        <a class="btn" data-toggle="modal" href="#!!Class!!Modal" style="text-align:right;">...More info</a>
+                    </li>
+                </ul>
+            </div>
+            </div> <!-- End col-md-3 side-navbar -->
+
+            <div class="col-md-9" id="calendar">
+                <div class="row" id="calBlock">
+                    <div class="col-md-3" id="monday">
+                        <div class="thumbnail"><span class="day">Monday</span></div>
+                        <div class="thumbnail"><span class="time-55">8:00 - 8:50</span></div>
+                        <div class="thumbnail"><span class="time-55">9:05 - 9:55</span></div>
+                        <div class="thumbnail"><span class="time-55">10:10 - 11:00</span></div>
+                        <div class="thumbnail"><span class="time-55">11:15 - 12:05</span></div>
+                        <div class="thumbnail"><span class="time-55">12:20 - 1:10</span></div>
+                        <div class="thumbnail"><span class="time-55">1:25 - 2:15</span></div>
+                        <div class="thumbnail"><span class="time-75">2:30 - 3:45</span></div>
+                        <div class="thumbnail"><span class="time-75">4:00 - 5:15</span></div>
+                        <div class="thumbnail"><span class="time-75">5:30 - 6:45</span></div>
+                    </div> <!-- End of monday -->
+                    <div class="col-md-3" id="tuesday">
+                        <div class="thumbnail"><span class="day">Tuesday</span></div>
+                        <div class="thumbnail"><span class="time-75">8:30 - 9:45</span></div>
+                        <div class="thumbnail"><span class="time-75">10:00 - 11:15</span></div>
+                        <div class="thumbnail"><span class="time-75">11:30 - 12:45</span></div>
+                        <div class="thumbnail"><span class="time-75">1:00 - 2:15</span></div>
+                        <div class="thumbnail"><span class="time-75">2:30 - 3:45</span></div>
+                        <div class="thumbnail"><span class="time-75">4:00 - 5:15</span></div>
+                        <div class="thumbnail"><span class="time-75">5:30 - 6:45</span></div>
+                    </div> <!-- End of tuesday -->
+                    <div class="col-md-3" id="wednesday">
+                        <div class="thumbnail"><span class="day">Wednesday</span></div>
+                        <div class="thumbnail"><span class="time-55">8:00 - 8:50</span></div>
+                        <div class="thumbnail"><span class="time-55">9:05 - 9:55</span></div>
+                        <div class="thumbnail"><span class="time-55">10:10 - 11:00</span></div>
+                        <div class="thumbnail"><span class="time-55">11:15 - 12:05</span></div>
+                        <div class="thumbnail"><span class="time-55">12:20 - 1:10</span></div>
+                        <div class="thumbnail"><span class="time-55">1:25 - 2:15</span></div>
+                        <div class="thumbnail"><span class="time-75">2:30 - 3:45</span></div>
+                        <div class="thumbnail"><span class="time-75">4:00 - 5:15</span></div>
+                        <div class="thumbnail"><span class="time-75">5:30 - 6:45</span></div>
+                    </div> <!-- End of wednesday -->
+                    <div class="col-md-3" id="thursday">
+                        <div class="thumbnail"><span class="day">Thursday</span></div>
+                        <div class="thumbnail"><span class="time-75">8:30 - 9:45</span></div>
+                        <div class="thumbnail"><span class="time-75">10:00 - 11:15</span></div>
+                        <div class="thumbnail"><span class="time-75">11:30 - 12:45</span></div>
+                        <div class="thumbnail"><span class="time-75">1:00 - 2:15</span></div>
+                        <div class="thumbnail"><span class="time-75">2:30 - 3:45</span></div>
+                        <div class="thumbnail"><span class="time-75">4:00 - 5:15</span></div>
+                        <div class="thumbnail"><span class="time-75">5:30 - 6:45</span></div>
+                    </div> <!-- End of thursday -->
+                    <div class="col-md-3" id="friday">
+                        <div class="thumbnail"><span class="day">Friday</span></div>
+                        <div class="thumbnail"><span class="time-55">8:00 - 8:50</span></div>
+                        <div class="thumbnail"><span class="time-55">9:05 - 9:55</span></div>
+                        <div class="thumbnail"><span class="time-55">10:10 - 11:00</span></div>
+                        <div class="thumbnail"><span class="time-55">11:15 - 12:05</span></div>
+                        <div class="thumbnail"><span class="time-55">12:20 - 1:10</span></div>
+                        <div class="thumbnail"><span class="time-55">1:25 - 2:15</span></div>
+                        <div class="thumbnail"><span class="time-75">2:30 - 3:45</span></div>
+                        <div class="thumbnail"><span class="time-75">4:00 - 5:15</span></div>
+                        <div class="thumbnail"><span class="time-75">5:30 - 6:45</span></div>
+                    </div> <!-- End of friday -->
+                </div> <!-- End of col-md-9 row -->
+            </div> <!-- End of col-md-9 -->
+        </div>
+        <!-- necessary javascript -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/bundle.js"></script>
+    </div>
+</body>
 </html>
