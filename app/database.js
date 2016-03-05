@@ -97,9 +97,92 @@ var initialData = {
         }
     },
     // "Document" storing professors
-    "professors": {},
+    "professors": {
+        "12345678": {
+            "professorId": "12345678",
+            "firstName": "Verty",
+            "lastName": "Verts",
+            "Office": "Cafeteria",
+            "Rating": "C+",
+        },
+        "83719683": {
+            "professorId": "83719683",
+            "firstName": "Jason",
+            "lastName": "Derulo",
+            "Office": "LGRT",
+            "Rating": "B+",
+        },
+        "23810589": {
+            "professorId": "23810589",
+            "firstName": "Tim",
+            "lastName": "Richards",
+            "Office": "CS something",
+            "Rating": "A+",
+        },
+    },
     // "Document" storing courses
-    "courses": {}
+    "courses": {
+        "12345678": {
+            "courseId": "12345678",
+            "description": "Fun",
+            "location": "in the sky",
+            "credits": "all of them",
+            "final exam slot": "01/22/2017",
+            "grade": "A+",
+            "completed": "yes",
+            "category": "art",
+        },
+        "92819522": {
+            "courseId": "92819522",
+            "description": "Ahhh",
+            "location": "ground",
+            "credits": "all of them",
+            "final exam slot": "02/22/2017",
+            "grade": "A",
+            "completed": "yes",
+            "category": "literature",
+        },
+        "19103958": {
+            "courseId": "19103958",
+            "description": "Work",
+            "location": "in the sky",
+            "credits": "3",
+            "final exam slot": "03/22/2017",
+            "grade": "A-",
+            "completed": "yes",
+            "category": "cs",
+        },
+        "18271821": {
+            "courseId": "18271821",
+            "description": "Much work",
+            "location": "in the sky",
+            "credits": "4",
+            "final exam slot": "04/22/2017",
+            "grade": "B",
+            "completed": "yes",
+            "category": "history",
+        },
+        "85938173": {
+            "courseId": "85938173",
+            "description": "Much HW",
+            "location": "in the sky",
+            "credits": "1",
+            "final exam slot": "05/22/2017",
+            "grade": "B-",
+            "completed": "yes",
+            "category": "music",
+        },
+        "09876543": {
+            "courseId": "09876543",
+            "description": "Difficult",
+            "location": "in the sky",
+            "credits": "2",
+            "final exam slot": "06/22/2017",
+            "grade": "C+",
+            "completed": "yes",
+            "category": "gym",
+        },
+    }
 };
 
 var data = JSON.parse(localStorage.getItem(startupName));
