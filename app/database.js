@@ -6,6 +6,7 @@ var startupName = "InSPIRE, Inc.";
 
 // Put your mock objects here, as in Workshop 4
 var initialData = {
+    // "Document" for students
     "students": {
         "12345678": {
             "studentId": "12345678",
@@ -94,8 +95,11 @@ var initialData = {
                 "zip": "77478"
             }
         }
-    }
-
+    },
+    // "Document" storing professors
+    "professors": {},
+    // "Document" storing courses
+    "courses": {}
 };
 
 var data = JSON.parse(localStorage.getItem(startupName));
