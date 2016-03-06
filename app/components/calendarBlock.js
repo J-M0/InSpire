@@ -9,7 +9,7 @@ export default class CalendarBlock extends React.Component {
 	render() {
 		return (
 			<div className="thumbnail">
-				<span className="day">Monday</span>
+				<span className={this.state.type}>{this.state.text}</span>
 			</div> // End of top div
 		);
 	}
