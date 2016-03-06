@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Calendar from './components/calendarBlock';
-import { IndexRoute, Router, Route, browserHistory } from 'react-router';
+import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
 class ProfilePage extends React.Component {
 	render() {
@@ -20,11 +20,10 @@ class App extends React.Component {
 }
 
 ReactDOM.render((
-	<Router history={browserHistory}>
+	<Router history={hashHistory}>
 		<Route path="/" component={App}>
-			{/* show the feed at /*/}
 			<IndexRoute component={Calendar} />
-			<Route path="/profile/:id" component={ProfilePage} />
+			<Route path="/profile/:id/search_for_class.html" component={Calendar} />
 		</Route>
 	</Router>
 ),document.getElementById('calendar'));

@@ -80,8 +80,8 @@ for (i=0; i < def75Times.length; i+= 2) {
 }
 
 export default class Calendar extends React.Component {
-
 	render() {
+		console.log(this.props.params.id);
 		return (
 			<div className="row">
 				<div className="col-md-3" id="Monday">
