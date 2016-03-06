@@ -1,5 +1,6 @@
 import React from 'react';
 //import {readDocuments} from '../database.js';
+import {getUserInfo} from '../server';
 
 /*
 var days = {
@@ -80,8 +81,19 @@ for (i=0; i < def75Times.length; i+= 2) {
 }
 
 export default class Calendar extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.state = props;
+	}
+
+	refresh() {
+		getUserInfo(this.props.params.id, (userInfo) => {
+			this.setState({userInfo});
+		});
+	}
+
 	render() {
-		console.log(this.props.params.id);
 		return (
 			<div className="row">
 				<div className="col-md-3" id="Monday">
@@ -115,5 +127,9 @@ export default class Calendar extends React.Component {
 				</div>
 			</div>
 		);
+	}
+
+	componentDidMount() {
+		this.refresh();
 	}
 }

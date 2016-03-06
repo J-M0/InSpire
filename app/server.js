@@ -10,3 +10,7 @@ function emulateServerReturn(data, cb) {
   }, 4);
 }
 
+export function getUserInfo(user, cb) {
+  var userData = readDocument('students', user);
+  emulateServerReturn(userData, cb);
+}
