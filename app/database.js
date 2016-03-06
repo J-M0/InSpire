@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+//import React from 'react';
+//import ReactDOM from 'react-dom';
 
 // Modify with your startup's name!
 var startupName = "InSPIRE, Inc.";
@@ -103,22 +103,22 @@ var initialData = {
             "firstName": "Verty",
             "lastName": "Verts",
             "Office": "Cafeteria",
-            "Rating": "C+",
+            "Rating": "C+"
         },
         "83719683": {
             "professorId": "83719683",
             "firstName": "Jason",
             "lastName": "Derulo",
             "Office": "LGRT",
-            "Rating": "B+",
+            "Rating": "B+"
         },
         "23810589": {
             "professorId": "23810589",
             "firstName": "Tim",
             "lastName": "Richards",
             "Office": "CS something",
-            "Rating": "A+",
-        },
+            "Rating": "A+"
+        }
     },
     // "Document" storing courses
     "courses": {
@@ -130,7 +130,7 @@ var initialData = {
             "final exam slot": "01/22/2017",
             "grade": "A+",
             "completed": "yes",
-            "category": "art",
+            "category": "art"
         },
         "92819522": {
             "courseId": "92819522",
@@ -140,7 +140,7 @@ var initialData = {
             "final exam slot": "02/22/2017",
             "grade": "A",
             "completed": "yes",
-            "category": "literature",
+            "category": "literature"
         },
         "19103958": {
             "courseId": "19103958",
@@ -150,7 +150,7 @@ var initialData = {
             "final exam slot": "03/22/2017",
             "grade": "A-",
             "completed": "yes",
-            "category": "cs",
+            "category": "cs"
         },
         "18271821": {
             "courseId": "18271821",
@@ -160,7 +160,7 @@ var initialData = {
             "final exam slot": "04/22/2017",
             "grade": "B",
             "completed": "yes",
-            "category": "history",
+            "category": "history"
         },
         "85938173": {
             "courseId": "85938173",
@@ -170,7 +170,7 @@ var initialData = {
             "final exam slot": "05/22/2017",
             "grade": "B-",
             "completed": "yes",
-            "category": "music",
+            "category": "music"
         },
         "09876543": {
             "courseId": "09876543",
@@ -180,8 +180,8 @@ var initialData = {
             "final exam slot": "06/22/2017",
             "grade": "C+",
             "completed": "yes",
-            "category": "gym",
-        },
+            "category": "gym"
+        }
     }
 };
 
@@ -207,6 +207,12 @@ export function readDocument(collection, id) {
   // Clone the data. We do this to model a database, where you receive a
   // *copy* of an object and not the object itself.
   return JSONClone(data[collection][id]);
+}
+
+export function readDocuments(collection) {
+  // Clone the data. We do this to model a database, where you receive a
+  // *copy* of an object and not the object itself.
+  return JSONClone(data[collection]);
 }
 
 /**
@@ -243,8 +249,12 @@ export function resetDatabase() {
 }
 
 /**
+ * Removing this until we actually add a reset button
+ */
+/**
  * Reset database button.
  */
+/*
 class ResetDatabase extends React.Component {
   render() {
     return (
@@ -261,3 +271,4 @@ ReactDOM.render(
   <ResetDatabase />,
   document.getElementById('db-reset')
 );
+*/

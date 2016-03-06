@@ -1,4 +1,5 @@
 import React from 'react';
+import {readDocuments} from '../database.js';
 
 /*
 var days = {
@@ -8,6 +9,10 @@ var days = {
 	"Thursday"  : 4,
 	"Friday"    : 5
 } */
+
+var courses = readDocuments('courses');
+{console.log(courses);}
+var blocks55 = []; var blocks75 = [];
 
 var def55Times = [
 	new Date(0,0,0, 8, 0), new Date(0,0,0, 8,50),
@@ -29,7 +34,6 @@ var def75Times = [
 ];
 
 class CalendarBlock extends React.Component {
-
 	constructor(props) {
 		super(props);
 		this.state = props;
@@ -37,15 +41,12 @@ class CalendarBlock extends React.Component {
 
 	render() {
 		return (
-			<div className="thumbnail">
-				<span className={this.state.type}>{this.state.text}</span>
-			</div> // End of top div
+			<div className="thumbnail"><span className={this.state.type}>{this.state.text}</span></div>
 		);
 	}
 }
 
-var blocks55 = [];
-var blocks75 = [];
+
 
 for (var i=0; i < def55Times.length; i+= 2) {
 	blocks55.push(<CalendarBlock key={i} type="time-55" text={def55Times[i].toTimeString().substring(0, 5).replace(/^0+/, '') + " - " + def55Times[i+1].toTimeString().substring(0, 5).replace(/^0+/, '')} />);
