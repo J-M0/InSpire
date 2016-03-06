@@ -1,19 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Calendar from './components/calendarBlock';
+import { IndexRoute, Router, Route, browserHistory } from 'react-router';
 
-// use this to remove leading 0's
-// replace(/^0+/, '')
+class ProfilePage extends React.Component {
+	render() {
+		return (
+			<p>This is the profile page for a user with ID {this.props.params.id}</p>
+		);
+	}
+}
 
-ReactDOM.render(
-	<Calendar />, document.getElementById('calendar')
-);
+class App extends React.Component {
+	render() {
+		return (
+			<div>{this.props.children}</div>
+		);
+	}
+}
 
-/*
-ReactDOM.render(
-	<div>
-			<CalendarBlock type="day" text="Tuesday" />
-			{blocks75}
-	</div>, document.getElementById('tuesday')
-);
-*/
+ReactDOM.render((
+	<Router history={browserHistory}>
+		<Route path="/" component={App}>
+			{/* show the feed at /*/}
+			<IndexRoute component={Calendar} />
+			<Route path="/profile/:id" component={ProfilePage} />
+		</Route>
+	</Router>
+),document.getElementById('calendar'));

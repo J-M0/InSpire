@@ -1,17 +1,17 @@
 import React from 'react';
-import {readDocuments} from '../database.js';
+//import {readDocuments} from '../database.js';
 
 /*
 var days = {
-	"Monday"    : 1,
-	"Tuesday"   : 2,
-	"Wednesday" : 3,
-	"Thursday"  : 4,
-	"Friday"    : 5
+	"1" : "Monday",
+	"2" : "Tuesday",
+	"3" : "Wednesday",
+	"4" : "Thursday",
+	"5" : "Friday"
 } */
 
-var courses = readDocuments('courses');
-{console.log(courses);}
+//var courses = readDocuments('courses');
+//{console.log(courses);}
 var blocks55 = []; var blocks75 = [];
 
 var def55Times = [
@@ -39,14 +39,37 @@ class CalendarBlock extends React.Component {
 		this.state = props;
 	}
 
+	handleClick(e) {
+		e.preventDefault();
+		console.log("kappa");
+	}
+
 	render() {
 		return (
-			<div className="thumbnail"><span className={this.state.type}>{this.state.text}</span></div>
+			<div className="thumbnail"><span className={this.state.type} onClick={(e) => this.handleClick(e)}>{this.state.text}</span></div>
 		);
 	}
 }
 
+/*
+class CourseButton extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = props;
+	}
 
+	render () {
+		return (
+			<button type="button" className="btn btn-primary btn-block">
+				<p>2:30 - 3:45PM</p>
+				<p>AFROAM 133 - 01</p>
+				<p>Lecture</p>
+				<p>ILC S131</p>
+			</button>
+		);
+	}
+}
+*/
 
 for (var i=0; i < def55Times.length; i+= 2) {
 	blocks55.push(<CalendarBlock key={i} type="time-55" text={def55Times[i].toTimeString().substring(0, 5).replace(/^0+/, '') + " - " + def55Times[i+1].toTimeString().substring(0, 5).replace(/^0+/, '')} />);

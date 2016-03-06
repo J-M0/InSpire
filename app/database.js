@@ -35,7 +35,13 @@ var initialData = {
                 "city": "Bessemer",
                 "state": "AL",
                 "zip": "35224"
-            }
+            },
+            "courses": [
+              "12345678", "92819522", "19103958"
+            ],
+            "cart": [
+              "18271821", "85938173", "09876543"
+            ]
         },
         "27133668": {
             "studentId": "27133668",
@@ -64,7 +70,13 @@ var initialData = {
                 "city": "South Portland",
                 "state": "ME",
                 "zip": "04106"
-            }
+            },
+            "courses": [
+              "18271821", "85938173", "09876543"
+            ],
+            "cart": [
+              "12345678", "92819522", "19103958"
+            ]
         },
         "07894436": {
             "studentId": "07894436",
@@ -93,7 +105,13 @@ var initialData = {
                 "city": "Sugar Land",
                 "state": "TX",
                 "zip": "77478"
-            }
+            },
+            "courses": [
+              "12345678", "19103958", "85938173"
+            ],
+            "cart": [
+              "92819522", "18271821", "09876543"
+            ]
         }
     },
     // "Document" storing professors
@@ -123,64 +141,82 @@ var initialData = {
     // "Document" storing courses
     "courses": {
         "12345678": {
-            "courseId": "12345678",
+            "courseId": "COMPSCI 220",
+            "courseName": "Programming Methodology",
             "description": "Fun",
             "location": "in the sky",
             "credits": "all of them",
             "final exam slot": "01/22/2017",
             "grade": "A+",
             "completed": "yes",
-            "category": "art"
+            "category": "art",
+            "start": new Date(0,0,0,8,0),
+            "end": new Date(0,0,0,8,55)
         },
         "92819522": {
-            "courseId": "92819522",
+            "courseId": "COMPSCI 230",
+            "courseName": "Computer Systems Principles",
             "description": "Ahhh",
             "location": "ground",
             "credits": "all of them",
             "final exam slot": "02/22/2017",
             "grade": "A",
             "completed": "yes",
-            "category": "literature"
+            "category": "literature",
+            "start": new Date(0,0,0,9,5),
+            "end": new Date(0,0,0,9,55)
         },
         "19103958": {
-            "courseId": "19103958",
+            "courseId": "COMPSCI 240",
+            "courseName": "Reasoning About Uncertainty",
             "description": "Work",
             "location": "in the sky",
             "credits": "3",
             "final exam slot": "03/22/2017",
             "grade": "A-",
             "completed": "yes",
-            "category": "cs"
+            "category": "cs",
+            "start" : new Date(0,0,0,11,15),
+            "end" : new Date(0,0,0,12,5)
         },
         "18271821": {
-            "courseId": "18271821",
+            "courseId": "COMPSCI 250",
+            "courseName": "Introduction to Computation",
             "description": "Much work",
             "location": "in the sky",
             "credits": "4",
             "final exam slot": "04/22/2017",
             "grade": "B",
             "completed": "yes",
-            "category": "history"
+            "category": "history",
+            "start" : new Date(0,0,0,2,30),
+            "end" : new Date(0,0,0,3,45)
         },
         "85938173": {
-            "courseId": "85938173",
+            "courseId": "COMPSCI 320",
+            "courseName": "Software Engineering",
             "description": "Much HW",
             "location": "in the sky",
             "credits": "1",
             "final exam slot": "05/22/2017",
             "grade": "B-",
             "completed": "yes",
-            "category": "music"
+            "category": "music",
+            "start" : new Date(0,0,0,3,0),
+            "end" : new Date(0,0,0,6,0)
         },
         "09876543": {
-            "courseId": "09876543",
+            "courseId": "COMPSCI 326",
+            "courseName": "Web Programming",
             "description": "Difficult",
             "location": "in the sky",
             "credits": "2",
             "final exam slot": "06/22/2017",
             "grade": "C+",
             "completed": "yes",
-            "category": "gym"
+            "category": "gym",
+            "start" : new Date(0,0,0,5,30),
+            "end" : new Date(0,0,0,6,45)
         }
     }
 };
