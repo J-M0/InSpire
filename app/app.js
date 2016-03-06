@@ -10,5 +10,5 @@ class UghWorld extends React.Component {
 }
 
 ReactDOM.render(
-	<UghWorld />, document.getElementById('top_container')
+	<UghWorld />, document.getElementById('N/A')
 );
