@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import CalendarBlock from './components/calendarBlock';
 
 class UghWorld extends React.Component {
 	render () {
@@ -10,5 +11,5 @@ class UghWorld extends React.Component {
 }
 
 ReactDOM.render(
-	<UghWorld />, document.getElementById('N/A')
+	<CalendarBlock />, document.getElementById('monday')
 );
