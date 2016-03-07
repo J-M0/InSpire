@@ -164,8 +164,8 @@ var initialData = {
             "grade": "A",
             "completed": "yes",
             "category": "literature",
-            "start": new Date(0,0,0,9,5),
-            "end": new Date(0,0,0,9,55),
+            "start": new Date(0,0,0,8,30),
+            "end": new Date(0,0,0,9,45),
             "days": ["Tuesday", "Thursday"]
         },
         "19103958": {
