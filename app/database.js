@@ -14,7 +14,7 @@ var initialData = {
             "lastName": "Jackson",
             "gradYear": 2017,
             "major": "Gender Studies",
-            "birthDate": "1992-03-14",
+            "birthDate": new Date(1992, 2, 14),
             "gender": "M",
             "mailStreetAddress": "58 Eastman Lane",
             "mailCity": "Amherst",
@@ -49,7 +49,7 @@ var initialData = {
             "lastName": "Thielen",
             "gradYear": 2018,
             "major": "Computer Science",
-            "birthDate": "1994-12-14",
+            "birthDate": new Date(1994, 11, 14),
             "gender": "F",
             "mailStreetAddress": "160 Clark Hill Rd",
             "mailCity": "Amherst",
@@ -84,7 +84,7 @@ var initialData = {
             "lastName": "Ensor",
             "gradYear": 2016,
             "major": "Chemistry",
-            "birthDate": "1993-05-25",
+            "birthDate": new Date(1993, 4, 25),
             "gender": "M",
             "mailStreetAddress": "230 Sunset Ave",
             "mailCity": "Amherst",
@@ -146,13 +146,13 @@ var initialData = {
             "description": "Fun",
             "location": "in the sky",
             "credits": "4",
-            "final exam slot": "01/22/2017",
+            "final exam slot": new Date(2017, 0, 22),
             "grade": "A+",
             "completed": "yes",
             "category": "art",
             "start": new Date(0,0,0,8,0),
             "end": new Date(0,0,0,8,55),
-						"days": [1,3,5]
+			"days": [1,3,5]
         },
         "92819522": {
             "courseId": "COMPSCI 230",
@@ -160,13 +160,13 @@ var initialData = {
             "description": "Ahhh",
             "location": "ground",
             "credits": "4",
-            "final exam slot": "02/22/2017",
+            "final exam slot": new Date(2017, 1, 22),
             "grade": "A",
             "completed": "yes",
             "category": "literature",
             "start": new Date(0,0,0,9,5),
             "end": new Date(0,0,0,9,55),
-						"days": [2,4]
+			"days": [2,4]
         },
         "19103958": {
             "courseId": "COMPSCI 240",
@@ -174,13 +174,13 @@ var initialData = {
             "description": "Work",
             "location": "in the sky",
             "credits": "3",
-            "final exam slot": "03/22/2017",
+            "final exam slot": new Date(2017, 2, 22),
             "grade": "A-",
             "completed": "yes",
             "category": "cs",
             "start" : new Date(0,0,0,11,15),
             "end" : new Date(0,0,0,12,5),
-						"days": [1,3,5]
+			"days": [1,3,5]
         },
         "18271821": {
             "courseId": "COMPSCI 250",
@@ -188,13 +188,13 @@ var initialData = {
             "description": "Much work",
             "location": "in the sky",
             "credits": "4",
-            "final exam slot": "04/22/2017",
+            "final exam slot": new Date(2017, 3, 22),
             "grade": "B",
             "completed": "yes",
             "category": "history",
             "start" : new Date(0,0,0,14,30),
             "end" : new Date(0,0,0,15,45),
-						"days": [1,3,5]
+			"days": [1,3,5]
         },
         "85938173": {
             "courseId": "COMPSCI 320",
@@ -202,13 +202,13 @@ var initialData = {
             "description": "Much HW",
             "location": "in the sky",
             "credits": "3",
-            "final exam slot": "05/22/2017",
+            "final exam slot": new Date(2017, 4, 22),
             "grade": "B-",
             "completed": "yes",
             "category": "music",
             "start" : new Date(0,0,0,15,0),
             "end" : new Date(0,0,0,18,0),
-						"days": [2,4]
+			"days": [2,4]
         },
         "09876543": {
             "courseId": "COMPSCI 326",
@@ -216,13 +216,13 @@ var initialData = {
             "description": "Difficult",
             "location": "in the sky",
             "credits": "3",
-            "final exam slot": "06/22/2017",
+            "final exam slot": new Date(2017, 5, 22),
             "grade": "C+",
             "completed": "yes",
             "category": "gym",
             "start" : new Date(0,0,0,17,30),
             "end" : new Date(0,0,0,18,45),
-						"days": [2,4]
+			"days": [2,4]
         }
     }
 };
