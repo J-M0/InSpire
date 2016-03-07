@@ -18,8 +18,11 @@ export function getStudentInfo(id, cb) {
 export function getCourses(user, cb) {
   var student = readDocument('students', user);
 
-	for (var i = 0, courses=[]; i < student.courses.length; i++)
-		courses.push(readDocument('courses', student.courses[i]));
+	if (student !== null) {
+		for (var i = 0, courses=[]; i < student.courses.length; i++) {
+			courses.push(readDocument('courses', student.courses[i]));
+		}
+	}
 
   emulateServerReturn(courses, cb);
 }

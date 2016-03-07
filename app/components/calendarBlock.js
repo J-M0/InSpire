@@ -93,10 +93,13 @@ export default class Calendar extends React.Component {
 	render() {
 		return (
 			<div className="row">
-				{/*{getCourses(this.props.params.id, (a) => console.log(a))}*/}
-				{console.log(getCourses(this.props.params.id, (a) => {
-					a.map((b)=>console.log(b));
-				}))}
+				{getCourses(this.props.params.id, (it) => {
+					if (it !== undefined)
+						it.map((v) => {
+							console.log(v)
+						})
+				})}
+
 				{days.map((obj, i) => {
 					switch(i) {
 						case 0: case 2: case 4:
