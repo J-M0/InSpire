@@ -59,6 +59,12 @@ class CalendarBlock extends React.Component {
 			var endTime 	= this.state.end.toLocaleTimeString();
 		}
 
+		if(this.state.enrolled !== undefined) {
+			this.state.enrolled.map((a) => {
+				console.log(a);
+			})
+		}
+
 		return (
 			<div className="thumbnail">
 				<span className={this.state.type} onClick={(e) => this.handleClick(e)}>
@@ -116,7 +122,7 @@ export default class Calendar extends React.Component {
 									})}
 
 									{default75Times.map((time, i) => {
-										if (i > 8) {
+										if (i > 6) {
 											if (this.state.userInfo !== undefined && i%2 === 0) {
 												return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"TTh" + i/2} type="time-75" 
 																start={default75Times[i]} end={default75Times[i+1]} />);
