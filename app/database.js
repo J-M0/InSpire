@@ -152,7 +152,7 @@ var initialData = {
             "category": "art",
             "start": new Date(0,0,0,8,0),
             "end": new Date(0,0,0,8,55),
-			"days": [1,3,5]
+            "days": ["Monday","Wednesday","Friday"]
         },
         "92819522": {
             "courseId": "COMPSCI 230",
@@ -166,7 +166,7 @@ var initialData = {
             "category": "literature",
             "start": new Date(0,0,0,9,5),
             "end": new Date(0,0,0,9,55),
-			"days": [2,4]
+            "days": ["Tuesday", "Thursday"]
         },
         "19103958": {
             "courseId": "COMPSCI 240",
@@ -180,7 +180,7 @@ var initialData = {
             "category": "cs",
             "start" : new Date(0,0,0,11,15),
             "end" : new Date(0,0,0,12,5),
-			"days": [1,3,5]
+            "days": ["Monday","Wednesday","Friday"]
         },
         "18271821": {
             "courseId": "COMPSCI 250",
@@ -194,7 +194,7 @@ var initialData = {
             "category": "history",
             "start" : new Date(0,0,0,14,30),
             "end" : new Date(0,0,0,15,45),
-			"days": [1,3,5]
+            "days": ["Monday","Wednesday","Friday"]
         },
         "85938173": {
             "courseId": "COMPSCI 320",
@@ -208,7 +208,7 @@ var initialData = {
             "category": "music",
             "start" : new Date(0,0,0,15,0),
             "end" : new Date(0,0,0,18,0),
-			"days": [2,4]
+            "days": ["Tuesday", "Thursday"]
         },
         "09876543": {
             "courseId": "COMPSCI 326",
@@ -222,7 +222,7 @@ var initialData = {
             "category": "gym",
             "start" : new Date(0,0,0,17,30),
             "end" : new Date(0,0,0,18,45),
-			"days": [2,4]
+            "days": ["Tuesday", "Thursday"]
         }
     }
 };

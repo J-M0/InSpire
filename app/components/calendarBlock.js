@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {getStudentInfo, getEnrolledCourses, queryCourses} from '../server';
 
 var days = [
@@ -32,6 +33,9 @@ class CalendarBlock extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = props;
+		getEnrolledCourses(this.state.userId, (enrolled) => {
+			this.setState({enrolled});
+		});
 	}
 
 	refresh() {
@@ -41,17 +45,10 @@ class CalendarBlock extends React.Component {
 
 	handleClick(e) {
 		e.preventDefault();
-		queryCourses(this.state.start, this.state.end, (available) => {
-			this.setState({available});
-		});
 		// TODO: Create modal for viewing possible classes of something
-		if (this.state.available !== undefined && this.state.available[0].start !== undefined) {
-			var tmp = new Date(this.state.available[0].start);
-			console.log(tmp.toLocaleTimeString());
-		}
 		this.refresh();
 	}
-
+			
 	render() {
 		if (this.state.text === undefined) {
 			var startTime = this.state.start.toLocaleTimeString();
@@ -59,8 +56,8 @@ class CalendarBlock extends React.Component {
 		}
 
 		if(this.state.enrolled !== undefined) {
-			this.state.enrolled.map((a) => {
-				console.log(a);
+			this.state.enrolled.map((a, i) => {
+				if (i == 1) {}
 			})
 		}
 
@@ -78,8 +75,8 @@ class CalendarBlock extends React.Component {
 	}
 
 	componentDidMount() {
-		getEnrolledCourses(this.state.userId, (enrolled) => {
-			this.setState({enrolled});
+		queryCourses(this.state.start, this.state.end, (available) => {
+			this.setState({available});
 		});
 	}
 }
@@ -116,15 +113,15 @@ export default class Calendar extends React.Component {
 												* In calendarBlocks, we have this.state.flag(this) which compiles to Calendar.courseFlag(CalendarBlock)
 												*/}
 											return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"MWF" + i/2} type="time-55" 
-															start={default55Times[i]} end={default55Times[i+1]} />);
+															start={default55Times[i]} end={default55Times[i+1]} day={obj.day}/>);
 										}
 									})}
 
 									{default75Times.map((time, i) => {
 										if (i > 6) {
 											if (this.state.userInfo !== undefined && i%2 === 0) {
-												return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"TTh" + i/2} type="time-75" 
-																start={default75Times[i]} end={default75Times[i+1]} />);
+												return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"MWF-Long" + i/2} type="time-75" 
+																start={default75Times[i]} end={default75Times[i+1]} day={obj.day}/>);
 											}
 										}
 									})}
@@ -137,7 +134,7 @@ export default class Calendar extends React.Component {
 								{default75Times.map((time, i) => {
 									if (this.state.userInfo !== undefined && i%2 === 0) {
 										return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"TTh" + i/2} type="time-75" 
-														start={default75Times[i]} end={default75Times[i+1]} />);
+														start={default75Times[i]} end={default75Times[i+1]} day={obj.day}/>);
 									}
 								})}
 							</div>
