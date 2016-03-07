@@ -1,5 +1,5 @@
 import React from 'react';
-import {getStudentInfo, queryCourses} from '../server';
+import {getStudentInfo, getEnrolledCourses, queryCourses} from '../server';
 
 var days = [
 	{"day" : "Monday"},
@@ -34,15 +34,21 @@ class CalendarBlock extends React.Component {
 		this.state = props;
 	}
 
+	refresh() {
+		if (this.state.flag !== undefined)
+			this.state.flag(this);
+		//getEnrolledCourses(this.props.params.id, (enrolled) => {
+		//	this.setState({enrolled});
+		//});
+		//console.log(this.state.enrolled);
+	}
+
 	handleClick(e) {
 		e.preventDefault();
 		queryCourses(this.state.start, this.state.end, (available) => {
 			this.setState({available});
 		});
-		// Note to Stephen: The above should grab all the courses that 
-		// fit in a time slot when you click it. That said, however, 
-		// it isn't perfect. Can you add days of the week to the courses
-		// in our database? 
+		// TODO: Add days of the week to courses in database.js
 		// TODO: Create modal for viewing possible classes of something
 		if (this.state.available !== undefined && this.state.available[0].start !== undefined) {
 			var tmp = new Date(this.state.available[0].start);
@@ -69,6 +75,10 @@ class CalendarBlock extends React.Component {
 			</div>
 		);
 	}
+
+	componentDidMount() {
+		this.refresh();
+	}
 }
 
 export default class Calendar extends React.Component {
@@ -84,6 +94,10 @@ export default class Calendar extends React.Component {
 		});
 	}
 
+	courseFlag(obj) {
+		console.log(obj);
+	}
+
 	render() {
 		return (
 			<div className="row">
@@ -95,7 +109,10 @@ export default class Calendar extends React.Component {
 									<CalendarBlock type="day" text={obj.day} />
 									{default55Times.map((time, i) => {
 										if (this.state.userInfo !== undefined && i%2 === 0) {
-											return(<CalendarBlock userId={this.state.userInfo.studentId} key={"MWF" + i/2} type="time-55" 
+											{/* (a)=>this.courseFlag(a) says to send as an argument the function courseFlag with one argument
+												* In calendarBlocks, we have this.state.flag(this) which compiles to Calendar.courseFlag(CalendarBlock)
+												*/}
+											return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"MWF" + i/2} type="time-55" 
 															start={default55Times[i]} end={default55Times[i+1]} />);
 										}
 									})}
@@ -103,7 +120,7 @@ export default class Calendar extends React.Component {
 									{default75Times.map((time, i) => {
 										if (i > 8) {
 											if (this.state.userInfo !== undefined && i%2 === 0) {
-												return(<CalendarBlock userId={this.state.userInfo.studentId} key={"TTh" + i/2} type="time-75" 
+												return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"TTh" + i/2} type="time-75" 
 																start={default75Times[i]} end={default75Times[i+1]} />);
 											}
 										}
@@ -116,7 +133,7 @@ export default class Calendar extends React.Component {
 								<CalendarBlock type="day" text={obj.day} />
 								{default75Times.map((time, i) => {
 									if (this.state.userInfo !== undefined && i%2 === 0) {
-										return(<CalendarBlock userId={this.state.userInfo.studentId} key={"TTh" + i/2} type="time-75" 
+										return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"TTh" + i/2} type="time-75" 
 														start={default75Times[i]} end={default75Times[i+1]} />);
 									}
 								})}
