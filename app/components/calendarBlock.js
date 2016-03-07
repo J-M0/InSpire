@@ -44,7 +44,6 @@ class CalendarBlock extends React.Component {
 		queryCourses(this.state.start, this.state.end, (available) => {
 			this.setState({available});
 		});
-		// TODO: Add days of the week to courses in database.js
 		// TODO: Create modal for viewing possible classes of something
 		if (this.state.available !== undefined && this.state.available[0].start !== undefined) {
 			var tmp = new Date(this.state.available[0].start);
