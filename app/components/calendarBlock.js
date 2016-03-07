@@ -2,14 +2,13 @@ import React from 'react';
 //import {readDocuments} from '../database.js';
 import {getUserInfo} from '../server';
 
-/*
-var days = {
-	"1" : "Monday",
-	"2" : "Tuesday",
-	"3" : "Wednesday",
-	"4" : "Thursday",
-	"5" : "Friday"
-} */
+var days = [
+	{"day" : "Monday"},
+	{"day" : "Tuesday"},
+	{"day" : "Wednesday"},
+	{"day" : "Thursday"},
+	{"day" : "Friday"}
+];
 
 //var courses = readDocuments('courses');
 //{console.log(courses);}
@@ -73,11 +72,11 @@ class CourseButton extends React.Component {
 */
 
 for (var i=0; i < def55Times.length; i+= 2) {
-	blocks55.push(<CalendarBlock key={i} type="time-55" text={def55Times[i].toTimeString().substring(0, 5).replace(/^0+/, '') + " - " + def55Times[i+1].toTimeString().substring(0, 5).replace(/^0+/, '')} />);
+	blocks55.push(<CalendarBlock key={"MWF" + i} type="time-55" text={def55Times[i].toTimeString().substring(0, 5).replace(/^0+/, '') + " - " + def55Times[i+1].toTimeString().substring(0, 5).replace(/^0+/, '')} />);
 }
 
 for (i=0; i < def75Times.length; i+= 2) {
-	blocks75.push(<CalendarBlock key={i} type="time-75" text={def75Times[i].toTimeString().substring(0, 5).replace(/^0+/, '') + " - " + def75Times[i+1].toTimeString().substring(0, 5).replace(/^0+/, '')} />);
+	blocks75.push(<CalendarBlock key={"TTh" + i} type="time-75" text={def75Times[i].toTimeString().substring(0, 5).replace(/^0+/, '') + " - " + def75Times[i+1].toTimeString().substring(0, 5).replace(/^0+/, '')} />);
 }
 
 export default class Calendar extends React.Component {
@@ -96,35 +95,24 @@ export default class Calendar extends React.Component {
 	render() {
 		return (
 			<div className="row">
-				<div className="col-md-3" id="Monday">
-					<CalendarBlock type="day" text="Monday" />
-					{blocks55}
-					{blocks75[4]}
-					{blocks75[5]}
-					{blocks75[6]}
-				</div>
-				<div className="col-md-3" id="Tuesday">
-					<CalendarBlock type="day" text="Tuesday" />
-					{blocks75}
-				</div>
-				<div className="col-md-3" id="Wednesday">
-					<CalendarBlock type="day" text="Wednesday" />
-					{blocks55}
-					{blocks75[4]}
-					{blocks75[5]}
-					{blocks75[6]}
-				</div>
-				<div className="col-md-3" id="Thursday">
-					<CalendarBlock type="day" text="Thursday" />
-					{blocks75}
-				</div>
-				<div className="col-md-3" id="Friday">
-					<CalendarBlock type="day" text="Friday" />
-					{blocks55}
-					{blocks75[4]}
-					{blocks75[5]}
-					{blocks75[6]}
-				</div>
+				{days.map((obj, i) => {
+					switch(i) {
+						case 0: case 2: case 4:
+							return (
+								<div key={"col" + i} className="col-md-3" id={obj.day}>
+									<CalendarBlock type="day" text={obj.day} />
+									{blocks55.concat(blocks75[4]).concat(blocks75[5]).concat(blocks75[6])}
+								</div>
+							);
+						case 1: case 3:
+						return (
+							<div key={"col" + i} className="col-md-3" id={obj.day}>
+								<CalendarBlock type="day" text={obj.day} />
+								{blocks75}
+							</div>
+						);
+					}
+				})}
 			</div>
 		);
 	}
