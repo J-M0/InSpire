@@ -30,16 +30,18 @@ export function getEnrolledCourses(user, cb) {
 export function queryCourses(start, end, cb) {
 	var available = [];
 	var courses = readDocuments('courses');
+
+	// Recast the variables since they were lost somehow
 	var recastStart = new Date(start);
 	var recastEnd = new Date(end);
 
 	for (var i in courses) {
-		var tmp = new Date(courses[i].start);
-		if(tmp < recastStart) {
-			console.log("start =" + recastStart.toLocaleTimeString());
-			console.log(tmp.toLocaleTimeString());
+		var courseStart = new Date(courses[i].start);
+		var courseEnd 	= new Date(courses[i].end);
+		if(courseStart <= recastStart && courseEnd >= recastStart) {
+			available.push(courses[i]);
 		}
-		//console.log(courses[i].start.toTimeString().substring(0, 5).replace(/^0+/, ''));
 	}
-	//emulateServerReturn(, cb);
+
+	emulateServerReturn(available, cb);
 }

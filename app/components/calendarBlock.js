@@ -1,8 +1,6 @@
 import React from 'react';
 import {getStudentInfo, queryCourses} from '../server';
 
-var blocks55 = [], blocks75 = [];
-
 var days = [
 	{"day" : "Monday"},
 	{"day" : "Tuesday"},
@@ -10,7 +8,6 @@ var days = [
 	{"day" : "Thursday"},
 	{"day" : "Friday"}
 ];
-
 
 var default55Times = [
 	new Date(0,0,0, 8, 0), new Date(0,0,0, 8,50),
@@ -39,9 +36,19 @@ class CalendarBlock extends React.Component {
 
 	handleClick(e) {
 		e.preventDefault();
-		queryCourses(this.state.start, this.state.end, (a) => {
+		queryCourses(this.state.start, this.state.end, (available) => {
 			this.setState({available});
 		});
+		// Note to Stephen: The above should grab all the courses that 
+		// fit in a time slot when you click it. That said, however, 
+		// it isn't perfect. Can you add days of the week to the courses
+		// in our database? 
+		// TODO: Create modal for viewing possible classes of something
+		if (this.state.available !== undefined && this.state.available[0].start !== undefined) {
+			var tmp = new Date(this.state.available[0].start);
+			console.log(tmp.toLocaleTimeString());
+		}
+		console.log(this.state);
 	}
 
 	render() {
