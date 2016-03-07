@@ -151,7 +151,8 @@ var initialData = {
             "completed": "yes",
             "category": "art",
             "start": new Date(0,0,0,8,0),
-            "end": new Date(0,0,0,8,55)
+            "end": new Date(0,0,0,8,55),
+						"days": [1,3,5]
         },
         "92819522": {
             "courseId": "COMPSCI 230",
@@ -164,7 +165,8 @@ var initialData = {
             "completed": "yes",
             "category": "literature",
             "start": new Date(0,0,0,9,5),
-            "end": new Date(0,0,0,9,55)
+            "end": new Date(0,0,0,9,55),
+						"days": [2,4]
         },
         "19103958": {
             "courseId": "COMPSCI 240",
@@ -177,7 +179,8 @@ var initialData = {
             "completed": "yes",
             "category": "cs",
             "start" : new Date(0,0,0,11,15),
-            "end" : new Date(0,0,0,12,5)
+            "end" : new Date(0,0,0,12,5),
+						"days": [1,3,5]
         },
         "18271821": {
             "courseId": "COMPSCI 250",
@@ -190,7 +193,8 @@ var initialData = {
             "completed": "yes",
             "category": "history",
             "start" : new Date(0,0,0,14,30),
-            "end" : new Date(0,0,0,15,45)
+            "end" : new Date(0,0,0,15,45),
+						"days": [1,3,5]
         },
         "85938173": {
             "courseId": "COMPSCI 320",
@@ -203,7 +207,8 @@ var initialData = {
             "completed": "yes",
             "category": "music",
             "start" : new Date(0,0,0,15,0),
-            "end" : new Date(0,0,0,18,0)
+            "end" : new Date(0,0,0,18,0),
+						"days": [2,4]
         },
         "09876543": {
             "courseId": "COMPSCI 326",
@@ -216,7 +221,8 @@ var initialData = {
             "completed": "yes",
             "category": "gym",
             "start" : new Date(0,0,0,17,30),
-            "end" : new Date(0,0,0,18,45)
+            "end" : new Date(0,0,0,18,45),
+						"days": [2,4]
         }
     }
 };
