@@ -75,7 +75,7 @@ class CalendarBlock extends React.Component {
 	}
 
 	componentDidMount() {
-		queryCourses(this.state.start, this.state.end, (available) => {
+		queryCourses(this.state.day, this.state.start, this.state.end, (available) => {
 			this.setState({available});
 		});
 	}
