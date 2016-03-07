@@ -10,7 +10,16 @@ function emulateServerReturn(data, cb) {
   }, 4);
 }
 
-export function getUserInfo(user, cb) {
-  var userData = readDocument('students', user);
-  emulateServerReturn(userData, cb);
+export function getStudentInfo(id, cb) {
+  var student = readDocument('students', id);
+  emulateServerReturn(student, cb);
+}
+
+export function getCourses(user, cb) {
+  var student = readDocument('students', user);
+
+	for (var i = 0, courses=[]; i < student.courses.length; i++)
+		courses.push(readDocument('courses', student.courses[i]));
+
+  emulateServerReturn(courses, cb);
 }

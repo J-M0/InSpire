@@ -1,6 +1,7 @@
 import React from 'react';
-//import {readDocuments} from '../database.js';
-import {getUserInfo} from '../server';
+import {getStudentInfo, getCourses} from '../server';
+
+var blocks55 = [], blocks75 = [];
 
 var days = [
 	{"day" : "Monday"},
@@ -10,9 +11,6 @@ var days = [
 	{"day" : "Friday"}
 ];
 
-//var courses = readDocuments('courses');
-//{console.log(courses);}
-var blocks55 = []; var blocks75 = [];
 
 var def55Times = [
 	new Date(0,0,0, 8, 0), new Date(0,0,0, 8,50),
@@ -72,7 +70,8 @@ class CourseButton extends React.Component {
 */
 
 for (var i=0; i < def55Times.length; i+= 2) {
-	blocks55.push(<CalendarBlock key={"MWF" + i} type="time-55" text={def55Times[i].toTimeString().substring(0, 5).replace(/^0+/, '') + " - " + def55Times[i+1].toTimeString().substring(0, 5).replace(/^0+/, '')} />);
+	blocks55.push(
+		<CalendarBlock key={"MWF" + i} type="time-55" text={def55Times[i].toTimeString().substring(0, 5).replace(/^0+/, '') + " - " + def55Times[i+1].toTimeString().substring(0, 5).replace(/^0+/, '')} />);
 }
 
 for (i=0; i < def75Times.length; i+= 2) {
@@ -80,14 +79,13 @@ for (i=0; i < def75Times.length; i+= 2) {
 }
 
 export default class Calendar extends React.Component {
-
 	constructor(props) {
 		super(props);
 		this.state = props;
 	}
 
 	refresh() {
-		getUserInfo(this.props.params.id, (userInfo) => {
+		getStudentInfo(this.props.params.id, (userInfo) => {
 			this.setState({userInfo});
 		});
 	}
@@ -95,6 +93,10 @@ export default class Calendar extends React.Component {
 	render() {
 		return (
 			<div className="row">
+				{/*{getCourses(this.props.params.id, (a) => console.log(a))}*/}
+				{console.log(getCourses(this.props.params.id, (a) => {
+					a.map((b)=>console.log(b));
+				}))}
 				{days.map((obj, i) => {
 					switch(i) {
 						case 0: case 2: case 4:
