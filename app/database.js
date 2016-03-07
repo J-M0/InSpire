@@ -189,8 +189,8 @@ var initialData = {
             "grade": "B",
             "completed": "yes",
             "category": "history",
-            "start" : new Date(0,0,0,2,30),
-            "end" : new Date(0,0,0,3,45)
+            "start" : new Date(0,0,0,14,30),
+            "end" : new Date(0,0,0,15,45)
         },
         "85938173": {
             "courseId": "COMPSCI 320",
@@ -202,8 +202,8 @@ var initialData = {
             "grade": "B-",
             "completed": "yes",
             "category": "music",
-            "start" : new Date(0,0,0,3,0),
-            "end" : new Date(0,0,0,6,0)
+            "start" : new Date(0,0,0,15,0),
+            "end" : new Date(0,0,0,18,0)
         },
         "09876543": {
             "courseId": "COMPSCI 326",
@@ -215,8 +215,8 @@ var initialData = {
             "grade": "C+",
             "completed": "yes",
             "category": "gym",
-            "start" : new Date(0,0,0,5,30),
-            "end" : new Date(0,0,0,6,45)
+            "start" : new Date(0,0,0,17,30),
+            "end" : new Date(0,0,0,18,45)
         }
     }
 };

@@ -1,4 +1,4 @@
-import {readDocument, writeDocument, addDocument} from './database.js';
+import {readDocument, readDocuments, writeDocument, addDocument} from './database.js';
 
 /**
  * Emulates how a REST call is *asynchronous* -- it calls your function back
@@ -15,7 +15,7 @@ export function getStudentInfo(id, cb) {
   emulateServerReturn(student, cb);
 }
 
-export function getCourses(user, cb) {
+export function getEnrolledCourses(user, cb) {
   var student = readDocument('students', user);
 
 	if (student !== null) {
@@ -25,4 +25,21 @@ export function getCourses(user, cb) {
 	}
 
   emulateServerReturn(courses, cb);
+}
+
+export function queryCourses(start, end, cb) {
+	var available = [];
+	var courses = readDocuments('courses');
+	var recastStart = new Date(start);
+	var recastEnd = new Date(end);
+
+	for (var i in courses) {
+		var tmp = new Date(courses[i].start);
+		if(tmp < recastStart) {
+			console.log("start =" + recastStart.toLocaleTimeString());
+			console.log(tmp.toLocaleTimeString());
+		}
+		//console.log(courses[i].start.toTimeString().substring(0, 5).replace(/^0+/, ''));
+	}
+	//emulateServerReturn(, cb);
 }

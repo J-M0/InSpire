@@ -1,5 +1,5 @@
 import React from 'react';
-import {getStudentInfo, getCourses} from '../server';
+import {getStudentInfo, queryCourses} from '../server';
 
 var blocks55 = [], blocks75 = [];
 
@@ -12,23 +12,23 @@ var days = [
 ];
 
 
-var def55Times = [
+var default55Times = [
 	new Date(0,0,0, 8, 0), new Date(0,0,0, 8,50),
 	new Date(0,0,0, 9, 5), new Date(0,0,0, 9,55),
 	new Date(0,0,0,10,10), new Date(0,0,0,11, 0),
 	new Date(0,0,0,11,15), new Date(0,0,0,12, 5),
-	new Date(0,0,0,12,20), new Date(0,0,0, 1,10),
-	new Date(0,0,0, 1,25), new Date(0,0,0, 2,15)
+	new Date(0,0,0,12,20), new Date(0,0,0,13,10),
+	new Date(0,0,0,13,25), new Date(0,0,0,14,15)
 ];
 
-var def75Times = [
+var default75Times = [
 	new Date(0,0,0, 8,30), new Date(0,0,0, 9,45),
 	new Date(0,0,0,10, 0), new Date(0,0,0,11,15),
 	new Date(0,0,0,11,30), new Date(0,0,0,12,45),
-	new Date(0,0,0, 1, 0), new Date(0,0,0, 2,15),
-	new Date(0,0,0, 2,30), new Date(0,0,0, 3,45),
-	new Date(0,0,0, 4, 0), new Date(0,0,0, 5,15),
-	new Date(0,0,0, 5,30), new Date(0,0,0, 6,45)
+	new Date(0,0,0,13, 0), new Date(0,0,0,14,15),
+	new Date(0,0,0,14,30), new Date(0,0,0,15,45),
+	new Date(0,0,0,16, 0), new Date(0,0,0,17,15),
+	new Date(0,0,0,17,30), new Date(0,0,0,18,45)
 ];
 
 class CalendarBlock extends React.Component {
@@ -39,47 +39,34 @@ class CalendarBlock extends React.Component {
 
 	handleClick(e) {
 		e.preventDefault();
-		console.log("kappa");
+		queryCourses(this.state.start, this.state.end, (a) => {
+			this.setState({available});
+		});
 	}
 
 	render() {
+		if (this.state.text === undefined) {
+			var startTime = this.state.start.toLocaleTimeString();
+			var endTime 	= this.state.end.toLocaleTimeString();
+		}
+
 		return (
-			<div className="thumbnail"><span className={this.state.type} onClick={(e) => this.handleClick(e)}>{this.state.text}</span></div>
+			<div className="thumbnail">
+				<span className={this.state.type} onClick={(e) => this.handleClick(e)}>
+					{
+						(this.state.text !== undefined) 
+						? this.state.text 
+						: startTime.substring(0, startTime.indexOf(":")+3).replace(/^0+/, '') + " - " + endTime.substring(0, endTime.indexOf(":")+3).replace(/^0+/, '')
+					}
+				</span>
+			</div>
 		);
 	}
-}
-
-/*
-class CourseButton extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = props;
-	}
-
-	render () {
-		return (
-			<button type="button" className="btn btn-primary btn-block">
-				<p>2:30 - 3:45PM</p>
-				<p>AFROAM 133 - 01</p>
-				<p>Lecture</p>
-				<p>ILC S131</p>
-			</button>
-		);
-	}
-}
-*/
-
-for (var i=0; i < def55Times.length; i+= 2) {
-	blocks55.push(
-		<CalendarBlock key={"MWF" + i} type="time-55" text={def55Times[i].toTimeString().substring(0, 5).replace(/^0+/, '') + " - " + def55Times[i+1].toTimeString().substring(0, 5).replace(/^0+/, '')} />);
-}
-
-for (i=0; i < def75Times.length; i+= 2) {
-	blocks75.push(<CalendarBlock key={"TTh" + i} type="time-75" text={def75Times[i].toTimeString().substring(0, 5).replace(/^0+/, '') + " - " + def75Times[i+1].toTimeString().substring(0, 5).replace(/^0+/, '')} />);
 }
 
 export default class Calendar extends React.Component {
 	constructor(props) {
+		var i;
 		super(props);
 		this.state = props;
 	}
@@ -93,27 +80,39 @@ export default class Calendar extends React.Component {
 	render() {
 		return (
 			<div className="row">
-				{getCourses(this.props.params.id, (it) => {
-					if (it !== undefined)
-						it.map((v) => {
-							console.log(v)
-						})
-				})}
-
 				{days.map((obj, i) => {
 					switch(i) {
 						case 0: case 2: case 4:
 							return (
 								<div key={"col" + i} className="col-md-3" id={obj.day}>
 									<CalendarBlock type="day" text={obj.day} />
-									{blocks55.concat(blocks75[4]).concat(blocks75[5]).concat(blocks75[6])}
+									{default55Times.map((time, i) => {
+										if (this.state.userInfo !== undefined && i%2 === 0) {
+											return(<CalendarBlock userId={this.state.userInfo.studentId} key={"MWF" + i/2} type="time-55" 
+															start={default55Times[i]} end={default55Times[i+1]} />);
+										}
+									})}
+
+									{default75Times.map((time, i) => {
+										if (i > 8) {
+											if (this.state.userInfo !== undefined && i%2 === 0) {
+												return(<CalendarBlock userId={this.state.userInfo.studentId} key={"TTh" + i/2} type="time-75" 
+																start={default75Times[i]} end={default75Times[i+1]} />);
+											}
+										}
+									})}
 								</div>
 							);
 						case 1: case 3:
 						return (
 							<div key={"col" + i} className="col-md-3" id={obj.day}>
 								<CalendarBlock type="day" text={obj.day} />
-								{blocks75}
+								{default75Times.map((time, i) => {
+									if (this.state.userInfo !== undefined && i%2 === 0) {
+										return(<CalendarBlock userId={this.state.userInfo.studentId} key={"TTh" + i/2} type="time-75" 
+														start={default75Times[i]} end={default75Times[i+1]} />);
+									}
+								})}
 							</div>
 						);
 					}
