@@ -42,6 +42,10 @@ class CourseButton extends React.Component {
 	}
 }
 
+class CourseModal extends React.Component {
+
+}
+
 class CalendarBlock extends React.Component {
 	constructor(props) {
 		super(props);
@@ -55,12 +59,14 @@ class CalendarBlock extends React.Component {
 		// TODO: Refresh Enrolled Courses?
 		if (this.state.flag !== undefined)
 		this.state.flag(this.state);
+
+		console.log(this);
 	}
 
 	handleClick(e) {
 		e.preventDefault();
-		// TODO: Create modal for viewing possible classes of something
-		// TODO: comments and stuff
+		// TODO: Create modal for viewing possible classes of
+
 		this.refresh();
 	}
 
@@ -73,11 +79,11 @@ class CalendarBlock extends React.Component {
 
 			// TODO: can you check if everything works??????
 			if(this.state.enrolled !== undefined) {
-				this.state.enrolled.map((a, i) => {
+				this.state.enrolled.map((enrolled) => {
 					// The available course list is a superset of enrolled course list
 					if (this.state.available !== undefined)
-						this.state.available.map((b) => {
-							if (a.courseId === b.courseId)
+						this.state.available.map((available) => {
+							if (enrolled.courseId === available.courseId)
 								content = <CourseButton />;
 						})
 				})
