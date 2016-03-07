@@ -46,9 +46,10 @@ class CalendarBlock extends React.Component {
 	handleClick(e) {
 		e.preventDefault();
 		// TODO: Create modal for viewing possible classes of something
+		// TODO: comments and stuff
 		this.refresh();
 	}
-			
+
 	render() {
 		if (this.state.text === undefined) {
 			var startTime = this.state.start.toLocaleTimeString();
@@ -65,8 +66,8 @@ class CalendarBlock extends React.Component {
 			<div className="thumbnail">
 				<span className={this.state.type} onClick={(e) => this.handleClick(e)}>
 					{
-						(this.state.text !== undefined) 
-						? this.state.text 
+						(this.state.text !== undefined)
+						? this.state.text
 						: startTime.substring(0, startTime.indexOf(":")+3).replace(/^0+/, '') + " - " + endTime.substring(0, endTime.indexOf(":")+3).replace(/^0+/, '')
 					}
 				</span>
@@ -83,7 +84,7 @@ class CalendarBlock extends React.Component {
 
 export default class Calendar extends React.Component {
 	constructor(props) {
-		var i;
+		
 		super(props);
 		this.state = props;
 	}
@@ -112,7 +113,7 @@ export default class Calendar extends React.Component {
 											{/* (a)=>this.courseFlag(a) says to send as an argument the function courseFlag with one argument
 												* In calendarBlocks, we have this.state.flag(this) which compiles to Calendar.courseFlag(CalendarBlock)
 												*/}
-											return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"MWF" + i/2} type="time-55" 
+											return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"MWF" + i/2} type="time-55"
 															start={default55Times[i]} end={default55Times[i+1]} day={obj.day}/>);
 										}
 									})}
@@ -120,7 +121,7 @@ export default class Calendar extends React.Component {
 									{default75Times.map((time, i) => {
 										if (i > 6) {
 											if (this.state.userInfo !== undefined && i%2 === 0) {
-												return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"MWF-Long" + i/2} type="time-75" 
+												return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"MWF-Long" + i/2} type="time-75"
 																start={default75Times[i]} end={default75Times[i+1]} day={obj.day}/>);
 											}
 										}
@@ -133,7 +134,7 @@ export default class Calendar extends React.Component {
 								<CalendarBlock type="day" text={obj.day} />
 								{default75Times.map((time, i) => {
 									if (this.state.userInfo !== undefined && i%2 === 0) {
-										return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"TTh" + i/2} type="time-75" 
+										return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"TTh" + i/2} type="time-75"
 														start={default75Times[i]} end={default75Times[i+1]} day={obj.day}/>);
 									}
 								})}
