@@ -27,7 +27,7 @@ export function getEnrolledCourses(user, cb) {
   emulateServerReturn(courses, cb);
 }
 
-export function queryCourses(start, end, cb) {
+export function queryCourses(day, start, end, cb) {
 	var available = [];
 	var courses = readDocuments('courses');
 
@@ -36,11 +36,16 @@ export function queryCourses(start, end, cb) {
 	var recastEnd = new Date(end);
 
 	for (var i in courses) {
+		//console.log(courses[i].days);
 		var courseStart = new Date(courses[i].start);
 		var courseEnd 	= new Date(courses[i].end);
-		if(courseStart <= recastStart && courseEnd >= recastStart) {
-			available.push(courses[i]);
-		}
+		courses[i].days.map((d)=> {
+			if(day === d) {
+				if(courseStart <= recastStart && courseEnd >= recastStart) {
+					available.push(courses[i]);
+				}
+			}
+		});
 	}
 
 	emulateServerReturn(available, cb);

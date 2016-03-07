@@ -29,18 +29,32 @@ var default75Times = [
 	new Date(0,0,0,17,30), new Date(0,0,0,18,45)
 ];
 
+class CourseButton extends React.Component {
+	render() {
+		return(
+			<button type="button" className="btn btn-primary btn-block">
+				<p>2:30 - 3:45PM</p>
+				<p>AFROAM 133 - 01AB</p>
+				<p>Discussion</p>
+				<p>MALCOLMX Center</p>
+			</button>
+		);
+	}
+}
+
 class CalendarBlock extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = props;
 		getEnrolledCourses(this.state.userId, (enrolled) => {
-			this.setState({enrolled});
-		});
+		this.setState({enrolled});
+	});
 	}
 
 	refresh() {
+		// TODO: Refresh Enrolled Courses?
 		if (this.state.flag !== undefined)
-			this.state.flag(this.state);
+		this.state.flag(this.state);
 	}
 
 	handleClick(e) {
@@ -51,32 +65,39 @@ class CalendarBlock extends React.Component {
 	}
 
 	render() {
-		if (this.state.text === undefined) {
+		var content = this.state.text;
+
+		if (content === undefined) {
 			var startTime = this.state.start.toLocaleTimeString();
 			var endTime 	= this.state.end.toLocaleTimeString();
-		}
 
-		if(this.state.enrolled !== undefined) {
-			this.state.enrolled.map((a, i) => {
-				if (i == 1) {}
-			})
+			// TODO: can you check if everything works??????
+			if(this.state.enrolled !== undefined) {
+				this.state.enrolled.map((a, i) => {
+					// The available course list is a superset of enrolled course list
+					if (this.state.available !== undefined)
+						this.state.available.map((b) => {
+							if (a.courseId === b.courseId)
+								content = <CourseButton />;
+						})
+				})
+			}
+			content = (content === undefined)
+								? startTime.substring(0, startTime.indexOf(":")+3).replace(/^0+/, '') + " - " + endTime.substring(0, endTime.indexOf(":")+3).replace(/^0+/, '')
+								: content;
 		}
 
 		return (
 			<div className="thumbnail">
 				<span className={this.state.type} onClick={(e) => this.handleClick(e)}>
-					{
-						(this.state.text !== undefined)
-						? this.state.text
-						: startTime.substring(0, startTime.indexOf(":")+3).replace(/^0+/, '') + " - " + endTime.substring(0, endTime.indexOf(":")+3).replace(/^0+/, '')
-					}
+					{content}
 				</span>
 			</div>
 		);
 	}
 
 	componentDidMount() {
-		queryCourses(this.state.start, this.state.end, (available) => {
+		queryCourses(this.state.day, this.state.start, this.state.end, (available) => {
 			this.setState({available});
 		});
 	}
@@ -84,7 +105,6 @@ class CalendarBlock extends React.Component {
 
 export default class Calendar extends React.Component {
 	constructor(props) {
-		
 		super(props);
 		this.state = props;
 	}
@@ -96,7 +116,7 @@ export default class Calendar extends React.Component {
 	}
 
 	courseFlag(obj) {
-		console.log(obj);
+		//console.log(obj);
 	}
 
 	render() {
