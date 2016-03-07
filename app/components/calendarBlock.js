@@ -42,31 +42,31 @@ class CourseButton extends React.Component {
 	}
 }
 
-class CourseModal extends React.Component {
-
-}
-
 class CalendarBlock extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = props;
 		getEnrolledCourses(this.state.userId, (enrolled) => {
-		this.setState({enrolled});
-	});
+			this.setState({enrolled});
+		});
+		// my edits here
+		this.setState({ testShow: false});
 	}
 
 	refresh() {
-		// TODO: Refresh Enrolled Courses?
 		if (this.state.flag !== undefined)
 		this.state.flag(this.state);
-
-		console.log(this);
+		getStudentInfo(this.state.userId, (userInfo) => {
+			this.setState({userInfo});
+		});
 	}
 
 	handleClick(e) {
 		e.preventDefault();
 		// TODO: Create modal for viewing possible classes of
-
+		// my edits here
+		this.setState({testShow: true});
+		// my edits end here
 		this.refresh();
 	}
 
@@ -77,7 +77,6 @@ class CalendarBlock extends React.Component {
 			var startTime = this.state.start.toLocaleTimeString();
 			var endTime 	= this.state.end.toLocaleTimeString();
 
-			// TODO: can you check if everything works??????
 			if(this.state.enrolled !== undefined) {
 				this.state.enrolled.map((enrolled) => {
 					// The available course list is a superset of enrolled course list
@@ -96,7 +95,8 @@ class CalendarBlock extends React.Component {
 		return (
 			<div className="thumbnail">
 				<span className={this.state.type} onClick={(e) => this.handleClick(e)}>
-					{content}
+					{/*my edits here*/}
+					{/*{this.state.testShow} ? <p>4head</p> : {content};*/}{content}
 				</span>
 			</div>
 		);

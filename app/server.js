@@ -27,6 +27,7 @@ export function getEnrolledCourses(user, cb) {
   emulateServerReturn(courses, cb);
 }
 
+// gets available courses
 export function queryCourses(day, start, end, cb) {
 	var available = [];
 	var courses = readDocuments('courses');
