@@ -36,11 +36,7 @@ class CalendarBlock extends React.Component {
 
 	refresh() {
 		if (this.state.flag !== undefined)
-			this.state.flag(this);
-		//getEnrolledCourses(this.props.params.id, (enrolled) => {
-		//	this.setState({enrolled});
-		//});
-		//console.log(this.state.enrolled);
+			this.state.flag(this.state);
 	}
 
 	handleClick(e) {
@@ -54,7 +50,7 @@ class CalendarBlock extends React.Component {
 			var tmp = new Date(this.state.available[0].start);
 			console.log(tmp.toLocaleTimeString());
 		}
-		console.log(this.state);
+		this.refresh();
 	}
 
 	render() {
@@ -77,7 +73,9 @@ class CalendarBlock extends React.Component {
 	}
 
 	componentDidMount() {
-		this.refresh();
+		getEnrolledCourses(this.state.userId, (enrolled) => {
+			this.setState({enrolled});
+		});
 	}
 }
 
