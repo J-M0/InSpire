@@ -28,7 +28,7 @@ export default class SideNav extends React.Component {
     render() {
       return (
         <div id="sidebar-container">
-			     <img src="img/umass_logo.png" alt="UMass Logo" width="102" height="100" id="logo">
+			     <img src="img/umass_logo.png" alt="UMass Logo" width="102" height="100" id="logo"/>
 			     <span id="spire"> InSPIRE</span>
 			     <ul class="nav">
 				       <li>
