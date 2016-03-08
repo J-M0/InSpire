@@ -4,7 +4,7 @@ import Calendar from './components/calendarBlock';
 import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
 import ClassInfo from './components/classInfo';
-import SearchResults from './components/searchResults'
+import SearchResultList from './components/searchResultList'
 
 class App extends React.Component {
 	render() {

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-export default class SearchResults extends React.Component {
+export default class SearchResultList extends React.Component {
 	render() {
 		return (
 			<div>
@@ -50,6 +50,6 @@ export default class SearchResults extends React.Component {
 }
 
 ReactDOM.render(
-	<SearchResults />,
+	<SearchResultList />,
 	document.getElementById('search-results')
 );
