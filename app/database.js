@@ -241,7 +241,21 @@ var initialData = {
             "start" : new Date(0,0,0,17,30),
             "end" : new Date(0,0,0,18,45),
             "days": ["Tuesday", "Thursday"]
-        }
+        },
+        "08874563": {
+          "courseId": "COMPSCI 373",
+          "courseName": "Intro to Computer Graphics",
+          "description": "Difficult",
+          "location": "neverland",
+          "credits": "3",
+          "final exam slot": new Date(2017, 5, 22),
+          "grade": "C+",
+          "completed": "yes",
+          "category": "gym",
+          "start" : new Date(0,0,0,11,15),
+          "end" : new Date(0,0,0,12,5),
+          "days": ["Monday", "Wednesday", "Thursday"]
+        } 
     }
 };
 
