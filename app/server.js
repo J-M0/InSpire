@@ -1,4 +1,4 @@
-import {readDocument, readDocuments, writeDocument, addDocument} from './database.js';
+import {readDocument, readDocuments/*, writeDocument*/} from './database.js';
 
 /**
  * Emulates how a REST call is *asynchronous* -- it calls your function back
@@ -27,13 +27,15 @@ export function getEnrolledCourses(user, cb) {
   emulateServerReturn(courses, cb);
 }
 
+// gets available courses
 export function queryCourses(day, start, end, cb) {
 	var available = [];
 	var courses = readDocuments('courses');
 
 	// Recast the variables since they were lost somehow
 	var recastStart = new Date(start);
-	var recastEnd = new Date(end);
+  // Note to Kevin from Kevin: Do I still need this? Consider later.
+	//var recastEnd = new Date(end);
 
 	for (var i in courses) {
 		//console.log(courses[i].days);
