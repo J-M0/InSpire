@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
 import {getStudentInfo, getEnrolledCourses, queryCourses} from '../server';
 
 var days = [
@@ -49,13 +49,11 @@ class CalendarBlock extends React.Component {
 		getEnrolledCourses(this.state.userId, (enrolled) => {
 			this.setState({enrolled});
 		});
-		// my edits here
-		this.setState({ testShow: false});
 	}
 
 	refresh() {
 		if (this.state.flag !== undefined)
-		this.state.flag(this.state);
+			this.state.flag(this.state);
 		getStudentInfo(this.state.userId, (userInfo) => {
 			this.setState({userInfo});
 		});
@@ -64,13 +62,14 @@ class CalendarBlock extends React.Component {
 	handleClick(e) {
 		e.preventDefault();
 		// TODO: Create modal for viewing possible classes of
-		// my edits here
-		this.setState({testShow: true});
-		// my edits end here
+		var bang = !this.state.testShow;
+		this.setState({ testShow: bang});
 		this.refresh();
 	}
 
 	render() {
+		if (this.state.testShow !== undefined)
+			var modal = (this.state.testShow) ? <div>KAPPAAAAAA</div> : undefined;
 		var content = this.state.text;
 
 		if (content === undefined) {
@@ -95,8 +94,8 @@ class CalendarBlock extends React.Component {
 		return (
 			<div className="thumbnail">
 				<span className={this.state.type} onClick={(e) => this.handleClick(e)}>
-					{/*my edits here*/}
-					{/*{this.state.testShow} ? <p>4head</p> : {content};*/}{content}
+					{modal}
+					{content}
 				</span>
 			</div>
 		);
@@ -106,6 +105,7 @@ class CalendarBlock extends React.Component {
 		queryCourses(this.state.day, this.state.start, this.state.end, (available) => {
 			this.setState({available});
 		});
+		this.setState({testShow : false});
 	}
 }
 
