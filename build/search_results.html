@@ -21,7 +21,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title">More Info</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" id="class-info-modal">
 					<div class="panel panel-default" id="modal-list-items">
 						<div class="panel-heading" style="color:#354066;"><span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> Class Information</div>
 						<div class="panel-body">
@@ -46,7 +46,7 @@
 								</tbody>
 							</table>
 						</div>
-						
+
 						<div class="panel-heading" style="color:#354066;"><span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> More Information</div>
 						<div class="panel-body">
 							<table class="table">
@@ -90,61 +90,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title">More Info</h4>
 				</div>
-				<div class="modal-body">
-					
-					<div class="panel panel-default" id="modal-list-items">
-						<div class="panel-heading" style="color:#354066;"><span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> Class Information</div>
-						<div class="panel-body">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>Number</th>
-										<th>Section</th>
-										<th>Units</th>
-										<th>Enrolled</th>
-										<th>Cap</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Computer Science 377</td>
-										<td>01</td>
-										<td>4</td>
-										<td>83</td>
-										<td>70</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						
-						<div class="panel-heading" style="color:#354066;"><span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> More Information</div>
-						<div class="panel-body">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>Title</th>
-										<th>Time</th>
-										<th>Room</th>
-										<th>Instructor</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Operating Systems</td>
-										<td>Tu/Thu 1:00pm - 2:15pm</td>
-										<td>Integrated Learning Center S211</td>
-										<td>Tim Richards</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-
-						<div class="panel-heading" style="color:#354066;"><span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> Class Description</div>
-						<div class="panel-body">
-							The design and operation of modern computer operating systems. Review of capabilities of typical computer hardware. Topics include command language interpreter (the shell), processes, concurrency, inter-process communication, linking and loading, memory management, transactions, file systems, distributed systems, security, and protection. Programming projects in Java and C.
-						</div>
-					</div>
-				</div>
+				<div class="modal-body"><!-- ClassInfo component renders here --></div>
 
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -173,19 +119,19 @@
 					<a href="#etc">See More...</a><br>
 				</div> <!-- End of todo panel body -->
 			</div> <!-- End of todo panel -->
-			
+
 			<div class="panel panel-default" id="search-results">
 				<div class="panel-heading" style="color:354066;"><span class="glyphicon glyphicon-chevron-left" style="color:#354066;"></span> Search Results</div>
 				<ul class="list group">
 					<li class="list-group-item">
 						<span class="glyphicon glyphicon-asterisk" style="color:green;"></span>
 						CS 326 - Web Programming <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-						<br> 
 						<br>
-						THIS IS A COOL CLASS. TRUST ME. 
+						<br>
+						THIS IS A COOL CLASS. TRUST ME.
 						<a class="btn" data-toggle="modal" href="#CS326Modal" style="text-align:right;">...More info</a>
 					</li>
-					<li class="list-group-item"> 
+					<li class="list-group-item">
 						<span class="glyphicon glyphicon-play class-full-btn" style="color:blue;"></span>
 						CS 320 - Software Engineering <span class="glyphicon glyphicon-chevron-right pull-right"></span>
 					</li>
@@ -200,7 +146,7 @@
 					<li class="list-group-item">
 						<span class="glyphicon glyphicon-asterisk" style="color:green;"></span>
 						CS 377 - Operating Systems <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-						<br> 
+						<br>
 						<br>
 						MORE INFO ABOUT ANOTHER CLASS OR SOMETHING.
 						<a class="btn" data-toggle="modal" href="#CS377Modal" style="text-align:right;">...More info</a>

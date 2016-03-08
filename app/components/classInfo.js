@@ -1,5 +1,5 @@
 import React from "react";
-// import ReactDOM from "react-dom";
+import ReactDOM from "react-dom";
 
 
 export default class ClassInfo extends React.Component {
@@ -67,3 +67,7 @@ export default class ClassInfo extends React.Component {
 		)
 	}
 }
+
+ReactDOM.render((
+	<ClassInfo />
+),document.getElementById('class-info-modal'));
