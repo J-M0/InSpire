@@ -1,10 +1,22 @@
 import React from "react";
 
 export default class SearchResultList extends React.Component {
+
+	handleBackClick(clickEvent) {
+		clickEvent.preventDefault();
+
+		if(clickEvent.button === 0) {
+			this.props.setPanelView("search");
+		}
+	}
 	render() {
 		return (
 			<div className="panel panel-default" id="search-results">
-				<div className="panel-heading" style={{color: '#354066'}}><span className="glyphicon glyphicon-chevron-left" style={{color: '#354066'}}></span> Search Results</div>
+				<div className="panel-heading" style={{color: '#354066'}}>
+					<a href="#" onClick={(e) => this.handleBackClick(e)}>
+						<span className="glyphicon glyphicon-chevron-left" style={{color: '#354066'}}></span>
+					</a> Search Results
+				</div>
 				<ul className="list group">
 					<li className="list-group-item">
 						<span className="glyphicon glyphicon-asterisk" style={{color: 'green'}}></span>
