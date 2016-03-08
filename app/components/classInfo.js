@@ -9,9 +9,7 @@ export default class ClassInfo extends React.Component {
 	}
 
 	getDays() {
-		for(var i = 0; i < this.state.days.length; i++) {
-
-		}
+		return this.state.days.join(" / ");
 	}
 
 	render() {
@@ -56,7 +54,7 @@ export default class ClassInfo extends React.Component {
 						<tbody>
 							<tr>
 								<td>{data.courseName}</td>
-								<td>Tu/Thu {data.start.toLocaleTimeString()} - {data.end.toLocaleTimeString()}</td>
+								<td>{this.getDays()} {data.start.toLocaleTimeString()} - {data.end.toLocaleTimeString()}</td>
 								<td>{data.location}</td>
 								<td>{data.instructor.firstName.concat(" ", data.instructor.lastName)}</td>
 							</tr>
