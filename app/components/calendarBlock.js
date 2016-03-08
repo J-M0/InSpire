@@ -42,6 +42,41 @@ class CourseButton extends React.Component {
 	}
 }
 
+class TestModal extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = props;
+	}
+
+	render() {
+		var body;
+
+		if (this.state.available.length !== 0) {
+			body = <div> {this.state.available.map( (course) => { return(course.courseId);} ) } </div>;
+		} else {
+			body="There are no courses available for this time slot.";
+		}
+
+		return(
+			<div id="testModal" className="modal big-red-box" role="dialog">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+							<h4 className="modal-title">Available Courses</h4>
+						</div>
+						<div className="modal-body">
+							<p>{body}</p>
+						</div>
+						<div className="modal-footer">
+							<button type="button" className="button-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	}
+}
+
 class CalendarBlock extends React.Component {
 	constructor(props) {
 		super(props);
@@ -69,7 +104,7 @@ class CalendarBlock extends React.Component {
 
 	render() {
 		if (this.state.testShow !== undefined)
-			var modal = (this.state.testShow) ? <div>KAPPAAAAAA</div> : undefined;
+			var modal = (this.state.testShow) ? <TestModal available={this.state.available}/> : undefined;
 		var content = this.state.text;
 
 		if (content === undefined) {
