@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Calendar from './components/calendarBlock';
-import ClassInfo from './components/classInfo';
 import { IndexRoute, Router, Route, hashHistory } from 'react-router';
+
+import ClassInfo from './components/classInfo';
+import SearchResults from './components/searchResults'
 
 class App extends React.Component {
 	render() {
