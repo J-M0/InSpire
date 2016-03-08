@@ -1,6 +1,15 @@
 import React from 'react';
 
 export default class SearchRadios extends React.Component {
+
+	handleSearchClick(clickEvent) {
+		clickEvent.preventDefault();
+
+		if(clickEvent.button === 0) {
+			this.props.setPanelView("results");
+		}
+	}
+
 	render() {
 		return (
 			<div className="panel panel-default" id="search-radios">
@@ -45,7 +54,7 @@ export default class SearchRadios extends React.Component {
 					</select>
 				</div>
 				<div className="center-block">
-					<button id="singlebutton" name="singlebutton" className="btn btn-primary center-block" style={{backgroundColor: '#354066'}}>
+					<button id="singlebutton" name="singlebutton" className="btn btn-primary center-block" style={{backgroundColor: '#354066'}} onClick={(e) => this.handleSearchClick(e)}>
 						Search <span className="glyphicon glyphicon-search" style={{marginLeft: '5px', marginBottom: '5px'}}></span>
 					</button>
 				</div>
