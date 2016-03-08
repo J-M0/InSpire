@@ -33,7 +33,7 @@ export function queryCourses(day, start, end, cb) {
 	var courses = readDocuments('courses');
 
 	// Recast the variables since they were lost somehow
-	var recastStart = new Date(start);
+	var blockStart = new Date(start);
   // Note to Kevin from Kevin: Do I still need this? Consider later.
 	//var recastEnd = new Date(end);
 
@@ -43,7 +43,7 @@ export function queryCourses(day, start, end, cb) {
 		var courseEnd 	= new Date(courses[i].end);
 		courses[i].days.map((d)=> {
 			if(day === d) {
-				if(courseStart <= recastStart && courseEnd >= recastStart) {
+				if(courseStart <= blockStart && courseEnd >= blockStart) {
 					available.push(courses[i]);
 				}
 			}

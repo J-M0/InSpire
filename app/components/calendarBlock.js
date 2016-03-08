@@ -52,7 +52,10 @@ class TestModal extends React.Component {
 		var body;
 
 		if (this.state.available.length !== 0) {
-			body = <div> {this.state.available.map( (course) => { return(course.courseId);} ) } </div>;
+			body = <div> {this.state.available.map( (courses, i) => {
+					return(
+						<button key={"btn"+i} type="button" className="course-modal-btn">{courses.courseId} - {courses.courseName}</button>
+					);} ) } </div>;
 		} else {
 			body="There are no courses available for this time slot.";
 		}
@@ -65,7 +68,7 @@ class TestModal extends React.Component {
 							<h4 className="modal-title">Available Courses</h4>
 						</div>
 						<div className="modal-body">
-							<p>{body}</p>
+							{body}
 						</div>
 						<div className="modal-footer">
 							<button type="button" className="button-default" data-dismiss="modal">Close</button>
