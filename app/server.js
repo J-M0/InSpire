@@ -27,6 +27,13 @@ export function getEnrolledCourses(user, cb) {
   emulateServerReturn(courses, cb);
 }
 
+export function getCourseInfo(courseId, cb) {
+    var course = readDocument('courses', courseId);
+    course.instructor = readDocument('professors', course.instructor);
+
+    emulateServerReturn(course, cb);
+}
+
 // gets available courses
 export function queryCourses(day, start, end, cb) {
 	var available = [];
