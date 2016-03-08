@@ -1,10 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
 export default class SearchResultList extends React.Component {
 	render() {
 		return (
-			<div>
+			<div className="panel panel-default" id="search-results">
 				<div className="panel-heading" style={{color: '#354066'}}><span className="glyphicon glyphicon-chevron-left" style={{color: '#354066'}}></span> Search Results</div>
 				<ul className="list group">
 					<li className="list-group-item">
@@ -48,8 +47,3 @@ export default class SearchResultList extends React.Component {
 		)
 	}
 }
-
-ReactDOM.render(
-	<SearchResultList />,
-	document.getElementById('search-results')
-);

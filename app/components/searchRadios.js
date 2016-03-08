@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 export default class SearchRadios extends React.Component {
 	render() {
 		return (
-			<div>
+			<div className="panel panel-default" id="search-radios">
 				<div className="panel-heading" style={{color: '#354066'}}>Class Search Filters</div>
 				<div className="checkbox">
 					<label><input type="checkbox" value="" />Seats Available</label>
@@ -54,8 +53,3 @@ export default class SearchRadios extends React.Component {
 		)
 	}
 }
-
-ReactDOM.render(
-	<SearchRadios />,
-	document.getElementById('search-radios')
-);

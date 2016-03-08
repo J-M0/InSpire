@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
 import SearchRadios from './searchRadios';
 import SearchResultList from './searchResultList';
 
@@ -13,3 +13,8 @@ export default class SearchPanel extends React.Component {
 		);
 	}
 }
+
+ReactDOM.render(
+	<SearchPanel />,
+	document.getElementById('search-panel')
+);

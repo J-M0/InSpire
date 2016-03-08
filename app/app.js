@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom';
 import Calendar from './components/calendarBlock';
 import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
-import ClassInfo from './components/classInfo';
-import SearchResultList from './components/searchResultList';
-import SearchRadios from './components/searchRadios';
+import SearchPanel from './components/searchPanel';
 
 class App extends React.Component {
 	render() {
