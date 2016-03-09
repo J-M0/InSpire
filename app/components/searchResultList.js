@@ -1,4 +1,5 @@
 import React from "react";
+import SearchResultItem from './searchResultItem';
 
 export default class SearchResultList extends React.Component {
 
@@ -19,12 +20,7 @@ export default class SearchResultList extends React.Component {
 				</div>
 				<ul className="list group">
 					<li className="list-group-item">
-						<span className="glyphicon glyphicon-asterisk" style={{color: 'green'}}></span>
-						CS 326 - Web Programming <span className="glyphicon glyphicon-chevron-down pull-right"></span>
-						<br />
-						<br />
-						THIS IS A COOL CLASS. TRUST ME.
-						<a className="btn" data-toggle="modal" href="#CS326Modal" style={{textAlign: 'right'}}>...More info</a>
+						<SearchResultItem />
 					</li>
 					<li className="list-group-item">
 						<span className="glyphicon glyphicon-play class-full-btn" style={{color: 'blue'}}></span>
