@@ -1,10 +1,34 @@
 import React from 'react';
 
 export default class SideNav extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = props;
+		getEnrolledCourses(this.state.userId, (enrolled) => {
+			this.setState({enrolled});
+		});
+	}
+
+	refresh() {
+		if (this.state.flag !== undefined)
+			this.state.flag(this.state);
+		getStudentInfo(this.state.userId, (userInfo) => {
+			this.setState({userInfo});
+		});
+	}
+
+	handleClick(e) {
+		e.preventDefault();
+		// TODO: Create modal for viewing possible classes of
+		var bang = !this.state.testShow;
+		this.setState({ testShow: bang});
+		this.refresh();
+	}
+
     render() {
       return (
         <div id="sidebar-container">
-			     <img src="img/umass_logo.png" alt="UMass Logo" width="102" height="100" id="logo">
+			     <img src="img/umass_logo.png" alt="UMass Logo" width="102" height="100" id="logo"/>
 			     <span id="spire"> InSPIRE</span>
 			     <ul class="nav">
 				       <li>
@@ -35,4 +59,10 @@ export default class SideNav extends React.Component {
 		</div>
      )
    }
+   componentDidMount() {
+		queryCourses(this.state.day, this.state.start, this.state.end, (available) => {
+			this.setState({available});
+		});
+		this.setState({testShow : false});
+	}
 }
