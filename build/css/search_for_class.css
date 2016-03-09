@@ -55,10 +55,19 @@ ul {
 .search-tabs > li > a {
 	background-color: #354066;
 	color: white;
+	height: 100%;
+	padding: 0px;
+	padding-top: 10%;
+	padding-bottom: 10%;
 }
 
 .search-tabs {
 	margin-left: 30px;
+	height: 4.5%
+}
+
+.tab-content {
+	height: 70%;
 }
 
 .time-2h {
@@ -98,16 +107,18 @@ ul {
 #calendar {
 	margin-top: 5px;
 	height: 100%;
+	width: 75%;
 }
 
 #calendar .col-md-3 {
-	width: 22%;
-	margin-left: -2%;
+	width:20.75%;
+	margin-left: -1%;
+	padding: 0.5%;
 	height: 100%;
 }
 
 #calendar .col-md-3:first-child {
-	margin-left: -2%;
+	/*margin-left: -2%;*/
 }
 
 #calendar .col-md-3:nth-child(2n) > .thumbnail {
@@ -143,7 +154,8 @@ ul {
 }
 
 #menu-tabs > li {
-	width: 75.45px;
+	height: 100%;
+	width: 25%;
 	text-align: center;
 }
 
@@ -155,9 +167,14 @@ ul {
 	z-index: 1;
 }
 
+#search {
+	height: 100%;
+}
+
 #search-radios {
 	margin-left: 30px;
-	padding-bottom: 13px;
+	margin-bottom: 0px;
+	height: 100%;
 }
 
 #search-radios label {
@@ -205,11 +222,13 @@ ul {
 #side-navbar {
 	height: 100%;
 	padding-right: 20px;
+	width: 25%;
 }
 
 #todo {
 	margin-left: 30px;
-	margin-top: 5px;
+	margin-top: calc(5px + 1.6%);
+	height: 20%;
 }
 
 #todo a {
@@ -223,7 +242,7 @@ ul {
 	left: 1%;
 	background: url("/img/dubois_pond_chapel.jpg") no-repeat center center fixed;
 	background-size: cover;
-*/}
+}
 
 #trapezoid {
 	border-bottom: 50px solid #354066;
