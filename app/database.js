@@ -42,13 +42,13 @@ var initialData = {
                     "function": "Financial Aid",
                     "dueDate": "03/01/16",
                     "status": "initiated"
-                }
+                },
                 "taxReturn": {
                     "function": "Financial Aid",
                     "dueDate": "03/01/16",
                     "status": "initiated"
                 }
-            }
+            },
             "courses": [
               "12345678", "92819522", "19103958"
             ],
