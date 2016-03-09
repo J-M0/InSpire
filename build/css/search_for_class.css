@@ -7,6 +7,7 @@ html, body {
 	height: 100%;
 	width: 100%;
 	position: relative;
+	overflow: hidden;
 }
 
 ul {
@@ -55,6 +56,15 @@ ul {
 	font-weight: bold;
 	text-align: center;
 	display: block;
+}
+
+.search-tabs > li > a {
+	background-color: #354066;
+	color: white;
+}
+
+.search-tabs {
+	margin-left: 30px;
 }
 
 .time-55 {
@@ -166,7 +176,7 @@ ul {
 
 #sidebar-container {
 	height: 100%;
-	width: 250px; 
+	width: 250px;
 	visibility: hidden; /*Toggle for sidebar*/
 	top: 0px;
 	position:absolute;

@@ -3,9 +3,7 @@ import React from 'react';
 import {getStudentInfo, getEnrolledCourses, queryCourses} from '../server';
 
 // STEPHEN TODO:
-// fix calendar buttons, make them look nice and stuff
 // fix search_for_class.html to also have shopping cart
-// remove <p> tags from calendar, adjust styling
 
 var days = [
 	{"day" : "Monday"},
