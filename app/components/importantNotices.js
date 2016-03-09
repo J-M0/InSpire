@@ -2,7 +2,7 @@ import React from 'react';
 import {getStudentInfo, getEnrolledCourses, queryCourses} from '../server';
 
 
-export default class SideNav extends React.Component {
+export default class ImportantNotices extends React.Component {
     render() {
       return (
 				<div className="panel panel-default" id="todo">
