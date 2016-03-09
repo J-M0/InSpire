@@ -85,7 +85,7 @@ export default class ClassInfo extends React.Component {
 
 
 
-ReactDOM.render(
-	<ClassInfo />,
-	document.getElementById('class-info-modal')
-);
+// ReactDOM.render(
+// 	<ClassInfo />,
+// 	document.getElementById('class-info-modal')
+// );
