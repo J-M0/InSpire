@@ -60,6 +60,7 @@ class CourseButton extends React.Component {
 			paddingLeft: '15%'
 		}
 
+
 		// display it
 		return(
 			<button type="button" className="btn btn-block btn-primary cal-btn">
@@ -149,9 +150,6 @@ class CalendarBlock extends React.Component {
 
 	// display it
 	render() {
-		// get the modal content if necessary
-		if (this.state.testShow !== undefined)
-			var modal = (this.state.testShow) ? <TestModal available={this.state.available}/> : undefined;
 		var content = this.state.text;
 		// if no modal needed, display regular CalendarBlock times
 		if (content === undefined) {
@@ -165,10 +163,15 @@ class CalendarBlock extends React.Component {
 						this.state.available.map((available) => {
 							if (enrolled.courseId === available.courseId)
 								// pass the relevant course info to the button if we find it and then create it
-								content = <CourseButton enrolledcourse={enrolled} />;
+								content = <CourseButton enrolledcourse={enrolled}/>;
 						})
 				})
 			}
+
+			// get the modal content if necessary
+			if (this.state.testShow !== undefined)
+				var modal = (this.state.testShow) ? <TestModal available={this.state.available}/> : undefined;
+
 			// ternary operator, displays content if we have it where content is possibly a CourseButton, if not displays time
 			content = (content === undefined)
 								? startTime.substring(0, startTime.indexOf(":")+3).replace(/^0+/, '') + " - " + endTime.substring(0, endTime.indexOf(":")+3).replace(/^0+/, '')
@@ -209,13 +212,9 @@ export default class Calendar extends React.Component {
 		});
 	}
 
-	courseFlag(obj) {
-		//console.log(obj);
-	}
-
 	// dont feel like explaining all this right now, so bascially it just does a calculation
 	// to figure out which of those two arrays of times to use and which days to render using
-	// modulo. 
+	// modulo.
 	render() {
 		return (
 			<div className="row" style={{height: '100%'}}>
@@ -230,7 +229,7 @@ export default class Calendar extends React.Component {
 											{/* (a)=>this.courseFlag(a) says to send as an argument the function courseFlag with one argument
 												* In calendarBlocks, we have this.state.flag(this) which compiles to Calendar.courseFlag(CalendarBlock)
 												*/}
-											return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"MWF" + i/2} type="time-55"
+											return(<CalendarBlock userId={this.state.userInfo.studentId} key={"MWF" + i/2} type="time-55"
 															start={default55Times[i]} end={default55Times[i+1]} day={obj.day}/>);
 										}
 									})}
@@ -238,7 +237,7 @@ export default class Calendar extends React.Component {
 									{default75Times.map((time, i) => {
 										if (i > 6) {
 											if (this.state.userInfo !== undefined && i%2 === 0) {
-												return(<CalendarBlock flag={(a)=>this.courseFlag(a)} userId={this.state.userInfo.studentId} key={"MWF-Long" + i/2} type="time-75"
+												return(<CalendarBlock userId={this.state.userInfo.studentId} key={"MWF-Long" + i/2} type="time-75"
 																start={default75Times[i]} end={default75Times[i+1]} day={obj.day}/>);
 											}
 										}
