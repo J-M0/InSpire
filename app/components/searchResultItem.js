@@ -17,11 +17,11 @@ export default class SearchResultItem extends React.Component {
 		return (
 			<div>
 				<span className="glyphicon glyphicon-asterisk" style={{color: 'green'}}></span>
-				CS 326 - Web Programming <a href="#"><span className="glyphicon glyphicon-chevron-down pull-right"></span></a>
+				CS 377 - Operating Systems <span className="glyphicon glyphicon-chevron-down pull-right"></span>
 				<br />
 				<br />
-				THIS IS A COOL CLASS. TRUST ME.
-				<a className="btn" data-toggle="modal" href="#CS326Modal" style={{textAlign: 'right'}}>...More info</a>
+				MORE INFO ABOUT ANOTHER CLASS OR SOMETHING.
+				<a className="btn" data-toggle="modal" href="Modal" style={{textAlign: 'right'}}>...More info</a>
 			</div>
 		);
 	}
