@@ -1,5 +1,5 @@
 import React from 'react';
-import {getStudentInfo, getEnrolledCourses, queryCourses} from '../server';
+import {getStudentInfo} from '../server';
 
 
 export default class ImportantNotices extends React.Component {
