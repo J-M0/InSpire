@@ -6,6 +6,8 @@ import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
 class App extends React.Component {
 	render() {
+		// Default user, to be removed
+		this.props.Calendar.props.params.id=12345678;
 		return (
 			<div>
 				{this.props.Calendar}
@@ -18,7 +20,7 @@ class App extends React.Component {
 ReactDOM.render((
 	<Router history={hashHistory}>
 		<Route path="/" component={App}>
-			{/*<IndexRoute component={}/>*/}
+			<IndexRoute components={{Calendar}}/>
 			<Route path="/profile/:id" components={{Calendar, SideNav}} />
 		</Route>
 	</Router>
