@@ -164,6 +164,14 @@ ul {
 	margin-left: 15px;
 }
 
+#shopping-cart {
+	margin-left: 30px;
+	padding-bottom: 5px;
+}
+
+#shopping-cart .list-group-item {
+	margin-left: -41px;
+}
 
 #search-results {
 	margin-left: 30px;
