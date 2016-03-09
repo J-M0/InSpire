@@ -2,6 +2,9 @@ import React from 'react';
 //import ReactDOM from 'react-dom';
 import {getStudentInfo, getEnrolledCourses, queryCourses} from '../server';
 
+// STEPHEN TODO:
+// fix search_for_class.html to also have shopping cart
+
 var days = [
 	{"day" : "Monday"},
 	{"day" : "Tuesday"},
@@ -31,12 +34,31 @@ var default75Times = [
 
 class CourseButton extends React.Component {
 	render() {
+		var course = this.props.enrolledcourse;
+		var start = new Date(course.start).toLocaleTimeString();
+		var end = new Date(course.end).toLocaleTimeString();
+		var startTime = start.substring(0, start.indexOf(":")+3).replace(/^0+/, '');
+		var endTime = end.substring(0, end.indexOf(":")+3).replace(/^0+/, '');
+
+		var rightstyle = {
+			textAlign:'center',
+			display: 'block',
+			float: 'right',
+			paddingRight: '15%'
+		};
+
+		var leftstyle = {
+			textAlign:'center',
+			display: 'block',
+			float: 'left',
+			paddingLeft: '15%'
+		}
+
 		return(
-			<button type="button" className="btn btn-primary btn-block">
-				<p>2:30 - 3:45PM</p>
-				<p>AFROAM 133 - 01AB</p>
-				<p>Discussion</p>
-				<p>MALCOLMX Center</p>
+			<button type="button" className="btn btn-block btn-primary cal-btn">
+				<span style={leftstyle}>{startTime + " - " + endTime}</span>  <span style={rightstyle}>{course.location}</span>
+				<br />
+				<span style={leftstyle}>{course.courseId}</span>
 			</button>
 		);
 	}
@@ -99,7 +121,6 @@ class CalendarBlock extends React.Component {
 
 	handleClick(e) {
 		e.preventDefault();
-		// TODO: Create modal for viewing possible classes of
 		var bang = !this.state.testShow;
 		this.setState({ testShow: bang});
 		this.refresh();
@@ -120,7 +141,7 @@ class CalendarBlock extends React.Component {
 					if (this.state.available !== undefined)
 						this.state.available.map((available) => {
 							if (enrolled.courseId === available.courseId)
-								content = <CourseButton />;
+								content = <CourseButton enrolledcourse={enrolled} />;
 						})
 				})
 			}
@@ -129,12 +150,11 @@ class CalendarBlock extends React.Component {
 								: content;
 		}
 
+		var type = "thumbnail " + this.state.type;
 		return (
-			<div className="thumbnail">
-				<span className={this.state.type} onClick={(e) => this.handleClick(e)}>
+			<div className={type} onClick={(e) => this.handleClick(e)}>
 					{modal}
 					{content}
-				</span>
 			</div>
 		);
 	}
@@ -165,12 +185,12 @@ export default class Calendar extends React.Component {
 
 	render() {
 		return (
-			<div className="row">
+			<div className="row" style={{height: '100%'}}>
 				{days.map((obj, i) => {
 					switch(i) {
 						case 0: case 2: case 4:
 							return (
-								<div key={"col" + i} className="col-md-3" id={obj.day}>
+								<div key={"col" + i} className="col-md-3" id={obj.day} style={{height: '100%'}}>
 									<CalendarBlock type="day" text={obj.day} />
 									{default55Times.map((time, i) => {
 										if (this.state.userInfo !== undefined && i%2 === 0) {

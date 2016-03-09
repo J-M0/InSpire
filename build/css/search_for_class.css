@@ -6,13 +6,24 @@
 html, body {
 	height: 100%;
 	width: 100%;
-	overflow: hidden;
 	position: relative;
+	overflow: hidden;
 }
+
+ul {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
 
 /* class tags begin here */
 .class-full-btn {
 	transform: rotate(270deg);
+}
+
+.cal-btn {
+	height: 100%;
+	font-size: 11px;
+	box-sizing: border-box;
 }
 
 .course-modal-btn {
@@ -41,13 +52,13 @@ html, body {
 	display: block;
 }
 
-.time-55 {
-	height: 50px;
+.search-tabs > li > a {
+	background-color: #354066;
+	color: white;
 }
 
-.time-75 {
-	height: 80px;
-
+.search-tabs {
+	margin-left: 30px;
 }
 
 .time-2h {
@@ -86,11 +97,13 @@ html, body {
 
 #calendar {
 	margin-top: 5px;
+	height: 100%;
 }
 
 #calendar .col-md-3 {
 	width: 22%;
 	margin-left: -2%;
+	height: 100%;
 }
 
 #calendar .col-md-3:first-child {
@@ -103,6 +116,14 @@ html, body {
 
 #calendar .thumbnail {
 	margin-bottom: 0px;
+}
+
+#calendar .thumbnail.time-75 {
+	height: 13.5%;
+}
+
+#calendar .thumbnail.time-55 {
+	height: 9%;
 }
 
 #circle {
@@ -119,6 +140,11 @@ html, body {
 	right: -55px;
 	padding-top: 10px;
 	color: white;
+}
+
+#menu-tabs > li {
+	width: 75.45px;
+	text-align: center;
 }
 
 #rotate-container {
@@ -138,6 +164,14 @@ html, body {
 	margin-left: 15px;
 }
 
+#shopping-cart {
+	margin-left: 30px;
+	padding-bottom: 5px;
+}
+
+#shopping-cart .list-group-item {
+	margin-left: -41px;
+}
 
 #search-results {
 	margin-left: 30px;
@@ -150,12 +184,23 @@ html, body {
 
 #sidebar-container {
 	height: 100%;
-	width: 1%;
+	width: 250px;
+	visibility: hidden; /*Toggle for sidebar*/
 	top: 0px;
 	position:absolute;
 	background-color: #354066;
 	z-index: 1;
 }
+
+#rotate-container {
+    transform: rotate(90deg);
+    height: 0px;
+    top: 45%;
+    left: -23%; /*left: 74%;*/
+    visibility: visible;
+    z-index: 1;
+  }
+
 
 #side-navbar {
 	height: 100%;
@@ -175,18 +220,17 @@ html, body {
 	height: 100%;
 	position: absolute;
 	width: 100%;
-	top: 0px;
 	left: 1%;
 	background: url("/img/dubois_pond_chapel.jpg") no-repeat center center fixed;
 	background-size: cover;
-}
+*/}
 
 #trapezoid {
-	border-bottom: 100px solid #354066;
-	border-left: 50px solid transparent;
+	border-bottom: 50px solid #354066;
+	border-left: 40px solid transparent;
 	border-right: 50px solid transparent;
 	height: 0px;
-	width: 220px;
+	width: 200px;
 	transform: scale(0.5, 0.5);
 }
 
