@@ -41,18 +41,24 @@ class CourseButton extends React.Component {
 		var endTime = end.substring(0, end.indexOf(":")+3).replace(/^0+/, '');
 
 		var rightstyle = {
-			textAlign:'right'
+			textAlign:'center',
+			display: 'block',
+			float: 'right',
+			paddingRight: '15%'
 		};
 
 		var leftstyle = {
-			textAlign:'left'
+			textAlign:'center',
+			display: 'block',
+			float: 'left',
+			paddingLeft: '15%'
 		}
 
 		return(
 			<button type="button" className="btn btn-block btn-primary cal-btn">
-				<span style={leftstyle}>{startTime + " - " + endTime}</span> | <span style={rightstyle}>{course.location}</span>
+				<span style={leftstyle}>{startTime + " - " + endTime}</span>  <span style={rightstyle}>{course.location}</span>
 				<br />
-				{course.courseId}
+				<span style={leftstyle}>{course.courseId}</span>
 			</button>
 		);
 	}
@@ -145,7 +151,7 @@ class CalendarBlock extends React.Component {
 								: content;
 		}
 
-		var type = "thumbnail " + this.state.type + " cal-btn-container";
+		var type = "thumbnail " + this.state.type;
 		return (
 			<div className={type}>
 				<span onClick={(e) => this.handleClick(e)}>

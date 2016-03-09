@@ -21,15 +21,9 @@ ul {
 }
 
 .cal-btn {
-	height: inherit;
-	white-space: normal;
-	font-family: Verdana,Arial;
-	font-size: 10px;
+	height: 100%;
+	font-size: 11px;
 	box-sizing: border-box;
-	text-align: center;
-}
-
-.cal-btn-container {
 }
 
 .course-modal-btn {
