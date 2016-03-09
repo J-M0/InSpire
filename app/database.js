@@ -145,7 +145,7 @@ var initialData = {
             "courseName": "Programming Methodology",
             "section": 1,
             "description": "Fun",
-            "location": "in the sky",
+            "location": "Totman",
             "credits": "4",
             "capacity": 120,
             "enrolled": 65,
@@ -163,7 +163,7 @@ var initialData = {
             "courseName": "Computer Systems Principles",
             "section": 1,
             "description": "Ahhh",
-            "location": "ground",
+            "location": "Hasbrouck",
             "credits": "4",
             "capacity": 90,
             "enrolled": 5,
@@ -181,7 +181,7 @@ var initialData = {
             "courseName": "Reasoning About Uncertainty",
             "section": 2,
             "description": "Work",
-            "location": "in the sky",
+            "location": "Goessman",
             "credits": "3",
             "capacity": 120,
             "enrolled": 100,
@@ -217,7 +217,7 @@ var initialData = {
             "courseName": "Software Engineering",
             "section": 3,
             "description": "Much HW",
-            "location": "in the sky",
+            "location": "Tobin",
             "credits": "3",
             "capacity": 100,
             "enrolled": 90,
@@ -235,7 +235,7 @@ var initialData = {
             "courseName": "Web Programming",
             "section": 3,
             "description": "Difficult",
-            "location": "in the sky",
+            "location": "Bartlett",
             "credits": "3",
             "capacity": 90,
             "enrolled": 65,
@@ -252,7 +252,7 @@ var initialData = {
           "courseId": "COMPSCI 373",
           "courseName": "Intro to Computer Graphics",
           "description": "Difficult",
-          "location": "neverland",
+          "location": "CS Building",
           "credits": "3",
           "final exam slot": new Date(2017, 5, 22),
           "grade": "C+",
@@ -261,7 +261,7 @@ var initialData = {
           "start" : new Date(0,0,0,11,15),
           "end" : new Date(0,0,0,12,5),
           "days": ["Monday", "Wednesday", "Thursday"]
-        } 
+        }
     }
 };
 

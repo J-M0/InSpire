@@ -2,6 +2,11 @@ import React from 'react';
 //import ReactDOM from 'react-dom';
 import {getStudentInfo, getEnrolledCourses, queryCourses} from '../server';
 
+// STEPHEN TODO:
+// fix calendar buttons, make them look nice and stuff
+// fix search_for_class.html to also have shopping cart
+// remove <p> tags from calendar, adjust styling
+
 var days = [
 	{"day" : "Monday"},
 	{"day" : "Tuesday"},
@@ -31,12 +36,25 @@ var default75Times = [
 
 class CourseButton extends React.Component {
 	render() {
+		var course = this.props.enrolledcourse;
+		var start = new Date(course.start).toLocaleTimeString();
+		var end = new Date(course.end).toLocaleTimeString();
+		var startTime = start.substring(0, start.indexOf(":")+3).replace(/^0+/, '');
+		var endTime = end.substring(0, end.indexOf(":")+3).replace(/^0+/, '');
+
+		var rightstyle = {
+			textAlign:'right'
+		};
+
+		var leftstyle = {
+			textAlign:'left'
+		}
+
 		return(
-			<button type="button" className="btn btn-primary btn-block">
-				<p>2:30 - 3:45PM</p>
-				<p>AFROAM 133 - 01AB</p>
-				<p>Discussion</p>
-				<p>MALCOLMX Center</p>
+			<button type="button" className="btn btn-block btn-primary cal-btn">
+				<span style={leftstyle}>{startTime + " - " + endTime}</span> | <span style={rightstyle}>{course.location}</span>
+				<br />
+				{course.courseId}
 			</button>
 		);
 	}
@@ -120,7 +138,7 @@ class CalendarBlock extends React.Component {
 					if (this.state.available !== undefined)
 						this.state.available.map((available) => {
 							if (enrolled.courseId === available.courseId)
-								content = <CourseButton />;
+								content = <CourseButton enrolledcourse={enrolled} />;
 						})
 				})
 			}
@@ -130,7 +148,7 @@ class CalendarBlock extends React.Component {
 		}
 
 		return (
-			<div className="thumbnail">
+			<div className="thumbnail cal-btn-container">
 				<span className={this.state.type} onClick={(e) => this.handleClick(e)}>
 					{modal}
 					{content}
