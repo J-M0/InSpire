@@ -9,6 +9,11 @@ html, body {
 	position: relative;
 }
 
+ul {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
 /* class tags begin here */
 .class-full-btn {
 	transform: rotate(270deg);
