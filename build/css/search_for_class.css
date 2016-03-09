@@ -204,7 +204,7 @@ ul {
 #sidebar-container {
 	height: 100%;
 	width: 250px;
-	visibility: hidden; /*Toggle for sidebar*/
+	visibility: hidden; /*temporary until sidebar component works*/
 	top: 0px;
 	position:absolute;
 	background-color: #354066;
@@ -215,7 +215,7 @@ ul {
     transform: rotate(90deg);
     height: 0px;
     top: 45%;
-    left: -23%; /*left: 74%;*/
+    left: -23%; /*temporary until sidebar component works*/
     visibility: visible;
     z-index: 1;
   }
