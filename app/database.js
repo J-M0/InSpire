@@ -90,13 +90,13 @@ var initialData = {
                     "function": "Financial Aid",
                     "dueDate": "03/01/16",
                     "status": "initiated"
-                }
+                },
                 "taxReturn": {
                     "function": "Financial Aid",
                     "dueDate": "03/01/16",
                     "status": "initiated"
                 }
-            }
+            },
             "courses": [
               "18271821", "85938173", "09876543"
             ],
@@ -138,13 +138,13 @@ var initialData = {
                     "function": "Financial Aid",
                     "dueDate": "03/01/16",
                     "status": "initiated"
-                }
+                },
                 "taxReturn": {
                     "function": "Financial Aid",
                     "dueDate": "03/01/16",
                     "status": "initiated"
                 }
-            }
+            },
             "courses": [
               "12345678", "19103958", "85938173"
             ],
