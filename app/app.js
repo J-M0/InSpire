@@ -18,7 +18,7 @@ class App extends React.Component {
 ReactDOM.render((
 	<Router history={hashHistory}>
 		<Route path="/" component={App}>
-			{/*<IndexRoute component={}/>*/}
+			{<IndexRoute components={{Calendar}}/>}
 			<Route path="/profile/:id" components={{Calendar, SideNav}} />
 		</Route>
 	</Router>
