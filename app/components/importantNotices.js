@@ -45,7 +45,7 @@ export default class SideNav extends React.Component {
 											<br />
 											<div className="panel-heading" style="color:#354066;">To Do Item Status</div>
 											<div className="panel-body">
-												<p>Initiated</p>
+												<h3><strong>Initiated</strong></h3>
 											</div>
 										</div>
 									</div>
@@ -109,7 +109,6 @@ export default class SideNav extends React.Component {
                     </div>
                   </div>
                 </div>
-
 
 						<div id="todoModal" className="modal fade" role="dialog">
 							<div className="modal-dialog modal-lg">
