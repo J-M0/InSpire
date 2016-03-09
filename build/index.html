@@ -170,6 +170,7 @@
     </div>
   </div>
 
+<!--
   <div id="sidebar-container">
     <img src="img/umass_logo.png" alt="UMass Logo" width="102" height="100" id="logo">
     <span id="spire"> InSPIRE</span>
@@ -200,9 +201,11 @@
       </div>
     </div>
   </div>
+-->
 
   <div class="row" id="top_container">
     <div class="col-md-3" id="side-navbar">
+
       <div class="panel panel-default" id="todo">
         <div class="panel-heading">Important Notices</div>
         <div class="panel-body">
@@ -212,6 +215,79 @@
         </div> <!-- End of todo panel body -->
       </div> <!-- End of todo panel -->
 
+      <ul class="nav nav-pills search-tabs">
+        <li class="active"><a data-toggle="tab" href="#search">Search</a></li>
+        <li><a data-toggle="tab" href="#results">Results</a></li>
+        <li><a data-toggle="tab" href="#cart">Cart</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="search" class="tab-pane fade in active">
+          <div class="panel panel-default" id="search-radios">
+            <div class="panel-heading" style="color:#354066;">Class Search Filters</div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="">Seats Available</label>
+            </div>
+            <div class="form-group">
+              <label for="keyword">Keyword:</label>
+              <input type="text" class="class-num pull-right keyword">
+            </div>
+            <div class="form-group">
+              <label for="class-num">Class Number:</label>
+              <select class="form control" id="course-num-ops">
+                <option>=</option>
+                <option>&gt;=</option>
+                <input type="text" class="class-num pull-right keyword">
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject:</label>
+              <select class="form-control" id="subject">
+                <option>!!Subject!!</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="gen-ed-cat">Gen Ed Category:</label>
+              <select class="form-control" id="gen-ed-cat">
+                <option>!!Gen Ed Category!!</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="session">Session</label>
+              <select class="form-control" id="session">
+                <option>!!Session!</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="instr-mode">Mode of Instruction</label>
+              <select class="form-control" id="instr-mode">
+                <option>!!Mode of instruction!!</option>
+              </select>
+            </div>
+            <div class="center-block">
+              <button id="singlebutton" name="singlebutton" class="btn btn-primary center-block" style="background-color:#354066;">
+                Search <span class="glyphicon glyphicon-search" style="margin-left:5px;margin-bottom:5px;"></span>
+              </button>
+            </div>
+          </div>
+        <div id="results" class="tab-pane fade in active">
+          <div class="panel panel-default" id="search-results">
+            <div class="panel-heading" style="color:354066;"><span class="glyphicon glyphicon-chevron-left" style="color:#354066;"></span> Search Results</div>
+            <ul class="list group">
+              <li class="list-group-item">
+                <span class="glyphicon glyphicon-!!glyphicon!!" style="color:green;"></span>
+                !!Class name!! <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+                <br>
+                !!Class description!!
+                <a class="btn" data-toggle="modal" href="#classInfoModal" style="text-align:right;">...More info</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!--
       <div class="panel panel-default" id="search-radios">
         <div class="panel-heading" style="color:#354066;">Class Search Filters</div>
         <div class="checkbox">
@@ -258,8 +334,9 @@
             Search <span class="glyphicon glyphicon-search" style="margin-left:5px;margin-bottom:5px;"></span>
           </button>
         </div>
-      </div> <!-- End of search-box -->
+      </div>  End of search-box -->
 
+      <!--
       <div class="panel panel-default" id="search-results">
         <div class="panel-heading" style="color:354066;"><span class="glyphicon glyphicon-chevron-left" style="color:#354066;"></span> Search Results</div>
         <ul class="list group">
@@ -271,7 +348,8 @@
             <a class="btn" data-toggle="modal" href="#classInfoModal" style="text-align:right;">...More info</a>
           </li>
         </ul>
-      </div> <!-- End of search-results -->
+      </div> <! End of search-results -->
+
     </div> <!-- End of col-md-3 -->
 
     <div class="col-md-9" id="calendar">
