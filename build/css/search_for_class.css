@@ -6,7 +6,6 @@
 html, body {
 	height: 100%;
 	width: 100%;
-	overflow: hidden;
 	position: relative;
 }
 
@@ -150,12 +149,23 @@ html, body {
 
 #sidebar-container {
 	height: 100%;
-	width: 1%;
+	width: 250px; 
+	visibility: visible; /*Toggle for sidebar*/
 	top: 0px;
 	position:absolute;
 	background-color: #354066;
 	z-index: 1;
 }
+
+#rotate-container {
+    transform: rotate(90deg);
+    height: 0px;
+    top: 45%;
+    left: 74%; /*left: -23%;*/
+    visibility: visible;
+    z-index: 1;
+  }
+
 
 #side-navbar {
 	height: 100%;
@@ -175,18 +185,17 @@ html, body {
 	height: 100%;
 	position: absolute;
 	width: 100%;
-	top: 0px;
 	left: 1%;
 	background: url("/img/dubois_pond_chapel.jpg") no-repeat center center fixed;
 	background-size: cover;
-}
+*/}
 
 #trapezoid {
-	border-bottom: 100px solid #354066;
-	border-left: 50px solid transparent;
+	border-bottom: 50px solid #354066;
+	border-left: 40px solid transparent;
 	border-right: 50px solid transparent;
 	height: 0px;
-	width: 220px;
+	width: 200px;
 	transform: scale(0.5, 0.5);
 }
 
