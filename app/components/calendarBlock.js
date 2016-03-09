@@ -2,9 +2,7 @@ import React from 'react';
 //import ReactDOM from 'react-dom';
 import {getStudentInfo, getEnrolledCourses, queryCourses} from '../server';
 
-// STEPHEN TODO:
-// fix search_for_class.html to also have shopping cart
-
+// list of days used for rendering the calendar
 var days = [
 	{"day" : "Monday"},
 	{"day" : "Tuesday"},
@@ -13,6 +11,7 @@ var days = [
 	{"day" : "Friday"}
 ];
 
+// 55 minute times for calendar
 var default55Times = [
 	new Date(0,0,0, 8, 0), new Date(0,0,0, 8,50),
 	new Date(0,0,0, 9, 5), new Date(0,0,0, 9,55),
@@ -22,6 +21,7 @@ var default55Times = [
 	new Date(0,0,0,13,25), new Date(0,0,0,14,15)
 ];
 
+// 75 minute times for calendar
 var default75Times = [
 	new Date(0,0,0, 8,30), new Date(0,0,0, 9,45),
 	new Date(0,0,0,10, 0), new Date(0,0,0,11,15),
@@ -32,6 +32,11 @@ var default75Times = [
 	new Date(0,0,0,17,30), new Date(0,0,0,18,45)
 ];
 
+/**
+	* CourseButton Component
+	* a CourseButton represents an enrolled course on the calendar
+	* gets the course from the parent CalendarBlock, formats the info, and displays
+	*/
 class CourseButton extends React.Component {
 	render() {
 		var course = this.props.enrolledcourse;
@@ -40,6 +45,7 @@ class CourseButton extends React.Component {
 		var startTime = start.substring(0, start.indexOf(":")+3).replace(/^0+/, '');
 		var endTime = end.substring(0, end.indexOf(":")+3).replace(/^0+/, '');
 
+		// react inline styling for the button text
 		var rightstyle = {
 			textAlign:'center',
 			display: 'block',
@@ -54,6 +60,7 @@ class CourseButton extends React.Component {
 			paddingLeft: '15%'
 		}
 
+		// display it
 		return(
 			<button type="button" className="btn btn-block btn-primary cal-btn">
 				<span style={leftstyle}>{startTime + " - " + endTime}</span>  <span style={rightstyle}>{course.location}</span>
@@ -64,15 +71,21 @@ class CourseButton extends React.Component {
 	}
 }
 
+/**
+	* TODO: rename
+	* TestModal Component
+	* modal appears when clicking an empty CalendarBlock, displays list of available
+	* courses, courses link to the CourseInfo modal
+	*/
 class TestModal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = props;
 	}
 
+	// display it
 	render() {
 		var body;
-
 		if (this.state.available.length !== 0) {
 			body = <div> {this.state.available.map( (courses, i) => {
 					return(
@@ -102,7 +115,12 @@ class TestModal extends React.Component {
 	}
 }
 
+/**
+	* CalendarBlock Component
+	* represents a time slot on the calendar
+	*/
 class CalendarBlock extends React.Component {
+	// gets the enrolled courses using the server and sets to enrolled
 	constructor(props) {
 		super(props);
 		this.state = props;
@@ -111,6 +129,7 @@ class CalendarBlock extends React.Component {
 		});
 	}
 
+	// define refresh behavior, refreshes student info
 	refresh() {
 		if (this.state.flag !== undefined)
 			this.state.flag(this.state);
@@ -119,6 +138,8 @@ class CalendarBlock extends React.Component {
 		});
 	}
 
+	// TODO: rename testShow variable
+	// define click behavior, displays TestModal when clicked
 	handleClick(e) {
 		e.preventDefault();
 		var bang = !this.state.testShow;
@@ -126,25 +147,29 @@ class CalendarBlock extends React.Component {
 		this.refresh();
 	}
 
+	// display it
 	render() {
+		// get the modal content if necessary
 		if (this.state.testShow !== undefined)
 			var modal = (this.state.testShow) ? <TestModal available={this.state.available}/> : undefined;
 		var content = this.state.text;
-
+		// if no modal needed, display regular CalendarBlock times
 		if (content === undefined) {
 			var startTime = this.state.start.toLocaleTimeString();
 			var endTime 	= this.state.end.toLocaleTimeString();
-
+			// if we are enrolled in a course at this time we need a button!
 			if(this.state.enrolled !== undefined) {
 				this.state.enrolled.map((enrolled) => {
 					// The available course list is a superset of enrolled course list
 					if (this.state.available !== undefined)
 						this.state.available.map((available) => {
 							if (enrolled.courseId === available.courseId)
+								// pass the relevant course info to the button if we find it and then create it
 								content = <CourseButton enrolledcourse={enrolled} />;
 						})
 				})
 			}
+			// ternary operator, displays content if we have it where content is possibly a CourseButton, if not displays time
 			content = (content === undefined)
 								? startTime.substring(0, startTime.indexOf(":")+3).replace(/^0+/, '') + " - " + endTime.substring(0, endTime.indexOf(":")+3).replace(/^0+/, '')
 								: content;
@@ -159,6 +184,7 @@ class CalendarBlock extends React.Component {
 		);
 	}
 
+	// called once
 	componentDidMount() {
 		queryCourses(this.state.day, this.state.start, this.state.end, (available) => {
 			this.setState({available});
@@ -167,6 +193,10 @@ class CalendarBlock extends React.Component {
 	}
 }
 
+/**
+	* Calendar Component
+	* displays the calendar by making appropriate CalendarBlocks
+	*/
 export default class Calendar extends React.Component {
 	constructor(props) {
 		super(props);
@@ -183,6 +213,9 @@ export default class Calendar extends React.Component {
 		//console.log(obj);
 	}
 
+	// dont feel like explaining all this right now, so bascially it just does a calculation
+	// to figure out which of those two arrays of times to use and which days to render using
+	// modulo. 
 	render() {
 		return (
 			<div className="row" style={{height: '100%'}}>
