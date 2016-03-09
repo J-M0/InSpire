@@ -109,13 +109,13 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <button class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="modal fade" tabindex="-1" role="dialog" id="!!Class!!Modal">
+  <div class="modal fade" tabindex="-1" role="dialog" id="classInfoModal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -175,7 +175,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Add Class</button>
         </div>
       </div>
@@ -220,7 +220,7 @@
         <div class="panel-body">
           <a href="#fafsa">2016-2017 FAFSA</a><br>
           <a href="#grad">Graduation Paperwork</a><br>
-          <a href="#etc">See More...</a><br>
+            <a href="#etc" data-toggle="modal" data-target="#todoModal">See More...</a><br>
         </div> <!-- End of todo panel body -->
       </div> <!-- End of todo panel -->
 
@@ -281,7 +281,7 @@
             <br>
             <br>
             !!Class description!!
-            <a class="btn" data-toggle="modal" href="#!!Class!!Modal" style="text-align:right;">...More info</a>
+            <a class="btn" data-toggle="modal" href="#classInfoModal" style="text-align:right;">...More info</a>
           </li>
         </ul>
       </div> <!-- End of search-results -->
