@@ -142,6 +142,11 @@ ul {
 	color: white;
 }
 
+#menu-tabs > li {
+	width: 75.45px;
+	text-align: center;
+}
+
 #rotate-container {
 	transform: rotate(90deg);
 	position: absolute;

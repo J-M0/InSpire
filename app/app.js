@@ -7,7 +7,8 @@ import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 class App extends React.Component {
 	render() {
 		// Default user, to be removed
-		this.props.Calendar.props.params.id=12345678;
+		if (this.props.Calendar.props.params.id === undefined)
+			this.props.Calendar.props.params.id=12345678;
 		return (
 			<div style={{height: '100%'}}>
 				{this.props.Calendar}
