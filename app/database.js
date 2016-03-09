@@ -36,6 +36,19 @@ var initialData = {
                 "state": "AL",
                 "zip": "35224"
             },
+            "academicInstitution": "U. of Massachusetts Amherst",
+            "importantNotices": {
+                "16-17fafsa": {
+                    "function": "Financial Aid",
+                    "dueDate": "03/01/16",
+                    "status": "initiated"
+                }
+                "taxReturn": {
+                    "function": "Financial Aid",
+                    "dueDate": "03/01/16",
+                    "status": "initiated"
+                }
+            }
             "courses": [
               "12345678", "92819522", "19103958"
             ],
@@ -71,6 +84,19 @@ var initialData = {
                 "state": "ME",
                 "zip": "04106"
             },
+            "academicInstitution": "U. of Massachusetts Amherst",
+            "importantNotices": {
+                "16-17fafsa": {
+                    "function": "Financial Aid",
+                    "dueDate": "03/01/16",
+                    "status": "initiated"
+                }
+                "taxReturn": {
+                    "function": "Financial Aid",
+                    "dueDate": "03/01/16",
+                    "status": "initiated"
+                }
+            }
             "courses": [
               "18271821", "85938173", "09876543"
             ],
@@ -106,6 +132,19 @@ var initialData = {
                 "state": "TX",
                 "zip": "77478"
             },
+            "academicInstitution": "U. of Massachusetts Amherst",
+            "importantNotices": {
+                "16-17fafsa": {
+                    "function": "Financial Aid",
+                    "dueDate": "03/01/16",
+                    "status": "initiated"
+                }
+                "taxReturn": {
+                    "function": "Financial Aid",
+                    "dueDate": "03/01/16",
+                    "status": "initiated"
+                }
+            }
             "courses": [
               "12345678", "19103958", "85938173"
             ],
