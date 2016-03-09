@@ -145,9 +145,10 @@ class CalendarBlock extends React.Component {
 								: content;
 		}
 
+		var type = "thumbnail " + this.state.type + " cal-btn-container";
 		return (
-			<div className="thumbnail cal-btn-container">
-				<span className={this.state.type} onClick={(e) => this.handleClick(e)}>
+			<div className={type}>
+				<span onClick={(e) => this.handleClick(e)}>
 					{modal}
 					{content}
 				</span>
@@ -181,12 +182,12 @@ export default class Calendar extends React.Component {
 
 	render() {
 		return (
-			<div className="row">
+			<div className="row" style={{height: '100%'}}>
 				{days.map((obj, i) => {
 					switch(i) {
 						case 0: case 2: case 4:
 							return (
-								<div key={"col" + i} className="col-md-3" id={obj.day}>
+								<div key={"col" + i} className="col-md-3" id={obj.day} style={{height: '100%'}}>
 									<CalendarBlock type="day" text={obj.day} />
 									{default55Times.map((time, i) => {
 										if (this.state.userInfo !== undefined && i%2 === 0) {

@@ -9,7 +9,7 @@ class App extends React.Component {
 		// Default user, to be removed
 		this.props.Calendar.props.params.id=12345678;
 		return (
-			<div>
+			<div style={{height: '100%'}}>
 				{this.props.Calendar}
 				{/*this.props.SideNav*/}
 			</div>

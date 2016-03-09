@@ -67,15 +67,6 @@ ul {
 	margin-left: 30px;
 }
 
-.time-55 {
-	height: 50px;
-}
-
-.time-75 {
-	height: 80px;
-
-}
-
 .time-2h {
 	height: 116px;
 }
@@ -112,11 +103,13 @@ ul {
 
 #calendar {
 	margin-top: 5px;
+	height: 100%;
 }
 
 #calendar .col-md-3 {
 	width: 22%;
 	margin-left: -2%;
+	height: 100%;
 }
 
 #calendar .col-md-3:first-child {
@@ -129,6 +122,14 @@ ul {
 
 #calendar .thumbnail {
 	margin-bottom: 0px;
+}
+
+#calendar .thumbnail.time-75 {
+	height: 13.5%;
+}
+
+#calendar .thumbnail.time-55 {
+	height: 9%;
 }
 
 #circle {
