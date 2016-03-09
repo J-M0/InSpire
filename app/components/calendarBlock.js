@@ -121,7 +121,6 @@ class CalendarBlock extends React.Component {
 
 	handleClick(e) {
 		e.preventDefault();
-		// TODO: Create modal for viewing possible classes of
 		var bang = !this.state.testShow;
 		this.setState({ testShow: bang});
 		this.refresh();
@@ -153,11 +152,9 @@ class CalendarBlock extends React.Component {
 
 		var type = "thumbnail " + this.state.type;
 		return (
-			<div className={type}>
-				<span onClick={(e) => this.handleClick(e)}>
+			<div className={type} onClick={(e) => this.handleClick(e)}>
 					{modal}
 					{content}
-				</span>
 			</div>
 		);
 	}
