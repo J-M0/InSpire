@@ -1,6 +1,45 @@
 import React from 'react';
 
+class navBarExtendButton extends React.Component {
+	refresh() {
+		if (this.state.flag !== undefined)
+		this.state.flag(this.state);
+	}
+
+	handleClick(e) {
+		e.preventDefault();
+		var bang = !this.state.testShow;
+		this.setState({ testShow: bang});
+		this.refresh();
+
+		//Extend / contract menu
+		// #sidebar-container {
+		// 	visibility: hidden; /*Toggle for sidebar*/
+		// }
+		// #rotate-container {
+		//     left: -23%; /*left: 74%;*/
+		//   }
+	}
+
+	render()
+	{
+		return(
+			<div id="rotate-container">
+				<div id="trapezoid">
+					<span className="glyphicon glyphicon-chevron-down" id="glyph-scaling"></span>
+				</div>
+			</div>
+		);
+	}
+
+}
+
 class navBarButton extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = props;
+	}
+
 	refresh() {
 		if (this.state.flag !== undefined)
 		this.state.flag(this.state);
@@ -14,9 +53,11 @@ class navBarButton extends React.Component {
 		//GoToHTML file with data text
 	}
 
-	render() {
+	render()
+	{
+		var text = this.props.data;
 		return(
-			<li><a href="#">"dataVariable"</a></li>
+			<li><a href="#">{text}</a></li>
 		);
 	}
 }
@@ -29,17 +70,13 @@ export default class SideNav extends React.Component {
 				<span id="spire"> InSPIRE</span>
 				<br /><br />
 				<ul className="nav">
-					<navBarButton data="Class Schedule"></navBarButton>
-					<navBarButton data="Final Exam Schedule"></navBarButton>
-					<navBarButton data="Finances"></navBarButton>
-					<navBarButton data="Housing"></navBarButton>
-					<navBarButton data="Logout"></navBarButton>
+					<navBarButton data={"Class Schedule"} />
+					<navBarButton data={"Final Exam Schedule"} />
+					<navBarButton data={"Finances"} />
+					<navBarButton data={"Housing"} />
+					<navBarButton data={"Logout"} />
 				</ul>
-				<div id="rotate-container">
-					<div id="trapezoid">
-						<span className="glyphicon glyphicon-chevron-down" id="glyph-scaling"></span>
-					</div>
-				</div>
+				<navBarExtendButton />
 			</div>
 		)
 	}
