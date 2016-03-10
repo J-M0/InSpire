@@ -28,6 +28,22 @@ ul {
 	box-sizing: border-box;
 }
 
+.cal-btn > span:nth-of-type(even) {
+	textAlign:center;
+	/*fontWeight: bold;*/
+  display: block;
+	float: right;
+	paddingRight: 5%;
+}
+
+.cal-btn > span:nth-of-type(odd) {
+	textAlign:center;
+	/*fontWeight: bold;*/
+  display: block;
+	float: left;
+	paddingLeft: 5%;
+}
+
 .course-modal-btn {
 	width: 100%;
 	margin: 2px;
@@ -129,6 +145,8 @@ ul {
 
 #calendar .thumbnail {
 	margin-bottom: 0px;
+	border-radius: 0px;
+	border-width: 1px 0px 0px 1px;
 }
 
 #calendar .thumbnail.time-75 {

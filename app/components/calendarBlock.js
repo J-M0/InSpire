@@ -51,40 +51,24 @@ class CourseButton extends React.Component {
 		var startTime = start.substring(0, start.indexOf(":")+3).replace(/^0+/, '');
 		var endTime = end.substring(0, end.indexOf(":")+3).replace(/^0+/, '');
 
-		// react inline styling for the button text
-		var rightstyle = {
-			textAlign:'center',
-			display: 'block',
-			float: 'right',
-			paddingRight: '15%'
-		};
-
-		var leftstyle = {
-			textAlign:'center',
-			display: 'block',
-			float: 'left',
-			paddingLeft: '15%'
-		}
-
-
 		// display it
 		return(
 			<button type="button" className="btn btn-block btn-primary cal-btn" onClick={e => this.handleClick(e)}>
-				<span style={leftstyle}>{startTime + " - " + endTime}</span>  <span style={rightstyle}>{course.location}</span>
-				<br />
-				<span style={leftstyle}>{course.courseId}</span>
+				<span>{startTime + " - " + endTime}</span>
+				<span>{course.courseId}</span>
+				<br/>
+				<span>{course.location}</span>
 			</button>
 		);
 	}
 }
 
 /**
-	* TODO: rename
-	* TestModal Component
+	* AvailableModal Component
 	* modal appears when clicking an empty CalendarBlock, displays list of available
 	* courses, courses link to the CourseInfo modal
 	*/
-class TestModal extends React.Component {
+class AvailableModal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = props;
@@ -145,13 +129,12 @@ class CalendarBlock extends React.Component {
 		});
 	}
 
-	// TODO: rename testShow variable
-	// define click behavior, displays TestModal when clicked
+	// define click behavior, displays AvailableModal when clicked
 	handleClick(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		var bang = !this.state.testShow;
-		this.setState({ testShow: bang});
+		var bang = !this.state.showModal;
+		this.setState({ showModal: bang});
 		this.refresh();
 	}
 
@@ -176,8 +159,8 @@ class CalendarBlock extends React.Component {
 			}
 
 			// get the modal content if necessary
-			if (this.state.testShow !== undefined)
-				var modal = (this.state.testShow) ? <TestModal available={this.state.available}/> : undefined;
+			if (this.state.showModal !== undefined)
+				var modal = (this.state.showModal) ? <AvailableModal available={this.state.available}/> : undefined;
 
 			// ternary operator, displays content if we have it where content is possibly a CourseButton, if not displays time
 			content = (content === undefined)
@@ -199,7 +182,7 @@ class CalendarBlock extends React.Component {
 		queryCourses(this.state.day, this.state.start, this.state.end, (available) => {
 			this.setState({available});
 		});
-		this.setState({testShow : false});
+		this.setState({showModal : false});
 	}
 }
 
