@@ -11,7 +11,8 @@
   <link href="css/search_for_class.css" rel="stylesheet">
 </head>
 
-<body>
+<body id='body'>
+	<!--
   <div id="todoModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -21,7 +22,9 @@
         </div>
         <div class="modal-body">
           <div class="panel panel-default" id="todo-list-items">
-            <div class="panel-heading" style="color:#354066;"><span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> Todo Items</div>
+            <div class="panel-heading" style="color:#354066;">
+              <span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> Todo Items
+            </div>
             <div class="panel-body">
               <table class="table">
                 <thead>
@@ -51,10 +54,14 @@
                 </tbody>
               </table>
             </div>
-            <div class="panel-heading" style="color:#354066;"><span class="glyphicon glyphicon-remove-circle" style="color:#354066;"></span> Holds</div>
+            <div class="panel-heading" style="color:#354066;">
+              <span class="glyphicon glyphicon-remove-circle" style="color:#354066;"></span> Holds
+            </div>
             <p style="margin-left:20px;">There are currently no holds on your account.</p>
             <br>
-            <div class="panel-heading" style="color:#354066;"><span class="glyphicon glyphicon-gift" style="color:#354066;"></span> Financial Aid</div>
+            <div class="panel-heading" style="color:#354066;">
+              <span class="glyphicon glyphicon-gift" style="color:#354066;"></span> Financial Aid
+            </div>
             <div class="panel-body">
               <p>Select the year of aid you wish to view.</p>
               <table class="table">
@@ -102,12 +109,16 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
           <h4 class="modal-title">More Info</h4>
         </div>
         <div class="modal-body">
           <div class="panel panel-default" id="modal-list-items">
-            <div class="panel-heading" style="color:#354066;"><span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> Class Information</div>
+            <div class="panel-heading" style="color:#354066;">
+              <span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> Class Information
+            </div>
             <div class="panel-body">
               <table class="table">
                 <thead>
@@ -131,7 +142,9 @@
               </table>
             </div>
 
-            <div class="panel-heading" style="color:#354066;"><span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> More Information</div>
+            <div class="panel-heading" style="color:#354066;">
+              <span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> More Information
+            </div>
             <div class="panel-body">
               <table class="table">
                 <thead>
@@ -153,8 +166,12 @@
               </table>
             </div>
 
-            <div class="panel-heading" style="color:#354066;"><span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> Class Description </div>
-            <div class="panel-body"> !!Class Description! </div>
+            <div class="panel-heading" style="color:#354066;">
+              <span class="glyphicon glyphicon-ok-circle" style="color:#354066;"></span> Class Description 
+            </div>
+            <div class="panel-body"> 
+              !!Class Description! 
+            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -164,7 +181,6 @@
       </div>
     </div>
   </div>
-
 
   <div id="sidebar-container">
     <img src="img/umass_logo.png" alt="UMass Logo" width="102" height="100" id="logo">
@@ -176,7 +192,6 @@
       <li><a href="#">Finances</a></li>
       <li><a href="#">Housing</a></li>
       <li><a href="#">Logout</a></li>
-
     </ul>
     <div id="rotate-container">
       <div id="trapezoid">
@@ -185,12 +200,12 @@
     </div>
   </div>
 
-
   <div class="row" id="top_container">
     <div class="col-md-3" id="side-navbar">
-
       <div class="panel panel-default" id="todo">
-        <div class="panel-heading">Important Notices</div>
+        <div class="panel-heading">
+          Important Notices
+        </div>
         <div class="panel-body">
           <a href="#fafsa">2016-2017 FAFSA</a><br>
           <a href="#grad">Graduation Paperwork</a><br>
@@ -207,7 +222,9 @@
       <div class="tab-content">
         <div id="search" class="tab-pane fade in active">
           <div class="panel panel-default" id="search-radios">
-            <div class="panel-heading" style="color:#354066;">Class Search Filters</div>
+            <div class="panel-heading" style="color:#354066;">
+              Class Search Filters
+            </div>
             <div class="checkbox">
               <label><input type="checkbox" value="">Seats Available</label>
             </div>
@@ -256,7 +273,9 @@
         </div>
         <div id="results" class="tab-pane fade in">
           <div class="panel panel-default" id="search-results">
-            <div class="panel-heading" style="color:354066;">Search Results</div>
+            <div class="panel-heading" style="color:354066;">
+              Search Results
+            </div>
             <ul class="list group">
               <li class="list-group-item">
                 <span class="glyphicon glyphicon-!!glyphicon!!" style="color:green;"></span>
@@ -270,27 +289,31 @@
         </div>
         <div id="cart" class="tab-pane fade in">
           <div id="shopping-cart" class="panel panel-default">
-            <div class="panel-heading" style="color:#354066;">Shopping Cart</div>
+            <div class="panel-heading" style="color:#354066;">
+              Shopping Cart
+            </div>
             <ul class="list group">
               <li class="list-group-item">
-      					<span class="glyphicon glyphicon-asterisk" style="color:green;"></span>
-      					CS 326 - Web Programming
-      				</li>
-      				<li class="list-group-item">
-      					<span class="glyphicon glyphicon-play class-full-btn" style="color:blue;"></span>
-      					CS 320 - Software Engineering
-      				</li>
-      				<li class="list-group-item">
-      					<span class="glyphicon glyphicon-stop" style="color:yellow;"></span>
-      					CS 373 - Intro. to Computer Graphics
-      				</li>
-      				<li class="list-group-item">
-      					<span class="glyphicon glyphicon-asterisk" style="color:green;"></span>
-      					CS 383 - Artificial Intelligence
-      				</li>
+                <span class="glyphicon glyphicon-asterisk" style="color:green;"></span>
+                CS 326 - Web Programming
+              </li>
+              <li class="list-group-item">
+                <span class="glyphicon glyphicon-play class-full-btn" style="color:blue;"></span>
+                CS 320 - Software Engineering
+              </li>
+              <li class="list-group-item">
+                <span class="glyphicon glyphicon-stop" style="color:yellow;"></span>
+                CS 373 - Intro. to Computer Graphics
+              </li>
+              <li class="list-group-item">
+                <span class="glyphicon glyphicon-asterisk" style="color:green;"></span>
+                CS 383 - Artificial Intelligence
+              </li>
             </ul>
             <div class="center-block">
-              <button name="singlebutton" class="btn btn-primary center-block" style="background-color:#354066;align:center;margin-top:5px;">Enroll</button>
+              <button name="singlebutton" class="btn btn-primary center-block" style="background-color:#354066;align:center;margin-top:5px;">
+                Enroll
+              </button>
             </div>
           </div>
         </div>
@@ -300,7 +323,7 @@
 
     <div class="col-md-9" id="calendar">
     </div>
-  </div>
+  </div> -->
   <!-- necessary javascript -->
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
