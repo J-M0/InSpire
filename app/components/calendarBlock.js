@@ -33,6 +33,12 @@ var default75Times = [
 ];
 
 class CourseButton extends React.Component {
+	handleClick(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		console.log("Kappa");
+	}
+
 	render() {
 		var course = this.props.enrolledcourse;
 		var start = new Date(course.start).toLocaleTimeString();
@@ -55,7 +61,7 @@ class CourseButton extends React.Component {
 		}
 
 		return(
-			<button type="button" className="btn btn-block btn-primary cal-btn">
+			<button type="button" className="btn btn-block btn-primary cal-btn" onClick={e => this.handleClick(e)}>
 				<span style={leftstyle}>{startTime + " - " + endTime}</span>  <span style={rightstyle}>{course.location}</span>
 				<br />
 				<span style={leftstyle}>{course.courseId}</span>
@@ -121,6 +127,7 @@ class CalendarBlock extends React.Component {
 
 	handleClick(e) {
 		e.preventDefault();
+		e.stopPropagation();
 		var bang = !this.state.testShow;
 		this.setState({ testShow: bang});
 		this.refresh();
