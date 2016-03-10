@@ -17,11 +17,11 @@ export default class SearchResultItem extends React.Component {
 		return (
 			<div>
 				<span className="glyphicon glyphicon-asterisk" style={{color: 'green'}}></span>
-				CS 377 - Operating Systems <span className="glyphicon glyphicon-chevron-down pull-right"></span>
+				CS 377 - Operating Systems <a href="#"><span className="glyphicon glyphicon-chevron-down pull-right"></span></a>
 				<br />
 				<br />
 				MORE INFO ABOUT ANOTHER CLASS OR SOMETHING.
-				<a className="btn" data-toggle="modal" href="Modal" style={{textAlign: 'right'}}>...More info</a>
+				<a className="btn" data-toggle="modal" href="#Modal" style={{textAlign: 'right'}}>...More info</a>
 			</div>
 		);
 	}

@@ -23,7 +23,7 @@ export default class SearchResultList extends React.Component {
 				<ul className="list group">
 					<li className="list-group-item">
 						<span className="glyphicon glyphicon-asterisk" style={{color: 'green'}}></span>
-						CS 326 - Web Programming <a href="#"><span className="glyphicon glyphicon-chevron-down pull-right"></span></a>
+						CS 326 - Web Programming <span className="glyphicon glyphicon-chevron-down pull-right"></span>
 						<br />
 						<br />
 						THIS IS A COOL CLASS. TRUST ME.
