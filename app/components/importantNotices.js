@@ -92,9 +92,9 @@ export default class ImportantNotices extends React.Component {
                               </thead>
                               <tbody>
                                 <tr>
-                                  <td>U. of Massachusetts Amherst</td>
-                                  <td>Financial Ai</td>
-                                  <td>05/16/2016</td>
+                                  <td>{data.academicInstitution}</td>
+                                  <td>{data.importantNotices.taxReturn.function}</td>
+                                  <td>{data.importantNotices.taxReturn.dueDate}</td>
                                   <td><a href="https://www.irs.gov/Individuals/Get-Transcript">View Additional Information</a></td>
                                 </tr>
                               </tbody>
@@ -114,7 +114,7 @@ export default class ImportantNotices extends React.Component {
                             </ul>
                           </div>
                           <div className="panel-heading" style="color:#354066;"><span className="glyphicon glyphicon-gift" style="color:#354066;"></span> To Do Item Status</div>
-                          <p><strong>Initiated</strong></p>
+                          <p><strong>{data.importantNotices.taxReturn.status}</strong></p>
                         </div>
                       </div>
                       <div className="modal-footer">
@@ -148,17 +148,17 @@ export default class ImportantNotices extends React.Component {
 													<tbody>
 														<tr>
 															<td>2016-2017 FAFSA</td>
-															<td>03/01/2015</td>
-															<td>Received</td>
-															<td>U. of Massachusetts Amherst</td>
-															<td>Financial Aid</td>
+															<td>{data.importantNotices.fafsa.dueDate}</td>
+															<td>{data.importantNotices.fafsa.status}</td>
+															<td>{data.academicInstitution}</td>
+															<td>{data.importantNotices.fafsa.function}</td>
 														</tr>
 														<tr>
 															<td>Graduation Paperwork</td>
-															<td>03/01/2015</td>
+															<td>{data.importantNotices.fafsa.dueDate}</td>
 															<td>Received</td>
-															<td>U. of Massachusetts Amherst</td>
-															<td>Graduate Program</td>
+															<td>{data.academicInstitution}</td>
+															<td>{data.importantNotices.fafsa.function}</td>
 														</tr>
 													</tbody>
 												</table>
@@ -180,22 +180,22 @@ export default class ImportantNotices extends React.Component {
 													<tbody>
 														<tr>
 															<td><a href="#">2016</a></td>
-															<td>U. of Massachusetts Amherst</td>
+															<td>{data.academicInstitution}</td>
 															<td>Financial Aid Year 2015-2016</td>
 														</tr>
 														<tr>
 															<td><a href="#">2015</a></td>
-															<td>U. of Massachusetts Amherst</td>
+															<td>{data.academicInstitution}</td>
 															<td>Financial Aid Year 2014-2015</td>
 														</tr>
 														<tr>
 															<td><a href="#">2014</a></td>
-															<td>U. of Massachusetts Amherst</td>
+															<td>{data.academicInstitution}</td>
 															<td>Financial Aid Year 2013-2014</td>
 														</tr>
 														<tr>
 															<td><a href="#">2013</a></td>
-															<td>U. of Massachusetts Amherst</td>
+															<td>{data.academicInstitution}</td>
 															<td>Financial Aid Year 2012-2013</td>
 														</tr>
 													</tbody>
