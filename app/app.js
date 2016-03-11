@@ -231,7 +231,7 @@ class App extends React.Component {
                   	<input type="text" className="className-num pull-right keyword"/>
                 	</div>
                 	<div className="form-group">
-                  	<label htmlFor="className-num">className Number:</label>
+                  	<label htmlFor="className-num">Course Number:</label>
                   	<select className="form control" id="course-num-ops">
                     	<option>=</option>
                     	<option>&gt;=</option>
@@ -241,25 +241,28 @@ class App extends React.Component {
                 	<div className="form-group">
                   	<label htmlFor="subject">Subject:</label>
                   	<select className="form-control" id="subject">
-                    	<option>!!Subject!!</option>
+                    	<option>Computer Science</option>
                   	</select>
                 	</div>
                 	<div className="form-group">
                   	<label htmlFor="gen-ed-cat">Gen Ed Category:</label>
                   	<select className="form-control" id="gen-ed-cat">
-                    	<option>!!Gen Ed Category!!</option>
+                    	<option>History</option>
+											<option>Biology</option>
                   	</select>
                 	</div>
                 	<div className="form-group">
                   	<label htmlFor="session">Session</label>
                   	<select className="form-control" id="session">
-                    	<option>!!Session!</option>
+                    	<option>1</option>
+											<option>2</option>
                   	</select>
                 	</div>
                 	<div className="form-group">
                   	<label htmlFor="instr-mode">Mode of Instruction</label>
                   	<select className="form-control" id="instr-mode">
-                    	<option>!!Mode of instruction!!</option>
+                    	<option>Instructor</option>
+											<option>Online</option>
                   	</select>
                 	</div>
                 	<div className="center-block">
