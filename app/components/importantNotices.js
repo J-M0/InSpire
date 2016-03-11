@@ -3,7 +3,21 @@ import {getStudentInfo} from '../server';
 
 
 export default class ImportantNotices extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = props;
+  }
+
+  refresh() {
+    getStudentInfo(this.props.params.id, (userInfo) => {
+      this.setState({userInfo});
+    });
+  }
+
     render() {
+      this.componentDidMount();
+      var data = this.props.studentInfo;
       return (
 				<div className="panel panel-default" id="todo">
 					<div className="panel-heading">Important Notices</div>
@@ -33,9 +47,9 @@ export default class ImportantNotices extends React.Component {
 													</thead>
 													<tbody>
 														<tr>
-															<td>U. of Massachusetts Amherst</td>
-															<td>Financial Aid</td>
-															<td>03/01/2016</td>
+															<td>{data.academicInstitution}</td>
+															<td>{data.importantNotices.fafsa.function}</td>
+															<td>{data.importantNotices.fafsa.dueDate}</td>
 														</tr>
 													</tbody>
 												</table>
@@ -45,7 +59,7 @@ export default class ImportantNotices extends React.Component {
 											<br />
 											<div className="panel-heading" style="color:#354066;">To Do Item Status</div>
 											<div className="panel-body">
-												<h3><strong>Initiated</strong></h3>
+												<h3><strong>{data.importantNotices.fafsa.status}</strong></h3>
 											</div>
 										</div>
 									</div>
