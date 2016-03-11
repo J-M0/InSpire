@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {getStudentInfo, getEnrolledCourses, queryCourses} from '../server';
 
 // list of days used for rendering the calendar
@@ -105,10 +104,6 @@ class AvailableModal extends React.Component {
         </div>
       </div>
     );
-  }
-
-  componentDidMount() {
-    ReactDOM.findDOMNode(this.refs.nameInput).focus();
   }
 }
 
