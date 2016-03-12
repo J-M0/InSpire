@@ -89,7 +89,7 @@ class AvailableModal extends React.Component {
 
     return(
       <div id="testModal" className="modal dimBg" role="dialog">
-        <div className="modal-dialog" style={{position:'relative'}}>
+        <div className="modal-dialog">
           <div className="modal-content myFade">
             <div className="modal-header">
               <h4 className="modal-title">Available Courses</h4>
