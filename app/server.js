@@ -34,7 +34,7 @@ export function getCourseInfo(courseId, cb) {
     emulateServerReturn(course, cb);
 }
 
-export function getSearchResults(seatsAvail, keyword, classNum, subject, genEdCat, session, instructionMode, cb) {
+export function getSearchResults(searchOptions, cb) {
     var results = [ '12345678', '92819522', '19103958', '18271821', '85938173', '09876543', '08874563'];
 
     emulateServerReturn(results.map((course) => readDocument('courses', course)), cb);

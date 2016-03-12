@@ -2,40 +2,70 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SearchRadios from './searchRadios';
 import SearchResultList from './searchResultList';
+import Modal from './modal';
+import ClassInfo from './classInfo';
+import SearchResultItem from './searchResultItem';
+import {getSearchResults} from '../server';
 
 export default class SearchPanel extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {showResults: this.props.showResults};
+		this.state = {view: this.props.view};
 	}
 
-	setView(view) {
-		if(view === "results") {
-			this.setState({showResults: true});
-		} else if(view === "search") {
-			this.setState({showResults: false});
+	setView(newView) {
+		this.setState({view: newView});
+	}
+
+	searchClasses(searchOptions) {
+		var callbackFunction = (returnedResults) => {
+			this.setState({results: returnedResults});
+			this.setView('results');
+		};
+		this.setView('loading');
+		getSearchResults(searchOptions, callbackFunction);
+	}
+
+	handleBackClick(clickEvent) {
+		clickEvent.preventDefault();
+
+		if(clickEvent.button === 0) {
+			this.setView('search');
 		}
+
 	}
 
 	render() {
-		if(this.state.showResults) {
-			return(
-				<div>
-					<SearchResultList setPanelView={(v) => this.setView(v)}/>
+		var contents;
+		var data = this.state;
+		switch(this.state.view) {
+			case 'search':
+				contents = <SearchRadios searchClasses={(ops) => this.searchClasses(ops)}/>;
+				break;
+			case 'results':
+			contents = (
+				<div className="panel panel-default" id="search-results">
+					<div className="panel-heading" style={{color: '#354066'}}>
+						<a href="#" onClick={(e) => this.handleBackClick(e)}>
+							<span className="glyphicon glyphicon-chevron-left" style={{color: '#354066'}}></span>
+						</a> Search Results
+					</div>
+					<ul className="list group">
+						{data.results.map((result, i) => {
+							<SearchResultItem key={i} id={i} courseTitle={result.courseId} />
+						})}
+					</ul>
 				</div>
 			);
-		} else {
-			return (
-				<div>
-					<SearchRadios setPanelView={(v) => this.setView(v)}/>
-				</div>
-			)
+				break;
 		}
+
+		return contents;
 	}
 }
 
 ReactDOM.render(
-	<SearchPanel showResults={false} />,
+	<SearchPanel view={"search"} />,
 	document.getElementById('search-panel')
 );
