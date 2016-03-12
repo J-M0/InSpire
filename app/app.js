@@ -4,6 +4,11 @@ import Calendar from './components/calendarBlock';
 import SideNav from './components/Navbar';
 import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
+/**
+	* Waiting on course information modal as well as search before i can implement shopping cart
+	* Stephen P
+	*/
+
 class App extends React.Component {
   render() {
   	// Default user, to be removed
