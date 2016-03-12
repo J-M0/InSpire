@@ -185,23 +185,7 @@ class App extends React.Component {
         	</div>
       	</div>
 
-      	<div id="sidebar-container">
-        	<img src="img/umass_logo.png" alt="UMass Logo" width="102" height="100" id="logo"/>
-        	<span id="spire"> InSPIRE</span>
-        	<br/><br/>
-        	<ul className="nav">
-          	<li><a href="#">className Scheule</a></li>
-          	<li><a href="#">Final Exam Schedule</a></li>
-          	<li><a href="#">Finances</a></li>
-          	<li><a href="#">Housing</a></li>
-          	<li><a href="#">Logout</a></li>
-        	</ul>
-        	<div id="rotate-container">
-          	<div id="trapezoid">
-            	<span className="glyphicon glyphicon-chevron-down" id="glyph-scaling"></span>
-          	</div>
-        	</div>
-      	</div>
+        {this.props.SideNav}
 
       	<div className="row" id="top_container">
         	<div className="col-md-3" id="side-navbar">

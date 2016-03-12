@@ -8,17 +8,23 @@ class navBarExtendButton extends React.Component {
 
 	handleClick(e) {
 		e.preventDefault();
-		var bang = !this.state.testShow;
-		this.setState({ testShow: bang});
-		this.refresh();
+		e.stopPropagation();
 
-		//Extend / contract menu
-		// #sidebar-container {
-		// 	visibility: hidden; /*Toggle for sidebar*/
-		// }
-		// #rotate-container {
-		//     left: -23%; /*left: 74%;*/
-		//   }
+		//Extend / contract menu - Not sure how to implement in React
+		// If sidebar is previously hidden:
+			// #sidebar-container {
+			// 	visibility: visible;
+			// }
+			// #rotate-container {
+			//     left: 74%;
+			//   }
+		// If sidebar is previously visible:
+			// #sidebar-container {
+			// 	visibility: hidden;
+			// }
+			// #rotate-container {
+			//     left: -25%;
+			//   }
 	}
 
 	render()
@@ -40,7 +46,7 @@ class navBarButton extends React.Component {
 		this.state = props;
 	}
 
-	refresh() {
+	refresh() { //Not sure what this does or if it's necessary
 		if (this.state.flag !== undefined)
 		this.state.flag(this.state);
 	}
@@ -50,14 +56,14 @@ class navBarButton extends React.Component {
 		var bang = !this.state.testShow;
 		this.setState({ testShow: bang});
 		this.refresh();
-		//GoToHTML file with data text
+		//Go to blank HTML file with data text
 	}
 
 	render()
 	{
 		var text = this.props.data;
 		return(
-			<li><a href="#">{text}</a></li>
+			<li><a href="#" onClick={e => this.handleClick(e)}>{text}</a></li>
 		);
 	}
 }
@@ -81,6 +87,6 @@ export default class SideNav extends React.Component {
 		)
 	}
 	componentDidMount() {
-		this.setState({testShow : false});
+		this.setState({testShow : false}); //Not sure what this does or if it's necessary
 	}
 }

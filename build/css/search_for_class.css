@@ -62,7 +62,7 @@ ul {
 @keyframes fadeIn {
   from {
     top: -250px;
-    opacity: 0; 
+    opacity: 0;
   }
   to {
     top: 0px;
@@ -254,7 +254,7 @@ ul {
     transform: rotate(90deg);
     height: 0px;
     top: 45%;
-    left: -23%; /*temporary until sidebar component works*/
+    left: -25%; /*temporary until sidebar component works*/
     visibility: visible;
     z-index: 1;
   }
