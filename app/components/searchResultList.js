@@ -17,6 +17,7 @@ export default class SearchResultList extends React.Component {
 	}
 
 	render() {
+		var data = this.state;
 		return (
 			<div className="panel panel-default" id="search-results">
 				<div className="panel-heading" style={{color: '#354066'}}>
@@ -25,9 +26,9 @@ export default class SearchResultList extends React.Component {
 					</a> Search Results
 				</div>
 				<ul className="list group">
-					{/*{data.results.map(result, i) => {
-						<SearchResultItem key={i} id={i}
-					}}*/}
+					{data.results.map((result, i) => {
+						return <SearchResultItem key={i} id={i} data={result} />
+					})}
 				</ul>
 			</div>
 		);
