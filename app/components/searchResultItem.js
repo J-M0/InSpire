@@ -22,8 +22,7 @@ export default class SearchResultItem extends React.Component {
 		var body;
 		var chevron;
 
-		if(this.state.moreInfo)
-		{
+		if(this.state.moreInfo) {
 			chevron = <span className="glyphicon glyphicon-chevron-down pull-right"></span>;
 			body = (
 				<div>

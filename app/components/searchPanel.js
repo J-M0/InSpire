@@ -2,9 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SearchRadios from './searchRadios';
 import SearchResultList from './searchResultList';
-import Modal from './modal';
-import ClassInfo from './classInfo';
-import SearchResultItem from './searchResultItem';
 import {getSearchResults} from '../server';
 
 export default class SearchPanel extends React.Component {
