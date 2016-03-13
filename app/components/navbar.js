@@ -2,10 +2,22 @@ import React from 'react';
 
 class NavbarExtendButton extends React.Component {
   render() {
+		var faceOut = {
+			transition: 'transform .15s',
+			marginRight: '-8px',
+			paddingBottom: '30px'
+		};
+
+		if (this.props.face !== undefined) {
+			faceOut.transform = (this.props.face) ? 'rotate(0deg)' : 'rotate(180deg)';
+		}
+
     return(
       <div id="rotate-container">
         <div id="trapezoid" onClick={(e)=>this.props.onClick(e)}>
-          <span className="glyphicon glyphicon-chevron-down" id="glyph-scaling"></span>
+					<div id="rotate-chevron-container" style={faceOut}>
+          	<span className="glyphicon glyphicon-chevron-down" id="glyph-scaling"></span>
+					</div>
         </div>
       </div>
     );
@@ -67,7 +79,7 @@ export default class SideNav extends React.Component {
           <NavbarButton data={"Housing"} />
           <NavbarButton data={"Logout"} />
         </ul>
-        <NavbarExtendButton onClick={(e)=>this.expand(e)}/>
+        <NavbarExtendButton onClick={(e)=>this.expand(e)} face={this.state.expand}/>
       </div>
     )
   }
