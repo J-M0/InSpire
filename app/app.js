@@ -222,7 +222,7 @@ class App extends React.Component {
                   <div className="form-group">
                     <label htmlFor="className-num">Course Number:</label>
                     <select className="form control" id="course-num-ops">
-                      <option>=</option>
+                      <option>"="</option>
                       <option>&gt;=</option>
                     </select>
                     <input type="text" className="className-num pull-right keyword"/>

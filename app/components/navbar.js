@@ -1,4 +1,5 @@
 import React from 'react';
+//import BlankPage from '../../build/blankHTML'
 
 class NavbarExtendButton extends React.Component {
   render() {
@@ -16,7 +17,7 @@ class NavbarExtendButton extends React.Component {
       <div id="rotate-container">
         <div id="trapezoid" onClick={(e)=>this.props.onClick(e)}>
 					<div id="rotate-chevron-container" style={faceOut}>
-          	<span className="glyphicon glyphicon-chevron-down" id="glyph-scaling"></span>
+            <span className="glyphicon glyphicon-chevron-down" id="glyph-scaling"></span>
 					</div>
         </div>
       </div>
@@ -28,12 +29,6 @@ class NavbarButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = props;
-  }
-
-  handleClick(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    //Go to blank HTML file with data text
   }
 
   render()
@@ -57,6 +52,14 @@ export default class SideNav extends React.Component {
     this.setState({expand: !this.state.expand});
   }
 
+  goToBlankhtml(e){
+      e.preventDefault();
+      e.stopPropagation();
+
+      //Go go blank html
+      //document.location.href = BlankPage;
+  }
+
   render() {
     var shamt = {left: '-15%'};
 		var sz = {width: '95%'};
@@ -71,13 +74,13 @@ export default class SideNav extends React.Component {
         <img src="img/umass_logo.png" alt="UMass Logo" width="100" height="100" style={{margin: '10px'}} id="logo"></img>
         <span id="spire"> InSPIRE</span>
         <br /><br />
-        <ul className="nav" style={sz}> 
-          <NavbarButton data={"Class Schedule"} />
-          <NavbarButton data={"Class Schedule"} />
-          <NavbarButton data={"Final Exam Schedule"} />
-          <NavbarButton data={"Finances"} />
-          <NavbarButton data={"Housing"} />
-          <NavbarButton data={"Logout"} />
+        <ul className="nav" style={sz}>
+          <NavbarButton onClick={'http://localhost:8080/webpack-dev-server/blankHTML.html'} data={"Class Schedule"} />
+          <NavbarButton onClick={'http://localhost:8080/webpack-dev-server/blankHTML.html'} data={"Class Schedule"} />
+          <NavbarButton onClick={'http://localhost:8080/webpack-dev-server/blankHTML.html'} data={"Final Exam Schedule"} />
+          <NavbarButton onClick={'http://localhost:8080/webpack-dev-server/blankHTML.html'} data={"Finances"} />
+          <NavbarButton onClick={'http://localhost:8080/webpack-dev-server/blankHTML.html'} data={"Housing"} />
+          <NavbarButton onClick={'http://localhost:8080/webpack-dev-server/blankHTML.html'} data={"Logout"} />
         </ul>
         <NavbarExtendButton onClick={(e)=>this.expand(e)} face={this.state.expand}/>
       </div>
