@@ -1,4 +1,5 @@
 import React from 'react';
+import ClassInfo from './classInfo';
 import {getStudentInfo, getEnrolledCourses, queryCourses} from '../server';
 
 // list of days used for rendering the calendar
@@ -39,8 +40,6 @@ var default75Times = [
 class CourseButton extends React.Component {
   handleClick(e) {
     e.preventDefault();
-    e.stopPropagation();
-    console.log("Kappa");
   }
 
   render() {
@@ -77,7 +76,7 @@ class AvailableModal extends React.Component {
   render() {
     var body;
     if (this.state.available.length !== 0) {
-      body = 
+      body =
         <div>
           {this.state.available.map((courses, i) => { return(
             <button key={"btn"+i} type="button" className="course-modal-btn">{courses.courseId} - {courses.courseName}</button>
@@ -142,7 +141,9 @@ class CalendarBlock extends React.Component {
   // display it
   render() {
     var content = this.state.text;
-    // if no modal needed, display regular CalendarBlock times
+    var modal;
+
+    // if no content, display regular CalendarBlock times
     if (content === undefined) {
       var startTime = this.state.start.toLocaleTimeString();
       var endTime   = this.state.end.toLocaleTimeString();
@@ -152,16 +153,22 @@ class CalendarBlock extends React.Component {
           // The available course list is a superset of enrolled course list
           if (this.state.available !== undefined)
             this.state.available.map((available) => {
-              if (enrolled.courseId === available.courseId)
+              if (enrolled.courseId === available.courseId) {
                 // pass the relevant course info to the button if we find it and then create it
                 content = <CourseButton enrolledcourse={enrolled}/>;
+                modal = (this.state.showModal) ? <ClassInfo data={enrolled}/> : undefined;
+                console.log(enrolled.courseId);
+                console.log(available.courseId);
+              }
             })
         })
       }
 
       // get the modal content if necessary
       if (this.state.showModal !== undefined)
-        var modal = (this.state.showModal) ? <AvailableModal available={this.state.available}/> : undefined;
+        if (modal === undefined)
+          modal = (this.state.showModal) ? <AvailableModal available={this.state.available}/> : undefined;
+
 
       // ternary operator, displays content if we have it where content is possibly a CourseButton, if not displays time
       content = (content === undefined)

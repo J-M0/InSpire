@@ -91,6 +91,12 @@ ul {
   display: block;
 }
 
+.info-modal {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
 .search-tabs > li > a {
   background-color: #354066;
   color: white;

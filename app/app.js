@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Calendar from './components/calendarBlock';
 import SideNav from './components/navbar';
 import ShoppingCart from './components/shoppingCart';
+import ClassInfo from './components/classInfo';
 import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
 /**
@@ -299,7 +300,7 @@ ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       {/* EXAMPLE: {{Calendar, SideNav, SearchPanel, etc., etc., etc.,}} */}
-      <IndexRoute components={{Calendar, SideNav, ShoppingCart}}/>
+      <IndexRoute components={{Calendar, SideNav, ShoppingCart, ClassInfo}}/>
       {/*DO NOT UNCOMMENT THE BELOW UNLESS YOUR NAME IS KEVIN CHAN */}
       {/*<Route path="/profile/:id" components={{Calendar, SideNav}} />*/}
     </Route>
