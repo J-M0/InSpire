@@ -23,8 +23,19 @@ export function getEnrolledCourses(user, cb) {
 			courses.push(readDocument('courses', student.courses[i]));
 		}
 	}
-
   emulateServerReturn(courses, cb);
+}
+
+// MY CHANGES HERE
+// gets the students shopping cart
+export function getShoppingCart(user, cb) {
+  var student = readDocument('students', user);
+  if (student !== null) {
+    for (var i = 0, cart=[]; i < student.cart.length; i++) {
+      cart.push(readDocument('courses', student.cart[i]));
+    }
+  }
+  emulateServerReturn(cart, cb);
 }
 
 // gets available courses

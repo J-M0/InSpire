@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Calendar from './components/calendarBlock';
 import SideNav from './components/navbar';
+import ShoppingCart from './components/shoppingCart';
 import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
 /**
@@ -14,6 +15,8 @@ class App extends React.Component {
     // Default user, to be removed
     if (this.props.Calendar.props.params.id === undefined)
       this.props.Calendar.props.params.id=12345678;
+    if (this.props.ShoppingCart.props.params.id === undefined)
+      this.props.ShoppingCart.props.params.id=12345678;
     return (
       <div id="application_wrapper">
         <div id="todoModal" className="modal fade" role="dialog">
@@ -278,34 +281,7 @@ class App extends React.Component {
                 </div>
               </div>
               <div id="cart" className="tab-pane fade in">
-                <div id="shopping-cart" className="panel panel-default">
-                  <div className="panel-heading" style={{color:'#354066'}}>
-                    Shopping Cart
-                  </div>
-                  <ul className="list group">
-                    <li className="list-group-item">
-                      <span className="glyphicon glyphicon-asterisk" style={{color:'green'}}></span>
-                      CS 326 - Web Programming
-                    </li>
-                    <li className="list-group-item">
-                      <span className="glyphicon glyphicon-play className-full-btn" style={{color:'blue'}}></span>
-                      CS 320 - Software Engineering
-                    </li>
-                    <li className="list-group-item">
-                      <span className="glyphicon glyphicon-stop" style={{color:'yellow'}}></span>
-                      CS 373 - Intro. to Computer Graphics
-                    </li>
-                    <li className="list-group-item">
-                      <span className="glyphicon glyphicon-asterisk" style={{color:'green'}}></span>
-                      CS 383 - Artificial Intelligence
-                    </li>
-                  </ul>
-                  <div className="center-block">
-                    <button name="singlebutton" className="btn btn-primary center-block" style={{backgroundColor:'#354066', align:'center', marginTop:'5px'}}>
-                      Enroll
-                    </button>
-                  </div>
-                </div>
+                {this.props.ShoppingCart}
               </div>
             </div>
           </div>
@@ -323,7 +299,7 @@ ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       {/* EXAMPLE: {{Calendar, SideNav, SearchPanel, etc., etc., etc.,}} */}
-      <IndexRoute components={{Calendar, SideNav}}/>
+      <IndexRoute components={{Calendar, SideNav, ShoppingCart}}/>
       {/*DO NOT UNCOMMENT THE BELOW UNLESS YOUR NAME IS KEVIN CHAN */}
       {/*<Route path="/profile/:id" components={{Calendar, SideNav}} />*/}
     </Route>
