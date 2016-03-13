@@ -10,12 +10,19 @@ export default class ClassInfo extends React.Component {
 		return this.state.data.days.join(" / ");
 	}
 
+	clickFn(e, obj) {
+		if (this.props.onClick !== undefined)
+			this.props.onClick(e, obj);
+	}
+
 	render() {
 		var data = this.state.data;
 		var start = new Date(data.start).toLocaleTimeString()
 		var end = new Date(data.end).toLocaleTimeString()
-		//var name = data.instructor.firstName.concat(" ", data.instructor.lastName);
-		var name = "kappa";
+
+		if (data.instructor.firstName !== undefined)
+			var name = data.instructor.firstName.concat(" ", data.instructor.lastName);
+
 		var classEdit1 = "modal fade";
 		var classEdit2 = "modal-content";
 
@@ -25,7 +32,7 @@ export default class ClassInfo extends React.Component {
 		}
 
 		return (
-			<div id={this.props.id} className={classEdit1} role="dialog" onClick={(e, obj) => this.props.onClick(e, obj)}>
+			<div id={this.props.id} className={classEdit1} role="dialog" onClick={(e, obj) => this.clickFn(e, obj)}>
         <div className="modal-dialog">
           <div className={classEdit2}>
             <div className="modal-header">

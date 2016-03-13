@@ -179,7 +179,6 @@ class CalendarBlock extends React.Component {
           modal = (this.state.showModal) ? <AvailableModal available={this.state.available} onClick={(e, obj)=>this.switchModals(e, obj)}/> : undefined;
         }
         if (this.state.courseInfoToggle !== false) {
-          console.log(this);
           modal = <ClassInfo data={this.state.available[this.state.courseInfoToggle.slice(-1)]} onClick={(e, obj) => this.switchModals(e, obj)} custom={true}/>;
         }
       }
