@@ -47,7 +47,7 @@ export default class SearchPanel extends React.Component {
 				contents = <LoadingScreen />;
 				break;
 			case 'results':
-				contents = <SearchResultList data={data.results} />;
+				contents = <SearchResultList data={data.results} setPanelView={(v) => this.setView(v)}/>;
 				break;
 		}
 
