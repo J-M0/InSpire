@@ -38,7 +38,7 @@ var initialData = {
             },
             "academicInstitution": "U. of Massachusetts Amherst",
             "importantNotices": {
-                "16-17fafsa": {
+                "fafsa": {
                     "function": "Financial Aid",
                     "dueDate": "03/01/16",
                     "status": "initiated"
@@ -86,7 +86,7 @@ var initialData = {
             },
             "academicInstitution": "U. of Massachusetts Amherst",
             "importantNotices": {
-                "16-17fafsa": {
+                "fafsa": {
                     "function": "Financial Aid",
                     "dueDate": "03/01/16",
                     "status": "initiated"
@@ -134,7 +134,7 @@ var initialData = {
             },
             "academicInstitution": "U. of Massachusetts Amherst",
             "importantNotices": {
-                "16-17fafsa": {
+                "fafsa": {
                     "function": "Financial Aid",
                     "dueDate": "03/01/16",
                     "status": "initiated"
