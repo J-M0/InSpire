@@ -1,5 +1,6 @@
 import React from 'react';
-//import BlankPage from '../../build/blankHTML'
+//import BlankHTML from '../../build/blankHTML.html'
+import {Link} from 'react-router';
 
 class NavbarExtendButton extends React.Component {
   render() {
@@ -35,7 +36,7 @@ class NavbarButton extends React.Component {
   {
     var text = this.props.data;
     return(
-      <li><a href="#" onClick={e => this.handleClick(e)}>{text}</a></li>
+      <li><Link to={"#"/*BlankHTML*/}>{text}</Link></li>
     );
   }
 }
@@ -50,14 +51,6 @@ export default class SideNav extends React.Component {
     e.preventDefault();
     e.stopPropagation();
     this.setState({expand: !this.state.expand});
-  }
-
-  goToBlankhtml(e){
-      e.preventDefault();
-      e.stopPropagation();
-
-      //Go go blank html
-      //document.location.href = BlankPage;
   }
 
   render() {
@@ -75,12 +68,12 @@ export default class SideNav extends React.Component {
         <span id="spire"> InSPIRE</span>
         <br /><br />
         <ul className="nav" style={sz}>
-          <NavbarButton onClick={'http://localhost:8080/webpack-dev-server/blankHTML.html'} data={"Class Schedule"} />
-          <NavbarButton onClick={'http://localhost:8080/webpack-dev-server/blankHTML.html'} data={"Class Schedule"} />
-          <NavbarButton onClick={'http://localhost:8080/webpack-dev-server/blankHTML.html'} data={"Final Exam Schedule"} />
-          <NavbarButton onClick={'http://localhost:8080/webpack-dev-server/blankHTML.html'} data={"Finances"} />
-          <NavbarButton onClick={'http://localhost:8080/webpack-dev-server/blankHTML.html'} data={"Housing"} />
-          <NavbarButton onClick={'http://localhost:8080/webpack-dev-server/blankHTML.html'} data={"Logout"} />
+          <NavbarButton data={"Class Schedule"} />
+          <NavbarButton data={"Class Schedule"} />
+          <NavbarButton data={"Final Exam Schedule"} />
+          <NavbarButton data={"Finances"} />
+          <NavbarButton data={"Housing"} />
+          <NavbarButton data={"Logout"} />
         </ul>
         <NavbarExtendButton onClick={(e)=>this.expand(e)} face={this.state.expand}/>
       </div>
