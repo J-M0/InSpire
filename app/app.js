@@ -17,8 +17,7 @@ class App extends React.Component {
     // Default user, to be removed
     if (this.props.Calendar.props.params.id === undefined)
       this.props.Calendar.props.params.id=12345678;
-    if (this.props.ShoppingCart.props.params.id === undefined)
-      this.props.ShoppingCart.props.params.id=12345678;
+    
     return (
       <div id="application_wrapper">
 
