@@ -7,16 +7,25 @@ export default class ShoppingCart extends React.Component {
     this.state = props;
   }
 
+  refresh() {
+    console.log("refreshed");
+  }
+
+  handleClick(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    console.log("this is from the cart item");
+    this.refresh();
+  }
+
   render() {
-    var body;
-    var icon;
+    var body
     if (this.state.cart !== undefined) {
       if (this.state.cart.length !== 0) {
         body =
         <div>
           {this.state.cart.map((courses, i) => { return (
-            //<button key={"btn"+i} type="button" className="course-modal-btn">{courses.courseId} - {courses.courseName}</button>
-            <li className="list-group-item shop-cart-item" key={i}>{courses.courseId} - {courses.courseName}</li>
+            <li className="list-group-item shop-cart-item" key={i} onClick={(e) => this.handleClick(e)}>{courses.courseId} - {courses.courseName}</li>
           );})}
         </div>
       } else {
