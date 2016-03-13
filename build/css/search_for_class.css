@@ -242,9 +242,7 @@ ul {
 
 #sidebar-container {
   height: 100%;
-  width: 250px;
-  visibility: hidden; /*temporary until sidebar component works*/
-  top: 0px;
+  width: 15.5%;
   position:absolute;
   background-color: #354066;
   z-index: 1;
@@ -254,8 +252,7 @@ ul {
     transform: rotate(90deg);
     height: 0px;
     top: 45%;
-    left: -25%; /*temporary until sidebar component works*/
-    visibility: visible;
+    left: 75%;
     z-index: 1;
   }
 
