@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from './modal';
+import ClassInfo from './classInfo';
 
 export default class SearchResultItem extends React.Component {
 	constructor(props) {
@@ -40,7 +41,7 @@ export default class SearchResultItem extends React.Component {
 
 		return (
 			<li className="list-group-item">
-				<Modal id={modalId} />
+				<Modal id={modalId}><ClassInfo data={data}/></Modal>
 				<span className="glyphicon glyphicon-asterisk" style={{color: 'green'}}></span>
 				{data.courseId} - {data.courseName} <a href="#" onClick={(e) => this.handleChevronClick(e)}>{chevron}</a>
 				{body}
