@@ -20,28 +20,28 @@ export default class SearchResultItem extends React.Component {
 	render() {
 		var data = this.state;
 		var body;
+		var chevron;
 
 		if(this.state.moreInfo)
 		{
+			chevron = <span className="glyphicon glyphicon-chevron-down pull-right"></span>;
 			body = (
 				<div>
-					<a href="#" onClick={(e) => this.handleChevronClick(e)}><span className="glyphicon glyphicon-chevron-down pull-right"></span></a>
-					<br />
 					<br />
 					{data.description}
+					<br />
 					<a className="btn" data-toggle="modal" href="#Modal" style={{textAlign: 'right'}}>...More info</a>
 				</div>
 			);
 		} else {
-			body = (
-				<a href="#" onClick={(e) => this.handleChevronClick(e)}><span className="glyphicon glyphicon-chevron-right pull-right"></span></a>
-			);
+			chevron = <span className="glyphicon glyphicon-chevron-left pull-right"></span>;
 		}
 
 		return (
 			<li className="list-group-item">
 				<span className="glyphicon glyphicon-asterisk" style={{color: 'green'}}></span>
-				{data.courseId} - {data.courseName} {body}
+				{data.courseId} - {data.courseName} <a href="#" onClick={(e) => this.handleChevronClick(e)}>{chevron}</a>
+				{body}
 			</li>
 		);
 	}
