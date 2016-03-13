@@ -157,8 +157,6 @@ class CalendarBlock extends React.Component {
                 // pass the relevant course info to the button if we find it and then create it
                 content = <CourseButton enrolledcourse={enrolled}/>;
                 modal = (this.state.showModal) ? <ClassInfo data={enrolled}/> : undefined;
-                console.log(enrolled.courseId);
-                console.log(available.courseId);
               }
             })
         })

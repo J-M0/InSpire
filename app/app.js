@@ -3,11 +3,8 @@ import ReactDOM from 'react-dom';
 import Calendar from './components/calendarBlock';
 import SideNav from './components/navbar';
 import ShoppingCart from './components/shoppingCart';
-<<<<<<< HEAD
 import ClassInfo from './components/classInfo';
-=======
-import ImportantNotices from './components/importantNotices'
->>>>>>> eea99f50cb1792ec430aadb7cfafe546ed002c32
+import ImportantNotices from './components/importantNotices';
 import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
 /**
@@ -24,83 +21,6 @@ class App extends React.Component {
       this.props.ShoppingCart.props.params.id=12345678;
     return (
       <div id="application_wrapper">
-
-        <div className="modal fade" tabIndex="-1" role="dialog" id="classNameInfoModal">
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 className="modal-title">More Info</h4>
-              </div>
-              <div className="modal-body">
-                <div className="panel panel-default" id="modal-list-items">
-                  <div className="panel-heading" style={{color:'#354066'}}>
-                    <span className="glyphicon glyphicon-ok-circle" style={{color:'#354066'}}></span> className Information
-                  </div>
-                  <div className="panel-body">
-                    <table className="table">
-                      <thead>
-                        <tr>
-                          <th>Number</th>
-                          <th>Section</th>
-                          <th>Units</th>
-                          <th>Enrolled</th>
-                          <th>Cap</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>!!className Number!!</td>
-                          <td>!!className section!!</td>
-                          <td>!!className units!!</td>
-                          <td>!!className enrolled!!</td>
-                          <td>!!className cap!!</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <div className="panel-heading" style={{color:'#354066'}}>
-                    <span className="glyphicon glyphicon-ok-circle" style={{color:'#354066'}}></span> More Information
-                  </div>
-                  <div className="panel-body">
-                    <table className="table">
-                      <thead>
-                        <tr>
-                          <th>Title</th>
-                          <th>Time</th>
-                          <th>Room</th>
-                          <th>Instructor</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>!!className title!!</td>
-                          <td>!!className time!</td>
-                          <td>!!className location!!</td>
-                          <td>!!className instructor!!</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <div className="panel-heading" style={{color:'#354066'}}>
-                    <span className="glyphicon glyphicon-ok-circle" style={{color:'#354066'}}></span> className Description
-                  </div>
-                  <div className="panel-body">
-                    !!className Description!
-                  </div>
-                </div>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary">Add className</button>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {this.props.SideNav}
 
