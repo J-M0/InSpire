@@ -4,7 +4,6 @@ export default class ClassInfo extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = props;
-		console.log(this);
 	}
 
 	getDays() {
@@ -19,7 +18,7 @@ export default class ClassInfo extends React.Component {
 		var name = "kappa";
 
 		return (
-			<div id="test-modal" className="modal dimBg" role="dialog">
+			<div id="test-modal" className="modal dimBg" role="dialog" onClick={(e, obj) => this.props.onClick(e, obj)}>
         <div className="modal-dialog">
           <div className="modal-content myFade">
             <div className="modal-header">
@@ -36,9 +35,9 @@ export default class ClassInfo extends React.Component {
 											<th>Enrolled</th>
 											<th>Cap</th>
 										</tr>
-									</thead>
-									<tbody>
-										<tr>
+										</thead>
+										<tbody>
+											<tr>
 											<td>{data.courseId}</td>
 											<td>{data.section}</td>
 											<td>{data.credits}</td>

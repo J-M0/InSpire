@@ -38,6 +38,7 @@ var default75Times = [
   * gets the course from the parent CalendarBlock, formats the info, and displays
   */
 class CourseButton extends React.Component {
+
   handleClick(e) {
     e.preventDefault();
   }
@@ -51,7 +52,7 @@ class CourseButton extends React.Component {
 
     // display it
     return(
-      <button type="button" className="btn btn-block btn-primary cal-btn" onClick={e => this.handleClick(e)}>
+      <button type="button" className="btn btn-block btn-primary cal-btn" onClick={(e) => this.handleClick(e)}>
         <span>{startTime + " - " + endTime}</span>
         <span>{course.courseId}</span>
         <br/>
@@ -79,7 +80,7 @@ class AvailableModal extends React.Component {
       body =
         <div>
           {this.state.available.map((courses, i) => { return(
-            <button key={"btn"+i} type="button" className="course-modal-btn">{courses.courseId} - {courses.courseName}</button>
+            <button key={"btn"+i} type="button" className="course-modal-btn" onClick={(e, obj) => this.props.onClick(e, obj)}>{courses.courseId} - {courses.courseName}</button>
           );})}
         </div>;
     } else {
@@ -138,6 +139,16 @@ class CalendarBlock extends React.Component {
     this.refresh();
   }
 
+  switchModals(e, i) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (this.state.courseInfoToggle === false) {
+      this.setState({courseInfoToggle:i});
+    } else {
+      this.setState({courseInfoToggle:false});
+    }
+  }
+
   // display it
   render() {
     var content = this.state.text;
@@ -163,10 +174,15 @@ class CalendarBlock extends React.Component {
       }
 
       // get the modal content if necessary
-      if (this.state.showModal !== undefined)
-        if (modal === undefined)
-          modal = (this.state.showModal) ? <AvailableModal available={this.state.available}/> : undefined;
-
+      if (this.state.showModal !== undefined) {
+        if (modal === undefined) {
+          modal = (this.state.showModal) ? <AvailableModal available={this.state.available} onClick={(e, obj)=>this.switchModals(e, obj)}/> : undefined;
+        }
+        if (this.state.courseInfoToggle !== false) {
+          console.log(this);
+          modal = <ClassInfo data={this.state.available[this.state.courseInfoToggle.slice(-1)]} onClick={(e, obj) => this.switchModals(e, obj) } />;
+        }
+      }
 
       // ternary operator, displays content if we have it where content is possibly a CourseButton, if not displays time
       content = (content === undefined)
@@ -189,6 +205,7 @@ class CalendarBlock extends React.Component {
       this.setState({available});
     });
     this.setState({showModal : false});
+    this.setState({courseInfoToggle: false});
   }
 }
 
