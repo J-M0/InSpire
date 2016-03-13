@@ -1,6 +1,4 @@
 import React from 'react';
-//import BlankHTML from '../../build/blankHTML.html'
-import {Link} from 'react-router';
 
 class NavbarExtendButton extends React.Component {
   render() {
@@ -36,7 +34,7 @@ class NavbarButton extends React.Component {
   {
     var text = this.props.data;
     return(
-      <li><Link to={"#"/*BlankHTML*/}>{text}</Link></li>
+      <li><a href={'../../BlankHTML.html'}>{text}</a></li>
     );
   }
 }
