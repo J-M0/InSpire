@@ -47,8 +47,11 @@ export default class SideNav extends React.Component {
 
   render() {
     var shamt = {left: '-15%'};
+		var sz = {width: '95%'};
+
     if (this.state.expand == true) {
       shamt = {left: '0%'};
+			sz = {width: '100%'};
     }
 
     return (
@@ -56,7 +59,7 @@ export default class SideNav extends React.Component {
         <img src="img/umass_logo.png" alt="UMass Logo" width="100" height="100" style={{margin: '10px'}} id="logo"></img>
         <span id="spire"> InSPIRE</span>
         <br /><br />
-        <ul className="nav"> 
+        <ul className="nav" style={sz}> 
           <NavbarButton data={"Class Schedule"} />
           <NavbarButton data={"Class Schedule"} />
           <NavbarButton data={"Final Exam Schedule"} />
