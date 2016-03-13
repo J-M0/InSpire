@@ -11,7 +11,7 @@ export default class SearchPanel extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {view: this.props.view};
+		this.state = this.props.view;
 	}
 
 	setView(newView) {
@@ -43,25 +43,27 @@ export default class SearchPanel extends React.Component {
 			case 'search':
 				contents = <SearchRadios searchClasses={(ops) => this.searchClasses(ops)}/>;
 				break;
+			case 'loading':
+				contents = <LoadingScreen />;
+				break;
 			case 'results':
-			contents = (
-				<div className="panel panel-default" id="search-results">
-					<div className="panel-heading" style={{color: '#354066'}}>
-						<a href="#" onClick={(e) => this.handleBackClick(e)}>
-							<span className="glyphicon glyphicon-chevron-left" style={{color: '#354066'}}></span>
-						</a> Search Results
-					</div>
-					<ul className="list group">
-						{data.results.map((result, i) => {
-							<SearchResultItem key={i} id={i} courseTitle={result.courseId} />
-						})}
-					</ul>
-				</div>
-			);
+				contents = <SearchResultList data={data.results} />;
 				break;
 		}
 
 		return contents;
+	}
+}
+
+class LoadingScreen extends React.Component {
+	render() {
+		return (
+			<div className="panel panel-default">
+				<div className="panel-heading" style={{color: '#354066'}}>
+					Loading
+				</div>
+			</div>
+		);
 	}
 }
 
