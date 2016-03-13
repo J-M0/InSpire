@@ -46,7 +46,7 @@ export default class SearchResultItem extends React.Component {
 
 		return (
 			<li className="list-group-item">
-				<Modal id={modalId}><ClassInfo data={data}/></Modal>
+				<ClassInfo id={modalId} data={data}/>
 				<span className="glyphicon glyphicon-asterisk" style={{color: 'green'}}></span>
 				{data.courseId} - {data.courseName} <a href="#" onClick={(e) => this.handleChevronClick(e)}>{chevron}</a>
 				{body}

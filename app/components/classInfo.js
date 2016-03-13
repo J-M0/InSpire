@@ -16,11 +16,18 @@ export default class ClassInfo extends React.Component {
 		var end = new Date(data.end).toLocaleTimeString()
 		//var name = data.instructor.firstName.concat(" ", data.instructor.lastName);
 		var name = "kappa";
+		var classEdit1 = "modal fade";
+		var classEdit2 = "modal-content";
+
+		if (this.props.custom === true) {
+			classEdit1 = "modal dimBg";
+			classEdit2 = "modal-content myFade";
+		}
 
 		return (
-			<div id="test-modal" className="modal dimBg" role="dialog" onClick={(e, obj) => this.props.onClick(e, obj)}>
+			<div id={this.props.id} className={classEdit1} role="dialog" onClick={(e, obj) => this.props.onClick(e, obj)}>
         <div className="modal-dialog">
-          <div className="modal-content myFade">
+          <div className={classEdit2}>
             <div className="modal-header">
               <h4 className="modal-title" style={{color:'#354066'}}>Class Information</h4>
             </div>
