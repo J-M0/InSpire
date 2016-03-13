@@ -24,13 +24,18 @@ export default class SearchResultItem extends React.Component {
 		var body;
 		var chevron;
 		var modalId = "ResultModal" + this.props.id;
+		var description;
+
+		if(data.description.length > 100) {
+			description = data.description.substring(0, 100).concat("...");
+		}
 
 		if(this.state.moreInfo) {
 			chevron = <span className="glyphicon glyphicon-chevron-down pull-right"></span>;
 			body = (
 				<div>
 					<br />
-					{data.description}
+					{description}
 					<br />
 					<a className="btn" data-toggle="modal" href={"#" + modalId} style={{textAlign: 'right'}}>...More info</a>
 				</div>
