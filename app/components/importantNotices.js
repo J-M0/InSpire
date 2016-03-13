@@ -130,7 +130,6 @@ export default class ImportantNotices extends React.Component {
               <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                   <div className="modal-header">
-                    <button type="button" className="close" data-dismiss="modal">&times;</button>
                     <h4 className="modal-title" style={{color:'#354066'}}>Todo list & More</h4>
                   </div>
                   <div className="modal-body">

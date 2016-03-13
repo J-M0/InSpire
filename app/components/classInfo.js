@@ -2,7 +2,7 @@ import React from "react";
 
 export default class ClassInfo extends React.Component {
 	constructor(props) {
-		super(props);	
+		super(props);
 		this.state = props;
 		console.log(this);
 	}
@@ -23,10 +23,10 @@ export default class ClassInfo extends React.Component {
         <div className="modal-dialog">
           <div className="modal-content myFade">
             <div className="modal-header">
-              <h4 className="modal-title">Class Information</h4>
+              <h4 className="modal-title" style={{color:'#354066'}}>Class Information</h4>
             </div>
             <div className="modal-body">
-              <div className="panel-body">
+              <div className="panel-body" style={{color:'#354066'}}>
 								<table className="table">
 									<thead>
 										<tr>
@@ -48,7 +48,7 @@ export default class ClassInfo extends React.Component {
 									</tbody>
 								</table>
 							</div>
-							<div className="panel-body">
+							<div className="panel-body" style={{color:'#354066'}}>
 								<table className="table">
 									<thead>
 										<tr>
@@ -68,8 +68,7 @@ export default class ClassInfo extends React.Component {
 									</tbody>
 								</table>
 							</div>
-							<div className="panel-heading" style={{color: '#354066'}}><span className="glyphicon glyphicon-ok-circle" style={{color: '#354066'}}></span> Class Description</div>
-							<div className="panel-body">{data.description}</div>
+							<div className="panel-body" style={{color:'#354066'}}>{data.description}</div>
             </div>
             <div className="modal-footer">
               <button type="button" className="button-default" data-dismiss="modal">Close</button>
