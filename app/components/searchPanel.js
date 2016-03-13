@@ -11,7 +11,7 @@ export default class SearchPanel extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = this.props.view;
+		this.state = {view: this.props.view};
 	}
 
 	setView(newView) {
