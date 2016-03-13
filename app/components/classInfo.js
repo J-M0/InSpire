@@ -2,7 +2,7 @@ import React from "react";
 
 export default class ClassInfo extends React.Component {
 	constructor(props) {
-		super(props);
+		super(props);	
 		this.state = props;
 		console.log(this);
 	}
