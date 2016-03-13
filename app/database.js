@@ -40,12 +40,12 @@ var initialData = {
             "importantNotices": {
                 "fafsa": {
                     "function": "Financial Aid",
-                    "dueDate": "03/01/16",
+                    "dueDate": new Date(2016, 2, 1),
                     "status": "initiated"
                 },
                 "taxReturn": {
                     "function": "Financial Aid",
-                    "dueDate": "03/01/16",
+                    "dueDate": new Date(2016, 2, 1),
                     "status": "initiated"
                 }
             },
@@ -88,12 +88,12 @@ var initialData = {
             "importantNotices": {
                 "fafsa": {
                     "function": "Financial Aid",
-                    "dueDate": "03/01/16",
+                    "dueDate": new Date(2016, 2, 0),
                     "status": "initiated"
                 },
                 "taxReturn": {
                     "function": "Financial Aid",
-                    "dueDate": "03/01/16",
+                    "dueDate": new Date(2016, 2, 1),
                     "status": "initiated"
                 }
             },
@@ -136,12 +136,12 @@ var initialData = {
             "importantNotices": {
                 "fafsa": {
                     "function": "Financial Aid",
-                    "dueDate": "03/01/16",
+                    "dueDate": new Date(2016, 2, 1),
                     "status": "initiated"
                 },
                 "taxReturn": {
                     "function": "Financial Aid",
-                    "dueDate": "03/01/16",
+                    "dueDate": new Date(2016, 2, 1),
                     "status": "initiated"
                 }
             },
