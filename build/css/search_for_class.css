@@ -105,6 +105,15 @@ ul {
   height: 4.5%
 }
 
+.shop-cart-item {
+  display:block;
+}
+
+.shop-cart-item:hover {
+  background-color: #354066;
+  color: white;
+}
+
 .tab-content {
   height: 69.7%;
 }
