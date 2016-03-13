@@ -11,7 +11,7 @@ export default class Modal extends React.Component {
 							<h4 className="modal-title">More Info</h4>
 						</div>
 						<div className="modal-body">
-							{this.props.contents}
+							{this.props.children}
 						</div>
 
 						<div className="modal-footer">
