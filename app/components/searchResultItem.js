@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from './modal';
 
 export default class SearchResultItem extends React.Component {
 	constructor(props) {
@@ -21,6 +22,7 @@ export default class SearchResultItem extends React.Component {
 		var data = this.state;
 		var body;
 		var chevron;
+		var modalId = "ResultModal" + this.props.id;
 
 		if(this.state.moreInfo) {
 			chevron = <span className="glyphicon glyphicon-chevron-down pull-right"></span>;
@@ -29,7 +31,7 @@ export default class SearchResultItem extends React.Component {
 					<br />
 					{data.description}
 					<br />
-					<a className="btn" data-toggle="modal" href="#Modal" style={{textAlign: 'right'}}>...More info</a>
+					<a className="btn" data-toggle="modal" href={"#" + modalId} style={{textAlign: 'right'}}>...More info</a>
 				</div>
 			);
 		} else {
@@ -38,6 +40,7 @@ export default class SearchResultItem extends React.Component {
 
 		return (
 			<li className="list-group-item">
+				<Modal id={modalId} />
 				<span className="glyphicon glyphicon-asterisk" style={{color: 'green'}}></span>
 				{data.courseId} - {data.courseName} <a href="#" onClick={(e) => this.handleChevronClick(e)}>{chevron}</a>
 				{body}
