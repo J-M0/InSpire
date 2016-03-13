@@ -69,24 +69,3 @@ export default class ClassInfo extends React.Component {
 		)
 	}
 }
-
-
-
-
-
-
-
-// <td>Computer Science 377</td>
-// <td>01</td>
-// <td>4</td>
-// <td>83</td>
-// <td>70</td>
-
-// <td>Operating Systems</td>
-// <td>Tu/Thu 1:00pm - 2:15pm</td>
-// <td>Integrated Learning Center S211</td>
-// <td>Tim Richards</td>
-
-// <div className="panel-body">
-// 	The design and operation of modern computer operating systems. Review of capabilities of typical computer hardware. Topics include command language interpreter (the shell), processes, concurrency, inter-process communication, linking and loading, memory management, transactions, file systems, distributed systems, security, and protection. Programming projects in Java and C.
-// </div>

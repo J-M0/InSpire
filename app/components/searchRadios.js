@@ -1,12 +1,7 @@
 import React from 'react';
 
 export default class SearchRadios extends React.Component {
-	constructor(props) {
-		super(props);
-
-
-	}
-
+	
 	handleSubmit(clickEvent) {
 		clickEvent.preventDefault();
 		var form = clickEvent.target;

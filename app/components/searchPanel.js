@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import SearchRadios from './searchRadios';
 import SearchResultList from './searchResultList';
 import {getSearchResults} from '../server';
@@ -63,8 +62,3 @@ class LoadingScreen extends React.Component {
 		);
 	}
 }
-
-ReactDOM.render(
-	<SearchPanel view={"search"} />,
-	document.getElementById('search-panel')
-);

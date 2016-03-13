@@ -4,7 +4,6 @@ import Calendar from './components/calendarBlock';
 import SideNav from './components/Navbar';
 import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
-import SearchPanel from './components/searchPanel';
 
 class App extends React.Component {
 	render() {
@@ -28,8 +27,3 @@ ReactDOM.render((
 		</Route>
 	</Router>
 ),document.getElementById('calendar'));
-
-// ReactDOM.render(
-// 	<ClassInfo />,
-// 	document.getElementById('class-info-modal')
-// );
