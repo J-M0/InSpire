@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default class SearchRadios extends React.Component {
-	
+
 	handleSubmit(clickEvent) {
 		clickEvent.preventDefault();
 		var form = clickEvent.target;
@@ -47,6 +47,8 @@ export default class SearchRadios extends React.Component {
 						<label htmlFor="genEdCat">Gen Ed Category:</label>
 						<select className="form-control" id="genEdCat">
 							<option>AL Literature</option>
+								<option>History</option>
+								<option>Biology</option>
 						</select>
 					</div>
 					<div className="form-group">
@@ -59,6 +61,7 @@ export default class SearchRadios extends React.Component {
 						<label htmlFor="instrMode">Mode of Instruction</label>
 						<select className="form-control" id="instrMode">
 							<option>Classroom</option>
+							<option>Online</option>
 						</select>
 					</div>
 
