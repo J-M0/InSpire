@@ -128,7 +128,8 @@ ul {
   height: 116px;
 }
 
-.time-55 .modal {
+.time-55 .modal,
+.time-75 .modal {
 	font-weight: normal;
 	text-align: left;
 }
