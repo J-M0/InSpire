@@ -76,7 +76,7 @@ ul {
   left: 0px;
   right: 0px;
   top: -250px;
-  animation: fadeIn 0.15s ease-out forwards;
+  animation: fadeIn 0.3s linear forwards;
 }
 
 .day {
@@ -126,6 +126,11 @@ ul {
 
 .time-2h {
   height: 116px;
+}
+
+.time-55 .modal {
+	font-weight: normal;
+	text-align: left;
 }
 
 .nav a {
