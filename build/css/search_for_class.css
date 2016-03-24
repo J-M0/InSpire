@@ -175,6 +175,10 @@ ul {
   height: 100%;
 }
 
+#calendar .col-md-3 .thumbnail:first-child {
+	height: 4%;
+}
+
 #calendar .col-md-3:first-child > .thumbnail:first-child {
   border-top-left-radius: 4px;
 }
@@ -223,6 +227,13 @@ ul {
   right: -55px;
   padding-top: 10px;
   color: white;
+}
+
+#left-side {
+  height: 100%;
+  padding-right: 20px;
+  width: 24.65%;
+	margin-right: 0.125vw;
 }
 
 #logo {
@@ -306,13 +317,6 @@ ul {
   top: 45%;
   left: 20vw;
   z-index: -1;
-}
-
-
-#side-navbar {
-  height: 100%;
-  padding-right: 20px;
-  width: 25%;
 }
 
 #todo {

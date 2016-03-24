@@ -20,33 +20,29 @@ class App extends React.Component {
       this.props.Calendar.props.params.id=12345678;
 
     return (
-      <div id="application_wrapper">
+		  <div className="row" id="top_container">
 
         {this.props.SideNav}
 
-        <div className="row" id="top_container">
-          <div className="col-md-3" id="side-navbar">
-            {this.props.ImportantNotices}
+        <div className="col-md-3" id="left-side">
+          {this.props.ImportantNotices}
+          <ul id="menu-tabs" className="nav nav-pills search-tabs" data-tabs="tab-content">
+            <li className="active"><a data-toggle="tab" href="#search">Search</a></li>
+            <li><a data-toggle="tab" href="#cart">Cart</a></li>
+          </ul>
+          <div className="tab-content">
+            <div id="search" className="tab-pane fade in active">
+              {this.props.SearchPanelWrapper}
+            </div>
 
-            <ul id="menu-tabs" className="nav nav-pills search-tabs" data-tabs="tab-content">
-              <li className="active"><a data-toggle="tab" href="#search">Search</a></li>
-              <li><a data-toggle="tab" href="#cart">Cart</a></li>
-            </ul>
-
-            <div className="tab-content">
-              <div id="search" className="tab-pane fade in active">
-                {this.props.SearchPanelWrapper}
-              </div>
-
-              <div id="cart" className="tab-pane fade in">
-                {this.props.ShoppingCart}
-              </div>
+            <div id="cart" className="tab-pane fade in">
+              {this.props.ShoppingCart}
             </div>
           </div>
+        </div>
 
-          <div className="col-md-9" id="calendar">
-            {this.props.Calendar}
-          </div>
+        <div className="col-md-9" id="calendar">
+          {this.props.Calendar}
         </div>
       </div>
     );
