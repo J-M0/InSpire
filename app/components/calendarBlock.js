@@ -81,7 +81,7 @@ class AvailableModal extends React.Component {
           );})}
         </div>;
     } else {
-      body = "There are no courses available for this time slot.";
+      body = <span style={{fontWeight: "bold"}}>There are no courses available for this time slot.</span>;
     }
 
     return(
