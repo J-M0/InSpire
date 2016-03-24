@@ -2,22 +2,22 @@ import React from 'react';
 
 class NavbarExtendButton extends React.Component {
   render() {
-		var faceOut = {
-			transition: 'transform .15s',
-			marginRight: '-8px',
-			paddingBottom: '30px'
-		};
+    var faceOut = {
+      transition: 'transform .5s',
+      marginRight: '-8px',
+      paddingBottom: '30px'
+    };
 
-		if (this.props.face !== undefined) {
-			faceOut.transform = (this.props.face) ? 'rotate(0deg)' : 'rotate(180deg)';
-		}
+    if (this.props.face !== undefined) {
+      faceOut.transform = (this.props.face) ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
 
     return(
       <div id="rotate-container">
         <div id="trapezoid" onClick={(e)=>this.props.onClick(e)}>
-					<div id="rotate-chevron-container" style={faceOut}>
+          <div id="rotate-chevron-container" style={faceOut}>
             <span className="glyphicon glyphicon-chevron-down" id="glyph-scaling"></span>
-					</div>
+          </div>
         </div>
       </div>
     );
@@ -49,19 +49,24 @@ export default class SideNav extends React.Component {
     e.preventDefault();
     e.stopPropagation();
     this.setState({expand: !this.state.expand});
+    this.setState({collapse: this.state.expand});
   }
 
   render() {
-    var shamt = {left: '-15%'};
-		var sz = {width: '95%'};
+    var shift;
+    var sz = {width: '95%'};
 
     if (this.state.expand == true) {
-      shamt = {left: '0%'};
-			sz = {width: '100%'};
+      shift = {animation: 'expand .5s forwards'};
+      sz = {width: '100%'};
+    }
+    
+    if (this.state.collapse == true) {
+      shift = {animation: 'collapse .5s forwards'};
     }
 
     return (
-      <div id="sidebar-container" style={shamt}>
+      <div id="sidebar-container" style={shift}>
         <img src="img/umass_logo.png" alt="UMass Logo" id="logo"></img>
         <span id="spire"> InSPIRE</span>
         <ul className="nav" style={sz}>
@@ -79,5 +84,6 @@ export default class SideNav extends React.Component {
 
   componentDidMount() {
     this.setState({expand: false});
+    this.setState({collapse: false});
   }
 }
