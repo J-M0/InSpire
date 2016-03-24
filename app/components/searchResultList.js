@@ -21,9 +21,9 @@ export default class SearchResultList extends React.Component {
 		return (
 			<div className="panel panel-default" id="search-results">
 				<div className="panel-heading" style={{color: '#354066'}}>
-					<a href="#" onClick={(e) => this.handleBackClick(e)}>
-						<span className="glyphicon glyphicon-chevron-left" style={{color: '#354066'}}></span>
-					</a> Search Results
+					<div onClick={(e) => this.handleBackClick(e)}>
+						<span className="glyphicon glyphicon-chevron-left" style={{color: '#354066'}}></span> Search Results
+					</div> 
 				</div>
 				<ul className="list group">
 					{data.results.map((result, i) => {
