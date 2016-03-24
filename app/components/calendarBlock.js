@@ -91,7 +91,7 @@ class AvailableModal extends React.Component {
             <div className="modal-header">
               <h4 className="modal-title">Available Courses</h4>
             </div>
-            <div className="modal-body">
+            <div className="modal-body" style={{textAlign: "center"}}>
               {body}
             </div>
             <div className="modal-footer">
