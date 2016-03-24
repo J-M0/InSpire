@@ -1,6 +1,7 @@
 import React from 'react';
 import ClassInfo from './classInfo';
 import {getStudentInfo, getEnrolledCourses, queryCourses} from '../server';
+import timeToString from '../util';
 
 // list of days used for rendering the calendar
 var days = [
@@ -45,15 +46,9 @@ class CourseButton extends React.Component {
 
   render() {
     var course = this.props.enrolledcourse;
-    var start = new Date(course.start).toLocaleTimeString();
-    var end = new Date(course.end).toLocaleTimeString();
-    var startTime = start.substring(0, start.indexOf(":")+3).replace(/^0+/, '');
-    var endTime = end.substring(0, end.indexOf(":")+3).replace(/^0+/, '');
-
-    // display it
     return(
       <button type="button" className="btn btn-block btn-primary cal-btn" onClick={(e) => this.handleClick(e)}>
-        <span>{startTime + " - " + endTime}</span>
+        <span>{timeToString(course.start) + " - " + timeToString(course.end)}</span>
         <span>{course.courseId}</span>
         <br/>
         <span>{course.location}</span>
@@ -80,11 +75,13 @@ class AvailableModal extends React.Component {
       body =
         <div>
           {this.state.available.map((courses, i) => { return(
-            <button key={"btn"+i} type="button" className="course-modal-btn" onClick={(e, obj) => this.props.onClick(e, obj)}>{courses.courseId} - {courses.courseName}</button>
+            <button key={"btn"+i} type="button" className="course-modal-btn" onClick={(e, obj) => this.props.onClick(e, obj)}>
+							{courses.courseId} - {courses.courseName}
+						</button>
           );})}
         </div>;
     } else {
-      body="There are no courses available for this time slot.";
+      body = "There are no courses available for this time slot.";
     }
 
     return(
@@ -125,6 +122,7 @@ class CalendarBlock extends React.Component {
   refresh() {
     if (this.state.flag !== undefined)
       this.state.flag(this.state);
+
     getStudentInfo(this.state.userId, (userInfo) => {
       this.setState({userInfo});
     });
@@ -156,8 +154,8 @@ class CalendarBlock extends React.Component {
 
     // if no content, display regular CalendarBlock times
     if (content === undefined) {
-      var startTime = this.state.start.toLocaleTimeString();
-      var endTime   = this.state.end.toLocaleTimeString();
+      var start = this.state.start;
+      var end   = this.state.end;
       // if we are enrolled in a course at this time we need a button!
       if(this.state.enrolled !== undefined) {
         this.state.enrolled.map((enrolled) => {
@@ -167,7 +165,7 @@ class CalendarBlock extends React.Component {
               if (enrolled.courseId === available.courseId) {
                 // pass the relevant course info to the button if we find it and then create it
                 content = <CourseButton enrolledcourse={enrolled}/>;
-                modal = (this.state.showModal) ? <ClassInfo data={enrolled} custom={true}/> : undefined;
+                modal = (this.state.showModal) ? <ClassInfo data={enrolled}/> : undefined;
               }
             })
         })
@@ -179,14 +177,12 @@ class CalendarBlock extends React.Component {
           modal = (this.state.showModal) ? <AvailableModal available={this.state.available} onClick={(e, obj)=>this.switchModals(e, obj)}/> : undefined;
         }
         if (this.state.courseInfoToggle !== false) {
-          modal = <ClassInfo data={this.state.available[this.state.courseInfoToggle.slice(-1)]} onClick={(e, obj) => this.switchModals(e, obj)} custom={true}/>;
+          modal = <ClassInfo data={this.state.available[this.state.courseInfoToggle.slice(-1)]} onClick={(e, obj) => this.switchModals(e, obj)}/>;
         }
       }
 
       // ternary operator, displays content if we have it where content is possibly a CourseButton, if not displays time
-      content = (content === undefined)
-                ? startTime.substring(0, startTime.indexOf(":")+3).replace(/^0+/, '') + " - " + endTime.substring(0, endTime.indexOf(":")+3).replace(/^0+/, '')
-                : content;
+      content = (content === undefined) ? timeToString(start) + " - " + timeToString(end) : content;
     }
 
     var type = "thumbnail " + this.state.type;
