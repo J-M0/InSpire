@@ -62,9 +62,8 @@ export default class SideNav extends React.Component {
 
     return (
       <div id="sidebar-container" style={shamt}>
-        <img src="img/umass_logo.png" alt="UMass Logo" width="100" height="100" style={{margin: '10px'}} id="logo"></img>
+        <img src="img/umass_logo.png" alt="UMass Logo" id="logo"></img>
         <span id="spire"> InSPIRE</span>
-        <br /><br />
         <ul className="nav" style={sz}>
           <NavbarButton data={"Class Schedule"} />
           <NavbarButton data={"Class Schedule"} />
