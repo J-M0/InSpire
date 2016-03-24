@@ -281,7 +281,7 @@ ul {
 @keyframes expand {
   from {}
   to {
-    transform: translate(0%,0);
+    transform: translate(-1.5%,0);
   }
 }
 
