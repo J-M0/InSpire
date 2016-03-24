@@ -165,7 +165,7 @@ class CalendarBlock extends React.Component {
               if (enrolled.courseId === available.courseId) {
                 // pass the relevant course info to the button if we find it and then create it
                 content = <CourseButton enrolledcourse={enrolled}/>;
-                modal = (this.state.showModal) ? <ClassInfo data={enrolled}/> : undefined;
+                modal = (this.state.showModal) ? <ClassInfo data={enrolled} custom={true}/> : undefined;
               }
             })
         })
@@ -177,7 +177,7 @@ class CalendarBlock extends React.Component {
           modal = (this.state.showModal) ? <AvailableModal available={this.state.available} onClick={(e, obj)=>this.switchModals(e, obj)}/> : undefined;
         }
         if (this.state.courseInfoToggle !== false) {
-          modal = <ClassInfo data={this.state.available[this.state.courseInfoToggle.slice(-1)]} onClick={(e, obj) => this.switchModals(e, obj)}/>;
+          modal = <ClassInfo data={this.state.available[this.state.courseInfoToggle.slice(-1)]} onClick={(e, obj) => this.switchModals(e, obj)} custom={true}/>;
         }
       }
 
