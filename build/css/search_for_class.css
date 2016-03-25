@@ -313,10 +313,17 @@ ul {
 #rotate-container {
   transform: rotate(90deg);
 	position: absolute;
-  height: 0px;
-  top: 45%;
-  left: 20vw;
+  height: 15vh;
+	width: 20vh;
+	top: 40%;
+  left: 8vw;
   z-index: -1;
+}
+
+#rotate-chevron-container {
+	position: absolute;
+	top: 2vh;
+	right: 4.5vh;
 }
 
 #todo {
@@ -337,14 +344,16 @@ ul {
 }
 
 #trapezoid {
-  border-bottom: 50px solid #354066;
-  border-left: 40px solid transparent;
-  border-right: 50px solid transparent;
-  height: 0px;
-  width: 200px;
+  border-bottom: 3vw solid #354066;
+  border-left: 5vh solid transparent;
+  border-right: 5vh solid transparent;
   transform: scale(0.5, 0.5);
+	margin-top: -0.75vw;
 }
 
 #trapezoid .glyphicon-chevron-down {
   color: white;
+	display: block;
+	padding-top: 0px;
+	right: 0px;
 }

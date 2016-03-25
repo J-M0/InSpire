@@ -4,8 +4,6 @@ class NavbarExtendButton extends React.Component {
   render() {
     var faceOut = {
       transition: 'transform .5s',
-      marginRight: '-8px',
-      paddingBottom: '30px'
     };
 
     if (this.props.face !== undefined) {
