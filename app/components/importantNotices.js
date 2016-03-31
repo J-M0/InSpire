@@ -12,7 +12,7 @@ class UserInfoButton extends React.Component {
   {
     var text = this.props.data;
     return(
-      <li><a href={'../../Modal would pop up.html'}>{text}</a></li>
+      <a href={'../../Modal would pop up.html'}>{text}</a>
     );
   }
 }
@@ -37,7 +37,8 @@ export default class UserInfo extends React.Component {
 					<div className="panel-heading">User Info</div>
 					<div className="panel-body">
             Name <br /> StudentId <br />
-            <UserInfoButton data={"Final Exam Schedule"} />
+          <UserInfoButton data={"Final Exam Schedule"} />
+          <br />
             <UserInfoButton data={"Logout"} />
 					</div>
 				</div>
