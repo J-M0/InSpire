@@ -1,8 +1,9 @@
 import React from 'react';
+import Modal from './modal';
 import {getStudentInfo} from '../server';
 
 
-class logOutButton extends React.Component {
+class LogOutButton extends React.Component {
   render()
   {
     return(
@@ -11,7 +12,7 @@ class logOutButton extends React.Component {
   }
 }
 
-class finalExamButton extends React.Component {
+class FinalExamButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = props;
@@ -19,13 +20,20 @@ class finalExamButton extends React.Component {
 
   render()
   {
+    if (this.state !== undefined){
+      var data = this.state.data;
+      var modalId = "FinalExamModal" + this.state.id;
+    }
     return(
-      <a href="#">Final Exams</a>
+      <div>
+        <Modal data={data} modalType="FinalExamSchedule" id={modalId} />
+        <a href="#">Final Exam Schedule</a>
+      </div>
     );
   }
 }
 
-class transcriptButton extends React.Component {
+class TranscriptButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = props;
@@ -33,14 +41,20 @@ class transcriptButton extends React.Component {
 
   render()
   {
+    if (this.state !== undefined){
+      var data = this.state.data;
+      var modalId = "UnofficialTranscriptModal" + this.state.id;
+    }
     return(
-      <a href="#">Unofficial Transcript</a>
+      <div>
+        <Modal data={data} modalType="UnofficialTranscript" id={modalId} />
+        <a href="#">Unofficial Transcript</a>
+      </div>
     );
   }
 }
 
 export default class UserInfo extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = props;
@@ -59,22 +73,20 @@ export default class UserInfo extends React.Component {
 
   render() {
     if (this.state.info !== undefined){
-      var studentID = this.props.params.id;
+      var studentID = this.state.params.id;
       var studentName = this.state.info.firstName + " " + this.state.info.lastName;
+      var courses = this.state.info.enrolledCourses;
     }
+
     return (
       <div className="panel panel-default" id="userinfo">
-
         <div className="panel-heading">
           <strong>{studentName} ({studentID})</strong>
         </div>
-
         <div className="panel-body">
-          <transcriptButton />Unofficial Transcript
-            <br />
-          <finalExamButton />Final Exam
-            <br />
-          <logOutButton />Logout
+          <TranscriptButton />
+          <FinalExamButton data={courses}/>
+          <LogOutButton />
         </div>
       </div>
     );
