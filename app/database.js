@@ -1,55 +1,20 @@
-//import React from 'react';
-//import ReactDOM from 'react-dom';
-
 // Modify with your startup's name!
 var startupName = "InSPIRE, Inc.";
 
 // Put your mock objects here, as in Workshop 4
 var initialData = {
-    // "Document" for students -- James Morris
     "students": {
         "12345678": {
-            "studentId": "12345678",
             "firstName": "Jason",
             "lastName": "Jackson",
             "gradYear": 2017,
-            "major": "Gender Studies",
+            "major": "Sociology",
             "birthDate": new Date(1992, 2, 14),
             "gender": "M",
-            "mailStreetAddress": "58 Eastman Lane",
-            "mailCity": "Amherst",
-            "mailState": "MA",
-            "mailZip": "01003",
-            "permStreetAddress": "2642 Marigold Lane",
-            "permCity": "Doral",
-            "permState": "FL",
-            "permZip": "33178",
-            "phoneNumber": "305-463-5054",
             "advisor": 1,
             "email": "jjackson@umass.edu",
-            "emergencyContact": {
-                "firstName": "Carol",
-                "lastName": "Huston",
-                "phoneNumber": "205-436-0467",
-                "streetAddress": "1157 Broad Street",
-                "city": "Bessemer",
-                "state": "AL",
-                "zip": "35224"
-            },
             "academicInstitution": "U. of Massachusetts Amherst",
-            "importantNotices": {
-                "fafsa": {
-                    "function": "Financial Aid",
-                    "dueDate": new Date(2016, 2, 1),
-                    "status": "initiated"
-                },
-                "taxReturn": {
-                    "function": "Financial Aid",
-                    "dueDate": new Date(2016, 2, 1),
-                    "status": "initiated"
-                }
-            },
-            "courses": [
+            "enrolledCourses": [
               "12345678", "92819522", "19103958"
             ],
             "cart": [
@@ -57,46 +22,15 @@ var initialData = {
             ]
         },
         "27133668": {
-            "studentId": "27133668",
             "firstName": "Christine",
             "lastName": "Thielen",
             "gradYear": 2018,
             "major": "Computer Science",
             "birthDate": new Date(1994, 11, 14),
             "gender": "F",
-            "mailStreetAddress": "160 Clark Hill Rd",
-            "mailCity": "Amherst",
-            "mailState": "MA",
-            "mailZip": "01003",
-            "permStreetAddress": "4987 Terry Lane",
-            "permCity": "Orlando",
-            "permState": "FL",
-            "permZip": "32805",
-            "phoneNumber": "321-230-6522",
             "advisor": 2,
             "email": "cthielen@umass.edu",
-            "emergencyContact": {
-                "firstName": "Thomas",
-                "lastName": "Thielen",
-                "phoneNumber": "207-681-0579",
-                "streetAddress": "1522 Fantages Way",
-                "city": "South Portland",
-                "state": "ME",
-                "zip": "04106"
-            },
-            "academicInstitution": "U. of Massachusetts Amherst",
-            "importantNotices": {
-                "fafsa": {
-                    "function": "Financial Aid",
-                    "dueDate": new Date(2016, 2, 0),
-                    "status": "initiated"
-                },
-                "taxReturn": {
-                    "function": "Financial Aid",
-                    "dueDate": new Date(2016, 2, 1),
-                    "status": "initiated"
-                }
-            },
+            "academicInstitution": "Amherst College",
             "courses": [
               "18271821", "85938173", "09876543"
             ],
@@ -105,46 +39,14 @@ var initialData = {
             ]
         },
         "07894436": {
-            "studentId": "07894436",
             "firstName": "James",
             "lastName": "Ensor",
             "gradYear": 2016,
             "major": "Chemistry",
             "birthDate": new Date(1993, 4, 25),
             "gender": "M",
-            "mailStreetAddress": "230 Sunset Ave",
-            "mailCity": "Amherst",
-            "mailState": "MA",
-            "mailZip": "01003",
-            "permStreetAddress": "3109 Grove Street",
-            "permCity": "Melville",
-            "permState": "NY",
-            "permZip": "11747",
-            "phoneNumber": "631-773-2379",
             "advisor": 3,
             "email": "jensor@umass.edu",
-            "emergencyContact": {
-                "firstName": "Paulette",
-                "lastName": "Cantara",
-                "phoneNumber": "713-719-5202",
-                "streetAddress": "630 Brooke Street",
-                "city": "Sugar Land",
-                "state": "TX",
-                "zip": "77478"
-            },
-            "academicInstitution": "U. of Massachusetts Amherst",
-            "importantNotices": {
-                "fafsa": {
-                    "function": "Financial Aid",
-                    "dueDate": new Date(2016, 2, 1),
-                    "status": "initiated"
-                },
-                "taxReturn": {
-                    "function": "Financial Aid",
-                    "dueDate": new Date(2016, 2, 1),
-                    "status": "initiated"
-                }
-            },
             "courses": [
               "12345678", "19103958", "85938173"
             ],
