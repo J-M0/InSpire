@@ -246,8 +246,10 @@ ul {
 
 #left-side {
   height: 100%;
-  padding-right:20px;
-  width: 24.65%;
+  padding-right:0.8vw;
+	padding-left:0px;
+	margin-left: -1.0vw;
+  width: 25.7%;
 	margin-right: 0.125vw;
 }
 
@@ -277,7 +279,7 @@ ul {
 }
 
 #search-radios div:nth-child(2) input {
-	width: 14vw;
+	width: 17vw;
 }
 
 #search-radios div:nth-child(3) label {
@@ -285,7 +287,7 @@ ul {
 }
 
 #search-radios div:nth-child(3) input {
-	width: 45%;
+	width: 50%;
 }
 
 #shopping-cart {
