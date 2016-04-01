@@ -4,7 +4,7 @@ import Calendar from './components/calendarBlock';
 /*import SideNav from './components/navbar';*/
 import ShoppingCart from './components/shoppingCart';
 import ClassInfo from './components/classInfo';
-import ImportantNotices from './components/importantNotices';
+import UserInfo from './components/UserInfo';
 import SearchPanel from './components/searchPanel';
 import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
@@ -25,7 +25,7 @@ class App extends React.Component {
         {/*this.props.SideNav*/}
 
         <div className="col-md-3" id="left-side">
-          {this.props.ImportantNotices}
+          {this.props.UserInfo}
           <ul id="menu-tabs" className="nav nav-pills search-tabs" data-tabs="tab-content">
             <li className="active"><a data-toggle="tab" href="#search">Search</a></li>
             <li><a data-toggle="tab" href="#cart">Cart</a></li>
@@ -59,7 +59,7 @@ ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       {/* EXAMPLE: {{Calendar, SideNav, SearchPanel, etc., etc., etc.,}} */}
-      <IndexRoute components={{Calendar, ShoppingCart, ImportantNotices, ClassInfo, SearchPanelWrapper}}/>
+      <IndexRoute components={{Calendar, ShoppingCart, /*navbar, */ UserInfo, ClassInfo, SearchPanelWrapper}}/>
       {/*DO NOT UNCOMMENT THE BELOW UNLESS YOUR NAME IS KEVIN CHAN */}
       {/*<Route path="/profile/:id" components={{Calendar, SideNav}} />*/}
     </Route>
