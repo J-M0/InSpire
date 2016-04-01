@@ -156,14 +156,23 @@ ul {
 }
 
 /*OVERWRITING BOOTSTRAP CSS*/
-.form-control, .btn{
+.btn{
 	font-size: 1.6vh;
+}
+
+.checkbox input[type=checkbox] {
+	margin-top: 1px;
+	margin-left: -15px;
+}
+
+.form-control {
+	font-size: 1.6vh;
+	height: 4vh;
 }
 
 .panel-body {
   padding: 4%;
 }
-
 /*END OF OVERWRITING BOOTRSTRAP CSS
 /* class tags end here */
 
@@ -265,7 +274,19 @@ ul {
 }
 
 #search-radios label {
-  margin-left: 15px;
+	margin-left: 0.5vw;
+}
+
+#search-radios div:nth-child(2) input {
+	width: 14vw;
+}
+
+#search-radios div:nth-child(3) label {
+	width: 30%;
+}
+
+#search-radios div:nth-child(3) input {
+	width: 45%;
 }
 
 #shopping-cart {
