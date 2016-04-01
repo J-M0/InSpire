@@ -34,7 +34,7 @@ class transcriptButton extends React.Component {
   render()
   {
     return(
-      <a href="#">Unofficial TRANSCRIPT</a>
+      <a href="#">Unofficial Transcript</a>
     );
   }
 }
@@ -70,7 +70,7 @@ export default class UserInfo extends React.Component {
         </div>
 
         <div className="panel-body">
-          <transcriptButton />Unofficial Transcript
+          <transcriptButton /> Unofficial Transcript
             <br />
           <finalExamButton />Final Exam
             <br />

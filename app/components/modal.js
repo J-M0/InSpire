@@ -123,3 +123,14 @@ class ClassInfo extends React.Component {
 		);
 	}
 }
+
+class UoTranscript extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = props;
+	}
+
+	render() {
+		console.log("this is from the UO transcript modal");
+	}
+}
