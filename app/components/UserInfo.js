@@ -42,7 +42,7 @@ class TranscriptButton extends React.Component {
   render()
   {
     if (this.state !== undefined){
-      var data = this.state.data;
+      var data = this.props.data;
       var modalId = "UnofficialTranscriptModal" + this.state.id;
     }
     return(
@@ -76,6 +76,7 @@ export default class UserInfo extends React.Component {
       var studentID = this.state.params.id;
       var studentName = this.state.info.firstName + " " + this.state.info.lastName;
       var courses = this.state.info.enrolledCourses;
+      var record = this.state.info.completedCourses;
     }
 
     return (
@@ -84,7 +85,7 @@ export default class UserInfo extends React.Component {
           <strong>{studentName} ({studentID})</strong>
         </div>
         <div className="panel-body">
-          <TranscriptButton />
+          <TranscriptButton data={record}/>
           <FinalExamButton data={courses}/>
           <LogOutButton />
         </div>

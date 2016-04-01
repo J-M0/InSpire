@@ -7,25 +7,25 @@ export default class Modal extends React.Component {
 	}
 
 	render() {
-		var modalType = this.state.modalType;
-		var modalId = this.props.modalId;
+		var modalType = this.state.type;
+		var modalId = this.state.id;
 		var data = this.state.data;
 
 		var modalContent;
 		switch (modalType) {
-			case "Class Information":
+			case "ClassInformation":
 				modalContent = <ClassInfo data={data} />;
 				break;
-			case "Unofficial Transcript":
-				modalContent = "Unofficial Transcript";
+			case "UnofficialTranscript":
+				modalContent = <UoTranscript data={data} />;
 				break;
-			case "Final Exam Schedule":
+			case "FinalExamSchedule":
 				modalContent = "Final Exam Schedule";
 				break;
-			case "Time Selection":
+			case "TimeSelection":
 				modalContent = "Time Selection";
 				break;
-			case "Available Courses":
+			case "AvailableCourses":
 				modalContent = "Available Courses";
 				break;
 			default:
@@ -127,10 +127,12 @@ class ClassInfo extends React.Component {
 class UoTranscript extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = props;
+		this.state = props.data;
 	}
 
 	render() {
-		console.log("this is from the UO transcript modal");
+		return(
+			<div></div>
+		);
 	}
 }
