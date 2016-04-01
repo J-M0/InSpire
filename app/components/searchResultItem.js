@@ -37,7 +37,7 @@ export default class SearchResultItem extends React.Component {
 					<br />
 					{description}
 					<br />
-					<a className="btn" data-toggle="modal" href={"#" + modalId} style={{textAlign: 'right'}}>...More info</a>
+					<a className="btn" data-toggle="modal" href={"#" + modalId} style={{textAlign: 'right', width: '100%', fontSize: '1.6vh'}}>...More info</a>
 				</div>
 			);
 		} else {
@@ -49,7 +49,7 @@ export default class SearchResultItem extends React.Component {
 
 				{/*<ClassInfo id={modalId} data={data}/>*/}
 				<span className="glyphicon glyphicon-asterisk" style={{color: 'green'}}></span>
-				{data.courseId} - {data.courseName} <a href="#" onClick={(e) => this.handleChevronClick(e)}>{chevron}</a>
+				{data.courseNumber} - {data.courseName} <a href="#" onClick={(e) => this.handleChevronClick(e)}>{chevron}</a>
 				{body}
 			</li>
 		);

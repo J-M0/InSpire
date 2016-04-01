@@ -25,7 +25,7 @@ export default class ShoppingCart extends React.Component {
         body =
         <div>
           {this.state.cart.map((courses, i) => { return (
-            <li className="list-group-item shop-cart-item" key={i} onClick={(e) => this.handleClick(e)}>{courses.courseId} - {courses.courseName}</li>
+            <li className="list-group-item shop-cart-item" key={i} onClick={(e) => this.handleClick(e)}>{courses.courseNumber} - {courses.courseName}</li>
           );})}
         </div>
       } else {
