@@ -45,7 +45,7 @@ export default class SearchResultItem extends React.Component {
 		}
 		return (
 			<li className="list-group-item">
-				<Modal modalType="ClassInformation" data={data} id="ClassInformation" />
+				<Modal type="ClassInformation" data={data} id={modalId} />
 
 				{/*<ClassInfo id={modalId} data={data}/>*/}
 				<span className="glyphicon glyphicon-asterisk" style={{color: 'green'}}></span>

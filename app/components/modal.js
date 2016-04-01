@@ -7,8 +7,8 @@ export default class Modal extends React.Component {
 	}
 
 	render() {
-		var modalType = this.state.modalType;
-		var modalId = this.props.modalId;
+		var modalType = this.state.type;
+		var modalId = this.state.id;
 		var data = this.state.data;
 
 		var modalContent;
