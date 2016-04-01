@@ -3,7 +3,7 @@ import React from 'react';
 class NavbarExtendButton extends React.Component {
   render() {
     var faceOut = {
-      transition: 'transform .5s',
+      transition: 'transform .5s'
     };
 
     if (this.props.face !== undefined) {
@@ -58,7 +58,7 @@ export default class SideNav extends React.Component {
       shift = {animation: 'expand .5s forwards'};
       sz = {width: '100%'};
     }
-    
+
     if (this.state.collapse == true) {
       shift = {animation: 'collapse .5s forwards'};
     }
@@ -68,11 +68,7 @@ export default class SideNav extends React.Component {
         <img src="img/umass_logo.png" alt="UMass Logo" id="logo"></img>
         <span id="spire"> InSPIRE</span>
         <ul className="nav" style={sz}>
-          <NavbarButton data={"Class Schedule"} />
-          <NavbarButton data={"Class Schedule"} />
           <NavbarButton data={"Final Exam Schedule"} />
-          <NavbarButton data={"Finances"} />
-          <NavbarButton data={"Housing"} />
           <NavbarButton data={"Logout"} />
         </ul>
         <NavbarExtendButton onClick={(e)=>this.expand(e)} face={this.state.expand}/>

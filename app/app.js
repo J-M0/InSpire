@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Calendar from './components/calendarBlock';
-import SideNav from './components/navbar';
+/*import SideNav from './components/navbar';*/
 import ShoppingCart from './components/shoppingCart';
 import ClassInfo from './components/classInfo';
 import ImportantNotices from './components/importantNotices';
@@ -9,20 +9,20 @@ import SearchPanel from './components/searchPanel';
 import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
 /**
-  * Waiting on course information modal as well as search before i can implement shopping cart
-  * Stephen P
-  */
+* Waiting on course information modal as well as search before i can implement shopping cart
+* Stephen P
+*/
 
 class App extends React.Component {
   render() {
     // Default user, to be removed
     if (this.props.Calendar.props.params.id === undefined)
-      this.props.Calendar.props.params.id=12345678;
+    this.props.Calendar.props.params.id=12345678;
 
     return (
-		  <div className="row" id="top_container">
+      <div className="row" id="top_container">
 
-        {this.props.SideNav}
+        {/*this.props.SideNav*/}
 
         <div className="col-md-3" id="left-side">
           {this.props.ImportantNotices}
@@ -50,16 +50,16 @@ class App extends React.Component {
 }
 
 class SearchPanelWrapper extends React.Component {
-    render() {
-        return <SearchPanel view={'search'} />
-    }
+  render() {
+    return <SearchPanel view={'search'} />
+  }
 }
 
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       {/* EXAMPLE: {{Calendar, SideNav, SearchPanel, etc., etc., etc.,}} */}
-      <IndexRoute components={{Calendar, SideNav, ShoppingCart, ImportantNotices, ClassInfo, SearchPanelWrapper}}/>
+      <IndexRoute components={{Calendar, ShoppingCart, ImportantNotices, ClassInfo, SearchPanelWrapper}}/>
       {/*DO NOT UNCOMMENT THE BELOW UNLESS YOUR NAME IS KEVIN CHAN */}
       {/*<Route path="/profile/:id" components={{Calendar, SideNav}} />*/}
     </Route>
