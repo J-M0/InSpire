@@ -31,7 +31,7 @@ export default class SearchRadios extends React.Component {
 					</div>
 					<div className="form-group">
 						<label htmlFor="classNum">Class Number:</label>
-						<select className="form control" id="course-num-ops">
+						<select className="form control" id="course-num-ops" style={{marginLeft: '10px'}}>
 							<option>{"="}</option>
 							<option>&gt;=</option>
 						</select>
