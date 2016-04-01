@@ -19,8 +19,8 @@ export function getEnrolledCourses(user, cb) {
   var student = readDocument('students', user);
 
 	if (student !== null) {
-		for (var i = 0, courses=[]; i < student.courses.length; i++) {
-			courses.push(readDocument('courses', student.courses[i]));
+		for (var i = 0, courses=[]; i < student.enrolledCourses.length; i++) {
+			courses.push(readDocument('courses', student.enrolledCourses[i]));
 		}
 	}
   emulateServerReturn(courses, cb);

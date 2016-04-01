@@ -52,10 +52,10 @@ export default class ClassInfo extends React.Component {
 										</thead>
 										<tbody>
 											<tr>
-											<td>{data.courseId}</td>
+											<td>{data.courseNumber}</td>
 											<td>{data.section}</td>
 											<td>{data.credits}</td>
-											<td>{data.enrolled}</td>
+											<td>{data.enrolled.length}</td>
 											<td>{data.capacity}</td>
 										</tr>
 									</tbody>
