@@ -34,7 +34,7 @@ class transcriptButton extends React.Component {
   render()
   {
     return(
-      <a href="#">Unofficial Transcript</a>
+      <a href="#">Unofficial TRANSCRIPT</a>
     );
   }
 }
