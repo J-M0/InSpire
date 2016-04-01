@@ -1,4 +1,4 @@
-import {readDocument, readDocuments/*, writeDocument*/} from './database.js';
+import {readDocument, readDocuments , writeDocument} from './database.js';
 
 /**
  * Emulates how a REST call is *asynchronous* -- it calls your function back
@@ -24,6 +24,24 @@ export function getEnrolledCourses(user, cb) {
 		}
 	}
   emulateServerReturn(courses, cb);
+}
+
+export function enrollInClass(studentId, courseId, cb) {
+    var student = readDocument('students', studentId);
+    var course = readDocument('courses', courseId);
+
+    student.enrolledCourses.push(courseId);
+    course.enrolled.push(studentId);
+
+    writeDocument('students', student);
+    writeDocument('courses', course);
+
+    emulateServerReturn(undefined, cb);
+
+}
+
+export function dropClass(studentId, classId, cb) {
+
 }
 
 // MY CHANGES HERE
