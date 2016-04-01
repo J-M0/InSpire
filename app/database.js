@@ -20,7 +20,7 @@ var initialData = {
             "cart": [
               "18271821", "85938173", "09876543"
             ],
-            "completedCourses": []
+            "completedCourses": [["92819522", "A+"], ["12345678", "B-"]]
         },
         "27133668": {
             "firstName": "Christine",
