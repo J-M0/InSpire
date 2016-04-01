@@ -59,7 +59,7 @@ export default class UserInfo extends React.Component {
 
   render() {
     if (this.state.info !== undefined){
-      var studentID = this.state.info.studentId;
+      var studentID = this.props.params.id;
       var studentName = this.state.info.firstName + " " + this.state.info.lastName;
     }
     return (
