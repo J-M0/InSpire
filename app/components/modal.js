@@ -6,24 +6,69 @@ export default class Modal extends React.Component {
 		this.state = props;
 	}
 
+	render() {
+		var modalType = this.state.modalType;
+		var modalId = this.props.modalId;
+		var data = this.state.data;
+
+		var modalContent;
+		switch (modalType) {
+			case "Class Information":
+				modalContent = <ClassInfo data={data} />;
+				break;
+			case "Unofficial Transcript":
+				modalContent = "Unofficial Transcript";
+				break;
+			case "Final Exam Schedule":
+				modalContent = "Final Exam Schedule";
+				break;
+			case "Time Selection":
+				modalContent = "Time Selection";
+				break;
+			case "Available Courses":
+				modalContent = "Available Courses";
+				break;
+			default:
+				console.log(modalType);
+				break;
+		}
+
+		return (
+			<div className="modal fade" role="dialog" id={modalId}>
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+							<button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 className="modal-title">{modalType}</h4>
+						</div>;
+						{modalContent}
+					</div>
+				</div>
+			</div>
+		)
+	}
+}
+
+
+class ClassInfo extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = props.data;
+	}
+
 	getDays() {
-		return this.state.data.days.join(" / ");
+		return this.state.days.join(" / ");
 	}
 
 	render() {
-		var modalType = this.state.modalType;
-		var data = this.state.data;
-
+		var data = this.state;
 		var start = new Date(data.start).toLocaleTimeString()
 		var end = new Date(data.end).toLocaleTimeString()
 
-		if (data.instructor.firstName !== undefined)
-		var name = data.instructor.firstName.concat(" ", data.instructor.lastName);
-
-		var modalContent;
-		switch (modalType){
-			case "Class Information":
-			modalContent =
+		if (data.instructor.firstName !== undefined) {
+			var name = data.instructor.firstName.concat(" ", data.instructor.lastName);
+		}
+		return (
 			<div className="modal-body">
 				<div className="panel-body" style={{color:'#354066'}}>
 					<table className="table">
@@ -74,37 +119,7 @@ export default class Modal extends React.Component {
 					<button type="button" className="btn btn-primary">Add Class</button>
 					<button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
-			</div>;
-			break;
-			case "Unofficial Transcript":
-			modalContent = "";
-			break;
-			case "Final Exam Schedule":
-			modalContent = "";
-			break;
-			case "Time Selection":
-			modalContent = "";
-			break;
-			case "Available Courses":
-			modalContent = "";
-			break;
-			default:
-			console.log(modalType);
-			break;
-		}
-
-		return (
-			<div className="modal fade" role="dialog" id={modalType}>
-				<div className="modal-dialog">
-					<div className="modal-content">
-						<div className="modal-header">
-							<button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 className="modal-title">{modalType}</h4>
-						</div>;
-						{modalContent}
-					</div>
-				</div>
 			</div>
-		)
+		);
 	}
 }
