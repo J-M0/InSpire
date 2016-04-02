@@ -7,30 +7,32 @@ export default class Modal extends React.Component {
 	}
 
 	render() {
-		var modalType = this.state.type;
-		var modalId = this.state.id;
-		var data = this.state.data;
+		if (this.props !== undefined){
+			var modalType = this.props.modalType;
+			var modalId = this.props.id;
+			var data = this.props.data;
 
-		var modalContent;
-		switch (modalType) {
-			case "ClassInformation":
+
+			var modalContent;
+			switch (modalType) {
+				case "ClassInformation":
 				modalContent = <ClassInfo data={data} />;
 				break;
-			case "UnofficialTranscript":
+				case "UnofficialTranscript":
 				modalContent = <UoTranscript data={data} />;
 				break;
-			case "FinalExamSchedule":
-				modalContent = "Final Exam Schedule";
+				case "Final Exam Schedule":
+				modalContent = <FinalExamModal data={data} />;
 				break;
-			case "TimeSelection":
+				case "TimeSelection":
 				modalContent = "Time Selection";
 				break;
-			case "AvailableCourses":
+				case "AvailableCourses":
 				modalContent = "Available Courses";
 				break;
-			default:
-				console.log(modalType);
+				default:
 				break;
+			}
 		}
 
 		return (
@@ -40,7 +42,7 @@ export default class Modal extends React.Component {
 						<div className="modal-header">
 							<button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 							<h4 className="modal-title">{modalType}</h4>
-						</div>;
+						</div>
 						{modalContent}
 					</div>
 				</div>
@@ -49,6 +51,55 @@ export default class Modal extends React.Component {
 	}
 }
 
+class FinalExamModal extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = props.data;
+	}
+
+	render() {
+		// if (this.props.data !== undefined){
+		// 	var courseIDs = this.props.data.enrolledCourses;
+		// 	var courses = courseIDs.map((i)=>getCourseInfo(i));
+		//
+		// 	//sort courses by date, with time as "tiebreaker"
+		//
+		// 	var examSchedule;
+		// 	for each (exam in courses){
+		// 		examSchedule +=
+		// 		<tr>
+		// 			<td>{exam.final[0]}</td>
+		// 			<td>{exam.final[1].section}</td>
+		// 			<td>{exam.courseName}</td>
+		// 			<td>{exam.final[2]}</td>
+		// 		</tr>
+		// 	}
+		// }
+		return (
+			<div className="modal-body">
+				<div className="panel-body" style={{color:'#354066'}}>
+					<table className="table">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Time</th>
+								<th>Course</th>
+								<th>Location</th>
+							</tr>
+						</thead>
+						<tbody>
+							{/*examSchedule*/}
+						</tbody>
+					</table>
+				</div>
+
+				<div className="modal-footer">
+					<button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		);
+	}
+}
 
 class ClassInfo extends React.Component {
 	constructor(props) {
