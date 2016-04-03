@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default class Modal extends React.Component {
-	
+
 	render() {
 
 		var modalType = this.props.type;
@@ -182,7 +182,22 @@ class UoTranscript extends React.Component {
 
 	render() {
 		var data = this.props.data;
-		console.log(data);
+		var modalContent= "";
+		if (data !== undefined) {
+			if (data.completedCourses.length !== 0) {
+				modalContent =
+          data.completedCourses.map((tuples, i) => {
+						return(
+							<tr key={"tr"+i}>
+								<td>{tuples[0]}</td>
+								<td>{tuples[1]}</td>
+							</tr>
+						);
+					}
+				)
+			}
+		}
+
 		return(
 			<div className="modal-body">
 				<div className="panel-body" style={{color:'#354066'}}>
@@ -194,7 +209,7 @@ class UoTranscript extends React.Component {
 							</tr>
 						</thead>
 						<tbody>
-
+							{modalContent}
 						</tbody>
 					</table>
 				</div>
