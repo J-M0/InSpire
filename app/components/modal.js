@@ -1,10 +1,10 @@
 import React from 'react';
 
 export default class Modal extends React.Component {
-	/*constructor(props) {
+	constructor(props) {
 		super(props);
 		this.state = props;
-	}*/
+	}
 
 	render() {
 
@@ -33,7 +33,6 @@ export default class Modal extends React.Component {
 			default:
 				break;
 		}
-	}
 
 		return (
 			<div className="modal fade" role="dialog" id={modalId}>
@@ -43,13 +42,16 @@ export default class Modal extends React.Component {
 							<button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 							<h4 className="modal-title">{modalType}</h4>
 						</div>
-						{modalContent}
+						<div className="modal-body">
+							{modalContent}
+						</div>
 					</div>
 				</div>
 			</div>
 		)
 	}
 }
+
 
 class FinalExamModal extends React.Component {
 	constructor(props) {
