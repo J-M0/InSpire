@@ -1,34 +1,35 @@
 import React from 'react';
 
 export default class Modal extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = props;
-	}
-
+	
 	render() {
 
 		var modalType = this.props.type;
 		var modalId = this.props.id;
 		var data = this.props.data;
 
-
 		var modalContent;
+		var modalTitle;
 		switch (modalType) {
 			case "ClassInformation":
 				modalContent = <ClassInfo data={data} />;
+				modalTitle = "Class Information";
 				break;
 			case "UnofficialTranscript":
 				modalContent = <UoTranscript data={data} />;
+				modalTitle = "Unofficial Transcript";
 				break;
 			case "Final Exam Schedule":
 				modalContent = <FinalExamModal data={data} />;
+				modalTitle = "Final Exam Schedule";
 				break;
 			case "TimeSelection":
 				modalContent = "Time Selection";
+				modalTitle = "Time Selection";
 				break;
 			case "AvailableCourses":
 				modalContent = "Available Courses";
+				modalTitle = "Available Courses";
 				break;
 			default:
 				break;
@@ -40,7 +41,7 @@ export default class Modal extends React.Component {
 					<div className="modal-content">
 						<div className="modal-header">
 							<button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 className="modal-title">{modalType}</h4>
+							<h4 className="modal-title">{modalTitle}</h4>
 						</div>
 						<div className="modal-body">
 							{modalContent}
@@ -178,16 +179,29 @@ class ClassInfo extends React.Component {
 }
 
 class UoTranscript extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = props.data;
-		console.log(this);
-	}
 
 	render() {
+		var data = this.props.data;
+		console.log(data);
 		return(
-			<div>
-				<span>KAPPA</span>
+			<div className="modal-body">
+				<div className="panel-body" style={{color:'#354066'}}>
+					<table className="table table-striped">
+						<thead>
+							<tr>
+								<th>Course</th>
+								<th>Grade</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+
+				<div className="modal-footer">
+					<button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
 			</div>
 		);
 	}

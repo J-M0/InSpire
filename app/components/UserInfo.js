@@ -24,7 +24,6 @@ class FinalExamButton extends React.Component {
       var data = this.props.data;
       var modalId = "FinalExamModal" + this.props.id;
     }
-
     return(
       <div>
         <Modal data={data} type="FinalExamSchedule" id={modalId} />
@@ -86,7 +85,7 @@ export default class UserInfo extends React.Component {
         </div>
         <div className="panel-body">
           <FinalExamButton data={data} id={studentID} />
-          <TranscriptButton />
+          <TranscriptButton data={data} id={studentID} />
           <LogOutButton />
         </div>
       </div>
