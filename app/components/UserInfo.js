@@ -26,7 +26,7 @@ class FinalExamButton extends React.Component {
     }
     return(
       <div>
-        <Modal data={data} modalType="FinalExamSchedule" id={modalId} />
+        <Modal data={data} type="FinalExamSchedule" id={modalId} />
         <a href="#">Final Exam Schedule</a>
       </div>
     );
@@ -47,8 +47,8 @@ class TranscriptButton extends React.Component {
     }
     return(
       <div>
-        <Modal data={data} modalType="UnofficialTranscript" id={modalId} />
-        <a href="#">Unofficial Transcript</a>
+        <a data-toggle="modal" href={"#" + modalId}>Unofficial Transcript</a>
+        <Modal data={data} type="UnofficialTranscript" id={modalId} />
       </div>
     );
   }

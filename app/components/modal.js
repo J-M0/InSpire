@@ -1,15 +1,15 @@
 import React from 'react';
 
 export default class Modal extends React.Component {
-	constructor(props) {
+	/*constructor(props) {
 		super(props);
 		this.state = props;
-	}
+	}*/
 
 	render() {
-		var modalType = this.state.type;
-		var modalId = this.state.id;
-		var data = this.state.data;
+		var modalType = this.props.type;
+		var modalId = this.props.id;
+		var data = this.props.data;
 
 		var modalContent;
 		switch (modalType) {
@@ -128,11 +128,14 @@ class UoTranscript extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = props.data;
+		console.log(this);
 	}
 
 	render() {
 		return(
-			<div></div>
+			<div>
+				<span>KAPPA</span>
+			</div>
 		);
 	}
 }
