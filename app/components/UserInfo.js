@@ -20,10 +20,11 @@ class FinalExamButton extends React.Component {
 
   render()
   {
-    if (this.state !== undefined){
-      var data = this.state.data;
-      var modalId = "FinalExamModal" + this.state.id;
+    if (this.props.data !== undefined){
+      var data = this.props.data;
+      var modalId = "FinalExamModal" + this.props.id;
     }
+
     return(
       <div>
         <Modal data={data} type="FinalExamSchedule" id={modalId} />
@@ -75,8 +76,7 @@ export default class UserInfo extends React.Component {
     if (this.state.info !== undefined){
       var studentID = this.state.params.id;
       var studentName = this.state.info.firstName + " " + this.state.info.lastName;
-      var courses = this.state.info.enrolledCourses;
-      var record = this.state.info.completedCourses;
+      var data = this.state.info;
     }
 
     return (
@@ -85,8 +85,8 @@ export default class UserInfo extends React.Component {
           <strong>{studentName} ({studentID})</strong>
         </div>
         <div className="panel-body">
-          <TranscriptButton data={record}/>
-          <FinalExamButton data={courses}/>
+          <FinalExamButton data={data} id={studentID} />
+          <TranscriptButton />
           <LogOutButton />
         </div>
       </div>
