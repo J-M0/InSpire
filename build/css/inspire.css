@@ -170,6 +170,15 @@ ul {
 	height: 4vh;
 }
 
+.modal-lg {
+	width: 60vw;
+}
+
+.modal-title {
+	color: #354066;
+	font-size: 2.8vh;
+}
+
 .panel-body {
   padding: 4%;
 }
