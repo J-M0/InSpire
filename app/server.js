@@ -36,11 +36,35 @@ export function enrollInClass(studentId, courseId, cb) {
     writeDocument('students', student);
     writeDocument('courses', course);
 
-    emulateServerReturn(undefined, cb);
+    var retVal = {
+        "student": student,
+        "course": course
+    };
+    emulateServerReturn(retVal, cb);
 
 }
 
-export function dropClass(studentId, classId, cb) {
+export function dropClass(studentId, courseId, cb) {
+    var student = readDocument('students', studentId);
+    var course = readDocument('courses', courseId);
+
+    var studentIndex = student.enrolledCourses.indexOf(courseId);
+    var courseIndex = course.enrolled.indexOf(studentId);
+
+    if (studentIndex !== -1 && courseIndex !== -1) {
+        student.enrolledCourses.splice(courseIndex, 1);
+        courseIndex.enrolled.splice(studentIndex, 1);
+    }
+
+    writeDocument('students', student);
+    writeDocument('courses', course);
+
+    var retVal = {
+        "student": student,
+        "course": course
+    };
+
+    emulateServerReturn(retVal, cb);
 
 }
 
