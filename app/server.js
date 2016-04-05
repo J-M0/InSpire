@@ -58,7 +58,7 @@ export function getShoppingCart(user, cb) {
 
 export function getCourseInfo(courseId, cb) {
     var course = readDocument('courses', courseId);
-    course.instructor = readDocument('professors', course.instructor);
+    course.instructor = readDocument('professor', course.instructor);
 
     emulateServerReturn(course, cb);
 }
