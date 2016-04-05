@@ -37,9 +37,25 @@ app.get('/courses/:courseid', function(req, res) {
 
 });
 
+// add me to error handling
+app.get('/students/undefined/enrolled', function(req, res) {
+
+});
+
+// GET request for student's enrolled courses
+app.get('/students/:studentid/enrolled', function(req, res) {
+	var courses = [];
+	var id = req.params.studentid;
+	// authentication will go here
+	var student = readDocument('students', id);
+	for (var i = 0, courses=[]; i < student.enrolledCourses.length; i++) {
+		courses.push(readDocument('courses', student.enrolledCourses[i]));
+	}
+	res.send(courses);
+});
+
 // GET request for student information
 app.get('/students/:studentid', function(req, res){
-	console.log("Getting student info...");
 	var id = req.params.studentid;
 	// authentication will go here
 	var student = readDocument('students', id);

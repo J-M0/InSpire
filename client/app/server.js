@@ -68,15 +68,10 @@ export function getStudentInfo(id, cb) {
   });
 }
 
-export function getEnrolledCourses(user, cb) {
-  var student = readDocument('students', user);
-
-	if (student !== null) {
-		for (var i = 0, courses=[]; i < student.enrolledCourses.length; i++) {
-			courses.push(readDocument('courses', student.enrolledCourses[i]));
-		}
-	}
-  emulateServerReturn(courses, cb);
+export function getEnrolledCourses(id, cb) {
+  sendXHR('GET', 'students/'+id+'/enrolled', undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText))
+  });
 }
 
 export function enrollInClass(studentId, courseId, cb) {
@@ -151,7 +146,7 @@ export function getSearchResults(searchOptions, cb) {
 }
 
 // gets available courses
-export function queryCourses(day, start, end, cb) {
+export function getAvailableCourses(day, start, end, cb) {
 	var available = [];
 	var courses = readDocuments('courses');
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import ClassInfo from './classInfo';
-import {getStudentInfo, getEnrolledCourses, queryCourses} from '../server';
+import {getStudentInfo, getEnrolledCourses, getAvailableCourses} from '../server';
 import timeToString from '../util';
 
 // list of days used for rendering the calendar
@@ -195,7 +195,7 @@ class CalendarBlock extends React.Component {
 
   // called once
   componentDidMount() {
-    queryCourses(this.state.day, this.state.start, this.state.end, (available) => {
+    getAvailableCourses(this.state.day, this.state.start, this.state.end, (available) => {
       this.setState({available});
     });
     this.setState({showModal : false});
