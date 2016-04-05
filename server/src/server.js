@@ -37,8 +37,13 @@ app.get('/courses/:courseid', function(req, res) {
 
 });
 
+// GET request for student information
 app.get('/students/:studentid', function(req, res){
-
+	console.log("Getting student info...");
+	var id = req.params.studentid;
+	// authentication will go here
+	var student = readDocument('students', id);
+	res.send(student);
 });
 
 /**
