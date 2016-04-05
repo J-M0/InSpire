@@ -12,11 +12,7 @@ var app = express();
 app.use(bodyParser.text());
 app.use(bodyParser.json());
 
-if (__dirname.substring(__dirname.lastIndexOf('/')) === '/src') {
-	app.use(express.static('../../client/build'));
-} else {
-	app.use(express.static('../client/build'));
-}
+app.use(express.static('../client/build'));
 
 // Reset database.
 app.post('/resetdb', function(req, res) {
