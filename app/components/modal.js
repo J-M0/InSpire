@@ -55,53 +55,35 @@ export default class Modal extends React.Component {
 }
 
 class FinalExamModal extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = props;
+	}
+
 	render() {
-		if (this.props.data !== undefined){
-			var courseIDs = this.props.data.enrolledCourses;
-			var courses = [];
-			var examSchedule = "";
-			for (var i in courseIDs){
-				getCourseInfo(courseIDs[i], (course) => {
-					if (courses.length == 0) courses.push(course);
-					else {
-						for (var j in courses){
-							if (course.final[0] < courses[j].final[0]){
-								courses.splice(j, 0, course);
-								break;
-							} else if (j == courses.length-1) courses.push(course);
-						}
-					}
-					///////////////////// KEVIN CHAN LOOK HERE
-					console.log(courses);
-					examSchedule =
-					courses.map((exam, i) => {
-						return(
-
-							<tr key={"tr" + i}>
-								<td>hi</td>
-								<td>hi</td>
-								<td>hi</td>
-								<td>hi</td>
-
-								// <td>{exam.final[0]}</td>
-								// <td>{exam.final[0]}</td>
-								// <td>{exam.courseName}</td>
-								// <td>{exam.final[2]}</td>
-							</tr>
-						);
-					}
-				)
-
-				////////////////////////
-			});
+		var data = this.props.data;
+		var modalContent = "";
+		if (data !== undefined) {
+			if (data.enrolledCourses.length !== 0) {
+				modalContent =
+				data.enrolledCourses.map((tuples, i) => {
+					return(
+						<tr key={"tr"+i}>
+							<td>DATE</td>
+							<td>TIME</td>
+							<td>{tuples}</td>
+							<td>LOCATION</td>
+						</tr>
+					);
+				}
+			)
 		}
 	}
 
-
-	return (
+	return(
 		<div className="modal-body">
 			<div className="panel-body" style={{color:'#354066'}}>
-				<table className="table">
+				<table className="table table-striped">
 					<thead>
 						<tr>
 							<th>Date</th>
@@ -111,7 +93,7 @@ class FinalExamModal extends React.Component {
 						</tr>
 					</thead>
 					<tbody>
-						{examSchedule}
+						{modalContent}
 					</tbody>
 				</table>
 			</div>
@@ -121,7 +103,7 @@ class FinalExamModal extends React.Component {
 			</div>
 		</div>
 	);
-}
+	}
 }
 
 class ClassInfo extends React.Component {
@@ -202,7 +184,7 @@ class UoTranscript extends React.Component {
 
 	render() {
 		var data = this.props.data;
-		var modalContent= "";
+		var modalContent = "";
 		if (data !== undefined) {
 			if (data.completedCourses.length !== 0) {
 				modalContent =
