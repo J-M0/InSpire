@@ -170,6 +170,21 @@ ul {
 	height: 4vh;
 }
 
+.modal-lg {
+	width: 60vw;
+}
+
+.modal-title {
+	color: #354066;
+	font-size: 2.8vh;
+}
+
+.nav-pills>li.active>a {
+  box-shadow:
+    inset 1px 2px 10px #4A677F,
+    inset -1px -2px 10px #4A677F;
+}
+
 .panel-body {
   padding: 4%;
 }
