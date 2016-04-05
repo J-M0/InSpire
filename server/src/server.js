@@ -21,6 +21,26 @@ app.post('/resetdb', function(req, res) {
 	res.send();
 });
 
+app.post('/search', function(req, res) {
+
+});
+
+app.post('/addclass', function(req, res) {
+
+});
+
+app.post('/dropclass', function(req, res) {
+
+});
+
+app.get('/courses/:courseid', function(req, res) {
+
+});
+
+app.get('/students/:studentid', function(req, res){
+
+});
+
 /**
  * Translate JSON Schema Validation failures into error 400s.
  * THIS MUST ALWAYS COME BEFORE app.listen() AND AFTER OUR ROUTES!
