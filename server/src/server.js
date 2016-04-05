@@ -21,6 +21,20 @@ app.post('/resetdb', function(req, res) {
 	res.send();
 });
 
+/**
+ * Translate JSON Schema Validation failures into error 400s.
+ * THIS MUST ALWAYS COME BEFORE app.listen() AND AFTER OUR ROUTES!
+ */
+ app.use(function(err, req, res, next) {
+	if (err.name === 'JsonSchemaValidation') {
+        // Set a bad request http response status
+		res.status(400).end();
+	} else {
+        // It's some other sort of error; pass it to next error middleware handler
+		next(err);
+	}
+});
+
 app.listen(3000, function() {
 	console.log('InSpire server listening on port 3000!');
 });
