@@ -5,6 +5,7 @@ var startupName = "InSPIRE, Inc.";
 var initialData = {
     "students": {
         "12345678": {
+            "_id": "12345678",
             "firstName": "Jason",
             "lastName": "Jackson",
             "gradYear": 2017,
@@ -23,6 +24,7 @@ var initialData = {
             "completedCourses": [["92819522", "A+"], ["12345678", "B-"]]
         },
         "27133668": {
+            "_id": "27133668",
             "firstName": "Christine",
             "lastName": "Thielen",
             "gradYear": 2018,
@@ -41,6 +43,7 @@ var initialData = {
             "completedCourses": []
         },
         "07894436": {
+            "_id": "07894436",
             "firstName": "James",
             "lastName": "Ensor",
             "gradYear": 2016,
@@ -62,21 +65,21 @@ var initialData = {
     // "Document" storing professors
     "professor": {
         "12345678": {
-            "id": "12345678",
+            "_id": "12345678",
             "firstName": "Verty",
             "lastName": "Verts",
             "office": "LGRT 300",
             "teaches": ["12345678", "18271821"]
         },
         "83719683": {
-            "id": "83719683",
+            "_id": "83719683",
             "firstName": "Jason",
             "lastName": "Derulo",
             "office": "LGRT 100",
             "teaches": ["92819522", "19103958"]
         },
         "23810589": {
-            "id": "23810589",
+            "_id": "23810589",
             "firstName": "Tim",
             "lastName": "Richards",
             "office": "CS 240",
@@ -86,6 +89,7 @@ var initialData = {
     // "Document" storing courses
     "courses": {
         "12345678": {
+            "_id": "12345678",
             "courseNumber": "COMPSCI 220",
             "courseName": "Programming Methodology",
             "section": 1,
@@ -102,6 +106,7 @@ var initialData = {
             "days": ["Monday","Wednesday","Friday"]
         },
         "92819522": {
+            "_id": "92819522",
             "courseNumber": "COMPSCI 230",
             "courseName": "Computer Systems Principles",
             "section": 1,
@@ -118,6 +123,7 @@ var initialData = {
             "days": ["Tuesday", "Thursday"]
         },
         "19103958": {
+            "_id": "19103958",
             "courseNumber": "COMPSCI 240",
             "courseName": "Reasoning About Uncertainty",
             "section": 2,
@@ -134,6 +140,7 @@ var initialData = {
             "days": ["Monday","Wednesday","Friday"]
         },
         "18271821": {
+            "_id": "18271821",
             "courseNumber": "COMPSCI 250",
             "courseName": "Introduction to Computation",
             "section": 2,
@@ -150,6 +157,7 @@ var initialData = {
             "days": ["Monday","Wednesday","Friday"]
         },
         "85938173": {
+            "_id": "85938173",
             "courseNumber": "COMPSCI 320",
             "courseName": "Software Engineering",
             "section": 3,
@@ -166,6 +174,7 @@ var initialData = {
             "days": ["Tuesday", "Thursday"]
         },
         "09876543": {
+            "_id": "09876543",
             "courseNumber": "COMPSCI 326",
             "courseName": "Web Programming",
             "section": 3,
@@ -182,6 +191,7 @@ var initialData = {
             "days": ["Tuesday", "Thursday"]
         },
         "08874563": {
+          "_id": "08874563",
           "courseNumber": "COMPSCI 373",
           "courseName": "Intro to Computer Graphics",
           "description": "This course introduces the fundamental concepts of 2D and 3D computer graphics. It covers the basic methods for modeling, rendering, and imaging. Topics include: image processing, digital photography, 2D/3D modeling, 3D graphics pipeline, OpenGL, shading, texture mapping, ray tracing, 3D printing. Throughout the class, we will teach students to learn modern graphics techniques, to model the visual world algorithmically, and to implement algorithms using Java. Students who have taken COMPSCI 473 are not eligible to take this course. Prerequisites: COMPSCI 187 (or ECE 242) and COMPSCI 190DM (or MATH 235 or COMPSCI 240 or equivalent courses from other departments).",
