@@ -76,8 +76,8 @@ class AvailableModal extends React.Component {
         <div>
           {this.state.available.map((courses, i) => { return(
             <button key={"btn"+i} type="button" className="course-modal-btn" onClick={(e, obj) => this.props.onClick(e, obj)}>
-							{courses.courseNumber} - {courses.courseName}
-						</button>
+              {courses.courseNumber} - {courses.courseName}
+            </button>
           );})}
         </div>;
     } else {

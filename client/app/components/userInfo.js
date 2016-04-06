@@ -39,9 +39,9 @@ class TranscriptButton extends React.Component {
   render() {
     if (this.props.data !== undefined) {
       var data = this.props.data;
-		}
+    }
 
-		if (this.props.id !== undefined) {
+    if (this.props.id !== undefined) {
       var modalId = "UnofficialTranscriptModal" + this.props.id;
     }
 
