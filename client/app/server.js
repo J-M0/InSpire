@@ -32,14 +32,14 @@ function sendXHR(verb, resource, body, cb) {
   xhr.timeout = 10000;
 
   // Network failure: Could not connect to server.
-  /*xhr.addEventListener('error', function() {
-    FacebookError('Could not ' + verb + " " + resource + ": Could not connect to the server.");
+  xhr.addEventListener('error', function() {
+    console.log('Could not ' + verb + " " + resource + ": Could not connect to the server.");
   });
 
   // Network failure: request took too long to complete.
   xhr.addEventListener('timeout', function() {
-    FacebookError('Could not ' + verb + " " + resource + ": Request timed out.");
-  }); */
+    console.log('Could not ' + verb + " " + resource + ": Request timed out.");
+  });
 
   switch (typeof(body)) {
     case 'undefined':
