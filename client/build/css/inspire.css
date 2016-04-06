@@ -54,30 +54,6 @@ ul {
   text-align: center;
 }
 
-.dimBg {
-  background: rgba(0,0,0,0.4);
-  display: block !important;
-}
-
-@keyframes fadeIn {
-  from {
-    top: -250px;
-    opacity: 0;
-  }
-  to {
-    top: 0px;
-    opacity: 1;
-  }
-}
-
-.myFade {
-  position: absolute;
-  opacity: 0;
-  left: 0px;
-  right: 0px;
-  animation: fadeIn 0.3s linear forwards;
-}
-
 .day {
   font-weight: bold;
   text-align: center;
@@ -157,26 +133,34 @@ ul {
 
 /*OVERWRITING BOOTSTRAP CSS*/
 .btn{
-	font-size: 1.6vh;
+  font-size: 1.6vh;
 }
 
 .checkbox input[type=checkbox] {
-	margin-top: 1px;
-	margin-left: -15px;
+  margin-top: 1px;
+  margin-left: -15px;
 }
 
 .form-control {
-	font-size: 1.6vh;
-	height: 4vh;
+  font-size: 1.6vh;
+  height: 4vh;
+}
+
+.modal-body > .panel-body {
+  padding: 0px 4%;
+}
+
+.modal-content {
+  max-height: 90vh;
 }
 
 .modal-lg {
-	width: 50vw;
+  width: 50vw;
 }
 
 .modal-title {
-	color: #354066;
-	font-size: 2.8vh;
+  color: #354066;
+  font-size: 2.8vh;
 }
 
 .nav-pills>li.active>a {
@@ -206,7 +190,7 @@ ul {
 }
 
 #calendar .col-md-3 .thumbnail:first-child {
-	height: 4%;
+  height: 4%;
 }
 
 #calendar .col-md-3:first-child > .thumbnail:first-child {
@@ -262,10 +246,10 @@ ul {
 #left-side {
   height: 100%;
   padding-right:0.8vw;
-	padding-left:0px;
-	margin-left: -1.0vw;
+  padding-left:0px;
+  margin-left: -1.0vw;
   width: 25.7%;
-	margin-right: 0.125vw;
+  margin-right: 0.125vw;
 }
 
 #logo {
@@ -290,19 +274,19 @@ ul {
 }
 
 #search-radios label {
-	margin-left: 0.5vw;
+  margin-left: 0.5vw;
 }
 
 #search-radios div:nth-child(2) input {
-	width: 17vw;
+  width: 17vw;
 }
 
 #search-radios div:nth-child(3) label {
-	width: 30%;
+  width: 30%;
 }
 
 #search-radios div:nth-child(3) input {
-	width: 50%;
+  width: 50%;
 }
 
 #shopping-cart {
@@ -356,18 +340,18 @@ ul {
 
 #rotate-container {
   transform: rotate(90deg);
-	position: absolute;
+  position: absolute;
   height: 15vh;
-	width: 20vh;
-	top: 40%;
+  width: 20vh;
+  top: 40%;
   left: 8vw;
   z-index: -1;
 }
 
 #rotate-chevron-container {
-	position: absolute;
-	top: 2vh;
-	right: 4.5vh;
+  position: absolute;
+  top: 2vh;
+  right: 4.5vh;
 }
 
 #userinfo {
@@ -392,12 +376,12 @@ ul {
   border-left: 5vh solid transparent;
   border-right: 5vh solid transparent;
   transform: scale(0.5, 0.5);
-	margin-top: -0.75vw;
+  margin-top: -0.75vw;
 }
 
 #trapezoid .glyphicon-chevron-down {
   color: white;
-	display: block;
-	padding-top: 0px;
-	right: 0px;
+  display: block;
+  padding-top: 0px;
+  right: 0px;
 }

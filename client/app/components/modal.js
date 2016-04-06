@@ -44,9 +44,7 @@ export default class Modal extends React.Component {
               <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 className="modal-title">{modalTitle}</h4>
             </div>
-            <div className="modal-body">
-              {modalContent}
-            </div>
+            {modalContent}
           </div>
         </div>
       </div>
@@ -81,23 +79,24 @@ class FinalExamModal extends React.Component {
   }
 
   return(
-    <div className="modal-body">
-      <div className="panel-body" style={{color:'#354066'}}>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Course</th>
-              <th>Location</th>
-            </tr>
-          </thead>
-          <tbody>
-            {modalContent}
-          </tbody>
-        </table>
+    <div>
+      <div className="modal-body">
+        <div className="panel-body" style={{color:'#354066'}}>
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Course</th>
+                <th>Location</th>
+              </tr>
+            </thead>
+            <tbody>
+              {modalContent}
+            </tbody>
+          </table>
+        </div>
       </div>
-
       <div className="modal-footer">
         <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
       </div>
@@ -126,52 +125,53 @@ class ClassInfo extends React.Component {
     }
 
     return (
-      <div className="modal-body">
-        <div className="panel-body" style={{color:'#354066'}}>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Number</th>
-                <th>Section</th>
-                <th>Units</th>
-                <th>Enrolled</th>
-                <th>Cap</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{data.courseNumber}</td>
-                <td>{data.section}</td>
-                <td>{data.credits}</td>
-                <td>{data.enrolled.length}</td>
-                <td>{data.capacity}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div>
+        <div className="modal-body">
+          <div className="panel-body" style={{color:'#354066'}}>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Number</th>
+                  <th>Section</th>
+                  <th>Units</th>
+                  <th>Enrolled</th>
+                  <th>Cap</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{data.courseNumber}</td>
+                  <td>{data.section}</td>
+                  <td>{data.credits}</td>
+                  <td>{data.enrolled.length}</td>
+                  <td>{data.capacity}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-        <div className="panel-body" style={{color:'#354066'}}>
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Time</th>
-                <th>Room</th>
-                <th>Instructor</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{data.courseName}</td>
-                <td>{this.getDays()} <br/> {start} - {end}</td>
-                <td>{data.location}</td>
-                <td>{name}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="panel-body" style={{color:'#354066'}}>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Time</th>
+                  <th>Room</th>
+                  <th>Instructor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{data.courseName}</td>
+                  <td>{this.getDays()} <br/> {start} - {end}</td>
+                  <td>{data.location}</td>
+                  <td>{name}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div className="panel-body" style={{color:'#354066'}}>{data.description}</div>
         </div>
-        <div className="panel-body" style={{color:'#354066'}}>{data.description}</div>
-
         <div className="modal-footer">
           <button type="button" className="btn btn-primary">Add Class</button>
           <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -223,21 +223,22 @@ class UoTranscript extends React.Component {
     }
     
     return(
-      <div className="modal-body">
-        <div className="panel-body" style={{color:'#354066'}}>
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th>Course</th>
-                <th>Grade</th>
-              </tr>
-            </thead>
-            <tbody>
-              {modalContent}
-            </tbody>
-          </table>
+      <div>
+        <div className="modal-body">
+          <div className="panel-body" style={{color:'#354066'}}>
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th>Course</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody>
+                {modalContent}
+              </tbody>
+            </table>
+          </div>
         </div>
-
         <div className="modal-footer">
           <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
         </div>
