@@ -10,20 +10,68 @@ function emulateServerReturn(data, cb) {
   }, 4);
 }
 
-export function getStudentInfo(id, cb) {
-  var student = readDocument('students', id);
-  emulateServerReturn(student, cb);
+/**
+ * Properly configure+send an XMLHttpRequest with error handling, authorization token,
+ * and other needed properties.
+ */
+function sendXHR(verb, resource, body, cb) {
+  var xhr = new XMLHttpRequest();
+  xhr.open(verb, resource);
+
+  xhr.addEventListener('load', function() {
+    var statusCode = xhr.status;
+    //var statusText = xhr.statusText;
+    if (statusCode >= 200 && statusCode < 300) {
+      // Success: Status code is in the [200, 300) range.
+      // Call the callback with the final XHR object.
+      cb(xhr);
+    }
+  });
+
+  // Time out the request if it takes longer than 10,000 milliseconds (10 seconds)
+  xhr.timeout = 10000;
+
+  // Network failure: Could not connect to server.
+  /*xhr.addEventListener('error', function() {
+    FacebookError('Could not ' + verb + " " + resource + ": Could not connect to the server.");
+  });
+
+  // Network failure: request took too long to complete.
+  xhr.addEventListener('timeout', function() {
+    FacebookError('Could not ' + verb + " " + resource + ": Request timed out.");
+  }); */
+
+  switch (typeof(body)) {
+    case 'undefined':
+      // No body to send.
+      xhr.send();
+      break;
+    case 'string':
+      // Tell the server we are sending text.
+      xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+      xhr.send(body);
+      break;
+    case 'object':
+      // Tell the server we are sending JSON.
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      // Convert body into a JSON string.
+      xhr.send(JSON.stringify(body));
+      break;
+    default:
+      throw new Error('Unknown body type: ' + typeof(body));
+  }
 }
 
-export function getEnrolledCourses(user, cb) {
-  var student = readDocument('students', user);
+export function getStudentInfo(id, cb) {
+  sendXHR('GET', '/students/'+id, undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText))
+  });
+}
 
-	if (student !== null) {
-		for (var i = 0, courses=[]; i < student.enrolledCourses.length; i++) {
-			courses.push(readDocument('courses', student.enrolledCourses[i]));
-		}
-	}
-  emulateServerReturn(courses, cb);
+export function getEnrolledCourses(id, cb) {
+  sendXHR('GET', 'students/'+id+'/enrolled', undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText))
+  });
 }
 
 export function enrollInClass(studentId, courseId, cb) {
@@ -98,7 +146,7 @@ export function getSearchResults(searchOptions, cb) {
 }
 
 // gets available courses
-export function queryCourses(day, start, end, cb) {
+export function getAvailableCourses(day, start, end, cb) {
 	var available = [];
 	var courses = readDocuments('courses');
 
