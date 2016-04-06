@@ -7,6 +7,10 @@
       "id": "classNum",
       "type": "string"
     },
+    "classNumOps": {
+      "id": "classNumOps",
+      "type": "string"
+    },
     "genEdCat": {
       "id": "genEdCat",
       "type": "string"
@@ -35,6 +39,7 @@
   "additionalProperties": false,
   "required": [
     "classNum",
+    "classNumOps",
     "genEdCat",
     "instructionMode",
     "keyword",

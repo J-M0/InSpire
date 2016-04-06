@@ -9,6 +9,7 @@ export default class SearchRadios extends React.Component {
       "seatsAvail": form.seats.checked,
       "keyword": form.keyword.value,
       "classNum": form.classNum.value,
+      "classNumOps": form.classNumOps.value,
       "subject": form.subject.value,
       "genEdCat": form.genEdCat.value,
       "session": form.session.value,
@@ -31,7 +32,7 @@ export default class SearchRadios extends React.Component {
           </div>
           <div className="form-group">
             <label htmlFor="classNum">Class Number:</label>
-            <select className="form control" id="course-num-ops">
+            <select className="form control" id="classNumOps">
               <option>{"="}</option>
               <option>&gt;=</option>
             </select>
