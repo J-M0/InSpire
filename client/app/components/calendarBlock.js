@@ -4,13 +4,7 @@ import {getStudentInfo, getEnrolledCourses, getAvailableCourses} from '../server
 import timeToString from '../util';
 
 // list of days used for rendering the calendar
-var days = [
-  {"day" : "Monday"},
-  {"day" : "Tuesday"},
-  {"day" : "Wednesday"},
-  {"day" : "Thursday"},
-  {"day" : "Friday"}
-];
+var days = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
 
 // 55 minute times for calendar
 var default55Times = [
@@ -118,6 +112,14 @@ class CalendarBlock extends React.Component {
     });
   }
 
+  componentDidMount() {
+    getAvailableCourses(this.state.day, this.state.start, this.state.end, (available) => {
+      this.setState({available});
+    });
+    this.setState({showModal : false});
+    this.setState({courseInfoToggle: false});
+  }
+
   // define refresh behavior, refreshes student info
   refresh() {
     if (this.state.flag !== undefined)
@@ -192,15 +194,6 @@ class CalendarBlock extends React.Component {
       </div>
     );
   }
-
-  // called once
-  componentDidMount() {
-    getAvailableCourses(this.state.day, this.state.start, this.state.end, (available) => {
-      this.setState({available});
-    });
-    this.setState({showModal : false});
-    this.setState({courseInfoToggle: false});
-  }
 }
 
 /**
@@ -211,6 +204,10 @@ export default class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = props;
+  }
+
+  componentDidMount() {
+    this.refresh();
   }
 
   refresh() {
@@ -225,24 +222,22 @@ export default class Calendar extends React.Component {
   render() {
     return (
       <div className="row" style={{height: '100%'}}>
-        {days.map((obj, i) => {
+        {days.map((d, i) => {
           switch(i) {
             case 0: case 2: case 4:
               return (
-                <div key={"col" + i} className="col-md-3" id={obj.day} style={{height: '100%'}}>
-                  <CalendarBlock type="day" text={obj.day} />
+                <div key={"col" + i} className="col-md-3" id={d} style={{height: '100%'}}>
+                  <CalendarBlock type="day" text={d} />
                   {default55Times.map((time, i) => {
                     if (this.state.userInfo !== undefined && i%2 === 0) {
-                      return(<CalendarBlock userId={this.props.params.id} key={"MWF" + i/2} type="time-55"
-                              start={default55Times[i]} end={default55Times[i+1]} day={obj.day}/>);
+                      return(<CalendarBlock userId={this.props.params.id} key={"MWF" + i/2} type="time-55" start={default55Times[i]} end={default55Times[i+1]} day={d}/>);
                     }
                   })}
 
                   {default75Times.map((time, i) => {
                     if (i > 6) {
                       if (this.state.userInfo !== undefined && i%2 === 0) {
-                        return(<CalendarBlock userId={this.props.params.id} key={"MWF-Long" + i/2} type="time-75"
-                                start={default75Times[i]} end={default75Times[i+1]} day={obj.day}/>);
+                        return(<CalendarBlock userId={this.props.params.id} key={"MWF-Long" + i/2} type="time-75" start={default75Times[i]} end={default75Times[i+1]} day={d}/>);
                       }
                     }
                   })}
@@ -250,12 +245,11 @@ export default class Calendar extends React.Component {
               );
             case 1: case 3:
             return (
-              <div key={"col" + i} className="col-md-3" id={obj.day}>
-                <CalendarBlock type="day" text={obj.day} />
+              <div key={"col" + i} className="col-md-3" id={d}>
+                <CalendarBlock type="day" text={d} />
                 {default75Times.map((time, i) => {
                   if (this.state.userInfo !== undefined && i%2 === 0) {
-                    return(<CalendarBlock userId={this.props.params.id} key={"TTh" + i/2} type="time-75"
-                            start={default75Times[i]} end={default75Times[i+1]} day={obj.day}/>);
+                    return(<CalendarBlock userId={this.props.params.id} key={"TTh" + i/2} type="time-75" start={default75Times[i]} end={default75Times[i+1]} day={d}/>);
                   }
                 })}
               </div>
@@ -264,9 +258,5 @@ export default class Calendar extends React.Component {
         })}
       </div>
     );
-  }
-
-  componentDidMount() {
-    this.refresh();
   }
 }
