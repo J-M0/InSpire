@@ -181,24 +181,23 @@ class ClassInfo extends React.Component {
 }
 
 class UoTranscript extends React.Component {
-
 	render() {
 		var data = this.props.data;
 		var modalContent = "";
 		if (data !== undefined) {
 			if (data.completedCourses.length !== 0) {
-				modalContent =
-				data.completedCourses.map((tuples, i) => {
-					return(
-						<tr key={"tr"+i}>
-							<td>{tuples[0]}</td>
-							<td>{tuples[1]}</td>
-						</tr>
-					);
-				}
-			)
+				modalContent = data.completedCourses.map((tuples, i) => {
+					// Print statement for debugging
+					//console.log(tuples);
+						return(
+							<tr key={"tr"+i}>
+								<td>{tuples[0]}</td>
+								<td>{tuples[1]}</td>
+							</tr>
+						);
+				})
+			}
 		}
-	}
 
 	return(
 		<div className="modal-body">

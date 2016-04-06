@@ -36,17 +36,15 @@ class FinalExamButton extends React.Component {
 }
 
 class TranscriptButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = props;
-  }
-
-  render()
-  {
-    if (this.state !== undefined){
+  render() {
+    if (this.props.data !== undefined) {
       var data = this.props.data;
-      var modalId = "UnofficialTranscriptModal" + this.state.id;
+		}
+
+		if (this.props.id !== undefined) {
+      var modalId = "UnofficialTranscriptModal" + this.props.id;
     }
+
     return(
       <div>
         <a data-toggle="modal" href={"#" + modalId}>Unofficial Transcript</a>
@@ -60,17 +58,9 @@ export default class UserInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = props;
-  }
-
-  refresh() {
-    if (this.props.params !== undefined)
     getStudentInfo(this.props.params.id, (userInfo) => {
       this.setState({info:userInfo});
     });
-  }
-
-  componentDidMount(){
-    this.refresh();
   }
 
   render() {

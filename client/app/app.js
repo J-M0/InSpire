@@ -4,7 +4,7 @@ import Calendar from './components/calendarBlock';
 /*import SideNav from './components/navbar';*/
 import ShoppingCart from './components/shoppingCart';
 import ClassInfo from './components/classInfo';
-import UserInfo from './components/UserInfo';
+import UserInfo from './components/userInfo';
 import SearchPanel from './components/searchPanel';
 import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
