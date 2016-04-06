@@ -2,6 +2,7 @@ import React from 'react';
 import ClassInfo from './classInfo';
 import {getStudentInfo, getEnrolledCourses, getAvailableCourses} from '../server';
 import timeToString from '../util';
+import Modal from './modal';
 
 // list of days used for rendering the calendar
 var days = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
@@ -33,7 +34,6 @@ var default75Times = [
   * gets the course from the parent CalendarBlock, formats the info, and displays
   */
 class CourseButton extends React.Component {
-
   handleClick(e) {
     e.preventDefault();
   }
@@ -41,7 +41,7 @@ class CourseButton extends React.Component {
   render() {
     var course = this.props.enrolledcourse;
     return(
-      <button type="button" className="btn btn-block btn-primary cal-btn" onClick={(e) => this.handleClick(e)}>
+      <button type="button" className="btn btn-block btn-primary cal-btn" onClick={(e) => this.handleClick(e)} data-toggle="modal" data-target={"#"+this.props.target}>
         <span>{timeToString(course.start) + " - " + timeToString(course.end)}</span>
         <span>{course.courseNumber}</span>
         <br/>
@@ -159,14 +159,14 @@ class CalendarBlock extends React.Component {
       var end   = this.state.end;
       // if we are enrolled in a course at this time we need a button!
       if(this.state.enrolled !== undefined) {
-        this.state.enrolled.map((enrolled) => {
+        this.state.enrolled.map((enrolled, i) => {
           // The available course list is a superset of enrolled course list
           if (this.state.available !== undefined)
-            this.state.available.map((available) => {
+            this.state.available.map((available, j) => {
               if (enrolled.courseNumber === available.courseNumber) {
                 // pass the relevant course info to the button if we find it and then create it
-                content = <CourseButton enrolledcourse={enrolled}/>;
-                modal = (this.state.showModal) ? <ClassInfo data={enrolled} custom={true}/> : undefined;
+                content = <CourseButton enrolledcourse={enrolled} target={this.props.day+i+j}/>;
+								modal = <Modal type="ClassInformation" data={enrolled} id={this.props.day+i+j} />;
               }
             })
         })
