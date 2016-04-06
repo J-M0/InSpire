@@ -10,6 +10,8 @@ function emulateServerReturn(data, cb) {
   }, 4);
 }
 
+var token = '';
+
 /**
  * Properly configure+send an XMLHttpRequest with error handling, authorization token,
  * and other needed properties.
@@ -17,6 +19,7 @@ function emulateServerReturn(data, cb) {
 function sendXHR(verb, resource, body, cb) {
   var xhr = new XMLHttpRequest();
   xhr.open(verb, resource);
+  xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 
   xhr.addEventListener('load', function() {
     var statusCode = xhr.status;
