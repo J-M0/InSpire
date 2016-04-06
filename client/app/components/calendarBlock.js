@@ -34,14 +34,10 @@ var default75Times = [
   * gets the course from the parent CalendarBlock, formats the info, and displays
   */
 class CourseButton extends React.Component {
-  handleClick(e) {
-    e.preventDefault();
-  }
-
   render() {
     var course = this.props.enrolledcourse;
     return(
-      <button type="button" className="btn btn-block btn-primary cal-btn" onClick={(e) => this.handleClick(e)} data-toggle="modal" data-target={"#"+this.props.target}>
+      <button type="button" className="btn btn-block btn-primary cal-btn" data-toggle="modal" data-target={"#"+this.props.target}>
         <span>{timeToString(course.start) + " - " + timeToString(course.end)}</span>
         <span>{course.courseNumber}</span>
         <br/>
@@ -57,31 +53,27 @@ class CourseButton extends React.Component {
   * courses, courses link to the CourseInfo modal
   */
 class AvailableModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = props;
-  }
-
-  // display it
   render() {
     var body;
-    if (this.state.available.length !== 0) {
+    if (this.props.available !== undefined && this.props.available.length !== 0) {
       body =
-        <div>
-          {this.state.available.map((courses, i) => { return(
-            <button key={"btn"+i} type="button" className="course-modal-btn" onClick={(e, obj) => this.props.onClick(e, obj)}>
-              {courses.courseNumber} - {courses.courseName}
-            </button>
-          );})}
+        <div data-toggle="modal" data-target={"#"+this.props.id}>
+          {this.props.available.map((course, i) => { 
+            return(
+              <button key={"btn"+i} type="button" className="course-modal-btn" data-toggle="modal" data-target={"#"+this.props.id+i}>
+                {course.courseNumber} - {course.courseName}
+              </button>
+            );
+          })}
         </div>;
     } else {
       body = <span style={{fontWeight: "bold"}}>There are no courses available for this time slot.</span>;
     }
 
     return(
-      <div id="testModal" className="modal dimBg" role="dialog">
-        <div className="modal-dialog">
-          <div className="modal-content myFade">
+      <div id={this.props.id} className="modal fade" role="dialog">
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
             <div className="modal-header">
               <h4 className="modal-title">Available Courses</h4>
             </div>
@@ -103,92 +95,53 @@ class AvailableModal extends React.Component {
   * represents a time slot on the calendar
   */
 class CalendarBlock extends React.Component {
-  // gets the enrolled courses using the server and sets to enrolled
   constructor(props) {
     super(props);
     this.state = props;
     getEnrolledCourses(this.state.userId, (enrolled) => {
       this.setState({enrolled});
     });
-  }
-
-  componentDidMount() {
     getAvailableCourses(this.state.day, this.state.start, this.state.end, (available) => {
       this.setState({available});
     });
-    this.setState({showModal : false});
-    this.setState({courseInfoToggle: false});
   }
 
-  // define refresh behavior, refreshes student info
-  refresh() {
-    getStudentInfo(this.state.userId, (userInfo) => {
-      this.setState({userInfo});
-    });
-  }
-
-  // define click behavior, displays AvailableModal when clicked
-  handleClick(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    var bang = !this.state.showModal;
-    this.setState({ showModal: bang});
-    this.refresh();
-  }
-
-  switchModals(e, i) {
-    e.preventDefault();
-    e.stopPropagation();
-    if (this.state.courseInfoToggle === false) {
-      this.setState({courseInfoToggle:i});
-    } else {
-      this.setState({courseInfoToggle:false});
-    }
-  }
-
-  // display it
   render() {
     var content = this.state.text;
+    var type = "thumbnail " + this.state.type;
     var modal;
+    if(this.state.available !== undefined)
+      modal = 
+        <div>
+          {this.state.available.map((course, i) => {
+            return(<Modal key={"modal"+i} type="ClassInformation" data={course} id={this.state.id+i} />)
+          })}
+          <AvailableModal available={this.state.available} id={this.state.id}/>
+        </div>
 
     // if no content, display regular CalendarBlock times
     if (content === undefined) {
       var start = this.state.start;
       var end   = this.state.end;
-      // if we are enrolled in a course at this time we need a button!
       if(this.state.enrolled !== undefined) {
         this.state.enrolled.map((enrolled, i) => {
-          // The available course list is a superset of enrolled course list
           if (this.state.available !== undefined)
             this.state.available.map((available, j) => {
               if (enrolled.courseNumber === available.courseNumber) {
-                // pass the relevant course info to the button if we find it and then create it
                 content = <CourseButton enrolledcourse={enrolled} target={this.state.id}/>;
                 modal = <Modal type="ClassInformation" data={enrolled} id={this.state.id} />;
               }
             })
         })
       }
-
-      // get the modal content if necessary
-      if (this.state.showModal !== undefined) {
-        if (modal === undefined) {
-          modal = (this.state.showModal) ? <AvailableModal available={this.state.available} onClick={(e, obj)=>this.switchModals(e, obj)}/> : undefined;
-        }
-        if (this.state.courseInfoToggle !== false) {
-          modal = <ClassInfo data={this.state.available[this.state.courseInfoToggle.slice(-1)]} onClick={(e, obj) => this.switchModals(e, obj)} custom={true}/>;
-        }
-      }
-
-      // ternary operator, displays content if we have it where content is possibly a CourseButton, if not displays time
       content = (content === undefined) ? timeToString(start) + " - " + timeToString(end) : content;
     }
 
-    var type = "thumbnail " + this.state.type;
     return (
-      <div className={type} onClick={(e) => this.handleClick(e)}>
-          {modal}
-          {content}
+      <div className={type}>
+        {modal}
+        {content}
+        <div style={{height: "80%", width: "100%"}} data-toggle="modal" data-target={"#"+this.state.id}/>
       </div>
     );
   }
