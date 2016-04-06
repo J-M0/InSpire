@@ -122,8 +122,6 @@ class CalendarBlock extends React.Component {
 
   // define refresh behavior, refreshes student info
   refresh() {
-    if (this.state.flag !== undefined)
-      this.state.flag(this.state);
     getStudentInfo(this.state.userId, (userInfo) => {
       this.setState({userInfo});
     });
@@ -165,8 +163,8 @@ class CalendarBlock extends React.Component {
             this.state.available.map((available, j) => {
               if (enrolled.courseNumber === available.courseNumber) {
                 // pass the relevant course info to the button if we find it and then create it
-                content = <CourseButton enrolledcourse={enrolled} target={this.props.day+i+j}/>;
-								modal = <Modal type="ClassInformation" data={enrolled} id={this.props.day+i+j} />;
+                content = <CourseButton enrolledcourse={enrolled} target={this.state.id}/>;
+                modal = <Modal type="ClassInformation" data={enrolled} id={this.state.id} />;
               }
             })
         })
@@ -230,14 +228,20 @@ export default class Calendar extends React.Component {
                   <CalendarBlock type="day" text={d} />
                   {default55Times.map((time, i) => {
                     if (this.state.userInfo !== undefined && i%2 === 0) {
-                      return(<CalendarBlock userId={this.props.params.id} key={"MWF" + i/2} type="time-55" start={default55Times[i]} end={default55Times[i+1]} day={d}/>);
+                      return(
+                        <CalendarBlock userId={this.props.params.id} key={"MWF" + i/2} id={"MWF" + i/2}
+                          type="time-55" start={default55Times[i]} end={default55Times[i+1]} day={d}/>
+                      );
                     }
                   })}
 
                   {default75Times.map((time, i) => {
                     if (i > 6) {
                       if (this.state.userInfo !== undefined && i%2 === 0) {
-                        return(<CalendarBlock userId={this.props.params.id} key={"MWF-Long" + i/2} type="time-75" start={default75Times[i]} end={default75Times[i+1]} day={d}/>);
+                        return(
+                          <CalendarBlock userId={this.props.params.id} key={"MWF-Long" + i/2} id={"MWF-Long" + i/2}
+                            type="time-75" start={default75Times[i]} end={default75Times[i+1]} day={d}/>
+                        );
                       }
                     }
                   })}
@@ -249,7 +253,10 @@ export default class Calendar extends React.Component {
                 <CalendarBlock type="day" text={d} />
                 {default75Times.map((time, i) => {
                   if (this.state.userInfo !== undefined && i%2 === 0) {
-                    return(<CalendarBlock userId={this.props.params.id} key={"TTh" + i/2} type="time-75" start={default75Times[i]} end={default75Times[i+1]} day={d}/>);
+                    return(
+                      <CalendarBlock userId={this.props.params.id} key={"TTh" + i/2} id={"TTh" + i/2}
+                        type="time-75" start={default75Times[i]} end={default75Times[i+1]} day={d}/>
+                    );
                   }
                 })}
               </div>
