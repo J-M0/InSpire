@@ -6,6 +6,7 @@ import ShoppingCart from './components/shoppingCart';
 import ClassInfo from './components/classInfo';
 import UserInfo from './components/userInfo';
 import SearchPanel from './components/searchPanel';
+import ErrorBanner from './components/errorbanner';
 import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
 /**
@@ -23,6 +24,11 @@ class App extends React.Component {
       <div className="row" id="top_container">
 
         {/*this.props.SideNav*/}
+
+            <div className="col-md-12">
+              <ErrorBanner />
+            </div>
+
 
         <div className="col-md-3" id="left-side">
           {this.props.UserInfo}

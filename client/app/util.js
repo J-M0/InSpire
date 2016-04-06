@@ -22,3 +22,11 @@ export default function dateToString(time) {
 	}
 	return time.substring(0, time.indexOf(":")+3).replace(/^0+/, '');
 }
+
+export function hideElement(shouldHide) {
+  if (shouldHide) {
+    return 'hidden';
+  } else {
+    return '';
+  }
+}
