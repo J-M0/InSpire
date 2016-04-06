@@ -7,6 +7,7 @@ var database = require('./database');
 var readDocument = database.readDocument;
 var writeDocument = database.writeDocument;
 var addDocument = database.addDocument;
+var SearchOptionsSchema = require('./schemas/searchOptions.json');
 
 var app = express();
 app.use(bodyParser.text());
@@ -21,8 +22,23 @@ app.post('/resetdb', function(req, res) {
 	res.send();
 });
 
-app.post('/search', function(req, res) {
+app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) {
+	var body = req.body;
 
+	var userid = req.params.userid;
+	var fromUser = getUserIdFromToken(req.get('Authorization'));
+
+	// if(userid === fromUser) {
+		var results = [ '12345678', '92819522', '19103958', '18271821', '85938173', '09876543', '08874563'];
+		var courses = results.map((course) => readDocument('courses', course));
+		for(var i = 0; i < results.length; i++) {
+			courses[i].instructor = readDocument('professor', courses[i].instructor);
+		}
+
+		res.send(courses);
+	// } else {
+	// 	res.send(401).end();
+	// }
 });
 
 app.post('/addclass', function(req, res) {

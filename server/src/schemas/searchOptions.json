@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/",
+  "type": "object",
+  "properties": {
+    "classNum": {
+      "id": "classNum",
+      "type": "string"
+    },
+    "genEdCat": {
+      "id": "genEdCat",
+      "type": "string"
+    },
+    "instructionMode": {
+      "id": "instructionMode",
+      "type": "string"
+    },
+    "keyword": {
+      "id": "keyword",
+      "type": "string"
+    },
+    "seatsAvail": {
+      "id": "seatsAvail",
+      "type": "boolean"
+    },
+    "session": {
+      "id": "session",
+      "type": "string"
+    },
+    "subject": {
+      "id": "subject",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "classNum",
+    "genEdCat",
+    "instructionMode",
+    "keyword",
+    "seatsAvail",
+    "session",
+    "subject"
+  ]
+}
