@@ -136,13 +136,9 @@ export function getCourseInfo(courseId, cb) {
 }
 
 export function getSearchResults(searchOptions, cb) {
-    var results = [ '12345678', '92819522', '19103958', '18271821', '85938173', '09876543', '08874563'];
-    var courses = results.map((course) => readDocument('courses', course));
-    for(var i = 0; i < results.length; i++) {
-        courses[i].instructor = readDocument('professor', courses[i].instructor);
-    }
-
-    emulateServerReturn(courses, cb);
+    sendXHR('POST', '/search', searchOptions, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
+    });
 }
 
 // gets available courses
