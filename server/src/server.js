@@ -38,6 +38,7 @@ app.get('/courses/:courseid', function(req, res) {
 });
 
 // add me to error handling
+// This should not happen anymore
 app.get('/students/undefined/enrolled', function(req, res) {
 
 });

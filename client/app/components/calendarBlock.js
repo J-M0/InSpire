@@ -98,9 +98,10 @@ class CalendarBlock extends React.Component {
   constructor(props) {
     super(props);
     this.state = props;
-    getEnrolledCourses(this.state.userId, (enrolled) => {
-      this.setState({enrolled});
-    });
+    if (this.state.userId !== undefined)
+      getEnrolledCourses(this.state.userId, (enrolled) => {
+        this.setState({enrolled});
+      });
     getAvailableCourses(this.state.day, this.state.start, this.state.end, (available) => {
       this.setState({available});
     });
