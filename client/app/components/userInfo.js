@@ -37,18 +37,19 @@ class FinalExamButton extends React.Component {
 
 class TranscriptButton extends React.Component {
   render() {
-    if (this.props.data !== undefined) {
-      var data = this.props.data;
-    }
+    var modal;
 
-    if (this.props.id !== undefined) {
+    // Do not create the modal until we have the proper data
+    if (this.props.data !== undefined && this.props.id !== undefined) {
+      var data = this.props.data;
       var modalId = "UnofficialTranscriptModal" + this.props.id;
+      modal = <Modal data={data} type="UnofficialTranscript" id={modalId} />
     }
 
     return(
       <div>
         <a data-toggle="modal" href={"#" + modalId}>Unofficial Transcript</a>
-        <Modal data={data} type="UnofficialTranscript" id={modalId} />
+        {modal}
       </div>
     );
   }

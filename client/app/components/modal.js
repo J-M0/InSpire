@@ -13,32 +13,32 @@ export default class Modal extends React.Component {
     var modalTitle;
     switch (modalType) {
       case "ClassInformation":
-      modalContent = <ClassInfo data={data} />;
-      modalTitle = "Class Information";
-      break;
+        modalContent = <ClassInfo data={data} />;
+        modalTitle = "Class Information";
+        break;
       case "UnofficialTranscript":
-      modalContent = <UoTranscript data={data} />;
-      modalTitle = "Unofficial Transcript";
-      break;
+        modalContent = <UoTranscript data={data} />;
+        modalTitle = "Unofficial Transcript";
+        break;
       case "FinalExamSchedule":
-      modalContent = <FinalExamModal data={data} />;
-      modalTitle = "Final Exam Schedule";
-      break;
+        modalContent = <FinalExamModal data={data} />;
+        modalTitle = "Final Exam Schedule";
+        break;
       case "TimeSelection":
-      modalContent = "Time Selection";
-      modalTitle = "Time Selection";
-      break;
+        modalContent = "Time Selection";
+        modalTitle = "Time Selection";
+        break;
       case "AvailableCourses":
-      modalContent = "Available Courses";
-      modalTitle = "Available Courses";
-      break;
+        modalContent = "Available Courses";
+        modalTitle = "Available Courses";
+        break;
       default:
-      break;
+        ;
     }
 
     return (
       <div className="modal fade" role="dialog" id={modalId}>
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-lg">
           <div className="modal-content">
             <div className="modal-header">
               <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -181,44 +181,66 @@ class ClassInfo extends React.Component {
 }
 
 class UoTranscript extends React.Component {
+  constructor(props) {
+		// Typical constructor stuff
+    super(props);
+    this.state = props;
+
+    var transcript = [];		// temp variable
+
+		// Since we know that props is not undefined (if you aren't sure,
+		// refer to userInfo.js), we can do the below!
+		
+		// Iterate over the completed courses, if there are none (i.e.
+		// completedCourses.length === 0, this does nothing.
+    this.state.data.completedCourses.map((tuples, i) => {
+      var courseAndGrade = [];		// Another temp variable
+			// Server-Database query for each completedCourse
+      getCourseInfo(tuples[0], (klass) => {
+				// Push to the tuple
+        courseAndGrade.push(klass.courseNumber + " " + klass.courseName);
+        courseAndGrade.push(tuples[1]);
+				// Push tuple to transcript array
+        transcript.push(courseAndGrade);
+				// Set this asynchronously, which is perfectly fine
+        this.setState({transcript: transcript});
+      });
+    });
+  }
+
   render() {
-    var data = this.props.data;
-    var modalContent = "";
-    if (data !== undefined) {
-      if (data.completedCourses.length !== 0) {
-        modalContent = data.completedCourses.map((tuples, i) => {
-          // Print statement for debugging
-          //console.log(tuples);
-            return(
-              <tr key={"tr"+i}>
-                <td>{tuples[0]}</td>
-                <td>{tuples[1]}</td>
-              </tr>
-            );
-        })
-      }
+    var modalContent;
+    if (this.state.transcript !== undefined) { 
+      modalContent = this.state.transcript.map((tuples, i) => {
+        return (
+          <tr key={"tr"+i}>
+            <td>{tuples[0]}</td>
+            <td>{tuples[1]}</td>
+          </tr>
+        );
+      });
     }
+    
+    return(
+      <div className="modal-body">
+        <div className="panel-body" style={{color:'#354066'}}>
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>Course</th>
+                <th>Grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              {modalContent}
+            </tbody>
+          </table>
+        </div>
 
-  return(
-    <div className="modal-body">
-      <div className="panel-body" style={{color:'#354066'}}>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Course</th>
-              <th>Grade</th>
-            </tr>
-          </thead>
-          <tbody>
-            {modalContent}
-          </tbody>
-        </table>
+        <div className="modal-footer">
+          <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
       </div>
-
-      <div className="modal-footer">
-        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  );
-}
+    );
+  }
 }
