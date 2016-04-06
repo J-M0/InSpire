@@ -124,6 +124,7 @@ class ClassInfo extends React.Component {
     if (data.instructor.firstName !== undefined) {
       var name = data.instructor.firstName.concat(" ", data.instructor.lastName);
     }
+
     return (
       <div className="modal-body">
         <div className="panel-body" style={{color:'#354066'}}>
@@ -182,27 +183,27 @@ class ClassInfo extends React.Component {
 
 class UoTranscript extends React.Component {
   constructor(props) {
-		// Typical constructor stuff
+    // Typical constructor stuff
     super(props);
     this.state = props;
 
-    var transcript = [];		// temp variable
+    var transcript = [];    // temp variable
 
-		// Since we know that props is not undefined (if you aren't sure,
-		// refer to userInfo.js), we can do the below!
-		
-		// Iterate over the completed courses, if there are none (i.e.
-		// completedCourses.length === 0, this does nothing.
+    // Since we know that props is not undefined (if you aren't sure,
+    // refer to userInfo.js), we can do the below!
+    
+    // Iterate over the completed courses, if there are none (i.e.
+    // completedCourses.length === 0, this does nothing.
     this.state.data.completedCourses.map((tuples, i) => {
-      var courseAndGrade = [];		// Another temp variable
-			// Server-Database query for each completedCourse
+      var courseAndGrade = [];    // Another temp variable
+      // Server-Database query for each completedCourse
       getCourseInfo(tuples[0], (klass) => {
-				// Push to the tuple
+        // Push to the tuple
         courseAndGrade.push(klass.courseNumber + " " + klass.courseName);
         courseAndGrade.push(tuples[1]);
-				// Push tuple to transcript array
+        // Push tuple to transcript array
         transcript.push(courseAndGrade);
-				// Set this asynchronously, which is perfectly fine
+        // Set this asynchronously, which is perfectly fine
         this.setState({transcript: transcript});
       });
     });
