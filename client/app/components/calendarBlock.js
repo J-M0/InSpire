@@ -1,6 +1,6 @@
 import React from 'react';
 import {getStudentInfo, getEnrolledCourses, getAvailableCourses} from '../server';
-import timeToString from '../util';
+import {timeToString} from '../util';
 import Modal from './modal';
 
 // list of days used for rendering the calendar
