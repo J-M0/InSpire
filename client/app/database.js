@@ -281,7 +281,8 @@ export function resetDatabase() {
  export class ResetDatabase extends React.Component {
    render() {
      return (
-       <button className="btn btn-default" type="button" onClick={() => {
+       <div>
+       <a href="#" onClick={() => {
          var xhr = new XMLHttpRequest();
          xhr.open('POST', '/resetdb');
          xhr.addEventListener('load', function() {
@@ -289,7 +290,7 @@ export function resetDatabase() {
            document.location.reload(false);
          });
          xhr.send();
-       }}>Reset Mock DB</button>
+       }}>Reset Mock DB</a></div>
      );
    }
  }
