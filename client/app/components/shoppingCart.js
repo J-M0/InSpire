@@ -1,31 +1,37 @@
 import React from 'react';
+import Modal from './modal';
 import {getShoppingCart} from '../server';
 
 export default class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
     this.state = props;
+    this.setState({morInfo: false});
   }
 
   refresh() {
-    console.log("refreshed");
   }
 
   handleClick(e) {
     e.stopPropagation();
     e.preventDefault();
-    console.log("this is from the cart item");
     this.refresh();
   }
 
   render() {
-    var body
+    var body;
+
     if (this.state.cart !== undefined) {
       if (this.state.cart.length !== 0) {
         body =
         <div>
-          {this.state.cart.map((courses, i) => { return (
-            <li className="list-group-item shop-cart-item" key={i} onClick={(e) => this.handleClick(e)}>{courses.courseNumber} - {courses.courseName}</li>
+          {this.state.cart.map((courses, i) => { var v = i.toString(); return (
+            <div>
+              <li className="list-group-item shop-cart-item" key={i} onClick={(e) => this.handleClick(e)}>{courses.courseNumber} - {courses.courseName}
+                <span className="glyphicon glyphicon-remove pull-right shop-cart-item" style={{color: '#354066'}}></span>
+                <Modal type="ClassInformation" data={courses} id={"CourseInfoModal" + v}/>
+                <a className="btn shop-cart-item" key={i} data-toggle="modal" href={"#CourseInfoModal" + v} style={{textAlign: 'right', width: '100%', fontSize: '1.6vh'}}>...More info</a></li>
+            </div>
           );})}
         </div>
       } else {
@@ -54,6 +60,7 @@ export default class ShoppingCart extends React.Component {
   componentDidMount() {
     getShoppingCart(this.props.params.id, (cart) =>  {
       this.setState({cart});
+      this.setState({moreInfo: !this.state.moreInfo});
     });
   }
 }

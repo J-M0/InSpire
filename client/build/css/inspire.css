@@ -1,5 +1,5 @@
 /*
- #354066; = dark blue, used for sidebar
+ #354066; = dark blue, used for everything
  #D5EDF5; = light blue, used for background
 */
 
@@ -92,7 +92,7 @@ ul {
 
 .shop-cart-item:hover {
   background-color: #354066;
-  color: white;
+  color: white !important;
 }
 
 .tab-content {
