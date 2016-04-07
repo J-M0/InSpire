@@ -112,6 +112,7 @@ app.post('/dropclass', function(req, res) {
 
 });
 
+// GET request for course information
 app.get('/courses/:courseid', function(req, res) {
   var course = readDocument('courses', req.params.courseid);
   course.instructor = readDocument('professor', course.instructor);
@@ -119,10 +120,25 @@ app.get('/courses/:courseid', function(req, res) {
   res.send(course);
 });
 
-// add me to error handling
-// This should not happen anymore
-app.get('/students/undefined/enrolled', function(req, res) {
+// GET request for available courses
+// May become more difficult when we extend functionality
+app.get('/courses/available/:day/:start', function(req, res) {
+  var available = [];
+  var courses = database.getCollection('courses');
 
+  var blockStart = new Date(req.params.start);
+  for (var i in courses) {
+    var courseStart = new Date(courses[i].start);
+    var courseEnd   = new Date(courses[i].end);
+    courses[i].days.map((d) => {
+      if (req.params.day === d) {
+        if (courseStart <= blockStart && courseEnd >= blockStart) {
+          available.push(courses[i]);
+        }
+      }
+    });
+  }
+  res.send(available);
 });
 
 // GET request for student's enrolled courses
@@ -136,8 +152,20 @@ app.get('/students/:studentid/enrolled', function(req, res) {
   res.send(courses);
 });
 
+// GET request for student shopping cart 
+app.get('/students/:studentid/cart', function(req, res) {
+  var id = req.params.studentid;
+  // authentication will go here
+  var student = readDocument('students', id);
+
+  for (var i = 0, cart=[]; i < student.cart.length; i++) {
+    cart.push(readDocument('courses', student.cart[i]));
+  }
+  res.send(cart);
+});
+
 // GET request for student information
-app.get('/students/:studentid', function(req, res){
+app.get('/students/:studentid', function(req, res) {
   var id = req.params.studentid;
   // authentication will go here
   var student = readDocument('students', id);

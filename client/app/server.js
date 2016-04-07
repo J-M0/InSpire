@@ -140,47 +140,27 @@ export function dropClass(studentId, courseId, cb) {
 
 }
 
-export function getShoppingCart(user, cb) {
-  var student = readDocument('students', user);
-  if (student !== null) {
-    for (var i = 0, cart=[]; i < student.cart.length; i++) {
-      cart.push(readDocument('courses', student.cart[i]));
-    }
-  }
-  emulateServerReturn(cart, cb);
+export function getShoppingCart(userId, cb) {
+  sendXHR('GET', '/students/'+ userId + '/cart', undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
+  });
 }
 
 export function getCourseInfo(courseId, cb) {
-		sendXHR('GET', '/courses/' + courseId, undefined, (xhr) => {
-			cb(JSON.parse(xhr.responseText));
-		});
+  sendXHR('GET', '/courses/' + courseId, undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
+  });
 }
 
 export function getSearchResults(searchOptions, cb) {
-    sendXHR('POST', '/search', searchOptions, (xhr) => {
-        cb(JSON.parse(xhr.responseText));
-    });
+  sendXHR('POST', '/search', searchOptions, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
+  });
 }
 
 // gets available courses
 export function getAvailableCourses(day, start, end, cb) {
-	var available = [];
-	var courses = readDocuments('courses');
-
-	var blockStart = new Date(start);
-
-	for (var i in courses) {
-		//console.log(courses[i].days);
-		var courseStart = new Date(courses[i].start);
-		var courseEnd 	= new Date(courses[i].end);
-		courses[i].days.map((d)=> {
-			if(day === d) {
-				if(courseStart <= blockStart && courseEnd >= blockStart) {
-					available.push(courses[i]);
-				}
-			}
-		});
-	}
-
-	emulateServerReturn(available, cb);
+  sendXHR('GET', '/courses/available/' + day + '/' + start, undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
+  });
 }
