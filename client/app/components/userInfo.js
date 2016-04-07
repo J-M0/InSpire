@@ -24,8 +24,6 @@ class FinalExamButton extends React.Component {
     if (this.props.data !== undefined){
       var data = this.props.data;
       var modalId = "FinalExamModal" + this.props.id;
-
-      // Check if there are any final exams at all
     }
     return(
       <div>

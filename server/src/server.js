@@ -139,6 +139,7 @@ app.get('/students/:studentid/enrolledCourses', function(req, res) {
 	var student = readDocument('students', id);
 
 	var courses = [];
+	
 	for (var i in student.enrolledCourses){
 		var course = readDocument('courses', student.enrolledCourses[i]);
 
@@ -152,7 +153,6 @@ app.get('/students/:studentid/enrolledCourses', function(req, res) {
 			}
 		}
 	}
-
 	res.send(courses);
 });
 

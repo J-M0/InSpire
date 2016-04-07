@@ -90,6 +90,12 @@ export function getEnrolledCourses(id, cb) {
   });
 }
 
+export function getCourseObjects(id, cb) {
+  sendXHR('GET', 'students/'+id+'/enrolledCourses', undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText))
+  });
+}
+
 export function enrollInClass(studentId, courseId, cb) {
     var student = readDocument('students', studentId);
     var course = readDocument('courses', courseId);
