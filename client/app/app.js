@@ -16,8 +16,12 @@ import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 class App extends React.Component {
   render() {
     // Default user, to be removed
-    if (this.props.Calendar.props.params.id === undefined)
-    this.props.Calendar.props.params.id=12345678;
+    if (this.props.Calendar.props.params.id === undefined) {
+        this.props.Calendar.props.params.id=12345678;
+    }
+    
+    //This is necessary to make CalendarBlocks refresh
+    this.props.Calendar.props.params.update = 1;
 
     return (
       <div className="row" id="top_container">

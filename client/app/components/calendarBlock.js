@@ -54,17 +54,28 @@ class CalendarBlock extends React.Component {
   constructor(props) {
     super(props);
     this.state = props;
-    if (this.state.userId !== undefined)
-      getEnrolledCourses(this.state.userId, (enrolled) => {
-        this.setState({enrolled});
-      });
-      getAvailableCourses(this.state.day, this.state.start, this.state.end, (available) => {
-        this.setState({available});
-      });
+  }
+
+  componentWillReceiveProps() {
+      this.refresh();
+  }
+
+  componentDidMount() {
+      this.refresh();
+  }
+
+  refresh() {
+    if (this.state.userId !== undefined) {
+        getEnrolledCourses(this.state.userId, (enrolled) => {
+          this.setState({enrolled});
+        });
+    }
+        getAvailableCourses(this.state.day, this.state.start, this.state.end, (available) => {
+          this.setState({available});
+        });
   }
 
   render() {
-    //   console.log(this.props);
     var content = this.state.text;
     var type = "thumbnail " + this.state.type;
     var modal;
@@ -114,6 +125,7 @@ export default class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = props;
+    this.setState({update: 1});
   }
 
   componentDidMount() {
@@ -122,7 +134,10 @@ export default class Calendar extends React.Component {
 
   refresh() {
     getStudentInfo(this.props.params.id, (userInfo) => {
-      this.setState({userInfo});
+        this.setState({userInfo: userInfo, params: {
+            id: this.state.params.id,
+            update: this.state.params.update + 1
+        }});
     });
   }
 
@@ -149,7 +164,7 @@ export default class Calendar extends React.Component {
                       return(
                         <CalendarBlock userId={this.props.params.id} key={"MWF" + i/2} id={"MWF" + i/2}
                           type="time-55" start={default55Times[i]} end={default55Times[i+1]} day={d}
-                          removeClass={(c) => this.removeClass(c)}/>
+                          removeClass={(c) => this.removeClass(c)} update={this.state.params.update}/>
                       );
                     }
                   })}
@@ -160,7 +175,7 @@ export default class Calendar extends React.Component {
                         return(
                           <CalendarBlock userId={this.props.params.id} key={"MWF-Long" + i/2} id={"MWF-Long" + i/2}
                             type="time-75" start={default75Times[i]} end={default75Times[i+1]} day={d}
-                            removeClass={(c) => this.removeClass(c)}/>
+                            removeClass={(c) => this.removeClass(c)} update={this.state.params.update}/>
                         );
                       }
                     }
@@ -176,7 +191,7 @@ export default class Calendar extends React.Component {
                     return(
                       <CalendarBlock userId={this.props.params.id} key={"TTh" + i/2} id={"TTh" + i/2}
                         type="time-75" start={default75Times[i]} end={default75Times[i+1]} day={d}
-                        removeClass={(c) => this.removeClass(c)}/>
+                        removeClass={(c) => this.removeClass(c)} update={this.state.params.update}/>
                     );
                   }
                 })}

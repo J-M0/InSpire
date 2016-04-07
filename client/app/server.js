@@ -87,14 +87,14 @@ export function getCourseObjects(id, cb) {
 }
 
 export function enrollInClass(studentId, courseId, cb) {
-    sendXHR('POST', '/addclass?student=' + studentId + '&course=' + courseId, undefined, (xhr) => {
-        cb(JSON.parse(xhr.responseText));
+    sendXHR('POST', '/addclass?student=' + studentId + '&course=' + courseId, undefined, () => {
+        cb()
     });
 }
 
 export function dropClass(studentId, courseId, cb) {
-    sendXHR('POST', '/dropclass?student=' + studentId + '&course=' + courseId, undefined, (xhr) => {
-        cb(JSON.parse(xhr.responseText));
+    sendXHR('POST', '/dropclass?student=' + studentId + '&course=' + courseId, undefined, () => {
+        cb();
     });
 }
 
