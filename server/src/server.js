@@ -3,6 +3,7 @@
 var express = require('express');
 var validate = require('express-jsonschema').validate;
 var bodyParser = require('body-parser');
+var url = require('url');
 var database = require('./database');
 var readDocument = database.readDocument;
 var writeDocument = database.writeDocument;
@@ -105,11 +106,75 @@ function matchString(string, field) {
 }
 
 app.post('/addclass', function(req, res) {
+	var urlObj = url.parse(req.url, true);
 
+	if(urlObj.query.student === undefined || urlObj.query.course === undefined) {
+		res.send(400).end();
+	}
+
+	var fromUser = getUserIdFromToken(req.get('Authorization'));
+	var studentId = urlObj.query.student;
+	var courseId = urlObj.query.course;
+
+	if(fromUser === studentId) {
+		var student = readDocument('students', studentId);
+		var course = readDocument('courses', courseId);
+
+		var studentIndex = student.enrolledCourses.indexOf(courseId);
+		var courseIndex = course.enrolled.indexOf(studentId);
+
+		if(studentIndex === -1 && courseIndex === -1) {
+			student.enrolledCourses.push(courseId);
+			course.enrolled.push(studentId);
+		} else {
+			// Something is wrong.
+			// The studnets and courses documents are out of sync.
+			res.send(500);
+		}
+
+		writeDocument('students', student);
+		writeDocument('courses', course);
+
+		res.send();
+	} else {
+		res.send(401).end();
+	}
 });
 
 app.post('/dropclass', function(req, res) {
+	var urlObj = url.parse(req.url, true);
 
+	if(urlObj.query.student === undefined || urlObj.query.course === undefined) {
+		res.send(400).end();
+	}
+
+	var fromUser = getUserIdFromToken(req.get('Authorization'));
+	var studentId = urlObj.query.student;
+	var courseId = urlObj.query.course;
+
+	if(fromUser === studentId) {
+		var student = readDocument('students', studentId);
+		var course = readDocument('courses', courseId);
+
+		var studentIndex = student.enrolledCourses.indexOf(courseId);
+		var courseIndex = course.enrolled.indexOf(studentId);
+
+		if(studentIndex !== -1 && courseIndex !== -1) {
+			student.enrolledCourses.push(courseIndex, 1);
+			course.enrolled.push(studentIndex, 1);
+		} else {
+			// Something is wrong.
+			// The studnets and courses documents are out of sync.
+			res.send(500);
+		}
+
+		writeDocument('students', student);
+		writeDocument('courses', course);
+
+		res.send();
+	} else {
+		res.send(401).end();
+	}
 });
 
 // GET request for course information
