@@ -81,9 +81,7 @@ export default class UserInfo extends React.Component {
           <FinalExamButton data={data} id={studentID} />
           <TranscriptButton data={data} id={studentID} />
           <LogOutButton />
-          <div className="row">
-            <ResetDatabase />
-          </div>
+          <ResetDatabase />
         </div>
       </div>
     );
