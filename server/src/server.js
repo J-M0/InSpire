@@ -36,14 +36,13 @@ app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) 
 	if(classNum === classNum) {
 		results = results.filter(matchesClassNum(classNum, body.classNumOps));
 	}
-	//
-	// if(body.seatsAvail) {
-	// 	results = results.filter((course) => {
-	// 		return course.enrolled.length < course.capacity;
-	// 	});
-	// }
 
-	// var courses = results.map((course) => readDocument('courses', course));
+	if(body.seatsAvail) {
+		results = results.filter((course) => {
+			return course.enrolled.length < course.capacity;
+		});
+	}
+
 	res.send(results);
 });
 
