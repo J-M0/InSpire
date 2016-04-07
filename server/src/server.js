@@ -43,19 +43,20 @@ app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) 
 		});
 	}
 
-	if(body.genEdCat.length > 0) {
+	var isSpace = /\s/;
+	if(!isSpace.test(body.genEdCat)) {
 		results = results.filter(matchString(body.genEdCat, 'genEdCategory'));
 	}
 
-	if(body.session.length > 0) {
+	if(!isSpace.test(body.session)) {
 		results = results.filter(matchString(body.session, 'session'));
 	}
 
-	if(body.subject.length > 0) {
+	if(!isSpace.test(body.subject)) {
 		results = results.filter(matchString(body.subject, 'subject'));
 	}
 
-	if(body.instructionMode.length > 0) {
+	if(!isSpace.test(body.instructionMode)) {
 		results = results.filter(matchString(body.instructionMode, 'instructionMode'));
 	}
 

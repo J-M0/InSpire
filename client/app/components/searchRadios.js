@@ -41,6 +41,7 @@ export default class SearchRadios extends React.Component {
           <div className="form-group">
             <label htmlFor="subject">Subject:</label>
             <select className="form-control" id="subject">
+              <option>&nbsp;</option>
               <option>Computer Science</option>
               <option>Computer Engineering</option>
             </select>
@@ -48,14 +49,16 @@ export default class SearchRadios extends React.Component {
           <div className="form-group">
             <label htmlFor="genEdCat">Gen Ed Category:</label>
             <select className="form-control" id="genEdCat">
+              <option>&nbsp;</option>
               <option>AL Literature</option>
-                <option>History</option>
-                <option>Biology</option>
+              <option>History</option>
+              <option>Biology</option>
             </select>
           </div>
           <div className="form-group">
             <label htmlFor="session">Session</label>
             <select className="form-control" id="session">
+              <option>&nbsp;</option>
               <option>*University</option>
               <option>CPE Summer Session 1</option>
             </select>
@@ -63,6 +66,7 @@ export default class SearchRadios extends React.Component {
           <div className="form-group">
             <label htmlFor="instrMode">Mode of Instruction</label>
             <select className="form-control" id="instrMode">
+              <option>&nbsp;</option>
               <option>Classroom</option>
               <option>Online</option>
             </select>
