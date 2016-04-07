@@ -42,7 +42,11 @@ app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) 
 			return course.enrolled.length < course.capacity;
 		});
 	}
-	
+
+	if(body.genEdCat.length > 0) {
+		results = results.filter(matchString(body.genEdCat, 'genEdCategory'));
+	}
+
 	results.sort((a, b) => {
 		if(a.courseNumber > b.courseNumber) {
 			return 1;
@@ -68,6 +72,12 @@ function matchesClassNum(classNum, op) {
 		}
 	} else {
 		throw Error('Unknown operation: ' + op);
+	}
+}
+
+function matchString(string, field) {
+	return function(course) {
+		return string === course[field];
 	}
 }
 
@@ -147,7 +157,7 @@ app.get('/students/:studentid/enrolledCourses', function(req, res) {
 	var student = readDocument('students', id);
 
 	var courses = [];
-	
+
 	for (var i in student.enrolledCourses){
 		var course = readDocument('courses', student.enrolledCourses[i]);
 
