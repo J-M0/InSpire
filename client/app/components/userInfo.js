@@ -2,13 +2,13 @@ import React from 'react';
 import Modal from './modal';
 import {getStudentInfo} from '../server';
 import {ResetDatabase} from '../resetdb';
-
+import {Link} from 'react-router';
 
 class LogOutButton extends React.Component {
   render()
   {
     return(
-      <a href="#">Logout</a>
+      <Link to="blankPage" target='/blankPage' activeClassName="active">Logout</Link>
     );
   }
 }
