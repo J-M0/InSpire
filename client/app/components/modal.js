@@ -1,7 +1,5 @@
 import React from 'react';
 import {getCourseInfo, getCourseObjects, getProfessorInfo} from '../server';
-import {dateToString, timeToString} from '../util';
-
 
 export default class Modal extends React.Component {
   render() {
@@ -57,28 +55,13 @@ class FinalExamModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = props;
-    this.state.data.enrolledCourses.map((course) => {
-      var start, end, id, location;
-      getCourseObjects(this.state.data._id, (courseList) => {
-        this.setState({courseList : courseList});
-        /*
-        courseList.map((course, i) => {
-          start = course.final[0];
-          end   = course.final[1];
-          id = course._id;
-          location = course.final[2];
-          console.log(course);
-          console.log(dateToString(start));
-          console.log(dateToString(end));
-        });
-        */
-      })
-    });
+    getCourseObjects(this.state.data._id, (courseList) => {
+      this.setState({courseList : courseList});
+    })
   }
 
   render() {
     var modalContent = <div style={{fontWeight: 'bold', textAlign: 'center'}}>No finals, lucky you!</div>;
-    console.log(this.state);
     if (this.state.courseList !== undefined) {
       modalContent =
         <table className="table table-striped">
@@ -92,13 +75,16 @@ class FinalExamModal extends React.Component {
           </thead>
           <tbody>
             {this.state.courseList.map((course, i) => {
-              // Recast date objects
+              var date = new Date(course.final[0]).toLocaleDateString();//dateToString(course.final[0]);
+              var time = new Date(course.final[0]).toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}) + " - " + new Date(course.final[1]).toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
+              var name = course.courseName;
+              var location = course.final[2];
               return (
                 <tr key={"tr"+i}>
-                  <td>{dateToString(course.final[0])}</td>
-                  <td>{timeToString(course.final[0]) + " - " + new Date(course.final[1]).toLocaleTimeString()}</td>
-                  <td>{course._id}</td>
-                  <td>{course.final[2]}</td>
+                  <td>{date}</td>
+                  <td>{time}</td>
+                  <td>{name}</td>
+                  <td>{location}</td>
                 </tr>
               )
             })}
