@@ -106,75 +106,75 @@ function matchString(string, field) {
 }
 
 app.post('/addclass', function(req, res) {
-	var urlObj = url.parse(req.url, true);
+  var urlObj = url.parse(req.url, true);
 
-	if(urlObj.query.student === undefined || urlObj.query.course === undefined) {
-		res.send(400).end();
-	}
+  if(urlObj.query.student === undefined || urlObj.query.course === undefined) {
+    res.send(400).end();
+  }
 
-	var fromUser = getUserIdFromToken(req.get('Authorization'));
-	var studentId = urlObj.query.student;
-	var courseId = urlObj.query.course;
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
+  var studentId = urlObj.query.student;
+  var courseId = urlObj.query.course;
 
-	if(fromUser === parseInt(studentId)) {
-		var student = readDocument('students', studentId);
-		var course = readDocument('courses', courseId);
+  if(fromUser === parseInt(studentId)) {
+    var student = readDocument('students', studentId);
+    var course = readDocument('courses', courseId);
 
-		var studentIndex = student.enrolledCourses.indexOf(courseId);
-		var courseIndex = course.enrolled.indexOf(studentId);
+    var studentIndex = student.enrolledCourses.indexOf(courseId);
+    var courseIndex = course.enrolled.indexOf(studentId);
 
-		if(studentIndex === -1 && courseIndex === -1) {
-			student.enrolledCourses.push(courseId);
-			course.enrolled.push(studentId);
-		} else {
-			// Something is wrong.
-			// The studnets and courses documents are out of sync.
-			res.send(500);
-		}
+    if(studentIndex === -1 && courseIndex === -1) {
+      student.enrolledCourses.push(courseId);
+      course.enrolled.push(studentId);
+    } else {
+      // Something is wrong.
+      // The studnets and courses documents are out of sync.
+      res.send(500);
+    }
 
-		writeDocument('students', student);
-		writeDocument('courses', course);
+    writeDocument('students', student);
+    writeDocument('courses', course);
 
-		res.send();
-	} else {
-		res.send(401).end();
-	}
+    res.send();
+  } else {
+    res.send(401).end();
+  }
 });
 
 app.post('/dropclass', function(req, res) {
-	var urlObj = url.parse(req.url, true);
+  var urlObj = url.parse(req.url, true);
 
-	if(urlObj.query.student === undefined || urlObj.query.course === undefined) {
-		res.send(400).end();
-	}
+  if(urlObj.query.student === undefined || urlObj.query.course === undefined) {
+    res.send(400).end();
+  }
 
-	var fromUser = getUserIdFromToken(req.get('Authorization'));
-	var studentId = urlObj.query.student;
-	var courseId = urlObj.query.course;
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
+  var studentId = urlObj.query.student;
+  var courseId = urlObj.query.course;
 
-	if(fromUser === parseInt(studentId)) {
-		var student = readDocument('students', studentId);
-		var course = readDocument('courses', courseId);
+  if(fromUser === parseInt(studentId)) {
+    var student = readDocument('students', studentId);
+    var course = readDocument('courses', courseId);
 
-		var courseIndex = student.enrolledCourses.indexOf(courseId);
-		var studentIndex = course.enrolled.indexOf(studentId);
+    var courseIndex = student.enrolledCourses.indexOf(courseId);
+    var studentIndex = course.enrolled.indexOf(studentId);
 
-		if(studentIndex !== -1 && courseIndex !== -1) {
-			student.enrolledCourses.splice(courseIndex, 1);
-			course.enrolled.splice(studentIndex, 1);
-		} else {
-			// Something is wrong.
-			// The studnets and courses documents are out of sync.
-			res.send(500);
-		}
+    if(studentIndex !== -1 && courseIndex !== -1) {
+      student.enrolledCourses.splice(courseIndex, 1);
+      course.enrolled.splice(studentIndex, 1);
+    } else {
+      // Something is wrong.
+      // The studnets and courses documents are out of sync.
+      res.send(500);
+    }
 
-		writeDocument('students', student);
-		writeDocument('courses', course);
+    writeDocument('students', student);
+    writeDocument('courses', course);
 
-		res.send();
-	} else {
-		res.send(401).end();
-	}
+    res.send();
+  } else {
+    res.send(401).end();
+  }
 });
 
 // GET request for course information
@@ -209,32 +209,46 @@ app.get('/courses/available/:day/:start', function(req, res) {
 // GET request for student's enrolled courses
 app.get('/students/:studentid/enrolled', function(req, res) {
   var id = req.params.studentid;
-  // authentication will go here
-  var student = readDocument('students', id);
-  for (var i = 0, courses=[]; i < student.enrolledCourses.length; i++) {
-    courses.push(readDocument('courses', student.enrolledCourses[i]));
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
+  if (id == fromUser) {
+    var student = readDocument('students', id);
+    for (var i = 0, courses=[]; i < student.enrolledCourses.length; i++) {
+      courses.push(readDocument('courses', student.enrolledCourses[i]));
+    }
+    res.send(courses);
+  } else {
+    res.status(400).end();
   }
-  res.send(courses);
 });
 
 // GET request for student shopping cart
 app.get('/students/:studentid/cart', function(req, res) {
   var id = req.params.studentid;
-  // authentication will go here
-  var student = readDocument('students', id);
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
 
-  for (var i = 0, cart=[]; i < student.cart.length; i++) {
-    cart.push(readDocument('courses', student.cart[i]));
+  if (id == fromUser) {
+    var student = readDocument('students', id);
+  
+    for (var i = 0, cart=[]; i < student.cart.length; i++) {
+      cart.push(readDocument('courses', student.cart[i]));
+    }
+    res.send(cart);
+  } else {
+    res.status(400).end();
   }
-  res.send(cart);
 });
 
 // GET request for student information
 app.get('/students/:studentid', function(req, res) {
   var id = req.params.studentid;
-  // authentication will go here
-  var student = readDocument('students', id);
-  res.send(student);
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
+
+  if (id == fromUser) {
+    var student = readDocument('students', id);
+    res.send(student);
+  } else {
+    res.status(400).end();
+  }
 });
 
 //GET request for professor Information
@@ -272,25 +286,30 @@ function getUserIdFromToken(authorizationLine) {
 // GET request for student's enrolled courses as objects
 app.get('/students/:studentid/enrolledCourses', function(req, res) {
   var id = req.params.studentid;
-  // authentication will go here
-  var student = readDocument('students', id);
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
 
-  var courses = [];
+  if (id == fromUser) {
+    var student = readDocument('students', id);
 
-  for (var i in student.enrolledCourses){
-    var course = readDocument('courses', student.enrolledCourses[i]);
+    var courses = [];
 
-    if (courses.length == 0) courses.push(course);
-    else {
-      for (var j in courses){
-        if (course.final[0] < courses[j].final[0]){
-          courses.splice(j, 0, course);
-          break;
-        } else if (j == courses.length-1) courses.push(course);
+    for (var i in student.enrolledCourses){
+      var course = readDocument('courses', student.enrolledCourses[i]);
+
+      if (courses.length == 0) courses.push(course);
+      else {
+        for (var j in courses){
+          if (course.final[0] < courses[j].final[0]){
+            courses.splice(j, 0, course);
+            break;
+          } else if (j == courses.length-1) courses.push(course);
+        }
       }
     }
+    res.send(courses);
+  } else {
+    res.send(400).end();
   }
-  res.send(courses);
 });
 
 /**
