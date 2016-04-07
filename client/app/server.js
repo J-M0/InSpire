@@ -1,4 +1,4 @@
-import {readDocument, readDocuments , writeDocument} from './database.js';
+// import {readDocument, readDocuments , writeDocument} from './database.js';
 
 /**
  * Emulates how a REST call is *asynchronous* -- it calls your function back
@@ -99,45 +99,15 @@ export function getCourseObjects(id, cb) {
 }
 
 export function enrollInClass(studentId, courseId, cb) {
-    var student = readDocument('students', studentId);
-    var course = readDocument('courses', courseId);
-
-    student.enrolledCourses.push(courseId);
-    course.enrolled.push(studentId);
-
-    writeDocument('students', student);
-    writeDocument('courses', course);
-
-    var retVal = {
-        "student": student,
-        "course": course
-    };
-    emulateServerReturn(retVal, cb);
-
+    sendXHR('POST', '/addclass?student=' + studentId + '&course=' + courseId, undefined, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
+    });
 }
 
 export function dropClass(studentId, courseId, cb) {
-    var student = readDocument('students', studentId);
-    var course = readDocument('courses', courseId);
-
-    var studentIndex = student.enrolledCourses.indexOf(courseId);
-    var courseIndex = course.enrolled.indexOf(studentId);
-
-    if (studentIndex !== -1 && courseIndex !== -1) {
-        student.enrolledCourses.splice(courseIndex, 1);
-        courseIndex.enrolled.splice(studentIndex, 1);
-    }
-
-    writeDocument('students', student);
-    writeDocument('courses', course);
-
-    var retVal = {
-        "student": student,
-        "course": course
-    };
-
-    emulateServerReturn(retVal, cb);
-
+    sendXHR('POST', '/dropclass?student=' + studentId + '&course=' + courseId, undefined, (xhr) => {
+        cb(JSON.parse(xhr.responseText));
+    });
 }
 
 export function getShoppingCart(userId, cb) {
