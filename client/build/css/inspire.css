@@ -172,7 +172,7 @@ ul {
 .panel-body {
   padding: 4%;
 }
-/*END OF OVERWRITING BOOTRSTRAP CSS
+/*END OF OVERWRITING BOOTRSTRAP CSS */
 /* class tags end here */
 
 /* id tags begin here */
@@ -304,6 +304,12 @@ ul {
 
 #search-results .list-group-item {
   margin-left: -41px;
+}
+
+#search-result-empty {
+    text-align: center;
+    color: red;
+    font-size: large;
 }
 
 @keyframes expand {
