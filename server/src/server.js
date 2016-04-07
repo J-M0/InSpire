@@ -29,13 +29,13 @@ app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) 
 	var fromUser = getUserIdFromToken(req.get('Authorization'));
 
 	// if(userid === fromUser) {
-		var results = [ '12345678', '92819522', '19103958', '18271821', '85938173', '09876543', '08874563'];
-		var courses = results.map((course) => readDocument('courses', course));
-		//for(var i = 0; i < results.length; i++) {
-			//courses[i].instructor = readDocument('professor', courses[i].instructor);
-		//}
+	var results = [ '12345678', '92819522', '19103958', '18271821', '85938173', '09876543', '08874563'];
+	var courses = results.map((course) => readDocument('courses', course));
+	for(var i = 0; i < results.length; i++) {
+		courses[i].instructor = readDocument('professor', courses[i].instructor);
+	}
 
-		res.send(courses);
+	res.send(courses);
 	// } else {
 	// 	res.send(401).end();
 	// }
@@ -78,16 +78,9 @@ app.get('/students/:studentid', function(req, res){
 	res.send(student);
 });
 
-// GET request for professor Information
-app.get('/professor/:professorid', function(req, res) {
-	var id = req.params.professorid;
-	var professor = readDocument('professor', id);
-	res.send(professor);
-});
-
 /*
- * Get the user ID from a token. Returns -1 (and invalid ID) if it fails
- */
+* Get the user ID from a token. Returns -1 (and invalid ID) if it fails
+*/
 function getUserIdFromToken(authorizationLine) {
 	try {
 		// Cut off "Bearer " from the header value.
@@ -110,16 +103,40 @@ function getUserIdFromToken(authorizationLine) {
 	}
 }
 
+// GET request for student's enrolled courses as objects
+app.get('/students/:studentid/enrolledCourses', function(req, res) {
+	var id = req.params.studentid;
+	// authentication will go here
+	var student = readDocument('students', id);
+
+	var courses = [];
+	for (var i in student.enrolledCourses){
+		var course = readDocument('courses', student.enrolledCourses[i]);
+
+		if (courses.length == 0) courses.push(course);
+		else {
+			for (var j in courses){
+				if (course.final[0] < courses[j].final[0]){
+					courses.splice(j, 0, course);
+					break;
+				} else if (j == courses.length-1) courses.push(course);
+			}
+		}
+	}
+
+	res.send(courses);
+});
+
 /**
- * Translate JSON Schema Validation failures into error 400s.
- * THIS MUST ALWAYS COME BEFORE app.listen() AND AFTER OUR ROUTES!
- */
- app.use(function(err, req, res, next) {
+* Translate JSON Schema Validation failures into error 400s.
+* THIS MUST ALWAYS COME BEFORE app.listen() AND AFTER OUR ROUTES!
+*/
+app.use(function(err, req, res, next) {
 	if (err.name === 'JsonSchemaValidation') {
-        // Set a bad request http response status
+		// Set a bad request http response status
 		res.status(400).end();
 	} else {
-        // It's some other sort of error; pass it to next error middleware handler
+		// It's some other sort of error; pass it to next error middleware handler
 		next(err);
 	}
 });
