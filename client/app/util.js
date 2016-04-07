@@ -5,22 +5,21 @@
  * substring truncates the information past the minutes
  * replace removes leading 0s just in case
  **/
-export default function timeToString(time) {
-	if (typeof time !== "Date") {
-		time = new Date(time).toLocaleTimeString();
-	} else {
-		time = time.toLocaleTimeString();
-	}
-	return time.substring(0, time.indexOf(":")+3).replace(/^0+/, '');
+export function timeToString(time) {
+  if (typeof time !== "Date") {
+    time = new Date(time).toLocaleTimeString();
+  } else {
+    time = time.toLocaleTimeString();
+  }
+  return time.substring(0, time.indexOf(":")+3).replace(/^0+/, '');
 }
 
-export default function dateToString(time) {
-	if (typeof time !== "Date") {
-		time = new Date(time).toLocaleTimeString();
-	} else {
-		time = time.toLocaleTimeString();
-	}
-	return time.substring(0, time.indexOf(":")+3).replace(/^0+/, '');
+export function dateToString(day) {
+  if (typeof day !== "Date") {
+    day  = new Date(day);
+  }
+
+  return day.toDateString();
 }
 
 export function hideElement(shouldHide) {

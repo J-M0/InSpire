@@ -14,21 +14,18 @@ class LogOutButton extends React.Component {
 }
 
 class FinalExamButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = props;
-  }
+  render() {
+    var modal;
 
-  render()
-  {
-    if (this.props.data !== undefined){
+    if (this.props.data !== undefined && this.props.id !== undefined) {
       var data = this.props.data;
       var modalId = "FinalExamModal" + this.props.id;
+      modal = <Modal data={data} type="FinalExamSchedule" id={modalId} />
     }
     return(
       <div>
-        <Modal data={data} type="FinalExamSchedule" id={modalId} />
         <a data-toggle="modal" href={"#" + modalId}>Final Exam Schedule</a>
+        {modal}
       </div>
     );
   }
