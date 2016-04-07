@@ -78,7 +78,7 @@ class FinalExamModal extends React.Component {
           <tbody>
             {this.state.courseList.map((course, i) => {
               var date = new Date(course.final[0]).toLocaleDateString();
-              var time = hhMMToString(course.final[0]) + " - " + meridiemToString(course.final[1]);
+              var time = meridiemToString(course.final[0]) + " - " + meridiemToString(course.final[1]);
               var name = course.courseName;
               var location = course.final[2];
               return (
