@@ -1,6 +1,6 @@
 import React from 'react';
 import {getStudentInfo, getEnrolledCourses, getAvailableCourses} from '../server';
-import {timeToString} from '../util';
+import {hhMMToString, meridiemToString} from '../util';
 import Modal from './modal';
 
 // list of days used for rendering the calendar
@@ -37,7 +37,7 @@ class CourseButton extends React.Component {
     var course = this.props.enrolledcourse;
     return(
       <button type="button" className="btn btn-block btn-primary cal-btn" data-toggle="modal" data-target={"#"+this.props.target}>
-        <span>{timeToString(course.start) + " - " + timeToString(course.end)}</span>
+        <span>{hhMMToString(course.start) + " - " + meridiemToString(course.end)}</span>
         <span>{course.courseNumber}</span>
         <br/>
         <span>{course.location}</span>
@@ -92,7 +92,7 @@ class CalendarBlock extends React.Component {
             })
         })
       }
-      content = (content === undefined) ? timeToString(start) + " - " + timeToString(end) : content;
+      content = (content === undefined) ? hhMMToString(start) + " - " + meridiemToString(end) : content;
     }
 
     return (

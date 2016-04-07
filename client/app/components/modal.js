@@ -1,5 +1,6 @@
 import React from 'react';
 import {getCourseInfo, getCourseObjects, getProfessorInfo} from '../server';
+import {hhMMToString, meridiemToString} from '../util';
 
 export default class Modal extends React.Component {
   render() {
@@ -75,8 +76,8 @@ class FinalExamModal extends React.Component {
           </thead>
           <tbody>
             {this.state.courseList.map((course, i) => {
-              var date = new Date(course.final[0]).toLocaleDateString();//dateToString(course.final[0]);
-              var time = new Date(course.final[0]).toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'}) + " - " + new Date(course.final[1]).toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
+              var date = new Date(course.final[0]).toLocaleDateString();
+              var time = hhMMToString(course.final[0]) + " - " + meridiemToString(course.final[1]);
               var name = course.courseName;
               var location = course.final[2];
               return (
@@ -124,8 +125,8 @@ class ClassInfo extends React.Component {
     var addButton;
     var data = this.state;
     var prof = this.state.professor;
-    var start = new Date(data.start).toLocaleTimeString();
-    var end = new Date(data.end).toLocaleTimeString();
+    var start = hhMMToString(new Date(data.start));
+    var end = meridiemToString(new Date(data.end));
 
     if(!this.props.noButton) {
       addButton = <button type="button" className="btn btn-primary">Add Class</button>;
