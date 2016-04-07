@@ -10,7 +10,7 @@ function emulateServerReturn(data, cb) {
   }, 4);
 }
 
-var token = '';
+var token = 'eyJpZCI6MTIzNDU2Nzh9';
 
 /**
  * Properly configure+send an XMLHttpRequest with error handling, authorization token,
@@ -23,11 +23,18 @@ function sendXHR(verb, resource, body, cb) {
 
   xhr.addEventListener('load', function() {
     var statusCode = xhr.status;
-    //var statusText = xhr.statusText;
+    var statusText = xhr.statusText;
     if (statusCode >= 200 && statusCode < 300) {
       // Success: Status code is in the [200, 300) range.
       // Call the callback with the final XHR object.
       cb(xhr);
+    }
+    else {
+      // Client or server error.
+      // The server may have included some response text with details concerning
+      // the error.
+      var responseText = xhr.responseText;
+      InspireError('Could not ' + verb + " " + resource + ": Received " + statusCode + " " + statusText + ": " + responseText);
     }
   });
 
