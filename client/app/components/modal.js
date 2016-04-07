@@ -124,14 +124,14 @@ class ClassInfo extends React.Component {
 
   handleAddClass(e) {
       e.preventDefault();
-      console.log("Added class!");
+    //   console.log("Added class!");
   }
 
   handleDropClass(e) {
       e.preventDefault();
     //   console.log(typeof this.props.removeClass);
       this.props.removeClass(this.state._id);
-      console.log("Dropped class!");
+    //   console.log("Dropped class!");
   }
 
   render() {
@@ -145,7 +145,7 @@ class ClassInfo extends React.Component {
     if(!this.props.noButton) {
       button = <button type="button" className="btn btn-primary" onClick={(e) => this.handleAddClass(e)}>Add Class</button>;
     } else {
-        button = <button type="button" className="btn btn-primary" onClick={(e) => this.handleDropClass(e)}>Drop Class</button>;
+        button = <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={(e) => this.handleDropClass(e)}>Drop Class</button>;
     }
 
     return (
