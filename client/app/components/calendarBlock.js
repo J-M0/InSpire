@@ -48,49 +48,6 @@ class CourseButton extends React.Component {
 }
 
 /**
-  * AvailableModal Component
-  * modal appears when clicking an empty CalendarBlock, displays list of available
-  * courses, courses link to the CourseInfo modal
-  */
-class AvailableModal extends React.Component {
-  render() {
-    var body;
-    if (this.props.available !== undefined && this.props.available.length !== 0) {
-      body =
-        <div data-toggle="modal" data-target={"#"+this.props.id}>
-          {this.props.available.map((course, i) => { 
-            return(
-              <button key={"btn"+i} type="button" className="course-modal-btn" data-toggle="modal" data-target={"#"+this.props.id+i}>
-                {course.courseNumber} - {course.courseName}
-              </button>
-            );
-          })}
-        </div>;
-    } else {
-      body = <span style={{fontWeight: "bold"}}>There are no courses available for this time slot.</span>;
-    }
-
-    return(
-      <div id={this.props.id} className="modal fade" role="dialog">
-        <div className="modal-dialog modal-lg">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h4 className="modal-title">Available Courses</h4>
-            </div>
-            <div className="modal-body" style={{textAlign: "center"}}>
-              {body}
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="button-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-
-/**
   * CalendarBlock Component
   * represents a time slot on the calendar
   */
@@ -102,9 +59,9 @@ class CalendarBlock extends React.Component {
       getEnrolledCourses(this.state.userId, (enrolled) => {
         this.setState({enrolled});
       });
-    getAvailableCourses(this.state.day, this.state.start, this.state.end, (available) => {
-      this.setState({available});
-    });
+      getAvailableCourses(this.state.day, this.state.start, this.state.end, (available) => {
+        this.setState({available});
+      });
   }
 
   render() {
@@ -112,22 +69,23 @@ class CalendarBlock extends React.Component {
     var type = "thumbnail " + this.state.type;
     var modal;
     if(this.state.available !== undefined)
-      modal = 
+      {var data =  this.state.available;
+      modal =
         <div>
           {this.state.available.map((course, i) => {
             return(<Modal key={"modal"+i} type="ClassInformation" data={course} id={this.state.id+i} />)
           })}
-          <AvailableModal available={this.state.available} id={this.state.id}/>
-        </div>
+          <Modal data={data} type="AvailableCourses" id={this.state.id} />
+        </div>}
 
     // if no content, display regular CalendarBlock times
     if (content === undefined) {
       var start = this.state.start;
       var end   = this.state.end;
       if(this.state.enrolled !== undefined) {
-        this.state.enrolled.map((enrolled, i) => {
+        this.state.enrolled.map((enrolled) => {
           if (this.state.available !== undefined)
-            this.state.available.map((available, j) => {
+            this.state.available.map((available) => {
               if (enrolled.courseNumber === available.courseNumber) {
                 content = <CourseButton enrolledcourse={enrolled} target={this.state.id}/>;
                 modal = <Modal type="ClassInformation" data={enrolled} id={this.state.id} />;

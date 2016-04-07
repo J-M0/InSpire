@@ -29,11 +29,11 @@ export default class Modal extends React.Component {
         modalTitle = "Time Selection";
         break;
       case "AvailableCourses":
-        modalContent = "Available Courses";
+        modalContent = <AvailableModal data={data} id={modalId}/>;
         modalTitle = "Available Courses";
         break;
       default:
-        ;
+        break;
     }
 
     return (
@@ -101,7 +101,7 @@ class FinalExamModal extends React.Component {
         <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-  );
+    );
   }
 }
 
@@ -191,7 +191,7 @@ class UoTranscript extends React.Component {
 
     // Since we know that props is not undefined (if you aren't sure,
     // refer to userInfo.js), we can do the below!
-    
+
     // Iterate over the completed courses, if there are none (i.e.
     // completedCourses.length === 0, this does nothing.
     this.state.data.completedCourses.map((tuples, i) => {
@@ -211,7 +211,7 @@ class UoTranscript extends React.Component {
 
   render() {
     var modalContent;
-    if (this.state.transcript !== undefined) { 
+    if (this.state.transcript !== undefined) {
       modalContent = this.state.transcript.map((tuples, i) => {
         return (
           <tr key={"tr"+i}>
@@ -221,7 +221,7 @@ class UoTranscript extends React.Component {
         );
       });
     }
-    
+
     return(
       <div>
         <div className="modal-body">
@@ -241,6 +241,47 @@ class UoTranscript extends React.Component {
         </div>
         <div className="modal-footer">
           <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    );
+  }
+}
+
+class AvailableModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = props;
+  }
+  render() {
+    var body;
+    var data;
+
+    data = this.state.data;
+    if (data.length > 0) {
+      body =
+        <div data-toggle="modal" data-target={"#"+this.props.id}>
+          {data.map((course, i) => {
+            return(
+              <button key={"btn"+i} type="button" className="course-modal-btn" data-toggle="modal" data-target={"#"+this.state.id+i}>
+                {course.courseNumber} - {course.courseName}
+              </button>
+            );
+          })}
+        </div>
+    } else {
+      body = <div><span>There are no available courses to take at this time.</span></div>;
+    }
+
+
+    return(
+      <div>
+        <div className="modal-body" style={{textAlign: "center"}}>
+          <div className="panel-body" style={{color:'#354066'}}>
+            {body}
+          </div>
+        </div>
+        <div className="modal-footer">
+          <button type="button" className="button-default" data-dismiss="modal">Close</button>
         </div>
       </div>
     );
