@@ -130,6 +130,8 @@ class ClassInfo extends React.Component {
 
     if(!this.props.noButton) {
       addButton = <button type="button" className="btn btn-primary">Add Class</button>;
+    } else {
+      addButton = <button type="button" className="btn btn-primary">Drop Class</button>;
     }
 
     return (

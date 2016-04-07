@@ -18,6 +18,11 @@ export default class ShoppingCart extends React.Component {
     this.refresh();
   }
 
+  handleRemoveClick(e) {
+    e.preventDefault();
+    this.refresh();
+  }
+
   render() {
     var body;
 
@@ -28,7 +33,7 @@ export default class ShoppingCart extends React.Component {
           {this.state.cart.map((courses, i) => { var v = i.toString(); return (
             <div>
               <li className="list-group-item shop-cart-item" key={i} onClick={(e) => this.handleClick(e)}>{courses.courseNumber} - {courses.courseName}
-                <span className="glyphicon glyphicon-remove pull-right shop-cart-item" style={{color: '#354066'}}></span>
+                <span className="glyphicon glyphicon-remove pull-right shop-cart-item" style={{color: '#354066'}} onClick={(e) => this.handleRemoveClick(e)}></span>
                 <Modal type="ClassInformation" data={courses} id={"CourseInfoModal" + v}/>
                 <a className="btn shop-cart-item" key={i} data-toggle="modal" href={"#CourseInfoModal" + v} style={{textAlign: 'right', width: '100%', fontSize: '1.6vh'}}>...More info</a></li>
             </div>
