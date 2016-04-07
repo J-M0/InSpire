@@ -22,18 +22,22 @@ app.post('/resetdb', function(req, res) {
 	res.send();
 });
 
+// Search for classes
 app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) {
 	var body = req.body;
 
-	var userid = req.params.userid;
-	var fromUser = getUserIdFromToken(req.get('Authorization'));
+	// var userid = req.params.userid;
+	// var fromUser = getUserIdFromToken(req.get('Authorization'));
+
+	var allCourses = database.getCollection('courses');
+	var courseNum = parseInt(body.courseNum);
 
 	// if(userid === fromUser) {
 	var results = [ '12345678', '92819522', '19103958', '18271821', '85938173', '09876543', '08874563'];
 	var courses = results.map((course) => readDocument('courses', course));
-	for(var i = 0; i < results.length; i++) {
-		courses[i].instructor = readDocument('professor', courses[i].instructor);
-	}
+	//for(var i = 0; i < results.length; i++) {
+		//courses[i].instructor = readDocument('professor', courses[i].instructor);
+	//}
 
 	res.send(courses);
 	// } else {
