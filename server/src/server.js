@@ -26,21 +26,42 @@ app.post('/resetdb', function(req, res) {
 app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) {
 	var body = req.body;
 
-	// var userid = req.params.userid;
-	// var fromUser = getUserIdFromToken(req.get('Authorization'));
+	var courses = database.getCollection('courses');
+	var results = Object.keys(courses).map((key) => {
+		return courses[key];
+	});
 
-	var allCourses = database.getCollection('courses');
-	var courseNum = parseInt(body.courseNum);
+	var classNum = parseInt(body.classNum);
 
-	// if(userid === fromUser) {
-	var results = [ '12345678', '92819522', '19103958', '18271821', '85938173', '09876543', '08874563'];
-	var courses = results.map((course) => readDocument('courses', course));
-
-	res.send(courses);
-	// } else {
-	// 	res.send(401).end();
+	if(classNum === classNum) {
+		results = results.filter(fuck(classNum, body.classNumOps));
+	}
+	//
+	// if(body.seatsAvail) {
+	// 	results = results.filter((course) => {
+	// 		return course.enrolled.length < course.capacity;
+	// 	});
 	// }
+
+	// var courses = results.map((course) => readDocument('courses', course));
+	res.send(results);
 });
+
+function fuck(classNum, op) {
+	if(op === '=') {
+		return function(course) {
+			var num = parseInt(course.courseNumber.split(' ')[1]);
+			return classNum === num;
+		}
+	} else if(op === '>=') {
+		return function(course) {
+			var num = parseInt(course.courseNumber.split(' ')[1]);
+			return classNum <= num;
+		}
+	} else {
+		throw Error('Unknown operation: ' + op);
+	}
+}
 
 app.post('/addclass', function(req, res) {
 
