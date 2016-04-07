@@ -140,8 +140,6 @@ export function dropClass(studentId, courseId, cb) {
 
 }
 
-// MY CHANGES HERE
-// gets the students shopping cart
 export function getShoppingCart(user, cb) {
   var student = readDocument('students', user);
   if (student !== null) {
@@ -153,10 +151,9 @@ export function getShoppingCart(user, cb) {
 }
 
 export function getCourseInfo(courseId, cb) {
-    var course = readDocument('courses', courseId);
-    course.instructor = readDocument('professor', course.instructor);
-
-    emulateServerReturn(course, cb);
+		sendXHR('GET', '/courses/' + courseId, undefined, (xhr) => {
+			cb(JSON.parse(xhr.responseText));
+		});
 }
 
 export function getSearchResults(searchOptions, cb) {
@@ -170,10 +167,7 @@ export function getAvailableCourses(day, start, end, cb) {
 	var available = [];
 	var courses = readDocuments('courses');
 
-	// Recast the variables since they were lost somehow
 	var blockStart = new Date(start);
-  // Note to Kevin from Kevin: Do I still need this? Consider later.
-	//var recastEnd = new Date(end);
 
 	for (var i in courses) {
 		//console.log(courses[i].days);
