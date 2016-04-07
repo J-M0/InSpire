@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from './modal';
 import {getStudentInfo} from '../server';
+import {ResetDatabase} from '../database';
 
 
 class LogOutButton extends React.Component {
@@ -80,6 +81,9 @@ export default class UserInfo extends React.Component {
           <FinalExamButton data={data} id={studentID} />
           <TranscriptButton data={data} id={studentID} />
           <LogOutButton />
+          <div className="row">
+            <ResetDatabase />
+          </div>
         </div>
       </div>
     );
