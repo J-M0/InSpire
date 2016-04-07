@@ -1,5 +1,5 @@
 import React from 'react';
-import {getCourseInfo} from '../server';
+import {getCourseInfo, getProfessorInfo} from '../server';
 // import {timeToString} from '../util';
 
 
@@ -109,6 +109,13 @@ class ClassInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = props.data;
+    //temp var for prof name
+    var profId = this.state.instructor;
+    var profName;
+    getProfessorInfo(profId, (prof) => {
+      profName = prof.firstName + " " + prof.lastName;
+      this.setState({ professor: profName});
+    });
   }
 
   getDays() {
@@ -117,12 +124,9 @@ class ClassInfo extends React.Component {
 
   render() {
     var data = this.state;
-    var start = new Date(data.start).toLocaleTimeString()
-    var end = new Date(data.end).toLocaleTimeString()
-
-    if (data.instructor.firstName !== undefined) {
-      var name = data.instructor.firstName.concat(" ", data.instructor.lastName);
-    }
+    var prof = this.state.professor;
+    var start = new Date(data.start).toLocaleTimeString();
+    var end = new Date(data.end).toLocaleTimeString();
 
     return (
       <div>
@@ -165,7 +169,7 @@ class ClassInfo extends React.Component {
                   <td>{data.courseName}</td>
                   <td>{this.getDays()} <br/> {start} - {end}</td>
                   <td>{data.location}</td>
-                  <td>{name}</td>
+                  <td>{prof}</td>
                 </tr>
               </tbody>
             </table>

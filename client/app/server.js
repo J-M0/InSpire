@@ -71,6 +71,12 @@ export function getStudentInfo(id, cb) {
   });
 }
 
+export function getProfessorInfo(id, cb) {
+  sendXHR('GET', '/professor/'+id, undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
+  });
+}
+
 export function getEnrolledCourses(id, cb) {
   sendXHR('GET', 'students/'+id+'/enrolled', undefined, (xhr) => {
     cb(JSON.parse(xhr.responseText))

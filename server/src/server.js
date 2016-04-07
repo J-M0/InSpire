@@ -78,6 +78,13 @@ app.get('/students/:studentid', function(req, res){
 	res.send(student);
 });
 
+// GET request for professor Information
+app.get('/professor/:professorid', function(req, res) {
+	var id = req.params.professorid;
+	var professor = readDocument('professor', id);
+	res.send(professor);
+});
+
 /*
  * Get the user ID from a token. Returns -1 (and invalid ID) if it fails
  */
