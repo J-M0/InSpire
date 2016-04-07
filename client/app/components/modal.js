@@ -110,12 +110,8 @@ class ClassInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = props.data;
-    //temp var for prof name
-    var profId = this.state.instructor;
-    var profName;
-    getProfessorInfo(profId, (prof) => {
-      profName = prof.firstName + " " + prof.lastName;
-      this.setState({ professor: profName});
+    getProfessorInfo(this.state.instructor, (prof) => {
+      this.setState({ professor: prof.firstName + " " + prof.lastName});
     });
   }
 
