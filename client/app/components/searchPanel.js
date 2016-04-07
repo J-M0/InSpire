@@ -54,9 +54,9 @@ export default class SearchPanel extends React.Component {
 class LoadingScreen extends React.Component {
   render() {
     return (
-      <div className="panel panel-default">
+      <div className="panel panel-default" id="search-results">
         <div className="panel-heading" style={{color: '#354066'}}>
-          Loading
+          Loading...
         </div>
       </div>
     );
