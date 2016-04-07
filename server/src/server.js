@@ -34,7 +34,7 @@ app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) 
 	var classNum = parseInt(body.classNum);
 
 	if(classNum === classNum) {
-		results = results.filter(fuck(classNum, body.classNumOps));
+		results = results.filter(matchesClassNum(classNum, body.classNumOps));
 	}
 	//
 	// if(body.seatsAvail) {
@@ -47,7 +47,7 @@ app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) 
 	res.send(results);
 });
 
-function fuck(classNum, op) {
+function matchesClassNum(classNum, op) {
 	if(op === '=') {
 		return function(course) {
 			var num = parseInt(course.courseNumber.split(' ')[1]);
