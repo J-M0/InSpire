@@ -21,6 +21,8 @@ function sendXHR(verb, resource, body, cb) {
   xhr.open(verb, resource);
   xhr.setRequestHeader('Authorization', 'Bearer ' + token);
 
+  // Tell ESLint to chill
+  /* global InspireError */
   xhr.addEventListener('load', function() {
     var statusCode = xhr.status;
     var statusText = xhr.statusText;
