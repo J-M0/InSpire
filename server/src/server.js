@@ -116,7 +116,7 @@ app.post('/addclass', function(req, res) {
 	var studentId = urlObj.query.student;
 	var courseId = urlObj.query.course;
 
-	if(fromUser === studentId) {
+	if(fromUser === parseInt(studentId)) {
 		var student = readDocument('students', studentId);
 		var course = readDocument('courses', courseId);
 
@@ -152,16 +152,16 @@ app.post('/dropclass', function(req, res) {
 	var studentId = urlObj.query.student;
 	var courseId = urlObj.query.course;
 
-	if(fromUser === studentId) {
+	if(fromUser === parseInt(studentId)) {
 		var student = readDocument('students', studentId);
 		var course = readDocument('courses', courseId);
 
-		var studentIndex = student.enrolledCourses.indexOf(courseId);
-		var courseIndex = course.enrolled.indexOf(studentId);
+		var courseIndex = student.enrolledCourses.indexOf(courseId);
+		var studentIndex = course.enrolled.indexOf(studentId);
 
 		if(studentIndex !== -1 && courseIndex !== -1) {
-			student.enrolledCourses.push(courseIndex, 1);
-			course.enrolled.push(studentIndex, 1);
+			student.enrolledCourses.splice(courseIndex, 1);
+			course.enrolled.splice(studentIndex, 1);
 		} else {
 			// Something is wrong.
 			// The studnets and courses documents are out of sync.
@@ -217,7 +217,7 @@ app.get('/students/:studentid/enrolled', function(req, res) {
   res.send(courses);
 });
 
-// GET request for student shopping cart 
+// GET request for student shopping cart
 app.get('/students/:studentid/cart', function(req, res) {
   var id = req.params.studentid;
   // authentication will go here
