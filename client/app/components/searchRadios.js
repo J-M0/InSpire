@@ -24,7 +24,7 @@ export default class SearchRadios extends React.Component {
         <div className="panel-heading" style={{color: '#354066'}}>Class Search Filters</div>
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <div className="checkbox">
-            <label><input type="checkbox" id="seats"/>Show Open Courses Only</label>
+            <label><input type="checkbox" defaultChecked id="seats"/>Show Open Courses Only</label>
           </div>
           <div className="form-group">
             <label htmlFor="keyword">Keyword:</label>
