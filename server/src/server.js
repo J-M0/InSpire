@@ -35,9 +35,6 @@ app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) 
 	// if(userid === fromUser) {
 	var results = [ '12345678', '92819522', '19103958', '18271821', '85938173', '09876543', '08874563'];
 	var courses = results.map((course) => readDocument('courses', course));
-	//for(var i = 0; i < results.length; i++) {
-		//courses[i].instructor = readDocument('professor', courses[i].instructor);
-	//}
 
 	res.send(courses);
 	// } else {
@@ -80,6 +77,13 @@ app.get('/students/:studentid', function(req, res){
 	// authentication will go here
 	var student = readDocument('students', id);
 	res.send(student);
+});
+
+//GET request for professor Information
+app.get('/professor/:professorid', function(req, res) {
+  var id = req.params.professorid;
+  var professor = readDocument('professor', id);
+  res.send(professor);
 });
 
 /*
