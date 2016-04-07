@@ -36,12 +36,12 @@ function sendXHR(verb, resource, body, cb) {
 
   // Network failure: Could not connect to server.
   xhr.addEventListener('error', function() {
-    console.log('Could not ' + verb + " " + resource + ": Could not connect to the server.");
+    InspireError('Could not ' + verb + " " + resource + ": Could not connect to the server.");
   });
 
   // Network failure: request took too long to complete.
   xhr.addEventListener('timeout', function() {
-    console.log('Could not ' + verb + " " + resource + ": Request timed out.");
+    InspireError('Could not ' + verb + " " + resource + ": Request timed out.");
   });
 
   switch (typeof(body)) {
