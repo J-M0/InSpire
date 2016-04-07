@@ -43,6 +43,16 @@ app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) 
 		});
 	}
 
+	if(body.keyword.length > 0) {
+		var keyword = body.keyword.trim();
+		if(keyword.length !== 0) {
+			var re = new RegExp(keyword, 'i');
+			results = results.filter((course) => {
+				return (re.test(course.courseName) || re.test(course.description));
+			});
+		}
+	}
+
 	var isSpace = /\s/;
 	if(!isSpace.test(body.genEdCat)) {
 		results = results.filter(matchString(body.genEdCat, 'genEdCategory'));
