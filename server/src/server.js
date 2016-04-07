@@ -47,6 +47,18 @@ app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) 
 		results = results.filter(matchString(body.genEdCat, 'genEdCategory'));
 	}
 
+	if(body.session.length > 0) {
+		results = results.filter(matchString(body.session, 'session'));
+	}
+
+	if(body.subject.length > 0) {
+		results = results.filter(matchString(body.subject, 'subject'));
+	}
+
+	if(body.instructionMode.length > 0) {
+		results = results.filter(matchString(body.instructionMode, 'instructionMode'));
+	}
+
 	results.sort((a, b) => {
 		if(a.courseNumber > b.courseNumber) {
 			return 1;
