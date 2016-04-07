@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import Calendar from './components/calendarBlock';
 /*import SideNav from './components/navbar';*/
 import ShoppingCart from './components/shoppingCart';
-import ClassInfo from './components/classInfo';
 import UserInfo from './components/userInfo';
 import SearchPanel from './components/searchPanel';
 import ErrorBanner from './components/errorbanner';
@@ -65,7 +64,7 @@ ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       {/* EXAMPLE: {{Calendar, SideNav, SearchPanel, etc., etc., etc.,}} */}
-      <IndexRoute components={{Calendar, ShoppingCart, /*navbar, */ UserInfo, ClassInfo, SearchPanelWrapper}}/>
+      <IndexRoute components={{Calendar, ShoppingCart, /*navbar, */ UserInfo, SearchPanelWrapper}}/>
       {/*DO NOT UNCOMMENT THE BELOW UNLESS YOUR NAME IS KEVIN CHAN */}
       {/*<Route path="/profile/:id" components={{Calendar, SideNav}} />*/}
     </Route>
