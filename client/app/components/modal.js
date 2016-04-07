@@ -12,7 +12,8 @@ export default class Modal extends React.Component {
     var modalTitle;
     switch (modalType) {
       case "ClassInformation":
-        modalContent = <ClassInfo data={data} noButton={this.props.noButton}/>;
+        //   console.log(this.props.removeClass);
+        modalContent = <ClassInfo data={data} noButton={this.props.noButton} removeClass={this.props.removeClass}/>;
         modalTitle = "Class Information";
         break;
       case "UnofficialTranscript":
@@ -121,17 +122,30 @@ class ClassInfo extends React.Component {
     return this.state.days.join(" / ");
   }
 
+  handleAddClass(e) {
+      e.preventDefault();
+      console.log("Added class!");
+  }
+
+  handleDropClass(e) {
+      e.preventDefault();
+    //   console.log(typeof this.props.removeClass);
+      this.props.removeClass(this.state._id);
+      console.log("Dropped class!");
+  }
+
   render() {
-    var addButton;
+    //   console.log(this.props.removeClass, this.props.noButton);
+    var button;
     var data = this.state;
     var prof = this.state.professor;
     var start = hhMMToString(new Date(data.start));
     var end = meridiemToString(new Date(data.end));
 
     if(!this.props.noButton) {
-      addButton = <button type="button" className="btn btn-primary">Add Class</button>;
+      button = <button type="button" className="btn btn-primary" onClick={(e) => this.handleAddClass(e)}>Add Class</button>;
     } else {
-      addButton = <button type="button" className="btn btn-primary">Drop Class</button>;
+        button = <button type="button" className="btn btn-primary" onClick={(e) => this.handleDropClass(e)}>Drop Class</button>;
     }
 
     return (
@@ -183,7 +197,7 @@ class ClassInfo extends React.Component {
           <div className="panel-body" style={{color:'#354066'}}>{data.description}</div>
         </div>
         <div className="modal-footer">
-          {addButton}
+          {button}
           <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>

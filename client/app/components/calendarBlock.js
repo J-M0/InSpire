@@ -1,5 +1,5 @@
 import React from 'react';
-import {getStudentInfo, getEnrolledCourses, getAvailableCourses} from '../server';
+import {getStudentInfo, getEnrolledCourses, getAvailableCourses, dropClass} from '../server';
 import {hhMMToString, meridiemToString} from '../util';
 import Modal from './modal';
 
@@ -64,6 +64,7 @@ class CalendarBlock extends React.Component {
   }
 
   render() {
+    //   console.log(this.props);
     var content = this.state.text;
     var type = "thumbnail " + this.state.type;
     var modal;
@@ -87,7 +88,7 @@ class CalendarBlock extends React.Component {
             this.state.available.map((available) => {
               if (enrolled.courseNumber === available.courseNumber) {
                 content = <CourseButton enrolledcourse={enrolled} target={this.state.id}/>;
-                modal = <Modal type="ClassInformation" data={enrolled} id={this.state.id} noButton={true} />;
+                modal = <Modal type="ClassInformation" data={enrolled} id={this.state.id} noButton={true} removeClass={this.props.removeClass}/>;
               }
             })
         })
@@ -125,6 +126,12 @@ export default class Calendar extends React.Component {
     });
   }
 
+  removeClass(course) {
+      dropClass(this.props.params.id, course, () => {
+          this.refresh();
+      });
+  }
+
   // dont feel like explaining all this right now, so bascially it just does a calculation
   // to figure out which of those two arrays of times to use and which days to render using
   // modulo.
@@ -141,7 +148,8 @@ export default class Calendar extends React.Component {
                     if (this.state.userInfo !== undefined && i%2 === 0) {
                       return(
                         <CalendarBlock userId={this.props.params.id} key={"MWF" + i/2} id={"MWF" + i/2}
-                          type="time-55" start={default55Times[i]} end={default55Times[i+1]} day={d}/>
+                          type="time-55" start={default55Times[i]} end={default55Times[i+1]} day={d}
+                          removeClass={(c) => this.removeClass(c)}/>
                       );
                     }
                   })}
@@ -151,7 +159,8 @@ export default class Calendar extends React.Component {
                       if (this.state.userInfo !== undefined && i%2 === 0) {
                         return(
                           <CalendarBlock userId={this.props.params.id} key={"MWF-Long" + i/2} id={"MWF-Long" + i/2}
-                            type="time-75" start={default75Times[i]} end={default75Times[i+1]} day={d}/>
+                            type="time-75" start={default75Times[i]} end={default75Times[i+1]} day={d}
+                            removeClass={(c) => this.removeClass(c)}/>
                         );
                       }
                     }
@@ -166,7 +175,8 @@ export default class Calendar extends React.Component {
                   if (this.state.userInfo !== undefined && i%2 === 0) {
                     return(
                       <CalendarBlock userId={this.props.params.id} key={"TTh" + i/2} id={"TTh" + i/2}
-                        type="time-75" start={default75Times[i]} end={default75Times[i+1]} day={d}/>
+                        type="time-75" start={default75Times[i]} end={default75Times[i+1]} day={d}
+                        removeClass={(c) => this.removeClass(c)}/>
                     );
                   }
                 })}
