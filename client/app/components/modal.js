@@ -13,7 +13,7 @@ export default class Modal extends React.Component {
     var modalTitle;
     switch (modalType) {
       case "ClassInformation":
-        modalContent = <ClassInfo data={data} />;
+        modalContent = <ClassInfo data={data} noButton={this.props.noButton}/>;
         modalTitle = "Class Information";
         break;
       case "UnofficialTranscript":
@@ -123,10 +123,15 @@ class ClassInfo extends React.Component {
   }
 
   render() {
+    var addButton;
     var data = this.state;
     var prof = this.state.professor;
     var start = new Date(data.start).toLocaleTimeString();
     var end = new Date(data.end).toLocaleTimeString();
+
+    if(!this.props.noButton) {
+      addButton = <button type="button" className="btn btn-primary">Add Class</button>;
+    }
 
     return (
       <div>
@@ -177,7 +182,7 @@ class ClassInfo extends React.Component {
           <div className="panel-body" style={{color:'#354066'}}>{data.description}</div>
         </div>
         <div className="modal-footer">
-          <button type="button" className="btn btn-primary">Add Class</button>
+          {addButton}
           <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -198,7 +203,7 @@ class UoTranscript extends React.Component {
 
     // Iterate over the completed courses, if there are none (i.e.
     // completedCourses.length === 0, this does nothing.
-    this.state.data.completedCourses.map((tuples, i) => {
+    this.state.data.completedCourses.map((tuples) => {
       var courseAndGrade = [];    // Another temp variable
       // Server-Database query for each completedCourse
       getCourseInfo(tuples[0], (klass) => {

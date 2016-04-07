@@ -1,5 +1,4 @@
 import React from 'react';
-import ClassInfo from './classInfo';
 import {getStudentInfo, getEnrolledCourses, getAvailableCourses} from '../server';
 import timeToString from '../util';
 import Modal from './modal';
@@ -88,7 +87,7 @@ class CalendarBlock extends React.Component {
             this.state.available.map((available) => {
               if (enrolled.courseNumber === available.courseNumber) {
                 content = <CourseButton enrolledcourse={enrolled} target={this.state.id}/>;
-                modal = <Modal type="ClassInformation" data={enrolled} id={this.state.id} />;
+                modal = <Modal type="ClassInformation" data={enrolled} id={this.state.id} noButton={true} />;
               }
             })
         })
