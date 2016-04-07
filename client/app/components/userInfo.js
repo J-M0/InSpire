@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from './modal';
 import {getStudentInfo} from '../server';
-import {ResetDatabase} from '../database';
+import {ResetDatabase} from '../resetdb';
 
 
 class LogOutButton extends React.Component {
