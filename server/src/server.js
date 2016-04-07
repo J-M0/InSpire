@@ -228,7 +228,7 @@ app.get('/students/:studentid/cart', function(req, res) {
 
   if (id == fromUser) {
     var student = readDocument('students', id);
-  
+
     for (var i = 0, cart=[]; i < student.cart.length; i++) {
       cart.push(readDocument('courses', student.cart[i]));
     }
@@ -286,11 +286,9 @@ function getUserIdFromToken(authorizationLine) {
 // GET request for student's enrolled courses as objects
 app.get('/students/:studentid/enrolledCourses', function(req, res) {
   var id = req.params.studentid;
-  var fromUser = getUserIdFromToken(req.get('Authorization'));
 
-  if (id == fromUser) {
+  if (id == getUserIdFromToken(req.get('Authorization'))) {
     var student = readDocument('students', id);
-
     var courses = [];
 
     for (var i in student.enrolledCourses){
@@ -307,9 +305,7 @@ app.get('/students/:studentid/enrolledCourses', function(req, res) {
       }
     }
     res.send(courses);
-  } else {
-    res.send(400).end();
-  }
+  } else res.send(400).end();
 });
 
 /**
