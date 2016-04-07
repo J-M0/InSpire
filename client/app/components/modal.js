@@ -31,13 +31,14 @@ export default class Modal extends React.Component {
       case "AvailableCourses":
         modalContent = <AvailableModal data={data} id={modalId}/>;
         modalTitle = "Available Courses";
+        var style={zIndex: '1049'};
         break;
       default:
         break;
     }
 
     return (
-      <div className="modal fade" role="dialog" id={modalId}>
+      <div className="modal fade" role="dialog" id={modalId} style={style}>
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
             <div className="modal-header">
@@ -268,15 +269,15 @@ class AvailableModal extends React.Component {
     data = this.state.data;
     if (data.length > 0) {
       body =
-        <div data-toggle="modal" data-target={"#"+this.props.id}>
-          {data.map((course, i) => {
+        //<div data-toggle="modal" data-target={"#"+this.props.id}>
+          data.map((course, i) => {
             return(
               <button key={"btn"+i} type="button" className="course-modal-btn" data-toggle="modal" data-target={"#"+this.state.id+i}>
                 {course.courseNumber} - {course.courseName}
               </button>
             );
-          })}
-        </div>
+          })
+        //</div>
     } else {
       body = <div><span>There are no available courses to take at this time.</span></div>;
     }
