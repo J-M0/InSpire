@@ -42,7 +42,16 @@ app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) 
 			return course.enrolled.length < course.capacity;
 		});
 	}
-
+	
+	results.sort((a, b) => {
+		if(a.courseNumber > b.courseNumber) {
+			return 1;
+		} else if (a.courseNumber < b.courseNumber) {
+			return -1;
+		} else {
+			return 0;
+		}
+	});
 	res.send(results);
 });
 
