@@ -13,7 +13,7 @@ var initialData = {
           "email": "jjackson@umass.edu",
           "academicInstitution": "U. of Massachusetts Amherst",
           "enrolledCourses": [
-            "12345678"
+            "12345678", "92819522", "19103958"
           ],
           "cart": [
             "18271821", "85938173", "09876543"
@@ -119,7 +119,7 @@ var initialData = {
           "location": "School of Management rm 137",
           "credits": 4,
           "capacity": 90,
-          "enrolled": [],
+          "enrolled": ["12345678"],
           "instructor": "83719683",
           "final": [new Date(2017, 1, 22,8,30,0,0),new Date(2017,1,22,10,30,0,0), "School of Management rm 136"],
           "category": "literature",
@@ -140,7 +140,7 @@ var initialData = {
           "location": "Thompson Hall room 106",
           "credits": 3,
           "capacity": 120,
-          "enrolled": [],
+          "enrolled": ["12345678"],
           "instructor": "83719683",
           "final": [new Date(2017, 2, 22,11,15,0,0),new Date(2017,2,22,13,15,0,0),"Thompson Hall room 105"],
           "category": "cs",

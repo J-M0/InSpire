@@ -54,56 +54,40 @@ class CalendarBlock extends React.Component {
   constructor(props) {
     super(props);
     this.state = props;
-  }
-
-  componentWillReceiveProps() {
-      this.refresh();
-  }
-
-  componentDidMount() {
-      this.refresh();
-  }
-
-  refresh() {
-    if (this.state.userId !== undefined) {
-        getEnrolledCourses(this.state.userId, (enrolled) => {
-          this.setState({enrolled});
-        });
-    }
-        getAvailableCourses(this.state.day, this.state.start, this.state.end, (available) => {
-          this.setState({available});
-        });
+    getAvailableCourses(this.state.day, this.state.start, this.state.end, (available) => {
+      this.setState({available});
+    });
   }
 
   render() {
     var content = this.state.text;
     var type = "thumbnail " + this.state.type;
     var modal;
-    if(this.state.available !== undefined)
-      {var data =  this.state.available;
+
+    if(this.state.available !== undefined) {
+      var data = this.state.available;
       modal =
         <div>
           {this.state.available.map((course, i) => {
             return(<Modal key={"modal"+i} type="ClassInformation" data={course} id={this.state.id+i} />)
           })}
           <Modal data={data} type="AvailableCourses" id={this.state.id} />
-        </div>}
+        </div>
+    }
 
     // if no content, display regular CalendarBlock times
     if (content === undefined) {
       var start = this.state.start;
       var end   = this.state.end;
-      if(this.state.enrolled !== undefined) {
-        this.state.enrolled.map((enrolled) => {
-          if (this.state.available !== undefined)
-            this.state.available.map((available) => {
-              if (enrolled.courseNumber === available.courseNumber) {
-                content = <CourseButton enrolledcourse={enrolled} target={this.state.id}/>;
-                modal = <Modal type="ClassInformation" data={enrolled} id={this.state.id} noButton={true} removeClass={this.props.removeClass}/>;
-              }
-            })
-        })
-      }
+      this.props.enrolled.map((enrolled) => {
+        if (this.state.available !== undefined)
+          this.state.available.map((available) => {
+            if (enrolled.courseNumber === available.courseNumber) {
+              content = <CourseButton enrolledcourse={enrolled} target={this.state.id}/>;
+              modal = <Modal type="ClassInformation" data={enrolled} id={this.state.id} noButton={true} removeClass={this.props.removeClass} addClass={this.props.addClass}/>;
+            }
+          })
+      })
       content = (content === undefined) ? hhMMToString(start) + " - " + meridiemToString(end) : content;
     }
 
@@ -125,26 +109,32 @@ export default class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = props;
-    this.setState({update: 1});
-  }
 
-  componentDidMount() {
+    getStudentInfo(this.props.params.id, (userInfo) => {
+      this.setState({userInfo});
+    });
+
     this.refresh();
   }
 
   refresh() {
-    getStudentInfo(this.props.params.id, (userInfo) => {
-        this.setState({userInfo: userInfo, params: {
-            id: this.state.params.id,
-            update: this.state.params.update + 1
-        }});
-    });
+    if (this.props.params.id !== undefined) {
+      getEnrolledCourses(this.props.params.id, (enrolled) => {
+        this.setState({enrolled});
+      });
+    }
   }
 
   removeClass(course) {
-      dropClass(this.props.params.id, course, () => {
-          this.refresh();
-      });
+    dropClass(this.props.params.id, course, () => {
+      this.refresh();
+    });
+  }
+
+  addClass(course) { 
+    enrollInClass(this.props.params.id, course, () => {
+      this.refresh();
+    });
   }
 
   // dont feel like explaining all this right now, so bascially it just does a calculation
@@ -160,43 +150,47 @@ export default class Calendar extends React.Component {
                 <div key={"col" + i} className="col-md-3" id={d} style={{height: '100%'}}>
                   <CalendarBlock type="day" text={d} />
                   {default55Times.map((time, i) => {
-                    if (this.state.userInfo !== undefined && i%2 === 0) {
+                    if (this.state.enrolled !== undefined && i%2 === 0) {
                       return(
-                        <CalendarBlock userId={this.props.params.id} key={"MWF" + i/2} id={"MWF" + i/2}
-                          type="time-55" start={default55Times[i]} end={default55Times[i+1]} day={d}
-                          removeClass={(c) => this.removeClass(c)} update={this.state.params.update}/>
+                        <CalendarBlock userId={this.props.params.id} key={"MWF" + i/2} id={"MWF" + i/2} type="time-55" 
+                          start={default55Times[i]} end={default55Times[i+1]} day={d} enrolled={this.state.enrolled} 
+                          removeClass={(c) => this.removeClass(c)} addClass={(c) => this.addClass(c) }/>
                       );
                     }
                   })}
 
                   {default75Times.map((time, i) => {
                     if (i > 6) {
-                      if (this.state.userInfo !== undefined && i%2 === 0) {
+                      if (this.state.enrolled !== undefined && i%2 === 0) {
                         return(
-                          <CalendarBlock userId={this.props.params.id} key={"MWF-Long" + i/2} id={"MWF-Long" + i/2}
-                            type="time-75" start={default75Times[i]} end={default75Times[i+1]} day={d}
-                            removeClass={(c) => this.removeClass(c)} update={this.state.params.update}/>
+                          <CalendarBlock userId={this.props.params.id} key={"MWF-Long" + i/2} id={"MWF-Long" + i/2} type="time-75" 
+                            start={default75Times[i]} end={default75Times[i+1]} day={d} enrolled={this.state.enrolled} 
+                            removeClass={(c) => this.removeClass(c)} addClass={(c) => this.addClass(c)} />
                         );
                       }
                     }
                   })}
                 </div>
               );
+              break;
             case 1: case 3:
-            return (
-              <div key={"col" + i} className="col-md-3" id={d}>
-                <CalendarBlock type="day" text={d} />
-                {default75Times.map((time, i) => {
-                  if (this.state.userInfo !== undefined && i%2 === 0) {
-                    return(
-                      <CalendarBlock userId={this.props.params.id} key={"TTh" + i/2} id={"TTh" + i/2}
-                        type="time-75" start={default75Times[i]} end={default75Times[i+1]} day={d}
-                        removeClass={(c) => this.removeClass(c)} update={this.state.params.update}/>
-                    );
-                  }
-                })}
-              </div>
-            );
+              return (
+                <div key={"col" + i} className="col-md-3" id={d}>
+                  <CalendarBlock type="day" text={d} />
+                  {default75Times.map((time, i) => {
+                    if (this.state.enrolled !== undefined && i%2 === 0) {
+                      return(
+                        <CalendarBlock userId={this.props.params.id} key={"TTh" + i/2} id={"TTh" + i/2} type="time-75" 
+                          start={default75Times[i]} end={default75Times[i+1]} day={d}  enrolled={this.state.enrolled} 
+                          removeClass={(c) => this.removeClass(c)} addClass={(c) => this.addClass(c)} />
+                      );
+                    }
+                  })}
+                </div>
+              );
+              break;
+            default:
+              break;
           }
         })}
       </div>
