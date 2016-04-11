@@ -1,5 +1,5 @@
 import React from 'react';
-import {getStudentInfo, getEnrolledCourses, getAvailableCourses, dropClass} from '../server';
+import {getStudentInfo, getEnrolledCourses, getAvailableCourses, dropClass, enrollInClass} from '../server';
 import {hhMMToString, meridiemToString} from '../util';
 import Modal from './modal';
 
@@ -69,7 +69,7 @@ class CalendarBlock extends React.Component {
       modal =
         <div>
           {this.state.available.map((course, i) => {
-            return(<Modal key={"modal"+i} type="ClassInformation" data={course} id={this.state.id+i} />)
+            return(<Modal key={"modal"+i} type="ClassInformation" data={course} id={this.state.id+i} addClass={this.props.addClass}/>)
           })}
           <Modal data={data} type="AvailableCourses" id={this.state.id} />
         </div>
@@ -84,7 +84,7 @@ class CalendarBlock extends React.Component {
           this.state.available.map((available) => {
             if (enrolled.courseNumber === available.courseNumber) {
               content = <CourseButton enrolledcourse={enrolled} target={this.state.id}/>;
-              modal = <Modal type="ClassInformation" data={enrolled} id={this.state.id} noButton={true} removeClass={this.props.removeClass} addClass={this.props.addClass}/>;
+              modal = <Modal type="ClassInformation" data={enrolled} id={this.state.id} noButton={true} removeClass={this.props.removeClass}/>;
             }
           })
       })

@@ -10,10 +10,12 @@ export default class Modal extends React.Component {
 
     var modalContent;
     var modalTitle;
+
+    var style;
+    var size = "modal-lg";
     switch (modalType) {
       case "ClassInformation":
-        //   console.log(this.props.removeClass);
-        modalContent = <ClassInfo data={data} noButton={this.props.noButton} removeClass={this.props.removeClass}/>;
+        modalContent = <ClassInfo id={modalId} data={data} noButton={this.props.noButton} removeClass={this.props.removeClass} addClass={this.props.addClass}/>;
         modalTitle = "Class Information";
         break;
       case "UnofficialTranscript":
@@ -31,7 +33,8 @@ export default class Modal extends React.Component {
       case "AvailableCourses":
         modalContent = <AvailableModal data={data} id={modalId}/>;
         modalTitle = "Available Courses";
-        var style={zIndex: '1049'};
+        style={zIndex: '1049'};
+        size = "";
         break;
       default:
         break;
@@ -39,7 +42,7 @@ export default class Modal extends React.Component {
 
     return (
       <div className="modal fade" role="dialog" id={modalId} style={style}>
-        <div className="modal-dialog modal-lg">
+        <div className={"modal-dialog " + size}>
           <div className="modal-content">
             <div className="modal-header">
               <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -123,19 +126,16 @@ class ClassInfo extends React.Component {
   }
 
   handleAddClass(e) {
-      e.preventDefault();
-    //   console.log("Added class!");
+    e.preventDefault();
+    this.props.addClass(this.state._id);
   }
 
   handleDropClass(e) {
-      e.preventDefault();
-    //   console.log(typeof this.props.removeClass);
-      this.props.removeClass(this.state._id);
-    //   console.log("Dropped class!");
+    e.preventDefault();
+    this.props.removeClass(this.state._id);
   }
 
   render() {
-    //   console.log(this.props.removeClass, this.props.noButton);
     var button;
     var data = this.state;
     var prof = this.state.professor;
@@ -143,9 +143,15 @@ class ClassInfo extends React.Component {
     var end = meridiemToString(new Date(data.end));
 
     if(!this.props.noButton) {
-      button = <button type="button" className="btn btn-primary" onClick={(e) => this.handleAddClass(e)}>Add Class</button>;
+      var parentModalId = this.props.id.substring(0, this.props.id.length-1);
+      button = 
+       <span style={{display: 'inline-block', marginRight: '5px'}} data-toggle="modal" data-target={"#"+parentModalId}>
+          <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={(e) => this.handleAddClass(e)}>
+            Add Class
+          </button>
+        </span>;
     } else {
-        button = <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={(e) => this.handleDropClass(e)}>Drop Class</button>;
+      button = <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={(e) => this.handleDropClass(e)}>Drop Class</button>;
     }
 
     return (
@@ -292,7 +298,7 @@ class AvailableModal extends React.Component {
           );
         });
     } else {
-      body = <div><span>There are no available courses to take at this time.</span></div>;
+      body = <div><span style={{fontWeight: 'bold'}}>There are no available courses to take at this time.</span></div>;
     }
 
     return(
