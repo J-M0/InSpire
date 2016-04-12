@@ -36,7 +36,7 @@ export default class SearchResultItem extends React.Component {
           <br />
           {description}
           <br />
-          <a className="btn" data-toggle="modal" href={"#" + modalId} style={{textAlign: 'right', width: '100%', fontSize: '1.6vh'}}>...More info</a>
+          <a className="btn" data-toggle="modal" href={"#" + modalId} style={{textAlign: 'right', width: '100%'}}>...More info</a>
         </div>
       );
     } else {

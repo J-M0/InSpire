@@ -14,9 +14,9 @@ html, body {
 }
 
 ul {
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
+  margin-bottom: 0px;
+  padding-left: 0px;
+}
 
 /* class tags begin here */
 .class-full-btn {
@@ -88,6 +88,14 @@ ul {
 
 .shop-cart-item {
   display:block;
+}
+
+.shop-cart-item > a {
+  text-align: right;
+  float: right;
+  clear: both;
+  margin-top: 10px;
+  width: 20%;
 }
 
 .shop-cart-item:hover {
@@ -294,22 +302,19 @@ ul {
   padding-bottom: 5px;
 }
 
-#shopping-cart .list-group-item {
-  margin-left: -41px;
+.list-group-item {
+  width: 100%;
+  float: left;
 }
 
 #search-results {
   margin-left: 30px;
 }
 
-#search-results .list-group-item {
-  margin-left: -41px;
-}
-
 #search-result-empty {
-    text-align: center;
-    color: red;
-    font-size: large;
+  text-align: center;
+  color: red;
+  font-size: large;
 }
 
 @keyframes expand {
