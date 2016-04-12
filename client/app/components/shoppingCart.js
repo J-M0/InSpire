@@ -15,13 +15,15 @@ export default class ShoppingCart extends React.Component {
   }
 
   handleClick(e) {
-    e.stopPropagation();
     e.preventDefault();
+    console.log("handleClick");
     this.refresh();
   }
 
   handleRemoveClick(e) {
     e.preventDefault();
+    e.stopPropagation();
+    console.log("handleRemoveClick");
     this.refresh();
   }
 
@@ -35,6 +37,12 @@ export default class ShoppingCart extends React.Component {
             return (
               <li className="list-group-item shop-cart-item" key={i} onClick={(e) => this.handleClick(e)}>
                 <span>{courses.courseNumber} - {courses.courseName}</span>
+                {/*
+								   To Do: Make the X turn white when hovered - easy
+                          Add remove from cart logic - easy
+                          Add enroll from cart logic - easy
+                          Add batch enrollment from cart logic - not so easy
+                */}
                 <span className="glyphicon glyphicon-remove pull-right shop-cart-item" style={{color: '#354066'}} onClick={(e) => this.handleRemoveClick(e)}/>
                 <Modal type="ClassInformation" data={courses} id={"CourseInfoModal" + i}/>
                 <a className="shop-cart-item" key={i} data-toggle="modal" href={"#CourseInfoModal" + i}>More info</a>
