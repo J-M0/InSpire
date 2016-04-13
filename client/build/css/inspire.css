@@ -99,7 +99,11 @@ ul {
 
 .shop-cart-item:hover {
   background-color: #354066;
-  color: white !important;
+  color: white;
+}
+
+.shop-cart-item:hover > a {
+  color:white;
 }
 
 .tab-content {

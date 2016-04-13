@@ -33,19 +33,18 @@ export default class ShoppingCart extends React.Component {
     if (this.state.cart !== undefined) {
       if (this.state.cart.length !== 0) {
         body =
-          this.state.cart.map((courses, i) => { 
+          this.state.cart.map((courses, i) => {
             return (
               <li className="list-group-item shop-cart-item" key={i} onClick={(e) => this.handleClick(e)}>
                 <span>{courses.courseNumber} - {courses.courseName}</span>
                 {/*
-								   To Do: Make the X turn white when hovered - easy
                           Add remove from cart logic - easy
                           Add enroll from cart logic - easy
                           Add batch enrollment from cart logic - not so easy
                 */}
-                <span className="glyphicon glyphicon-remove pull-right shop-cart-item" style={{color: '#354066'}} onClick={(e) => this.handleRemoveClick(e)}/>
+                <span className="glyphicon glyphicon-remove pull-right " style={{color: '#FFFFFF;'}} onClick={(e) => this.handleRemoveClick(e)}/>
                 <Modal type="ClassInformation" data={courses} id={"CourseInfoModal" + i}/>
-                <a className="shop-cart-item" key={i} data-toggle="modal" href={"#CourseInfoModal" + i}>More info</a>
+                <a key={i} data-toggle="modal" href={"#CourseInfoModal" + i}>More info</a>
               </li>
             );
           })
