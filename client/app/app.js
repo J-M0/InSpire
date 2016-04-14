@@ -59,10 +59,8 @@ class SearchPanelWrapper extends React.Component {
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
-      {/* EXAMPLE: {{Calendar, SideNav, SearchPanel, etc., etc., etc.,}} */}
-      <IndexRoute components={{Calendar, ShoppingCart, /*navbar, */ UserInfo, SearchPanelWrapper}}/>
-      {/*DO NOT UNCOMMENT THE BELOW UNLESS YOUR NAME IS KEVIN CHAN */}
-      {/*<Route path="/profile/:id" components={{Calendar, SideNav}} />*/}
+      <IndexRoute components={{Calendar, ShoppingCart, UserInfo, SearchPanelWrapper}}/>
+      <Route path="/user/:id" components={{Calendar, ShoppingCart, UserInfo, SearchPanelWrapper}}/>
     </Route>
   </Router>
 ),document.getElementById('wrapperContainer'));

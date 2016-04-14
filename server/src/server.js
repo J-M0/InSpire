@@ -129,7 +129,7 @@ app.post('/addclass', function(req, res) {
     } else {
       // Something is wrong.
       // The studnets and courses documents are out of sync.
-      res.send(500);
+      res.status(500).end();
     }
 
     writeDocument('students', student);
@@ -137,7 +137,7 @@ app.post('/addclass', function(req, res) {
 
     res.send();
   } else {
-    res.send(401).end();
+    res.status(401).end();
   }
 });
 
