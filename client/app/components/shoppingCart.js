@@ -41,23 +41,40 @@ export default class ShoppingCart extends React.Component {
 
   render() {
     var body;
-    var enroll = 
+    var englyph;
+
+    var enroll =
       <button name="singlebutton" className="btn btn-primary center-block" style={{backgroundColor:'#354066', marginTop:'5px'}}>
         Enroll
       </button>;
+
+    /* colors for glyphicons go here
+     * can enroll (green) - #348531
+     * class full (red) - #C9363E
+     * restrictions (yellow) - #D9D762
+     */
 
     if (this.state.cart !== undefined) {
       if (this.state.cart.length !== 0) {
         body =
           this.state.cart.map((course, i) => {
+            if (course.enrolled.length >= course.capacity) {
+              englyph = <span className="glyphicon glyphicon-asterisk pull-right" style={{color: '#C9363E', fontSize: '1.2em'}} />;
+            } else if (course.restrictions !== "") {
+              englyph = <span className="glyphicon glyphicon-asterisk pull-right" style={{color: '#D9D762', fontSize: '1.2em'}} />;
+            } else {
+              englyph = <span className="glyphicon glyphicon-asterisk pull-right" style={{color: '#348531', fontSize: '1.2em'}} />;
+            }
             return (
               <li className="list-group-item shop-cart-item" key={i} onClick={(e) => this.handleClick(e)}>
                 <span>{course.courseNumber} - {course.courseName}</span>
                 {/*
                           Add batch enrollment from cart logic - not so easy
                 */}
-                <span className="glyphicon glyphicon-remove pull-right " style={{color: '#FFFFFF'}} onClick={(e) => this.handleRemoveClick(e, course._id)}/>
+                <span className="glyphicon glyphicon-remove pull-right glyph-show-hover" style={{color: '#FFFFFF', display: 'none'}} onClick={(e) => this.handleRemoveClick(e, course._id)}/>
+                <span className="glyph-hide-hover" style={{marginLeft: '10px'}}>{englyph}</span>
                 <Modal type="ClassInformation" data={course} id={"CourseInfoModal" + i} addClass={(c) => this.addClass(c)} button='add' reload={this.props.reload}/>
+                <br/>
                 <a key={i} data-toggle="modal" href={"#CourseInfoModal" + i}>More info</a>
               </li>
             );

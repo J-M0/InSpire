@@ -103,7 +103,15 @@ ul {
 }
 
 .shop-cart-item:hover > a {
-  color:white;
+  color:white !important;
+}
+
+.shop-cart-item:hover > .glyph-show-hover {
+  display: block !important;
+}
+
+.shop-cart-item:hover > .glyph-hide-hover {
+  display: none !important;
 }
 
 .tab-content {
