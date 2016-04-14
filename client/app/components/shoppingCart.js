@@ -58,7 +58,8 @@ export default class ShoppingCart extends React.Component {
     if (this.state.cart !== undefined) {
       if (this.state.cart.length !== 0) {
         body =
-          this.state.cart.map((course, i) => {
+          this.state.cart.map((course) => {
+            var courseId = course._id;
             if (course.enrolled.length >= course.capacity) {
               englyph = <span className="glyphicon glyphicon-asterisk pull-right" style={{color: '#C9363E', fontSize: '1.2em'}} />;
             } else if (course.restrictions !== "") {
@@ -67,16 +68,16 @@ export default class ShoppingCart extends React.Component {
               englyph = <span className="glyphicon glyphicon-asterisk pull-right" style={{color: '#348531', fontSize: '1.2em'}} />;
             }
             return (
-              <li className="list-group-item shop-cart-item" key={i} onClick={(e) => this.handleClick(e)}>
+              <li className="list-group-item shop-cart-item" key={courseId} onClick={(e) => this.handleClick(e)}>
                 <span>{course.courseNumber} - {course.courseName}</span>
                 {/*
                           Add batch enrollment from cart logic - not so easy
                 */}
                 <span className="glyphicon glyphicon-remove pull-right glyph-show-hover" style={{color: '#FFFFFF', display: 'none'}} onClick={(e) => this.handleRemoveClick(e, course._id)}/>
                 <span className="glyph-hide-hover" style={{marginLeft: '10px'}}>{englyph}</span>
-                <Modal type="ClassInformation" data={course} id={"CourseInfoModal" + i} addClass={(c) => this.addClass(c)} button='add' reload={this.props.reload}/>
+                <Modal type="ClassInformation" data={course} id={"CourseInfoModal" + courseId} addClass={(c) => this.addClass(c)} button='add' reload={this.props.reload}/>
                 <br/>
-                <a key={i} data-toggle="modal" href={"#CourseInfoModal" + i}>More info</a>
+                <a key={courseId} data-toggle="modal" href={"#CourseInfoModal" + courseId}>More info</a>
               </li>
             );
           })
