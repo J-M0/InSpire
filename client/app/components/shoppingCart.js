@@ -37,6 +37,7 @@ export default class ShoppingCart extends React.Component {
         this.setState({cart});
       });
     });
+    this.props.reload();
   }
 
   render() {
@@ -57,7 +58,7 @@ export default class ShoppingCart extends React.Component {
                           Add batch enrollment from cart logic - not so easy
                 */}
                 <span className="glyphicon glyphicon-remove pull-right " style={{color: '#FFFFFF'}} onClick={(e) => this.handleRemoveClick(e, course._id)}/>
-                <Modal type="ClassInformation" data={course} id={"CourseInfoModal" + i} addClass={(c) => this.addClass(c)} button='add' reload={this.props.reload}/>
+                <Modal type="ClassInformation" data={course} id={"CourseInfoModal" + i} addClass={(c) => this.addClass(c)} button='add'/>
                 <a key={i} data-toggle="modal" href={"#CourseInfoModal" + i}>More info</a>
               </li>
             );
