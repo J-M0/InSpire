@@ -308,31 +308,6 @@ function getUserIdFromToken(authorizationLine) {
   }
 }
 
-// GET request for student's enrolled courses as objects
-app.get('/students/:studentid/enrolledCourses', function(req, res) {
-  var id = req.params.studentid;
-
-  if (id == getUserIdFromToken(req.get('Authorization'))) {
-    var student = readDocument('students', id);
-    var courses = [];
-
-    for (var i in student.enrolledCourses){
-      var course = readDocument('courses', student.enrolledCourses[i]);
-
-      if (courses.length == 0) courses.push(course);
-      else {
-        for (var j in courses){
-          if (course.final[0] < courses[j].final[0]){
-            courses.splice(j, 0, course);
-            break;
-          } else if (j == courses.length-1) courses.push(course);
-        }
-      }
-    }
-    res.send(courses);
-  } else res.send(400).end();
-});
-
 /**
 * Translate JSON Schema Validation failures into error 400s.
 * THIS MUST ALWAYS COME BEFORE app.listen() AND AFTER OUR ROUTES!

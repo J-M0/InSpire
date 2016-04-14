@@ -113,9 +113,11 @@ export default class Calendar extends React.Component {
     getStudentInfo(this.props.params.id, (userInfo) => {
       this.setState({userInfo});
     });
-
-    this.refresh();
   }
+
+	componentDidMount() {
+		this.props.subscribe(this);
+	}
 
   refresh() {
     if (this.props.params.id !== undefined) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {getCourseInfo, getCourseObjects, getProfessorInfo} from '../server';
+import {getCourseInfo, getProfessorInfo} from '../server';
 import {hhMMToString, meridiemToString} from '../util';
 
 export default class Modal extends React.Component {
@@ -21,6 +21,7 @@ export default class Modal extends React.Component {
       case "UnofficialTranscript":
         modalContent = <UoTranscript data={data} />;
         modalTitle = "Unofficial Transcript";
+        size = "modal-sm";
         break;
       case "FinalExamSchedule":
         modalContent = <FinalExamModal data={data} />;
@@ -34,7 +35,7 @@ export default class Modal extends React.Component {
         modalContent = <AvailableModal data={data} id={modalId}/>;
         modalTitle = "Available Courses";
         style={zIndex: '1049'};
-        size = "";
+        size = "modal-sm";
         break;
       default:
         break;
@@ -57,19 +58,14 @@ export default class Modal extends React.Component {
 }
 
 class FinalExamModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = props;
-    getCourseObjects(this.state.data._id, (courseList) => {
-      this.setState({courseList : courseList});
-    })
-  }
-
   render() {
-    var modalContent = <div style={{fontWeight: 'bold', textAlign: 'center'}}>No finals, lucky you!</div>;
-    if (this.state.courseList !== undefined) {
-      modalContent =
-        <table className="table table-striped">
+    this.props.data.sort(function(a, b) {
+      return a.final[0] > b.final[0];
+    });
+
+    var modalContent = (this.props.data.length === 0) 
+      ? <div style={{fontWeight: 'bold', textAlign: 'center'}}>No finals, lucky you!</div>
+      : <table className="table table-striped">
           <thead>
             <tr>
               <th>Date</th>
@@ -79,10 +75,10 @@ class FinalExamModal extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.courseList.map((course, i) => {
+            {this.props.data.map((course, i) => {
               var date = new Date(course.final[0]).toLocaleDateString();
               var time = meridiemToString(course.final[0]) + " - " + meridiemToString(course.final[1]);
-              var name = course.courseName;
+              var name = course.courseNumber + " " + course.courseName;
               var location = course.final[2];
               return (
                 <tr key={"tr"+i}>
@@ -95,7 +91,6 @@ class FinalExamModal extends React.Component {
             })}
           </tbody>
         </table>;
-    }
 
     return(
       <div>
@@ -213,60 +208,48 @@ class ClassInfo extends React.Component {
 
 class UoTranscript extends React.Component {
   constructor(props) {
-    // Typical constructor stuff
     super(props);
-    this.state = props;
 
-    var transcript = [];    // temp variable
-
-    // Since we know that props is not undefined (if you aren't sure,
-    // refer to userInfo.js), we can do the below!
-
-    // Iterate over the completed courses, if there are none (i.e.
-    // completedCourses.length === 0, this does nothing.
-    this.state.data.completedCourses.map((tuples) => {
-      var courseAndGrade = [];    // Another temp variable
-      // Server-Database query for each completedCourse
+    var transcript = [];
+    this.props.data.map((tuples) => {
+      var courseAndGrade = [];
       getCourseInfo(tuples[0], (klass) => {
-        // Push to the tuple
         courseAndGrade.push(klass.courseNumber + " " + klass.courseName);
         courseAndGrade.push(tuples[1]);
-        // Push tuple to transcript array
         transcript.push(courseAndGrade);
-        // Set this asynchronously, which is perfectly fine
         this.setState({transcript: transcript});
       });
     });
   }
 
   render() {
-    var modalContent;
-    if (this.state.transcript !== undefined) {
-      modalContent = this.state.transcript.map((tuples, i) => {
-        return (
-          <tr key={"tr"+i}>
-            <td>{tuples[0]}</td>
-            <td>{tuples[1]}</td>
-          </tr>
-        );
-      });
-    }
+    var modalContent = 
+      (this.state !== null) 
+      ? <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.transcript.map((tuples, i) => {
+              return (
+                <tr key={"tr"+i}>
+                  <td>{tuples[0]}</td>
+                  <td>{tuples[1]}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      : <div>You have no grades on record</div> ;
 
     return(
       <div>
         <div className="modal-body">
           <div className="panel-body" style={{color:'#354066'}}>
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th>Course</th>
-                  <th>Grade</th>
-                </tr>
-              </thead>
-              <tbody>
-                {modalContent}
-              </tbody>
-            </table>
+            {modalContent}
           </div>
         </div>
         <div className="modal-footer">
@@ -278,28 +261,19 @@ class UoTranscript extends React.Component {
 }
 
 class AvailableModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = props;
-  }
-
   render() {
     var body;
-    var data;
 
-    data = this.state.data;
-    if (data.length > 0) {
-      body =
-        data.map((course, i) => {
+    body = 
+      (this.props.data.length > 0) 
+      ? this.props.data.map((course, i) => {
           return(
-            <button key={"btn"+i} type="button" className="course-modal-btn" data-toggle="modal" data-target={"#"+this.state.id+i}>
+            <button key={"btn"+i} type="button" className="course-modal-btn" data-toggle="modal" data-target={"#"+this.props.id+i}>
               {course.courseNumber} - {course.courseName}
             </button>
           );
-        });
-    } else {
-      body = <div><span style={{fontWeight: 'bold'}}>There are no available courses to take at this time.</span></div>;
-    }
+        })
+      : body = <div><span style={{fontWeight: 'bold'}}>There are no available courses to take at this time.</span></div>;
 
     return(
       <div>

@@ -13,7 +13,7 @@ var initialData = {
           "email": "jjackson@umass.edu",
           "academicInstitution": "U. of Massachusetts Amherst",
           "enrolledCourses": [
-            "12345678", "92819522", "19103958"
+            "12345678", "19103958", "92819522"
           ],
           "cart": [
             "18271821", "85938173", "09876543"
@@ -100,7 +100,7 @@ var initialData = {
           "capacity": 120,
           "enrolled": [ "12345678" ],
           "instructor": "12345678",
-          "final": [new Date(2017, 0, 22,8,0,0,0),new Date(2017,0,22,10,0,0,0), "School of Management rm 136"],
+          "final": [new Date(2017, 0, 22,10,0,0,0),new Date(2017,0,22,12,0,0,0), "School of Management rm 135"],
           "category": "art",
           "start": new Date(0,0,0,8,0),
           "end": new Date(0,0,0,8,55),
@@ -121,7 +121,7 @@ var initialData = {
           "capacity": 90,
           "enrolled": ["12345678"],
           "instructor": "83719683",
-          "final": [new Date(2017, 1, 22,8,30,0,0),new Date(2017,1,22,10,30,0,0), "School of Management rm 136"],
+          "final": [new Date(2017, 0, 22,8,0,0,0),new Date(2017,0,22,10,0,0,0), "School of Management rm 136"],
           "category": "literature",
           "start": new Date(0,0,0,8,30),
           "end": new Date(0,0,0,9,45),
@@ -142,7 +142,7 @@ var initialData = {
           "capacity": 120,
           "enrolled": ["12345678"],
           "instructor": "83719683",
-          "final": [new Date(2017, 2, 22,11,15,0,0),new Date(2017,2,22,13,15,0,0),"Thompson Hall room 105"],
+          "final": [new Date(2017, 0, 23,11,15,0,0),new Date(2017,0,23,13,15,0,0),"Thompson Hall room 105"],
           "category": "cs",
           "start" : new Date(0,0,0,11,15),
           "end" : new Date(0,0,0,12,5),

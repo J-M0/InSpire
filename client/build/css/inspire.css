@@ -169,6 +169,10 @@ ul {
   width: 50vw;
 }
 
+.modal-sm {
+  width: 40vw;
+}
+
 .modal-title {
   color: #354066;
   font-size: 2.8vh;

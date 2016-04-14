@@ -11,11 +11,10 @@ export default class ShoppingCart extends React.Component {
     });
   }
 
-  // MADE CHANGES HERE
-  // location.reload() is only a bandaid for now
   refresh(courseId) {
-    dropCourseFromCart(this.props.params.id, courseId, () => {});
-    location.reload();
+    dropCourseFromCart(this.props.params.id, courseId, (cart) => {
+			this.setState({cart});
+		});
   }
 
   handleClick(e) {
@@ -31,12 +30,16 @@ export default class ShoppingCart extends React.Component {
 
   addClass(course) {
     enrollInClass(this.props.params.id, course, () => {
-      location.reload();
+      //location.reload();
     });
   }
 
   render() {
     var body;
+    var enroll = 
+      <button name="singlebutton" className="btn btn-primary center-block" style={{backgroundColor:'#354066', marginTop:'5px'}}>
+        Enroll
+      </button>;
 
     if (this.state.cart !== undefined) {
       if (this.state.cart.length !== 0) {
@@ -55,7 +58,8 @@ export default class ShoppingCart extends React.Component {
             );
           })
       } else {
-        body = "Your shopping cart is empty!";
+        body = <div style={{textAlign: 'center', padding: '10px'}}>Your shopping cart is empty!</div>;
+        enroll = undefined;
       }
     }
 
@@ -69,9 +73,7 @@ export default class ShoppingCart extends React.Component {
             {body}
           </ul>
         </div>
-        <button name="singlebutton" className="btn btn-primary center-block" style={{backgroundColor:'#354066', marginTop:'5px'}}>
-          Enroll
-        </button>
+        {enroll}
       </div>
     );
   }

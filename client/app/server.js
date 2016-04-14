@@ -80,12 +80,6 @@ export function getEnrolledCourses(id, cb) {
   });
 }
 
-export function getCourseObjects(id, cb) {
-  sendXHR('GET', 'students/'+id+'/enrolledCourses', undefined, (xhr) => {
-    cb(JSON.parse(xhr.responseText))
-  });
-}
-
 export function enrollInClass(studentId, courseId, cb) {
   sendXHR('POST', '/addclass?student=' + studentId + '&course=' + courseId, undefined, () => {
     cb()
