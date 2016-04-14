@@ -57,8 +57,7 @@ class CalendarBlock extends React.Component {
       modal =
         <div>
           {this.state.available.map((course, i) => {
-            return(<Modal key={"modal"+i} type="ClassInformation" data={course} id={this.state.id+i} 
-											addClass={this.props.addClass} button='add' reload={this.props.reload}/>)
+            return(<Modal key={"modal"+i} type="ClassInformation" data={course} id={this.state.id+i} addClass={this.props.addClass} button='add'/>)
           })}
           <Modal data={data} type="AvailableCourses" id={this.state.id} />
         </div>
@@ -72,8 +71,7 @@ class CalendarBlock extends React.Component {
           this.state.available.map((available) => {
             if (enrolled.courseNumber === available.courseNumber) {
               content = <CourseButton enrolledcourse={enrolled} target={this.state.id}/>;
-              modal = <Modal type="ClassInformation" data={enrolled} id={this.state.id} 
-													button='drop' removeClass={this.props.removeClass} reload={this.props.reload}/>;
+              modal = <Modal type="ClassInformation" data={enrolled} id={this.state.id} button='drop' removeClass={this.props.removeClass}/>;
             }
           })
       })
@@ -103,7 +101,7 @@ export default class Calendar extends React.Component {
   }
 
   componentDidMount() {
-    this.props.reload(this, 'Calendar', 'reload');
+    this.props.subscribe(this, 'Calendar', 'reload');
   }
 
   refresh() {
@@ -118,12 +116,14 @@ export default class Calendar extends React.Component {
     dropClass(this.props.params.id, course, () => {
       this.refresh();
     });
+    this.props.reload();
   }
 
   addClass(course) {
     enrollInClass(this.props.params.id, course, () => {
       this.refresh();
     });
+    this.props.reload();
   }
 
   render() {
@@ -140,7 +140,7 @@ export default class Calendar extends React.Component {
                       return(
                         <CalendarBlock userId={this.props.params.id} key={"MWF" + i/2} id={"MWF" + i/2} type="time-55"
                           start={default55Times[i]} end={default55Times[i+1]} day={d} enrolled={this.state.enrolled}
-                          removeClass={(c) => this.removeClass(c)} addClass={(c) => this.addClass(c)} reload={this.props.reload}/>
+                          removeClass={(c) => this.removeClass(c)} addClass={(c) => this.addClass(c)}/>
                       );
                     }
                   })}
@@ -151,7 +151,7 @@ export default class Calendar extends React.Component {
                         return(
                           <CalendarBlock userId={this.props.params.id} key={"MWF-Long" + i/2} id={"MWF-Long" + i/2} type="time-75"
                             start={default75Times[i]} end={default75Times[i+1]} day={d} enrolled={this.state.enrolled}
-                            removeClass={(c) => this.removeClass(c)} addClass={(c) => this.addClass(c)} reload={this.props.reload}/>
+                            removeClass={(c) => this.removeClass(c)} addClass={(c) => this.addClass(c)}/>
                         );
                       }
                     }
@@ -167,7 +167,7 @@ export default class Calendar extends React.Component {
                       return(
                         <CalendarBlock userId={this.props.params.id} key={"TTh" + i/2} id={"TTh" + i/2} type="time-75"
                           start={default75Times[i]} end={default75Times[i+1]} day={d}  enrolled={this.state.enrolled}
-                          removeClass={(c) => this.removeClass(c)} addClass={(c) => this.addClass(c)} reload={this.props.reload}/>
+                          removeClass={(c) => this.removeClass(c)} addClass={(c) => this.addClass(c)}/>
                       );
                     }
                   })}

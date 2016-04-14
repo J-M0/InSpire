@@ -37,6 +37,7 @@ export default class ShoppingCart extends React.Component {
         this.setState({cart});
       });
     });
+    this.props.reload();
   }
 
   render() {
