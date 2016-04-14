@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from './modal';
-import {getShoppingCart} from '../server';
+import {getShoppingCart, enrollInClass} from '../server';
 
 export default class ShoppingCart extends React.Component {
   constructor(props) {
@@ -17,14 +17,18 @@ export default class ShoppingCart extends React.Component {
   handleClick(e) {
     e.preventDefault();
     console.log("handleClick");
-    this.refresh();
   }
 
   handleRemoveClick(e) {
     e.preventDefault();
     e.stopPropagation();
     console.log("handleRemoveClick");
-    this.refresh();
+  }
+
+  addClass(course) {
+    enrollInClass(this.props.params.id, course, () => {
+      location.reload();
+    });
   }
 
   render() {
@@ -39,11 +43,10 @@ export default class ShoppingCart extends React.Component {
                 <span>{courses.courseNumber} - {courses.courseName}</span>
                 {/*
                           Add remove from cart logic - easy
-                          Add enroll from cart logic - easy
                           Add batch enrollment from cart logic - not so easy
                 */}
-                <span className="glyphicon glyphicon-remove pull-right " style={{color: '#FFFFFF;'}} onClick={(e) => this.handleRemoveClick(e)}/>
-                <Modal type="ClassInformation" data={courses} id={"CourseInfoModal" + i}/>
+                <span className="glyphicon glyphicon-remove pull-right " style={{color: '#FFFFFF'}} onClick={(e) => this.handleRemoveClick(e)}/>
+                <Modal type="ClassInformation" data={courses} id={"CourseInfoModal" + i} addClass={(c) => this.addClass(c)}/>
                 <a key={i} data-toggle="modal" href={"#CourseInfoModal" + i}>More info</a>
               </li>
             );

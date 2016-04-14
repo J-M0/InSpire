@@ -131,7 +131,7 @@ export default class Calendar extends React.Component {
     });
   }
 
-  addClass(course) { 
+  addClass(course) {
     enrollInClass(this.props.params.id, course, () => {
       this.refresh();
     });
@@ -152,8 +152,8 @@ export default class Calendar extends React.Component {
                   {default55Times.map((time, i) => {
                     if (this.state.enrolled !== undefined && i%2 === 0) {
                       return(
-                        <CalendarBlock userId={this.props.params.id} key={"MWF" + i/2} id={"MWF" + i/2} type="time-55" 
-                          start={default55Times[i]} end={default55Times[i+1]} day={d} enrolled={this.state.enrolled} 
+                        <CalendarBlock userId={this.props.params.id} key={"MWF" + i/2} id={"MWF" + i/2} type="time-55"
+                          start={default55Times[i]} end={default55Times[i+1]} day={d} enrolled={this.state.enrolled}
                           removeClass={(c) => this.removeClass(c)} addClass={(c) => this.addClass(c) }/>
                       );
                     }
@@ -163,8 +163,8 @@ export default class Calendar extends React.Component {
                     if (i > 6) {
                       if (this.state.enrolled !== undefined && i%2 === 0) {
                         return(
-                          <CalendarBlock userId={this.props.params.id} key={"MWF-Long" + i/2} id={"MWF-Long" + i/2} type="time-75" 
-                            start={default75Times[i]} end={default75Times[i+1]} day={d} enrolled={this.state.enrolled} 
+                          <CalendarBlock userId={this.props.params.id} key={"MWF-Long" + i/2} id={"MWF-Long" + i/2} type="time-75"
+                            start={default75Times[i]} end={default75Times[i+1]} day={d} enrolled={this.state.enrolled}
                             removeClass={(c) => this.removeClass(c)} addClass={(c) => this.addClass(c)} />
                         );
                       }
@@ -172,7 +172,6 @@ export default class Calendar extends React.Component {
                   })}
                 </div>
               );
-              break;
             case 1: case 3:
               return (
                 <div key={"col" + i} className="col-md-3" id={d}>
@@ -180,15 +179,14 @@ export default class Calendar extends React.Component {
                   {default75Times.map((time, i) => {
                     if (this.state.enrolled !== undefined && i%2 === 0) {
                       return(
-                        <CalendarBlock userId={this.props.params.id} key={"TTh" + i/2} id={"TTh" + i/2} type="time-75" 
-                          start={default75Times[i]} end={default75Times[i+1]} day={d}  enrolled={this.state.enrolled} 
+                        <CalendarBlock userId={this.props.params.id} key={"TTh" + i/2} id={"TTh" + i/2} type="time-75"
+                          start={default75Times[i]} end={default75Times[i+1]} day={d}  enrolled={this.state.enrolled}
                           removeClass={(c) => this.removeClass(c)} addClass={(c) => this.addClass(c)} />
                       );
                     }
                   })}
                 </div>
               );
-              break;
             default:
               break;
           }

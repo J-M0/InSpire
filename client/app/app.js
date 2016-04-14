@@ -8,19 +8,14 @@ import SearchPanel from './components/searchPanel';
 import ErrorBanner from './components/errorbanner';
 import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
-/**
-* Waiting on course information modal as well as search before i can implement shopping cart
-* Stephen P
-*/
-
 class App extends React.Component {
+
   render() {
     // Default user, to be removed
     if (this.props.Calendar.props.params.id === undefined) {
       this.props.Calendar.props.params.id=12345678;
     }
     
-
     return (
       <div className="row" id="top_container">
 
