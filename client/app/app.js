@@ -9,7 +9,6 @@ import ErrorBanner from './components/errorbanner';
 import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
 class App extends React.Component {
-  var reloadListeners = [];
   subscribe(component) {
     console.log(component);
   }

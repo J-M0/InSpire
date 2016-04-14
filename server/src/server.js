@@ -186,7 +186,7 @@ app.post('/dropfromcart', function(req, res) {
 
   var fromUser = getUserIdFromToken(req.get('Authorization'));
 
-  if (fromUser === req.body.userId) {
+  if (fromUser == req.body.userId) {
     var courseIndex = student.cart.indexOf(course);
     if (courseIndex !== -1 && student.cart.length !== 0) {
       student.cart.splice(courseIndex, 1);
@@ -195,7 +195,12 @@ app.post('/dropfromcart', function(req, res) {
     }
 
     writeDocument('students', student);
-    res.send();
+
+    for (var i = 0, cart=[]; i < student.cart.length; i++) {
+      cart.push(readDocument('courses', student.cart[i]));
+		}
+
+    res.send(cart);
 
   } else {
     res.status(401).end();

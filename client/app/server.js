@@ -100,9 +100,8 @@ export function getShoppingCart(userId, cb) {
 
 // MADE CHANGES HERE
 export function dropCourseFromCart(userId, courseId, cb) {
-  sendXHR('POST', '/dropfromcart', { userId:userId, courseId:courseId }, () => {
-    //cb(JSON.parse(xhr.responseText));
-    cb();
+  sendXHR('POST', '/dropfromcart', { userId:userId, courseId:courseId }, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
   });
 }
 
