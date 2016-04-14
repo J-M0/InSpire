@@ -15,7 +15,8 @@ export default class Modal extends React.Component {
     var size = "modal-lg";
     switch (modalType) {
       case "ClassInformation":
-        modalContent = <ClassInfo id={modalId} data={data} noButton={this.props.noButton} removeClass={this.props.removeClass} addClass={this.props.addClass}/>;
+        modalContent = <ClassInfo id={modalId} data={data} button={this.props.button} removeClass={this.props.removeClass} 
+													addClass={this.props.addClass} reload={this.props.reload}/>;
         modalTitle = "Class Information";
         break;
       case "UnofficialTranscript":
@@ -123,11 +124,13 @@ class ClassInfo extends React.Component {
   handleAddClass(e) {
     e.preventDefault();
     this.props.addClass(this.state._id);
+		this.props.reload();
   }
 
   handleDropClass(e) {
     e.preventDefault();
     this.props.removeClass(this.state._id);
+		this.props.reload();
   }
 
   render() {
@@ -137,7 +140,7 @@ class ClassInfo extends React.Component {
     var start = hhMMToString(new Date(data.start));
     var end = meridiemToString(new Date(data.end));
 
-    if(!this.props.noButton) {
+    if(this.props.button == 'add') {
       var parentModalId = this.props.id.substring(0, this.props.id.length-1);
       button = 
        <span style={{display: 'inline-block', marginRight: '5px'}} data-toggle="modal" data-target={"#"+parentModalId}>

@@ -11,10 +11,18 @@ export default class UserInfo extends React.Component {
     getStudentInfo(this.props.params.id, (userInfo) => {
       this.setState({user:userInfo});
     });
+		this.refresh();
+  }
+	
+	componentDidMount() {
+		this.props.subscribe(this, 'UserInfo', 'reload');
+	}
+
+	refresh() {	
     getEnrolledCourses(this.props.params.id, (courses) => {
       this.setState({enrolled: courses});
     });
-  }
+	}
 
   render() {
     var studentId = this.props.params.id;
@@ -34,9 +42,9 @@ export default class UserInfo extends React.Component {
           {TModal}
           {FModal}
           <ul style={{listStyleType: 'none'}}>
-            <li>  <a data-toggle="modal" href={"#FinalExamModal" + studentId}>Final Exam Schedule</a> </li>
+            <li>  <a data-toggle="modal" href={"#FinalExamModal" + studentId}>Final Exam Schedule</a>               </li>
             <li>  <a data-toggle="modal" href={"#UnofficialTranscriptModal" + studentId}>Unofficial Transcript</a>  </li>
-            <li>  <Link to="blankPage" target='/blankPage' activeClassName="active">Logout</Link> </li>
+            <li>  <Link to="blankPage" target='/blankPage' activeClassName="active">Logout</Link>                   </li>
           </ul>
           <ResetDatabase />
         </div>

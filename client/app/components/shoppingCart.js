@@ -11,10 +11,11 @@ export default class ShoppingCart extends React.Component {
     });
   }
 
-  refresh(courseId) {
-    dropCourseFromCart(this.props.params.id, courseId, (cart) => {
-			this.setState({cart});
-		});
+  componentDidMount() {
+    this.props.subscribe(this, 'ShoppingCart', 'reload');
+  }
+
+  refresh() {
   }
 
   handleClick(e) {
@@ -25,12 +26,16 @@ export default class ShoppingCart extends React.Component {
   handleRemoveClick(e, courseId) {
     e.preventDefault();
     e.stopPropagation();
-    this.refresh(courseId);
+    dropCourseFromCart(this.props.params.id, courseId, (cart) => {
+      this.setState({cart});
+    });
   }
 
   addClass(course) {
     enrollInClass(this.props.params.id, course, () => {
-      //location.reload();
+      dropCourseFromCart(this.props.params.id, course, (cart) => {
+        this.setState({cart});
+      });
     });
   }
 
@@ -52,7 +57,7 @@ export default class ShoppingCart extends React.Component {
                           Add batch enrollment from cart logic - not so easy
                 */}
                 <span className="glyphicon glyphicon-remove pull-right " style={{color: '#FFFFFF'}} onClick={(e) => this.handleRemoveClick(e, course._id)}/>
-                <Modal type="ClassInformation" data={course} id={"CourseInfoModal" + i} addClass={(c) => this.addClass(c)}/>
+                <Modal type="ClassInformation" data={course} id={"CourseInfoModal" + i} addClass={(c) => this.addClass(c)} button='add' reload={this.props.reload}/>
                 <a key={i} data-toggle="modal" href={"#CourseInfoModal" + i}>More info</a>
               </li>
             );
