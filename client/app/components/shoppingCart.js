@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from './modal';
-import {getShoppingCart, enrollInClass} from '../server';
+import {getShoppingCart, enrollInClass, dropCourseFromCart} from '../server';
 
 export default class ShoppingCart extends React.Component {
   constructor(props) {
@@ -11,18 +11,22 @@ export default class ShoppingCart extends React.Component {
     });
   }
 
-  refresh() {
+  // MADE CHANGES HERE
+  // location.reload() is only a bandaid for now
+  refresh(courseId) {
+    dropCourseFromCart(this.props.params.id, courseId, () => {});
+    location.reload();
   }
 
   handleClick(e) {
     e.preventDefault();
-    console.log("handleClick");
+    //console.log("handleClick");
   }
 
-  handleRemoveClick(e) {
+  handleRemoveClick(e, courseId) {
     e.preventDefault();
     e.stopPropagation();
-    console.log("handleRemoveClick");
+    this.refresh(courseId);
   }
 
   addClass(course) {
@@ -37,16 +41,15 @@ export default class ShoppingCart extends React.Component {
     if (this.state.cart !== undefined) {
       if (this.state.cart.length !== 0) {
         body =
-          this.state.cart.map((courses, i) => {
+          this.state.cart.map((course, i) => {
             return (
               <li className="list-group-item shop-cart-item" key={i} onClick={(e) => this.handleClick(e)}>
-                <span>{courses.courseNumber} - {courses.courseName}</span>
+                <span>{course.courseNumber} - {course.courseName}</span>
                 {/*
-                          Add remove from cart logic - easy
                           Add batch enrollment from cart logic - not so easy
                 */}
-                <span className="glyphicon glyphicon-remove pull-right " style={{color: '#FFFFFF'}} onClick={(e) => this.handleRemoveClick(e)}/>
-                <Modal type="ClassInformation" data={courses} id={"CourseInfoModal" + i} addClass={(c) => this.addClass(c)}/>
+                <span className="glyphicon glyphicon-remove pull-right " style={{color: '#FFFFFF'}} onClick={(e) => this.handleRemoveClick(e, course._id)}/>
+                <Modal type="ClassInformation" data={course} id={"CourseInfoModal" + i} addClass={(c) => this.addClass(c)}/>
                 <a key={i} data-toggle="modal" href={"#CourseInfoModal" + i}>More info</a>
               </li>
             );

@@ -137,7 +137,7 @@ app.post('/addclass', function(req, res) {
 
     res.send();
   } else {
-    res.send(401).end();
+    res.status(401).end();
   }
 });
 
@@ -174,6 +174,31 @@ app.post('/dropclass', function(req, res) {
     res.send();
   } else {
     res.send(401).end();
+  }
+});
+
+// MADE CHANGES HERE
+// POST request for removing a class from the shopping cart
+app.post('/dropfromcart', function(req, res) {
+
+  var student = readDocument('students', req.body.userId);
+  var course = req.body.courseId;
+
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
+
+  if (fromUser === req.body.userId) {
+    var courseIndex = student.cart.indexOf(course);
+    if (courseIndex !== -1 && student.cart.length !== 0) {
+      student.cart.splice(courseIndex, 1);
+    } else {
+      res.status(500).end();
+    }
+
+    writeDocument('students', student);
+    res.send();
+
+  } else {
+    res.status(401).end();
   }
 });
 
