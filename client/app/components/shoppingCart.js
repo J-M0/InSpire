@@ -50,6 +50,7 @@ export default class ShoppingCart extends React.Component {
         this.addClass(course);
       });
     }
+    this.setState({selected: []});
   }
 
   render() {
