@@ -86,6 +86,11 @@ ul {
   height: 4.5%
 }
 
+.selected {
+  background-color: #354066;
+  color: white;
+}
+
 .shop-cart-item {
   display:block;
 }

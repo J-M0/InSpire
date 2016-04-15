@@ -13,14 +13,18 @@ export default class ShoppingCart extends React.Component {
 
   componentDidMount() {
     this.props.subscribe(this, 'ShoppingCart', 'reload');
+    this.setState({selected: []});
   }
 
   refresh() {
   }
 
-  handleClick(e) {
+  handleClick(e, id) {
     e.preventDefault();
-    //console.log("handleClick");
+    var idx = this.state.selected.indexOf(id);
+    var selected = this.state.selected;
+    (idx === -1) ? selected.push(id) : selected.splice(idx, 1);
+    this.setState({selected});
   }
 
   handleRemoveClick(e, courseId) {
@@ -40,12 +44,21 @@ export default class ShoppingCart extends React.Component {
     this.props.reload();
   }
 
+  batchAddClass() {
+    if (this.state.selected.length !== 0) {
+      this.state.selected.map((course) => {
+        this.addClass(course);
+      });
+    }
+  }
+
   render() {
     var body;
     var englyph;
+    var selected;
 
     var enroll =
-      <button name="singlebutton" className="btn btn-primary center-block" style={{backgroundColor:'#354066', marginTop:'5px'}}>
+      <button name="singlebutton" className="btn btn-primary center-block" style={{backgroundColor:'#354066', marginTop:'5px'}} onClick={()=>this.batchAddClass()}>
         Enroll
       </button>;
 
@@ -60,6 +73,7 @@ export default class ShoppingCart extends React.Component {
         body =
           this.state.cart.map((course) => {
             var courseId = course._id;
+            selected = (this.state.selected.indexOf(courseId) !== -1) ? "selected" : "";
             if (course.enrolled.length >= course.capacity) {
               englyph = <span className="glyphicon glyphicon-asterisk pull-right" style={{color: '#C9363E', fontSize: '1.2em'}} />;
             } else if (course.restrictions !== "") {
@@ -68,12 +82,10 @@ export default class ShoppingCart extends React.Component {
               englyph = <span className="glyphicon glyphicon-asterisk pull-right" style={{color: '#348531', fontSize: '1.2em'}} />;
             }
             return (
-              <li className="list-group-item shop-cart-item" key={courseId} onClick={(e) => this.handleClick(e)}>
+              <li className={"list-group-item shop-cart-item " + selected} key={courseId} onClick={(e) => this.handleClick(e, courseId)}>
                 <span>{course.courseNumber} - {course.courseName}</span>
-                {/*
-                          Add batch enrollment from cart logic - not so easy
-                */}
-                <span className="glyphicon glyphicon-remove pull-right glyph-show-hover" style={{color: '#FFFFFF', display: 'none'}} onClick={(e) => this.handleRemoveClick(e, course._id)}/>
+                <span className="glyphicon glyphicon-remove pull-right glyph-show-hover" style={{color: '#FFFFFF', display: 'none'}} 
+                      onClick={(e) => this.handleRemoveClick(e, course._id)}/>
                 <span className="glyph-hide-hover" style={{marginLeft: '10px'}}>{englyph}</span>
                 <Modal type="ClassInformation" data={course} id={"CourseInfoModal" + courseId} addClass={(c) => this.addClass(c)} button='add' reload={this.props.reload}/>
                 <br/>
