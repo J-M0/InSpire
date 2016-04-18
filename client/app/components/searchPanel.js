@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchResultList from './searchResultList';
+import Modal from './modal';
 import {getSearchResults} from '../server';
 
 export default class SearchPanel extends React.Component {
@@ -141,6 +141,102 @@ class SearchRadios extends React.Component {
           </div>
         </form>
       </div>
+    );
+  }
+}
+
+class SearchResultList extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state = {results: props.data};
+  }
+
+  handleBackClick(clickEvent) {
+    clickEvent.preventDefault();
+
+    if(clickEvent.button === 0) {
+      this.props.setPanelView('search');
+    }
+  }
+
+  render() {
+    var data = this.state;
+    var body;
+    if(data.results.length === 0) {
+        body = (
+            <p id="search-result-empty">No matching classes were found</p>
+        );
+    } else {
+        body = (
+            <ul className="list group">
+              {data.results.map((result, i) => {
+                return <SearchResultItem key={i} id={i} data={result} />
+              })}
+            </ul>
+        );
+    }
+    return (
+      <div className="panel panel-default" id="search-results">
+        <div className="panel-heading" style={{color: '#354066'}}>
+          <div onClick={(e) => this.handleBackClick(e)}>
+            <span className="glyphicon glyphicon-chevron-left" style={{color: '#354066'}}></span> Search Results
+          </div>
+        </div>
+        {body}
+      </div>
+    );
+  }
+}
+
+class SearchResultItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    var newState = props.data;
+    newState.moreInfo = false;
+    this.state = newState;
+  }
+
+  handleChevronClick(clickEvent) {
+    clickEvent.preventDefault();
+
+    if(clickEvent.button === 0) {
+      this.setState({moreInfo: !this.state.moreInfo});
+    }
+  }
+
+  render() {
+    var data = this.state;
+    var body;
+    var chevron;
+    var modalId = "ResultModal" + this.props.id;
+    var description;
+
+    if(data.description.length > 100) {
+      description = data.description.substring(0, 100).concat("...");
+    }
+
+    if(this.state.moreInfo) {
+      chevron = <span className="glyphicon glyphicon-chevron-down pull-right"></span>;
+      body = (
+        <div>
+          <br />
+          {description}
+          <br />
+          <a className="btn" data-toggle="modal" href={"#" + modalId} style={{textAlign: 'right', width: '100%'}}>...More info</a>
+        </div>
+      );
+    } else {
+      chevron = <span className="glyphicon glyphicon-chevron-left pull-right"></span>;
+    }
+    return (
+      <li className="list-group-item">
+        <Modal type="ClassInformation" data={data} id={modalId} button='add'/>
+        <span className="glyphicon glyphicon-asterisk" style={{color: 'green'}}></span>
+        {data.courseNumber} - {data.courseName} <a href="#" onClick={(e) => this.handleChevronClick(e)}>{chevron}</a>
+        {body}
+      </li>
     );
   }
 }
