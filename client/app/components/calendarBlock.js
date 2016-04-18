@@ -107,6 +107,7 @@ export default class Calendar extends React.Component {
   refresh() {
     if (this.props.params.id !== undefined) {
       getEnrolledCourses(this.props.params.id, (enrolled) => {
+				console.log(enrolled);
         this.setState({enrolled});
       });
     }

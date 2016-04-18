@@ -26,7 +26,7 @@ class App extends React.Component {
     var userId = {id: this.props.params.id};
 
     if (userId.id === undefined) {
-      userId = {id:'12345678'};
+      userId = {id:'000000000000000012345678'};
     }
 
     return (
