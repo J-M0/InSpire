@@ -1,4 +1,8 @@
+// Old token
 var token = 'eyJpZCI6MTIzNDU2Nzh9';
+
+// New mongodb token
+//var token = 'eyJpZCI6IjAwMDAwMDAwMDAwMDAwMDAxMjM0NTY3OCJ9';
 
 /**
  * Properly configure+send an XMLHttpRequest with error handling, authorization token,
