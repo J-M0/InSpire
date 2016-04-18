@@ -14,9 +14,9 @@ var app = express();
 var MongoDB = require('mongodb');
 var MongoClient = MongoDB.MongoClient;
 var ObjectID = MongoDB.ObjectID;
-var url = 'mongodb://localhost:27017/InspireInc';
+var databaseUrl = 'mongodb://localhost:27017/InspireInc';
 
-MongoClient.connect(url, function(err, db) {
+MongoClient.connect(databaseUrl, function(err, db) {
   app.use(bodyParser.text());
   app.use(bodyParser.json());
   app.use('/mongo_express', mongo_express(mongo_express_config));
@@ -251,7 +251,7 @@ MongoClient.connect(url, function(err, db) {
     var id = new ObjectID(req.params.studentid);
     var fromUser = getUserIdFromToken(req.get('Authorization'));
 
-    if (id == fromUser) { 
+    if (id == fromUser) {
       db.collection('students').findOne({_id : id}, function (err, student) {
         if (err) {
           sendDatabaseError(res, err);
