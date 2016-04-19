@@ -63,7 +63,7 @@ class FinalExamModal extends React.Component {
       return a.final[0] > b.final[0];
     });
 
-    var modalContent = (this.props.data.length === 0) 
+    var modalContent = (this.props.data.length === 0)
       ? <div style={{fontWeight: 'bold', textAlign: 'center'}}>No finals, lucky you!</div>
       : <table className="table table-striped">
           <thead>
@@ -78,7 +78,7 @@ class FinalExamModal extends React.Component {
             {this.props.data.map((course, i) => {
               var date = new Date(course.final[0]).toLocaleDateString();
               var time = meridiemToString(course.final[0]) + " - " + meridiemToString(course.final[1]);
-              var name = course.courseNumber + " " + course.courseName;
+              var name = course.courseTag + " " + course.courseNumber + " " + course.courseName;
               var location = course.final[2];
               return (
                 <tr key={"tr"+i}>
@@ -139,7 +139,7 @@ class ClassInfo extends React.Component {
 
     if(this.props.button == 'add') {
       var parentModalId = this.props.id.substring(0, this.props.id.length-1);
-      button = 
+      button =
        <span style={{display: 'inline-block', marginRight: '5px'}} data-toggle="modal" data-target={"#"+parentModalId}>
           <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={(e) => this.handleAddClass(e)}>
             Add Class
@@ -165,7 +165,7 @@ class ClassInfo extends React.Component {
               </thead>
               <tbody>
                 <tr>
-                  <td>{data.courseNumber}</td>
+                  <td>{data.courseTag} {data.courseNumber}</td>
                   <td>{data.section}</td>
                   <td>{data.credits}</td>
                   <td>{data.enrolled.length}</td>
@@ -214,7 +214,7 @@ class UoTranscript extends React.Component {
     this.props.data.map((tuples) => {
       var courseAndGrade = [];
       getCourseInfo(tuples[0], (klass) => {
-        courseAndGrade.push(klass.courseNumber + " " + klass.courseName);
+        courseAndGrade.push(klass.courseTag + " " + klass.courseNumber + " " + klass.courseName);
         courseAndGrade.push(tuples[1]);
         transcript.push(courseAndGrade);
         this.setState({transcript: transcript});
@@ -223,8 +223,8 @@ class UoTranscript extends React.Component {
   }
 
   render() {
-    var modalContent = 
-      (this.state !== null) 
+    var modalContent =
+      (this.state !== null)
       ? <table className="table table-striped">
           <thead>
             <tr>
@@ -264,12 +264,12 @@ class AvailableModal extends React.Component {
   render() {
     var body;
 
-    body = 
-      (this.props.data.length > 0) 
+    body =
+      (this.props.data.length > 0)
       ? this.props.data.map((course, i) => {
           return(
             <button key={"btn"+i} type="button" className="course-modal-btn" data-toggle="modal" data-target={"#"+this.props.id+i}>
-              {course.courseNumber} - {course.courseName}
+              {course.courseTag} {course.courseNumber} - {course.courseName}
             </button>
           );
         })

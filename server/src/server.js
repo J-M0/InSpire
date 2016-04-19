@@ -51,10 +51,11 @@ MongoClient.connect(databaseUrl, function(err, db) {
     var query = {};
 
     for (var k in body) {
-      if (k === 'keyword' || k === 'seatsAvail' || k === 'opFilter') {
+      if (k === 'keyword' || k === 'seatsAvail') {
         continue;
-      }
-      if (body[k].length !== 0) {
+      } else if (k === 'opFilter') {
+        query['courseNumber']=body[k]['courseNumber'];
+      } else if (body[k].length !== 0) {
         console.log("body[" + k + "] = " + body[k].length);
         query[k] = body[k];
       }
@@ -66,7 +67,9 @@ MongoClient.connect(databaseUrl, function(err, db) {
     cursor.forEach( function (doc) {
       courses.push(doc);
     }, function () {
-      res.send(courses);
+      res.send(courses.sort(function(a, b) {
+        return a < b;
+      }));
     });
 
   });

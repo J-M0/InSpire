@@ -30,7 +30,7 @@ class CourseButton extends React.Component {
     return(
       <button type="button" className="btn btn-block btn-primary cal-btn" data-toggle="modal" data-target={"#"+this.props.target}>
         <span>{hhMMToString(course.start) + " - " + meridiemToString(course.end)}</span>
-        <span>{course.courseNumber}</span>
+        <span>{course.courseTag} {course.courseNumber}</span>
         <br/>
         <span>{course.location}</span>
       </button>
@@ -69,7 +69,9 @@ class CalendarBlock extends React.Component {
       this.props.enrolled.map((enrolled) => {
         if (this.state.available !== undefined)
           this.state.available.map((available) => {
-            if (enrolled.courseNumber === available.courseNumber) {
+            // temporary fix, change when we implement getAvailableCourses with real DB
+            var temp_course_num = enrolled.courseTag + " " + enrolled.courseNumber;
+            if (temp_course_num === available.courseNumber) {
               content = <CourseButton enrolledcourse={enrolled} target={this.state.id}/>;
               modal = <Modal type="ClassInformation" data={enrolled} id={this.state.id} button='drop' removeClass={this.props.removeClass}/>;
             }
@@ -107,7 +109,6 @@ export default class Calendar extends React.Component {
   refresh() {
     if (this.props.params.id !== undefined) {
       getEnrolledCourses(this.props.params.id, (enrolled) => {
-				console.log(enrolled);
         this.setState({enrolled});
       });
     }

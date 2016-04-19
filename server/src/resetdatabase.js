@@ -92,7 +92,8 @@ var initialData = {
   "courses": {
       "12345678": {
           "_id": new ObjectID("000000000000000012345678"),
-          "courseNumber": "COMPSCI 220",
+          "courseTag": "COMPSCI",
+          "courseNumber": "220",
           "courseName": "Programming Methodology",
           "section": 1,
           "subject": "Computer Engineering",
@@ -114,7 +115,8 @@ var initialData = {
       },
       "92819522": {
           "_id": new ObjectID("000000000000000092819522"),
-          "courseNumber": "COMPSCI 230",
+          "courseTag": "COMPSCI",
+          "courseNumber": "230",
           "courseName": "Computer Systems Principles",
           "section": 1,
           "subject": "Computer Engineering",
@@ -136,7 +138,8 @@ var initialData = {
       },
       "19103958": {
           "_id": new ObjectID("000000000000000019103958"),
-          "courseNumber": "COMPSCI 240",
+          "courseTag": "COMPSCI",
+          "courseNumber": "240",
           "courseName": "Reasoning About Uncertainty",
           "section": 2,
           "subject": "Computer Science",
@@ -158,7 +161,8 @@ var initialData = {
       },
       "18271821": {
           "_id": new ObjectID("000000000000000018271821"),
-          "courseNumber": "COMPSCI 250",
+          "courseTag": "COMPSCI",
+          "courseNumber": "250",
           "courseName": "Introduction to Computation",
           "section": 2,
           "subject": "Computer Science",
@@ -180,7 +184,8 @@ var initialData = {
       },
       "85938173": {
           "_id": new ObjectID("000000000000000085938173"),
-          "courseNumber": "COMPSCI 320",
+          "courseTag": "COMPSCI",
+          "courseNumber": "320",
           "courseName": "Software Engineering",
           "section": 3,
           "subject": "Computer Science",
@@ -202,7 +207,8 @@ var initialData = {
       },
       "09876543": {
           "_id": new ObjectID("000000000000000009876543"),
-          "courseNumber": "COMPSCI 326",
+          "courseTag": "COMPSCI",
+          "courseNumber": "326",
           "courseName": "Web Programming",
           "section": 3,
           "subject": "Computer Engineering",
@@ -224,7 +230,8 @@ var initialData = {
       },
       "8874563": {
         "_id": new ObjectID("000000000000000008874563"),
-        "courseNumber": "COMPSCI 373",
+        "courseTag": "COMPSCI",
+        "courseNumber": "373",
         "courseName": "Intro to Computer Graphics",
         "description": "This course introduces the fundamental concepts of 2D and 3D computer graphics. It covers the basic methods for modeling, rendering, and imaging. Topics include: image processing, digital photography, 2D/3D modeling, 3D graphics pipeline, OpenGL, shading, texture mapping, ray tracing, 3D printing. Throughout the class, we will teach students to learn modern graphics techniques, to model the visual world algorithmically, and to implement algorithms using Java. Students who have taken COMPSCI 473 are not eligible to take this course. Prerequisites: COMPSCI 187 (or ECE 242) and COMPSCI 190DM (or MATH 235 or COMPSCI 240 or equivalent courses from other departments).",
         "location": "Computer Science Bldg rm 142",
@@ -271,7 +278,7 @@ function resetDatabase(db, cb) {
   // "for" loop over asynchronous operations.
   var collections = Object.keys(initialData);
   var i = 0;
-  
+
   // Processes the next collection in the collections array.
   // If we have finished processing all of the collections,
   // it triggers the callback.
@@ -285,7 +292,7 @@ function resetDatabase(db, cb) {
       cb();
     }
   }
-  
+
   // Start processing the first collection!
   processNextCollection();
 }

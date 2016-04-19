@@ -68,18 +68,18 @@ class SearchRadios extends React.Component {
     clickEvent.preventDefault();
     var form = clickEvent.target;
 
-    var opFilter = {"$gte":0};
+    var opFilter = {"courseNumber":{"$gte":new String(0)}};
     if (form.classNum.value.length !== 0) {
       opFilter = {};
       switch(form.classNumOps.value) {
         case "=":
-          opFilter["$eq"]=form.classNum.value;
+          opFilter["courseNumber"]= {"$eq": form.classNum.value};
           break;
         case ">=":
-          opFilter["$gte"]=form.classNum.value;
+          opFilter["courseNumber"]= {"$gte": form.classNum.value};
           break;
         case "<=":
-          opFilter["$lte"]=form.classNum.value;
+          opFilter["courseNumber"]= {"$lte": form.classNum.value};
           break;
         default:
           break;
