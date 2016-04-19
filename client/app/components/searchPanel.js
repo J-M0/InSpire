@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from './modal';
 import {getSearchResults, enrollInClass} from '../server';
+import {hhMMToString, meridiemToString} from '../util';
 
 /*
  * TODO: STEPHEN PALAGI
@@ -245,6 +246,13 @@ class SearchResultItem extends React.Component {
     var description;
 
     var englyph;
+    var start = hhMMToString(new Date(data.start));
+    var end = meridiemToString(new Date(data.end));
+    var days = [];
+
+    for (var i=0; i < data.days.length; i++) {
+      days[i] = data.days[i].substring(0, 1);
+    }
 
     if(data.description.length > 100) {
       description = data.description.substring(0, 100).concat("...");
@@ -276,6 +284,8 @@ class SearchResultItem extends React.Component {
         {englyph}
         <Modal type="ClassInformation" data={data} id={modalId} button='add' addClass={(c) => this.addClass(c)}/>
         {data.courseTag} {data.courseNumber} - {data.courseName} <a href="#" onClick={(e) => this.handleChevronClick(e)}>{chevron}</a>
+        <br></br>
+        {days} / {start} - {end}
         {body}
       </li>
     );
