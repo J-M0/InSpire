@@ -124,33 +124,24 @@ MongoClient.connect(databaseUrl, function(err, db) {
     var courseId = new ObjectID(urlObj.query.course);
 
     if(fromUser === studentId) {
-        db.collection('courses').updateOne({ _id: courseId },
-            {
-                $pull: {
-                    enrolled: courseId
-                }
-            },
+      db.collection('courses').updateOne({ _id: courseId }, { $pull: { enrolled: courseId } }, 
+        function(err) {
+          if(err) {
+            return sendDatabaseError(res, err);
+          }
+
+          db.collection('students').updateOne({ _id: new ObjectID(studentId) }, { $pull: { enrolledCourses: courseId } },
             function(err) {
-                if(err) {
-                    return sendDatabaseError(res, err);
-                }
+              if(err) {
+                return sendDatabaseError(res, err);
+              }
 
-                db.collection('students').updateOne({ _id: new ObjectID(studentId) },
-                    {
-                        $pull: {
-                            enrolledCourses: courseId
-                        }
-                    },
-                    function(err) {
-                        if(err) {
-                            return sendDatabaseError(res, err);
-                        }
+              res.send();
 
-                        res.send();
-                    }
-                );
             }
-        );
+          );
+        }
+      );
     } else {
       res.send(401).end();
     }
