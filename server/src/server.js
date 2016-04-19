@@ -235,11 +235,13 @@ MongoClient.connect(databaseUrl, function(err, db) {
           sendDatabaseError(res, err);
         } else {
           var courses = [];
+					// A cursor is analogous to a pointer from C/C++. You need to iterate over the cursor object
+					// which is a lot like a LinkedList from Java.
           var cursor = db.collection('courses').find({_id: {$in : student.enrolledCourses}});
-          cursor.forEach( function(doc) {
-            courses.push(doc);
-          }, function () {
-            res.send(courses);
+          cursor.forEach( function(doc) { 								// From the Node.js MongoDB driver API
+            courses.push(doc);														// forEach takes 2 functions as parameters
+          }, function () {																// First function is applied every iteration
+            res.send(courses);														// Second function is applied at the end
           });
         }
       });
