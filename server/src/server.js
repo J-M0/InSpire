@@ -54,9 +54,9 @@ MongoClient.connect(databaseUrl, function(err, db) {
     for (var k in body) {
       switch(k) {
         case 'keyword':
-          if (body[k].length !== 0)
-            query['$text']= {$search: body[k]};
-          break;
+        if (body[k].length !== 0)
+        query['$text']= {$search: body[k]};
+        break;
         case 'seatsAvail':
         if (body[k]) {
           query['$where'] = 'this.enrolled.length < this.capacity';
@@ -98,60 +98,60 @@ MongoClient.connect(databaseUrl, function(err, db) {
     var courseId = new ObjectID(urlObj.query.course);
 
     if(fromUser.equals(studentId)) {
-        db.collection('students').findOne({ _id: studentId }, { enrolledCourses: 1 }, function(err, results) {
-            // console.log(results);
-            var query = {
-                $or: results.enrolledCourses.map((id) => { return { _id: id } })
+      db.collection('students').findOne({ _id: studentId }, { enrolledCourses: 1 }, function(err, results) {
+        // console.log(results);
+        var query = {
+          $or: results.enrolledCourses.map((id) => { return { _id: id } })
+        }
+        db.collection('courses').find(query).toArray(function(err, courses) {
+          if(err) {
+            return sendDatabaseError(res, err);
+          }
+
+          db.collection('courses').findOne({ _id: courseId }, function(err, enrollingCourse) {
+            if(err) {
+              return sendDatabaseError(res, err);
             }
-            db.collection('courses').find(query).toArray(function(err, courses) {
+
+            var canEnroll = true;
+
+            for(var i in courses) {
+              if(coursesConflict(courses[i], enrollingCourse)) {
+                canEnroll = false;
+                break;
+              }
+            }
+
+            if(canEnroll) {
+              db.collection('courses').updateOne({ _id: courseId }, {
+                $addToSet: {
+                  enrolled: studentId
+                }
+              }, function(err, result) {
                 if(err) {
-                    return sendDatabaseError(res, err);
+                  return sendDatabaseError(res, err);
                 }
 
-                db.collection('courses').findOne({ _id: courseId }, function(err, enrollingCourse) {
-                    if(err) {
-                        return sendDatabaseError(res, err);
-                    }
+                // console.log(result);
 
-                    var canEnroll = true;
+                db.collection('students').updateOne({ _id: studentId }, {
+                  $addToSet: {
+                    enrolledCourses: courseId
+                  }
+                }, function(err) {
+                  if(err) {
+                    return sendDatabaseError(res, err);
+                  }
 
-                    for(var i in courses) {
-                        if(coursesConflict(courses[i], enrollingCourse)) {
-                            canEnroll = false;
-                            break;
-                        }
-                    }
-
-                    if(canEnroll) {
-                        db.collection('courses').updateOne({ _id: courseId }, {
-                            $addToSet: {
-                                enrolled: studentId
-                            }
-                        }, function(err, result) {
-                            if(err) {
-                                return sendDatabaseError(res, err);
-                            }
-
-                            // console.log(result);
-
-                            db.collection('students').updateOne({ _id: studentId }, {
-                                $addToSet: {
-                                    enrolledCourses: courseId
-                                }
-                            }, function(err) {
-                                if(err) {
-                                    return sendDatabaseError(res, err);
-                                }
-
-                                res.send();
-                            });
-                        });
-                    } else {
-                        res.status(400).send("Could not enroll in class. There is a time conflict.")
-                    }
+                  res.send();
                 });
-            });
+              });
+            } else {
+              res.status(400).send("Could not enroll in class. There is a time conflict.")
+            }
+          });
         });
+      });
     } else {
       res.status(401).end();
     }
@@ -161,9 +161,9 @@ MongoClient.connect(databaseUrl, function(err, db) {
     var haveCommonDays = course1.days.some((day1) => course2.days.some((day2) => day1 === day2));
 
     if(haveCommonDays) {
-        return (course1.start <= course2.start && course2.end <= course1.end);
+      return (course1.start <= course2.start && course2.end <= course1.end);
     } else {
-        return false;
+      return false;
     }
   }
 
@@ -251,12 +251,12 @@ app.get('/courses/available/:day/:start', function(req, res) {
   var time = new Date(req.params.start);
   var day = req.params.day;
 
-  db.collection('courses').find({start : time}, {days : {$eq : day}}, function (err, courses) {
-    if (err) sendDatabaseError(res, err);
-    else {
-      var available = [];
-      for (var i in courses) available.push(courses[i]);
-    }
+  var available = [];
+  var cursor = db.collection('courses').find({start : time}, {days : {$in : day}});
+  cursor.forEach( function(course) {
+    var courseBlock = new Date(req.params.start);
+    if (course.start < courseBlock && course.end > courseBlock) available.push(course);
+  }, function () {
     res.send(available);
   });
 });
@@ -305,7 +305,7 @@ app.get('/students/:studentid/cart', function(req, res) {
 });
 
 // GET request for student information
-// Nick is doing this
+// Mike is doing this
 app.get('/students/:studentid', function(req, res) {
   var studentId = new ObjectID(req.params.studentid);
 
