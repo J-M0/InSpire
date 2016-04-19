@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from './modal';
-import {getSearchResults} from '../server';
+import {getSearchResults, enrollInClass} from '../server';
 
 export default class SearchPanel extends React.Component {
   constructor(props) {
@@ -42,7 +42,7 @@ export default class SearchPanel extends React.Component {
         contents = <LoadingScreen />;
         break;
       case 'results':
-        contents = <SearchResultList data={data.results} setPanelView={(v) => this.setView(v)}/>;
+        contents = <SearchResultList userId={this.props.userId} data={data.results} setPanelView={(v) => this.setView(v)}/>;
         break;
     }
 
@@ -171,7 +171,7 @@ class SearchResultList extends React.Component {
         body = (
             <ul className="list group">
               {data.results.map((result, i) => {
-                return <SearchResultItem key={i} id={i} data={result} />
+                return <SearchResultItem key={i} id={i} data={result} userId={this.props.userId}/>
               })}
             </ul>
         );
@@ -206,6 +206,10 @@ class SearchResultItem extends React.Component {
     }
   }
 
+  addClass(course) {
+      enrollInClass(this.props.userId.id, course);
+  }
+
   render() {
     var data = this.state;
     var body;
@@ -232,7 +236,7 @@ class SearchResultItem extends React.Component {
     }
     return (
       <li className="list-group-item">
-        <Modal type="ClassInformation" data={data} id={modalId} button='add'/>
+        <Modal type="ClassInformation" data={data} id={modalId} button='add' addClass={(c) => this.addClass(c)}/>
         <span className="glyphicon glyphicon-asterisk" style={{color: 'green'}}></span>
         {data.courseNumber} - {data.courseName} <a href="#" onClick={(e) => this.handleChevronClick(e)}>{chevron}</a>
         {body}

@@ -46,7 +46,7 @@ class App extends React.Component {
           </ul>
           <div className="tab-content">
             <div id="search" className="tab-pane fade in active">
-              <SearchPanel subscribe={this.subscribe.bind(this)} reload={this.pageReload.bind(this)}/>
+              <SearchPanel userId={userId} subscribe={this.subscribe.bind(this)} reload={this.pageReload.bind(this)}/>
             </div>
 
             <div id="cart" className="tab-pane fade in">
