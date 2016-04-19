@@ -298,12 +298,18 @@ MongoClient.connect(databaseUrl, function(err, db) {
 
   // GET request for student information
   app.get('/students/:studentid', function(req, res) {
-    var id = req.params.studentid;
+    var id = new ObjectID(req.params.studentid);
     var fromUser = getUserIdFromToken(req.get('Authorization'));
 
     if (id == fromUser) {
-      //var student = readDocument('students', id);
-      //res.send(student);
+      db.collection('students').findOne({_id : id}, function (err, student) {
+        if (err) {
+          sendDatabaseError(res, err);
+        }
+        else {
+          res.send(student);
+        }
+      });
     } else {
       res.status(400).end();
     }
