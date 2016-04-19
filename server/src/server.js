@@ -257,12 +257,12 @@ MongoClient.connect(databaseUrl, function(err, db) {
           sendDatabaseError(res, err);
         } else {
           var courses = [];
-          db.collection('courses').find({_id: {$in : student.enrolledCourses}}).each(function(err, doc) {
-            if (doc !== null) {
-              courses.push(doc);
-            }
+          var cursor = db.collection('courses').find({_id: {$in : student.enrolledCourses}});
+          cursor.forEach( function(doc) { 
+            courses.push(doc);
+          }, function () {
+            res.send(courses);
           });
-          res.send(courses);
         }
       });
     } else {
