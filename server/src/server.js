@@ -121,28 +121,36 @@ MongoClient.connect(databaseUrl, function(err, db) {
 
     var fromUser = getUserIdFromToken(req.get('Authorization'));
     var studentId = urlObj.query.student;
-    var courseId = urlObj.query.course;
+    var courseId = new ObjectID(urlObj.query.course);
 
-    if(fromUser === parseInt(studentId)) {
-      var student = readDocument('students', studentId);
-      var course = readDocument('courses', courseId);
+    if(fromUser === studentId) {
+        db.collection('courses').updateOne({ _id: courseId },
+            {
+                $pull: {
+                    enrolled: courseId
+                }
+            },
+            function(err) {
+                if(err) {
+                    return sendDatabaseError(res, err);
+                }
 
-      var courseIndex = student.enrolledCourses.indexOf(courseId);
-      var studentIndex = course.enrolled.indexOf(studentId);
+                db.collection('students').updateOne({ _id: new ObjectID(studentId) },
+                    {
+                        $pull: {
+                            enrolledCourses: courseId
+                        }
+                    },
+                    function(err) {
+                        if(err) {
+                            return sendDatabaseError(res, err);
+                        }
 
-      if(studentIndex !== -1 && courseIndex !== -1) {
-        student.enrolledCourses.splice(courseIndex, 1);
-        course.enrolled.splice(studentIndex, 1);
-      } else {
-        // Something is wrong.
-        // The studnets and courses documents are out of sync.
-        res.send(500);
-      }
-
-      writeDocument('students', student);
-      writeDocument('courses', course);
-
-      res.send();
+                        res.send();
+                    }
+                );
+            }
+        );
     } else {
       res.send(401).end();
     }
