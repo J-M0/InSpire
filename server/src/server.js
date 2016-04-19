@@ -1,20 +1,26 @@
-var express = require('express');
-var validate = require('express-jsonschema').validate;
-var bodyParser = require('body-parser');
-var url = require('url');
+// Node express variables
+var url           = require('url');
+var express       = require('express');
+var validate      = require('express-jsonschema').validate;
+var bodyParser    = require('body-parser');
+var searchSchema  = require('./schemas/searchOptions.json');
+
+// Mock db-variables, we should be able to delete these soon
 var database = require('./database');
 var readDocument = database.readDocument;
 var writeDocument = database.writeDocument;
 var addDocument = database.addDocument;
-var SearchOptionsSchema = require('./schemas/searchOptions.json');
+// Delete the above
+
+// MongoDB variables
 var mongo_express = require('mongo-express/lib/middleware');
 var mongo_express_config = require('mongo-express/config.default.js');
-var app = express();
-
 var MongoDB = require('mongodb');
 var MongoClient = MongoDB.MongoClient;
 var ObjectID = MongoDB.ObjectID;
 var databaseUrl = 'mongodb://localhost:27017/InspireInc';
+
+var app = express();
 
 MongoClient.connect(databaseUrl, function(err, db) {
   app.use(bodyParser.text());
@@ -34,7 +40,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
   });
 
   // Search for classes
-  app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) {
+  app.post('/search', validate({ body: searchSchema }), function(req, res) {
 
     /*
     "keyword",
