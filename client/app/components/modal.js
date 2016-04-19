@@ -243,7 +243,7 @@ class UoTranscript extends React.Component {
             })}
           </tbody>
         </table>
-      : <div>You have no grades on record</div> ;
+      : <div style={{fontWeight: 'bold', textAlign: 'center'}}>You have no grades on record</div> ;
 
     return(
       <div>

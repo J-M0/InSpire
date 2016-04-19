@@ -333,8 +333,8 @@ ul {
 
 #search-result-empty {
   text-align: center;
-  color: red;
-  font-size: large;
+  color: black;
+  padding-top: 10px;
 }
 
 @keyframes expand {
