@@ -2,6 +2,14 @@ import React from 'react';
 import Modal from './modal';
 import {getSearchResults, enrollInClass} from '../server';
 
+/*
+ * TODO: STEPHEN PALAGI
+ * reflect schedule conflict in glyphicons
+ * schedule conflicts on calendar are orange
+ * display class times on search results
+ * glyphicons on available modals
+ */
+
 export default class SearchPanel extends React.Component {
   constructor(props) {
     super(props);
@@ -236,8 +244,18 @@ class SearchResultItem extends React.Component {
     var modalId = "ResultModal" + this.props.id;
     var description;
 
+    var englyph;
+
     if(data.description.length > 100) {
       description = data.description.substring(0, 100).concat("...");
+    }
+
+    if (data.enrolled.length >= data.capacity) {
+      englyph = <span className="glyphicon glyphicon-asterisk pull-left" style={{color: '#C9363E', paddingRight: '10px'}} />;
+    } else if (data.restrictions !== "") {
+      englyph = <span className="glyphicon glyphicon-asterisk pull-left" style={{color: '#D9D762', paddingRight: '10px'}} />;
+    } else {
+      englyph = <span className="glyphicon glyphicon-asterisk pull-left" style={{color: '#348531', paddingRight: '10px'}} />;
     }
 
     if(this.state.moreInfo) {
@@ -255,8 +273,8 @@ class SearchResultItem extends React.Component {
     }
     return (
       <li className="list-group-item">
+        {englyph}
         <Modal type="ClassInformation" data={data} id={modalId} button='add' addClass={(c) => this.addClass(c)}/>
-        <span className="glyphicon glyphicon-asterisk" style={{color: 'green'}}></span>
         {data.courseTag} {data.courseNumber} - {data.courseName} <a href="#" onClick={(e) => this.handleChevronClick(e)}>{chevron}</a>
         {body}
       </li>
