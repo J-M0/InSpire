@@ -7,6 +7,7 @@ var searchSchema  = require('./schemas/searchOptions.json');
 
 // Mock db-variables, we should be able to delete these soon
 var database = require('./database');
+var ResetDatabase = require('./resetdatabase');
 var readDocument = database.readDocument;
 var writeDocument = database.writeDocument;
 // Delete the above
@@ -31,11 +32,12 @@ MongoClient.connect(databaseUrl, function(err, db) {
     res.status(500).send("A database error occurred: " + err);
   }
 
-  // Reset database.
+  // Reset the database.
   app.post('/resetdb', function(req, res) {
     console.log("Resetting database...");
-    database.resetDatabase();
-    res.send();
+    ResetDatabase(db, function() {
+      res.send();
+    });
   });
 
   // Search for classes
