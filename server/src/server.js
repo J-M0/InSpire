@@ -82,6 +82,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
 
   });
 
+  // POST route for enrolling a student in a class
   app.post('/addclass', function(req, res) {
     var urlObj = url.parse(req.url, true);
 
@@ -157,6 +158,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
       return false;
   }
 
+  // POST route for dropping a student from a class
   app.post('/dropclass', function(req, res) {
     var urlObj = url.parse(req.url, true);
 
@@ -169,7 +171,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
     var courseId = new ObjectID(urlObj.query.course);
 
     if(fromUser === studentId) {
-      db.collection('courses').updateOne({ _id: courseId }, { $pull: { enrolled: courseId } }, 
+      db.collection('courses').updateOne({ _id: courseId }, { $pull: { enrolled: courseId } },
         function(err) {
           if(err) {
             return sendDatabaseError(res, err);
