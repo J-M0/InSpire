@@ -105,15 +105,15 @@ MongoClient.connect(databaseUrl, function(err, db) {
                     return sendDatabaseError(res, err);
                 }
 
-                db.collection('courses').findOne({ _id: courseId }, function(err, course) {
+                db.collection('courses').findOne({ _id: courseId }, function(err, enrollingCourse) {
                     if(err) {
                         return sendDatabaseError(res, err);
                     }
 
                     var canEnroll = true;
 
-                    for(var c in courses) {
-                        if(coursesConflict(c, course)) {
+                    for(var i in courses) {
+                        if(coursesConflict(courses[i], enrollingCourse)) {
                             canEnroll = false;
                             break;
                         }
@@ -155,7 +155,21 @@ MongoClient.connect(databaseUrl, function(err, db) {
   });
 
   function coursesConflict(course1, course2) {
-      return false;
+      var days = [];
+
+      for(var i in course1.days) {
+          for(var j in course2.days) {
+              if(course1.days[i] === course2.days[j]) {
+                  days.push(course1.days[i]);
+              }
+          }
+      }
+
+      if(days.length === 0) {
+          return false;
+      } else {
+          return (course1.start <= course2.start && course2.end <= course1.end)
+      }
   }
 
   // POST route for dropping a student from a class
