@@ -262,6 +262,10 @@ function resetCollection(db, name, cb) {
   });
 }
 
+function addIndexes(db, cb) {
+  db.collection('courses').createIndex({ "description": "text", "courseName": "text"}, null, cb);
+}
+
 /**
  * Reset the MongoDB database.
  * @param db The database connection.
@@ -282,7 +286,7 @@ function resetDatabase(db, cb) {
       // Use myself as a callback.
       resetCollection(db, collection, processNextCollection);
     } else {
-      cb();
+      addIndexes(db, cb);
     }
   }
 

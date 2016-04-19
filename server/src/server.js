@@ -53,6 +53,8 @@ MongoClient.connect(databaseUrl, function(err, db) {
     for (var k in body) {
       switch(k) {
         case 'keyword':
+          if (body[k].length !== 0)
+            query['$text']= {$search: body[k]};
           break;
         case 'seatsAvail':
           if (body[k]) {
@@ -69,7 +71,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
       }
     }
 
-    // console.log(query);
+    console.log(query);
 
     var cursor = db.collection('courses').find(query);
     cursor.forEach( function (doc) {
