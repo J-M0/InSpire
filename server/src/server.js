@@ -154,6 +154,10 @@ MongoClient.connect(databaseUrl, function(err, db) {
     }
   });
 
+  // This could be simplified to just check the length of the arrays and then compare course times,
+  // but I wanted to make it more general as though this was the real world were we might have courses
+  // that are say Monday, Wednesday and Tuesday, Thursday. It doesn't actually handle that sort
+  // of case yet though. I'll work on it some more later.
   function coursesConflict(course1, course2) {
       var days = [];
 
