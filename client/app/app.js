@@ -20,7 +20,7 @@ class App extends React.Component {
       this.state[k][0].refresh();
     }
   }
-  
+
   render() {
     // Default user, to be removed
     var userId = {id: this.props.params.id};
@@ -46,7 +46,7 @@ class App extends React.Component {
           </ul>
           <div className="tab-content">
             <div id="search" className="tab-pane fade in active">
-              <SearchPanel view={'search'} subscribe={this.subscribe.bind(this)} reload={this.pageReload.bind(this)}/>
+              <SearchPanel userId={userId} subscribe={this.subscribe.bind(this)} reload={this.pageReload.bind(this)}/>
             </div>
 
             <div id="cart" className="tab-pane fade in">
