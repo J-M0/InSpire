@@ -69,7 +69,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
       }
     }
 
-    console.log(query);
+    // console.log(query);
 
     var cursor = db.collection('courses').find(query);
     cursor.forEach( function (doc) {
@@ -154,26 +154,14 @@ MongoClient.connect(databaseUrl, function(err, db) {
     }
   });
 
-  // This could be simplified to just check the length of the arrays and then compare course times,
-  // but I wanted to make it more general as though this was the real world were we might have courses
-  // that are say Monday, Wednesday and Tuesday, Thursday. It doesn't actually handle that sort
-  // of case yet though. I'll work on it some more later.
   function coursesConflict(course1, course2) {
-      var days = [];
+    var haveCommonDays = course1.days.some((day1) => course2.days.some((day2) => day1 === day2));
 
-      for(var i in course1.days) {
-          for(var j in course2.days) {
-              if(course1.days[i] === course2.days[j]) {
-                  days.push(course1.days[i]);
-              }
-          }
-      }
-
-      if(days.length === 0) {
-          return false;
-      } else {
-          return (course1.start <= course2.start && course2.end <= course1.end)
-      }
+    if(haveCommonDays) {
+        return (course1.start <= course2.start && course2.end <= course1.end);
+    } else {
+        return false;
+    }
   }
 
   // POST route for dropping a student from a class
