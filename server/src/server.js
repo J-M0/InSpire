@@ -81,34 +81,73 @@ MongoClient.connect(databaseUrl, function(err, db) {
       res.send(400).end();
     }
 
-    var fromUser = getUserIdFromToken(req.get('Authorization'));
-    var studentId = urlObj.query.student;
-    var courseId = urlObj.query.course;
+    var fromUser = new ObjectID(getUserIdFromToken(req.get('Authorization')));
+    var studentId = new ObjectID(urlObj.query.student);
+    var courseId = new ObjectID(urlObj.query.course);
 
-    if(fromUser === parseInt(studentId)) {
-      var student = readDocument('students', studentId);
-      var course = readDocument('courses', courseId);
+    if(fromUser.equals(studentId)) {
+        db.collection('students').findOne({ _id: studentId }, { enrolledCourses: 1 }, function(err, results) {
+            // console.log(results);
+            var query = {
+                $or: results.enrolledCourses.map((id) => { return { _id: id } })
+            }
+            db.collection('courses').find(query).toArray(function(err, courses) {
+                if(err) {
+                    return sendDatabaseError(res, err);
+                }
 
-      var studentIndex = student.enrolledCourses.indexOf(courseId);
-      var courseIndex = course.enrolled.indexOf(studentId);
+                db.collection('courses').findOne({ _id: courseId }, function(err, course) {
+                    if(err) {
+                        return sendDatabaseError(res, err);
+                    }
 
-      if(studentIndex === -1 && courseIndex === -1) {
-        student.enrolledCourses.push(courseId);
-        course.enrolled.push(studentId);
-      } else {
-        // Something is wrong.
-        // The studnets and courses documents are out of sync.
-        res.status(500).end();
-      }
+                    var canEnroll = true;
 
-      writeDocument('students', student);
-      writeDocument('courses', course);
+                    for(var c in courses) {
+                        if(coursesConflict(c, course)) {
+                            canEnroll = false;
+                            break;
+                        }
+                    }
 
-      res.send();
+                    if(canEnroll) {
+                        db.collection('courses').updateOne({ _id: courseId }, {
+                            $addToSet: {
+                                enrolled: studentId
+                            }
+                        }, function(err, result) {
+                            if(err) {
+                                return sendDatabaseError(res, err);
+                            }
+
+                            // console.log(result);
+
+                            db.collection('students').updateOne({ _id: studentId }, {
+                                $addToSet: {
+                                    enrolledCourses: courseId
+                                }
+                            }, function(err) {
+                                if(err) {
+                                    return sendDatabaseError(res, err);
+                                }
+
+                                res.send();
+                            });
+                        });
+                    } else {
+                        res.status(400).send("Could not enroll in class. There is a time conflict.")
+                    }
+                });
+            });
+        });
     } else {
       res.status(401).end();
     }
   });
+
+  function coursesConflict(course1, course2) {
+      return false;
+  }
 
   app.post('/dropclass', function(req, res) {
     var urlObj = url.parse(req.url, true);
