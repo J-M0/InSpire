@@ -1,20 +1,26 @@
-var express = require('express');
-var validate = require('express-jsonschema').validate;
-var bodyParser = require('body-parser');
-var url = require('url');
+// Node express variables
+var url           = require('url');
+var express       = require('express');
+var validate      = require('express-jsonschema').validate;
+var bodyParser    = require('body-parser');
+var searchSchema  = require('./schemas/searchOptions.json');
+
+// Mock db-variables, we should be able to delete these soon
 var database = require('./database');
 var readDocument = database.readDocument;
 var writeDocument = database.writeDocument;
 var addDocument = database.addDocument;
-var SearchOptionsSchema = require('./schemas/searchOptions.json');
+// Delete the above
+
+// MongoDB variables
 var mongo_express = require('mongo-express/lib/middleware');
 var mongo_express_config = require('mongo-express/config.default.js');
-var app = express();
-
 var MongoDB = require('mongodb');
 var MongoClient = MongoDB.MongoClient;
 var ObjectID = MongoDB.ObjectID;
 var databaseUrl = 'mongodb://localhost:27017/InspireInc';
+
+var app = express();
 
 MongoClient.connect(databaseUrl, function(err, db) {
   app.use(bodyParser.text());
@@ -34,16 +40,10 @@ MongoClient.connect(databaseUrl, function(err, db) {
   });
 
   // Search for classes
-  app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) {
+  app.post('/search', validate({ body: searchSchema }), function(req, res) {
 
     /*
-    "seatsAvail",
     "keyword",
-    "opFilter",
-    "subject",
-    "genEdCategory",
-    "session",
-    "instructionMode"
     */
 
     var body = req.body;
@@ -51,13 +51,21 @@ MongoClient.connect(databaseUrl, function(err, db) {
     var query = {};
 
     for (var k in body) {
-      if (k === 'keyword' || k === 'seatsAvail') {
-        continue;
-      } else if (k === 'opFilter') {
-        query['courseNumber']=body[k]['courseNumber'];
-      } else if (body[k].length !== 0) {
-        console.log("body[" + k + "] = " + body[k].length);
-        query[k] = body[k];
+      switch(k) {
+        case 'keyword':
+          break;
+        case 'seatsAvail':
+          if (body[k]) {
+            query['$where'] = 'this.enrolled.length < this.capacity';
+          }
+          break;
+        case 'opFilter':
+          query['courseNumber']=body[k]['courseNumber'];
+          break;
+        default:
+          if (body[k].length !== 0) {
+            query[k] = body[k];
+          }
       }
     }
 
@@ -161,33 +169,24 @@ MongoClient.connect(databaseUrl, function(err, db) {
     var courseId = new ObjectID(urlObj.query.course);
 
     if(fromUser === studentId) {
-        db.collection('courses').updateOne({ _id: courseId },
-            {
-                $pull: {
-                    enrolled: courseId
-                }
-            },
+      db.collection('courses').updateOne({ _id: courseId }, { $pull: { enrolled: courseId } }, 
+        function(err) {
+          if(err) {
+            return sendDatabaseError(res, err);
+          }
+
+          db.collection('students').updateOne({ _id: new ObjectID(studentId) }, { $pull: { enrolledCourses: courseId } },
             function(err) {
-                if(err) {
-                    return sendDatabaseError(res, err);
-                }
+              if(err) {
+                return sendDatabaseError(res, err);
+              }
 
-                db.collection('students').updateOne({ _id: new ObjectID(studentId) },
-                    {
-                        $pull: {
-                            enrolledCourses: courseId
-                        }
-                    },
-                    function(err) {
-                        if(err) {
-                            return sendDatabaseError(res, err);
-                        }
+              res.send();
 
-                        res.send();
-                    }
-                );
             }
-        );
+          );
+        }
+      );
     } else {
       res.send(401).end();
     }
@@ -263,13 +262,13 @@ MongoClient.connect(databaseUrl, function(err, db) {
           sendDatabaseError(res, err);
         } else {
           var courses = [];
-					// A cursor is analogous to a pointer from C/C++. You need to iterate over the cursor object
-					// which is a lot like a LinkedList from Java.
+          // A cursor is analogous to a pointer from C/C++. You need to iterate over the cursor object
+          // which is a lot like a LinkedList from Java.
           var cursor = db.collection('courses').find({_id: {$in : student.enrolledCourses}});
-          cursor.forEach( function(doc) { 								// From the Node.js MongoDB driver API
-            courses.push(doc);														// forEach takes 2 functions as parameters
-          }, function () {																// First function is applied every iteration
-            res.send(courses);														// Second function is applied at the end
+          cursor.forEach( function(doc) {                 // From the Node.js MongoDB driver API
+            courses.push(doc);                            // forEach takes 2 functions as parameters
+          }, function () {                                // First function is applied every iteration
+            res.send(courses);                            // Second function is applied at the end
           });
         }
       });

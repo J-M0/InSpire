@@ -108,7 +108,6 @@ var initialData = {
           "restrictions": "",
           "instructor": new ObjectID("000000000000000012345678"),
           "final": [new Date(2017, 0, 22,10,0,0,0),new Date(2017,0,22,12,0,0,0), "School of Management rm 135"],
-          "category": "art",
           "start": new Date(0,0,0,8,0),
           "end": new Date(0,0,0,8,55),
           "days": ["Monday","Wednesday","Friday"]
@@ -131,7 +130,6 @@ var initialData = {
           "restrictions": "",
           "instructor": new ObjectID("000000000000000083719683"),
           "final": [new Date(2017, 0, 22,8,0,0,0),new Date(2017,0,22,10,0,0,0), "School of Management rm 136"],
-          "category": "literature",
           "start": new Date(0,0,0,8,30),
           "end": new Date(0,0,0,9,45),
           "days": ["Tuesday", "Thursday"]
@@ -154,7 +152,6 @@ var initialData = {
           "restrictions": "",
           "instructor": new ObjectID("000000000000000083719683"),
           "final": [new Date(2017, 0, 23,11,15,0,0),new Date(2017,0,23,13,15,0,0),"Thompson Hall room 105"],
-          "category": "cs",
           "start" : new Date(0,0,0,11,15),
           "end" : new Date(0,0,0,12,5),
           "days": ["Monday","Wednesday","Friday"]
@@ -177,7 +174,6 @@ var initialData = {
           "restrictions": "",
           "instructor": new ObjectID("000000000000000012345678"),
           "final": [new Date(2017,3,22,14,30,0,0),new Date(2017,3,22,16,30,0,0), "Thompson Hall room 106"],
-          "category": "history",
           "start" : new Date(0,0,0,14,30),
           "end" : new Date(0,0,0,15,45),
           "days": ["Monday","Wednesday","Friday"]
@@ -200,7 +196,6 @@ var initialData = {
           "restrictions": "Must have completed CS 220 with a C or higher.",
           "instructor": new ObjectID("000000000000000023810589"),
           "final": [new Date(2017, 4, 22, 15, 0, 0), new Date(2017, 4, 22 ,17, 0, 0), "Lederle Grad Res Ctr rm A301"],
-          "category": "music",
           "start" : new Date(0,0,0,15,0),
           "end" : new Date(0,0,0,18,0),
           "days": ["Tuesday", "Thursday"]
@@ -223,7 +218,6 @@ var initialData = {
           "restrictions": "",
           "instructor": new ObjectID("000000000000000023810589"),
           "final": [new Date(2017, 5, 22,17,30,0,0),new Date(2017,5,22,19,30,0, 0),"Hasbrouck Lab Add room 126"],
-          "category": "gym",
           "start" : new Date(0,0,0,17,30),
           "end" : new Date(0,0,0,18,45),
           "days": ["Tuesday", "Thursday"]
@@ -245,10 +239,9 @@ var initialData = {
         "restrictions": "",
         "instructor": new ObjectID("000000000000000023810589"),
         "final": [new Date(2017, 5, 22,11,15,0,0),new Date(2017,5,22,13,15,0,0),"Computer Science Bldg rm 141"],
-        "category": "gym",
         "start" : new Date(0,0,0,11,15),
         "end" : new Date(0,0,0,12,5),
-        "days": ["Monday", "Wednesday", "Thursday"]
+        "days": ["Monday", "Wednesday", "Friday"]
       }
   }
 };
