@@ -19,6 +19,7 @@ var MongoDB = require('mongodb');
 var MongoClient = MongoDB.MongoClient;
 var ObjectID = MongoDB.ObjectID;
 var databaseUrl = 'mongodb://localhost:27017/InspireInc';
+var ResetDatabase = require('./resetdatabase');
 
 var app = express();
 
@@ -32,11 +33,12 @@ MongoClient.connect(databaseUrl, function(err, db) {
     res.status(500).send("A database error occurred: " + err);
   }
 
-  // Reset database.
+  // Reset the database.
   app.post('/resetdb', function(req, res) {
     console.log("Resetting database...");
-    database.resetDatabase();
-    res.send();
+    ResetDatabase(db, function() {
+      res.send();
+    });
   });
 
   // Search for classes
@@ -289,20 +291,36 @@ MongoClient.connect(databaseUrl, function(err, db) {
 
   // GET request for student shopping cart
   app.get('/students/:studentid/cart', function(req, res) {
-    var id = req.params.studentid;
-    var fromUser = getUserIdFromToken(req.get('Authorization'));
+  var id = new ObjectID(req.params.studentid);
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
 
-    if (id == fromUser) {
-      //var student = readDocument('students', id);
-
-      //for (var i = 0, cart=[]; i < student.cart.length; i++) {
-        //cart.push(readDocument('courses', student.cart[i]));
-      //}
-      //res.send(cart);
-    } else {
-      res.status(400).end();
-    }
-  });
+  if (id == fromUser) {
+    console.log("hi");
+    db.collection('students').findOne({_id : id}, function (err, student) {
+      if (err) {
+        sendDatabaseError(res, err);
+      } else {
+        var cart = [];
+        // A cursor is analogous to a pointer from C/C++. You need to iterate over the cursor object
+        // which is a lot like a LinkedList from Java.
+        var cursor = db.collection('courses').find({_id:{ $in : student.cart}});
+        cursor.forEach( function(doc) {                 // From the Node.js MongoDB driver API
+          cart.push(doc);                            // forEach takes 2 functions as parameters
+        }, function () {                                // First function is applied every iteration
+          res.send(cart.sort(function(a, b) {
+            return a.courseNumber > b.courseNumber;
+          }));                            // Second function is applied at the end
+        });
+      }
+    });
+  } else {
+    res.status(400).end();
+  }
+    //for (var i = 0, cart=[]; i < student.cart.length; i++) {
+    //cart.push(readDocument('courses', student.cart[i]));
+    //}
+    //res.send(cart);
+});
 
   // GET request for student information
   app.get('/students/:studentid', function(req, res) {
