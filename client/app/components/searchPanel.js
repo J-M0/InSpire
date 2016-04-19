@@ -257,7 +257,7 @@ class SearchResultItem extends React.Component {
       <li className="list-group-item">
         <Modal type="ClassInformation" data={data} id={modalId} button='add' addClass={(c) => this.addClass(c)}/>
         <span className="glyphicon glyphicon-asterisk" style={{color: 'green'}}></span>
-        {data.courseNumber} - {data.courseName} <a href="#" onClick={(e) => this.handleChevronClick(e)}>{chevron}</a>
+        {data.courseTag} {data.courseNumber} - {data.courseName} <a href="#" onClick={(e) => this.handleChevronClick(e)}>{chevron}</a>
         {body}
       </li>
     );
