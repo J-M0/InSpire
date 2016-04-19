@@ -37,13 +37,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
   app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) {
 
     /*
-    "seatsAvail",
     "keyword",
-    "opFilter",
-    "subject",
-    "genEdCategory",
-    "session",
-    "instructionMode"
     */
 
     var body = req.body;
@@ -51,13 +45,21 @@ MongoClient.connect(databaseUrl, function(err, db) {
     var query = {};
 
     for (var k in body) {
-      if (k === 'keyword' || k === 'seatsAvail') {
-        continue;
-      } else if (k === 'opFilter') {
-        query['courseNumber']=body[k]['courseNumber'];
-      } else if (body[k].length !== 0) {
-        console.log("body[" + k + "] = " + body[k].length);
-        query[k] = body[k];
+      switch(k) {
+        case 'keyword':
+          break;
+        case 'seatsAvail':
+          if (body[k]) {
+            query['$where'] = 'this.enrolled.length < this.capacity';
+          }
+          break;
+        case 'opFilter':
+          query['courseNumber']=body[k]['courseNumber'];
+          break;
+        default:
+          if (body[k].length !== 0) {
+            query[k] = body[k];
+          }
       }
     }
 
@@ -216,13 +218,13 @@ MongoClient.connect(databaseUrl, function(err, db) {
           sendDatabaseError(res, err);
         } else {
           var courses = [];
-					// A cursor is analogous to a pointer from C/C++. You need to iterate over the cursor object
-					// which is a lot like a LinkedList from Java.
+          // A cursor is analogous to a pointer from C/C++. You need to iterate over the cursor object
+          // which is a lot like a LinkedList from Java.
           var cursor = db.collection('courses').find({_id: {$in : student.enrolledCourses}});
-          cursor.forEach( function(doc) { 								// From the Node.js MongoDB driver API
-            courses.push(doc);														// forEach takes 2 functions as parameters
-          }, function () {																// First function is applied every iteration
-            res.send(courses);														// Second function is applied at the end
+          cursor.forEach( function(doc) {                 // From the Node.js MongoDB driver API
+            courses.push(doc);                            // forEach takes 2 functions as parameters
+          }, function () {                                // First function is applied every iteration
+            res.send(courses);                            // Second function is applied at the end
           });
         }
       });
