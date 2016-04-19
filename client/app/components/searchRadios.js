@@ -5,13 +5,31 @@ export default class SearchRadios extends React.Component {
   handleSubmit(clickEvent) {
     clickEvent.preventDefault();
     var form = clickEvent.target;
+
+    var opFilter = {"$gte":0};
+    if (form.classNum.value.length !== 0) {
+      opFilter = {};
+      switch(form.classNumOps.value) {
+        case "=":
+          opFilter["$eq"]=form.classNum.value;
+          break;
+        case ">=":
+          opFilter["$gte"]=form.classNum.value;
+          break;
+        case "<=":
+          opFilter["$lte"]=form.classNum.value;
+          break;
+        default:
+          break;
+      }
+    }
+
     var searchOptions = {
       "seatsAvail": form.seats.checked,
       "keyword": form.keyword.value,
-      "classNum": form.classNum.value,
-      "classNumOps": form.classNumOps.value,
+      opFilter,
       "subject": form.subject.value,
-      "genEdCat": form.genEdCat.value,
+      "genEdCategory": form.genEdCat.value,
       "session": form.session.value,
       "instructionMode": form.instrMode.value
     };
@@ -34,6 +52,7 @@ export default class SearchRadios extends React.Component {
             <label htmlFor="classNum">Class Number:</label>
             <select className="form control" id="classNumOps">
               <option>{"="}</option>
+              <option>&lt;=</option>
               <option>&gt;=</option>
             </select>
             <input type="text" id="classNum" className="pull-right keyword" />
@@ -41,7 +60,7 @@ export default class SearchRadios extends React.Component {
           <div className="form-group">
             <label htmlFor="subject">Subject:</label>
             <select className="form-control" id="subject">
-              <option>&nbsp;</option>
+              <option></option>
               <option>Computer Science</option>
               <option>Computer Engineering</option>
             </select>
@@ -49,7 +68,7 @@ export default class SearchRadios extends React.Component {
           <div className="form-group">
             <label htmlFor="genEdCat">Gen Ed Category:</label>
             <select className="form-control" id="genEdCat">
-              <option>&nbsp;</option>
+              <option></option>
               <option>AL Literature</option>
               <option>History</option>
               <option>Biology</option>
@@ -58,7 +77,7 @@ export default class SearchRadios extends React.Component {
           <div className="form-group">
             <label htmlFor="session">Session</label>
             <select className="form-control" id="session">
-              <option>&nbsp;</option>
+              <option></option>
               <option>*University</option>
               <option>CPE Summer Session 1</option>
             </select>
@@ -66,7 +85,7 @@ export default class SearchRadios extends React.Component {
           <div className="form-group">
             <label htmlFor="instrMode">Mode of Instruction</label>
             <select className="form-control" id="instrMode">
-              <option>&nbsp;</option>
+              <option></option>
               <option>Classroom</option>
               <option>Online</option>
             </select>

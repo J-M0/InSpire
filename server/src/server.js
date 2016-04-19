@@ -35,62 +35,40 @@ MongoClient.connect(databaseUrl, function(err, db) {
 
   // Search for classes
   app.post('/search', validate({ body: SearchOptionsSchema }), function(req, res) {
+
+    /*
+    "seatsAvail",
+    "keyword",
+    "opFilter",
+    "subject",
+    "genEdCategory",
+    "session",
+    "instructionMode"
+    */
+
     var body = req.body;
+    var courses = [];
+    var query = {};
 
-    var courses = database.getCollection('courses');
-    var results = Object.keys(courses).map((key) => {
-      return courses[key];
-    });
-
-    var classNum = parseInt(body.classNum);
-
-    if(classNum === classNum) {
-      results = results.filter(matchesClassNum(classNum, body.classNumOps));
-    }
-
-    if(body.seatsAvail) {
-      results = results.filter((course) => {
-        return course.enrolled.length < course.capacity;
-      });
-    }
-
-    if(body.keyword.length > 0) {
-      var keyword = body.keyword.trim();
-      if(keyword.length !== 0) {
-        var re = new RegExp(keyword, 'i');
-        results = results.filter((course) => {
-          return (re.test(course.courseName) || re.test(course.description));
-        });
+    for (var k in body) {
+      if (k === 'keyword' || k === 'seatsAvail' || k === 'opFilter') {
+        continue;
+      }
+      if (body[k].length !== 0) {
+        console.log("body[" + k + "] = " + body[k].length);
+        query[k] = body[k];
       }
     }
 
-    var isSpace = /\s/;
-    if(!isSpace.test(body.genEdCat)) {
-      results = results.filter(matchString(body.genEdCat, 'genEdCategory'));
-    }
+    console.log(query);
 
-    if(!isSpace.test(body.session)) {
-      results = results.filter(matchString(body.session, 'session'));
-    }
-
-    if(!isSpace.test(body.subject)) {
-      results = results.filter(matchString(body.subject, 'subject'));
-    }
-
-    if(!isSpace.test(body.instructionMode)) {
-      results = results.filter(matchString(body.instructionMode, 'instructionMode'));
-    }
-
-    results.sort((a, b) => {
-      if(a.courseNumber > b.courseNumber) {
-        return 1;
-      } else if (a.courseNumber < b.courseNumber) {
-        return -1;
-      } else {
-        return 0;
-      }
+    var cursor = db.collection('courses').find(query);
+    cursor.forEach( function (doc) {
+      courses.push(doc);
+    }, function () {
+      res.send(courses);
     });
-    res.send(results);
+
   });
 
   function matchesClassNum(classNum, op) {
@@ -258,7 +236,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
         } else {
           var courses = [];
           var cursor = db.collection('courses').find({_id: {$in : student.enrolledCourses}});
-          cursor.forEach( function(doc) { 
+          cursor.forEach( function(doc) {
             courses.push(doc);
           }, function () {
             res.send(courses);
@@ -300,11 +278,12 @@ MongoClient.connect(databaseUrl, function(err, db) {
     }
   });
 
+  // MADE CHANGES HERE FIX THIS EVENTUALLY
   //GET request for professor Information
   app.get('/professor/:professorid', function(req, res) {
     var id = req.params.professorid;
-    var professor = readDocument('professor', id);
-    res.send(professor);
+    //var professor = readDocument('professor', id);
+    //res.send(professor);
   });
 
   /*
