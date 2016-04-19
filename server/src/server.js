@@ -234,10 +234,10 @@ MongoClient.connect(databaseUrl, function(err, db) {
 
   // GET request for course information
   app.get('/courses/:courseid', function(req, res) {
-    var course = readDocument('courses', req.params.courseid);
-    course.instructor = readDocument('professor', course.instructor);
+    //var course = readDocument('courses', req.params.courseid);
+    //course.instructor = readDocument('professor', course.instructor);
 
-    res.send(course);
+    //res.send(course);
   });
 
   // GET request for available courses
