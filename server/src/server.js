@@ -68,33 +68,11 @@ MongoClient.connect(databaseUrl, function(err, db) {
       courses.push(doc);
     }, function () {
       res.send(courses.sort(function(a, b) {
-        return a < b;
+        return a.courseNumber > b.courseNumber;
       }));
     });
 
   });
-
-  function matchesClassNum(classNum, op) {
-    if(op === '=') {
-      return function(course) {
-        var num = parseInt(course.courseNumber.split(' ')[1]);
-        return classNum === num;
-      }
-    } else if(op === '>=') {
-      return function(course) {
-        var num = parseInt(course.courseNumber.split(' ')[1]);
-        return classNum <= num;
-      }
-    } else {
-      throw Error('Unknown operation: ' + op);
-    }
-  }
-
-  function matchString(string, field) {
-    return function(course) {
-      return string === course[field];
-    }
-  }
 
   app.post('/addclass', function(req, res) {
     var urlObj = url.parse(req.url, true);
