@@ -128,12 +128,10 @@ MongoClient.connect(databaseUrl, function(err, db) {
                             $addToSet: {
                                 enrolled: studentId
                             }
-                        }, function(err, result) {
+                        }, function(err) {
                             if(err) {
                                 return sendDatabaseError(res, err);
                             }
-
-                            // console.log(result);
 
                             db.collection('students').updateOne({ _id: studentId }, {
                                 $addToSet: {
