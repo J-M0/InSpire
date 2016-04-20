@@ -206,32 +206,38 @@ MongoClient.connect(databaseUrl, function(err, db) {
   // POST request for removing a class from the shopping cart
   app.post('/dropfromcart', function(req, res) {
 
-    var student = readDocument('students', req.body.userId);
-    var course = req.body.courseId;
-
+    var course = new ObjectID(req.body.courseId);
     var fromUser = getUserIdFromToken(req.get('Authorization'));
-
-    if (fromUser == req.body.userId) {
-      var courseIndex = student.cart.indexOf(course);
-      if (courseIndex !== -1 && student.cart.length !== 0) {
-        student.cart.splice(courseIndex, 1);
-      } else {
-        res.status(500).end();
-      }
-
-      writeDocument('students', student);
-
-      for (var i = 0, cart=[]; i < student.cart.length; i++) {
-        cart.push(readDocument('courses', student.cart[i]));
-      }
-
-      res.send(cart);
-
-    } else {
+    var id = new ObjectID(req.body.userId);
+    if (fromUser == id) {
+          console.log(course);
+          db.collection('students').updateOne({_id: id}, { $pull: {cart: course }}, function(err) {
+              if(err) {
+                  return sendDatabaseError(res, err);
+              }
+              db.collection('students').findOne({_id : id}, function (err, student) {
+                if (err) {
+                  sendDatabaseError(res, err);
+                }
+                else {
+                  var newCart = [];
+                  db.collection('courses').find({_id : {$in:student.cart}}).forEach(
+                    function(doc) {
+                      newCart.push(doc);
+                    },
+                    function() {
+                      res.send(newCart);
+                    }
+                  );
+                  //res.send(student.cart);
+                }
+              });
+         });
+       }
+      else {
       res.status(401).end();
     }
   });
-
   // GET request for course information
   app.get('/courses/:courseid', function(req, res) {
     //var course = readDocument('courses', req.params.courseid);

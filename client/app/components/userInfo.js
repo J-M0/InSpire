@@ -13,19 +13,19 @@ export default class UserInfo extends React.Component {
     });
 		this.refresh();
   }
-	
+
 	componentDidMount() {
 		this.props.subscribe(this, 'UserInfo', 'reload');
 	}
 
-	refresh() {	
+	refresh() {
     getEnrolledCourses(this.props.params.id, (courses) => {
       this.setState({enrolled: courses});
     });
 	}
 
   render() {
-    var studentId = this.props.params.id;
+    var studentId = this.props.params.id.substring(16);
     var FModal = (this.state.enrolled !== undefined) ? <Modal data={this.state.enrolled} type="FinalExamSchedule" id={"FinalExamModal" + studentId} /> : undefined;
 
     if (this.state.user !== undefined) {
