@@ -106,10 +106,16 @@ MongoClient.connect(databaseUrl, function(err, db) {
                     }
 
                     var canEnroll = true;
+                    var reason;
 
                     for(var i in courses) {
-                        if(coursesConflict(courses[i], enrollingCourse)) {
+                        if(courses[i]._id.equals(enrollingCourse._id)){
                             canEnroll = false;
+                            reason = "You are already enrolled in that course";
+                            break;
+                        } else if(coursesConflict(courses[i], enrollingCourse)) {
+                            canEnroll = false;
+                            reason = "There is a time conflict.";
                             break;
                         }
                     }
@@ -137,7 +143,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
                             });
                         });
                     } else {
-                        res.status(400).send("Could not enroll in class. There is a time conflict.")
+                        res.status(400).send("Could not enroll in class. " + reason);
                     }
                 });
             });
@@ -259,7 +265,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
         available.push(course);
       }
     }, function() {
-      res.send(available); 
+      res.send(available);
     });
   */
 
