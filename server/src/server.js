@@ -261,8 +261,9 @@ MongoClient.connect(databaseUrl, function(err, db) {
      if (course.days.indexOf(req.params.day) > -1 && courseStart <= blockStart && courseEnd >= blockStart){
        available.push(course);
      }
+   }, function () {
+     res.send(available);
   });
-  res.send(available);
   });
 
   // GET request for student's enrolled courses
