@@ -6,13 +6,6 @@ var bodyParser    = require('body-parser');
 var searchSchema  = require('./schemas/searchOptions.json');
 var addDropSchema = require('./schemas/addDropSchema.json');
 
-// Mock db-variables, we should be able to delete these soon
-var database = require('./database');
-var readDocument = database.readDocument;
-var writeDocument = database.writeDocument;
-var addDocument = database.addDocument;
-// Delete the above
-
 // MongoDB variables
 var mongo_express = require('mongo-express/lib/middleware');
 var mongo_express_config = require('mongo-express/config.default.js');
@@ -259,32 +252,18 @@ MongoClient.connect(databaseUrl, function(err, db) {
   // Nick is doing this
   app.get('/courses/available/:day/:start', function(req, res) {
     var available = [];
-    var courses = database.getCollection('courses');
-
     var blockStart = new Date(req.params.start);
-    for (var i in courses) {
-      var courseStart = new Date(courses[i].start);
-      var courseEnd   = new Date(courses[i].end);
-      courses[i].days.map((d) => {
-        if (req.params.day === d) {
-          if (courseStart <= blockStart && courseEnd >= blockStart) {
-            available.push(courses[i]);
-          }
-        }
-      });
-    }
-    res.send(available);
-  //   var available = [];
-  //   var blockStart = new Date(req.params.start);
-  //
-  //  var cursor = db.collection('courses').find({$where: 'this.days.indexOf(req.params.day) > -1'}, {start : req.params.start});
-  //  cursor.forEach( function(course) {
-  //    var courseStart = new Date(course.start);
-  //    var courseEnd   = new Date(course.end);
-  //    if (courseStart <= blockStart && courseEnd >= blockStart) available.push(course);
-  // }, function () {
-  //   res.send(available);
-  // });
+
+//{$where: 'this.days.indexOf(req.params.day) > -1'}, {start : req.params.start} couldn't get this to work
+   var cursor = db.collection('courses').find();
+   cursor.forEach( function(course) {
+     var courseStart = new Date(course.start);
+     var courseEnd   = new Date(course.end);
+     if (course.days.indexOf(req.params.day) > -1 && courseStart <= blockStart && courseEnd >= blockStart){
+       available.push(course);
+     }
+  });
+  res.send(available);
   });
 
   // GET request for student's enrolled courses
