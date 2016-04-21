@@ -245,10 +245,13 @@ MongoClient.connect(databaseUrl, function(err, db) {
   app.get('/courses/:courseid', function(req, res) {
     var courseId = new ObjectID(req.params.courseid);
 
-  db.collection('courses').findOne({_id : courseId}, function (err, course) {
-    if (err) sendDatabaseError(res, err);
-    else res.send(course);
-  });
+      db.collection('courses').findOne({_id : courseId}, function (err, course) {
+        if (err) {
+            sendDatabaseError(res, err);
+        } else {
+            res.send(course);
+        }
+      });
   });
 
   // GET request for available courses
@@ -366,10 +369,13 @@ MongoClient.connect(databaseUrl, function(err, db) {
   app.get('/professor/:professorid', function(req, res) {
     var professorId = new ObjectID(req.params.professorid);
 
-  db.collection('professor').findOne({_id : professorId}, function (err, professor) {
-    if (err) sendDatabaseError(res, err);
-    else res.send(professor);
-  });
+      db.collection('professor').findOne({_id : professorId}, function (err, professor) {
+        if (err) {
+            sendDatabaseError(res, err);
+        } else {
+            res.send(professor);
+        }
+      });
   });
 
   /*
