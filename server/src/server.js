@@ -210,7 +210,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
     var fromUser = getUserIdFromToken(req.get('Authorization'));
     var id = new ObjectID(req.body.userId);
     if (fromUser == id) {
-          console.log(course);
+
           db.collection('students').updateOne({_id: id}, { $pull: {cart: course }}, function(err) {
               if(err) {
                   return sendDatabaseError(res, err);
@@ -299,7 +299,6 @@ MongoClient.connect(databaseUrl, function(err, db) {
   var fromUser = getUserIdFromToken(req.get('Authorization'));
 
   if (id == fromUser) {
-    console.log("hi");
     db.collection('students').findOne({_id : id}, function (err, student) {
       if (err) {
         sendDatabaseError(res, err);
