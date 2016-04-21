@@ -259,7 +259,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
         available.push(course);
       }
     }, function() {
-      res.send(available);   Kevin Chan's fix: added the second function expected by cursor.forEach
+      res.send(available); 
     });
   */
 
