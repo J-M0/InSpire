@@ -16,7 +16,8 @@ export default class ErrorBanner extends React.Component {
       this.setState({
         active: true,
         error: errorText
-      })
+      });
+      console.error(errorText);
     };
   }
 
