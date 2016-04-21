@@ -22,6 +22,12 @@ export default class SearchPanel extends React.Component {
     this.setState({ view: newView });
   }
 
+  componentDidMount() {
+      this.props.subscribe(this, 'SearchPanel', 'reload');
+  }
+
+  refresh() {}
+
   searchClasses(searchOptions) {
     var callbackFunction = (returnedResults) => {
       this.setState({results: returnedResults});
@@ -51,7 +57,7 @@ export default class SearchPanel extends React.Component {
         contents = <LoadingScreen />;
         break;
       case 'results':
-        contents = <SearchResultList userId={this.props.userId} data={data.results} setPanelView={(v) => this.setView(v)}/>;
+        contents = <SearchResultList userId={this.props.userId} data={data.results} setPanelView={(v) => this.setView(v)} reload={this.props.reload}/>;
         break;
     }
 
@@ -199,7 +205,7 @@ class SearchResultList extends React.Component {
         body = (
             <ul className="list group">
               {data.results.map((result, i) => {
-                return <SearchResultItem key={i} id={i} data={result} userId={this.props.userId}/>
+                return <SearchResultItem key={i} id={i} data={result} userId={this.props.userId} reload={this.props.reload}/>
               })}
             </ul>
         );
@@ -235,7 +241,9 @@ class SearchResultItem extends React.Component {
   }
 
   addClass(course) {
-      enrollInClass(this.props.userId.id, course);
+      enrollInClass(this.props.userId.id, course, () => {
+          this.props.reload();
+      });
   }
 
   render() {
