@@ -4,6 +4,7 @@ var express       = require('express');
 var validate      = require('express-jsonschema').validate;
 var bodyParser    = require('body-parser');
 var searchSchema  = require('./schemas/searchOptions.json');
+var addDropSchema = require('./schemas/addDropSchema.json');
 
 // Mock db-variables, we should be able to delete these soon
 var database = require('./database');
@@ -87,7 +88,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
   });
 
   // POST route for enrolling a student in a class
-  app.post('/addclass', function(req, res) {
+  app.post('/addclass', validate({ query: addDropSchema }), function(req, res) {
     var urlObj = url.parse(req.url, true);
 
     if(urlObj.query.student === undefined || urlObj.query.course === undefined) {
@@ -167,7 +168,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
   }
 
   // POST route for dropping a student from a class
-  app.post('/dropclass', function(req, res) {
+  app.post('/dropclass', validate({ query: addDropSchema}), function(req, res) {
     var urlObj = url.parse(req.url, true);
 
     if(urlObj.query.student === undefined || urlObj.query.course === undefined) {
