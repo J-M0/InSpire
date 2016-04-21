@@ -67,8 +67,6 @@ MongoClient.connect(databaseUrl, function(err, db) {
       }
     }
 
-    console.log(query);
-
     var cursor = db.collection('courses').find(query);
     cursor.forEach( function (doc) {
       courses.push(doc);
@@ -233,7 +231,6 @@ MongoClient.connect(databaseUrl, function(err, db) {
   });
 
   // GET request for course information
-  // Nick is doing this
   app.get('/courses/:courseid', function(req, res) {
     var courseId = new ObjectID(req.params.courseid);
 
@@ -253,16 +250,26 @@ MongoClient.connect(databaseUrl, function(err, db) {
     var available = [];
     var blockStart = new Date(req.params.start);
 
-//{$where: 'this.days.indexOf(req.params.day) > -1'}, {start : req.params.start} couldn't get this to work
-   var cursor = db.collection('courses').find();
-   cursor.forEach( function(course) {
-     var courseStart = new Date(course.start);
-     var courseEnd   = new Date(course.end);
-     if (course.days.indexOf(req.params.day) > -1 && courseStart <= blockStart && courseEnd >= blockStart){
-       available.push(course);
-     }
-  });
-  res.send(available);
+  /* Nick Merlino's
+    var cursor = db.collection('courses').find();
+    cursor.forEach( function(course) {
+      var courseStart = new Date(course.start);
+      var courseEnd   = new Date(course.end);
+      if (course.days.indexOf(req.params.day) > -1 && courseStart <= blockStart && courseEnd >= blockStart){
+        available.push(course);
+      }
+    }, function() {
+      res.send(available);   Kevin Chan's fix: added the second function expected by cursor.forEach
+    });
+  */
+
+	// Alternative approach that leverages MongoDBs operators
+    var cursor = db.collection('courses').find({days: req.params.day, start: {$lte:blockStart}, end: {$gte: blockStart}});
+    cursor.forEach(function (doc) {
+        available.push(doc);
+    }, function() {
+        res.send(available);
+    });
   });
 
   // GET request for student's enrolled courses

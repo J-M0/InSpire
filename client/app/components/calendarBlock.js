@@ -57,6 +57,7 @@ class CalendarBlock extends React.Component {
       modal =
         <div>
           {this.state.available.map((course, i) => {
+            if (this.state.id === undefined) return(<span/>);
             return(<Modal key={"modal"+i} type="ClassInformation" data={course} id={this.state.id+i} addClass={this.props.addClass} button='add'/>)
           })}
           <Modal data={data} type="AvailableCourses" id={this.state.id} />
@@ -69,9 +70,7 @@ class CalendarBlock extends React.Component {
       this.props.enrolled.map((enrolled) => {
         if (this.state.available !== undefined)
           this.state.available.map((available) => {
-            // temporary fix, change when we implement getAvailableCourses with real DB
-            var temp_course_num = enrolled.courseTag + " " + enrolled.courseNumber;
-            if (temp_course_num === available.courseNumber) {
+            if (enrolled.courseNumber === available.courseNumber) {
               content = <CourseButton enrolledcourse={enrolled} target={this.state.id}/>;
               modal = <Modal type="ClassInformation" data={enrolled} id={this.state.id} button='drop' removeClass={this.props.removeClass}/>;
             }
