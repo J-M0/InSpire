@@ -94,7 +94,6 @@ MongoClient.connect(databaseUrl, function(err, db) {
 
     if(fromUser.equals(studentId)) {
         db.collection('students').findOne({ _id: studentId }, { enrolledCourses: 1 }, function(err, results) {
-            // console.log(results);
             var query = {
                 $or: results.enrolledCourses.map((id) => { return { _id: id } })
             }
