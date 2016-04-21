@@ -14,7 +14,7 @@ import React from 'react';
            document.location.reload(false);
          });
          xhr.send();
-     }} style={{color: 'red'}}>Reset Mock DB</a></div>
+     }} style={{color: 'red'}}>Reset DB</a></div>
      );
    }
  }
