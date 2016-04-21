@@ -239,16 +239,21 @@ MongoClient.connect(databaseUrl, function(err, db) {
       res.status(401).end();
     }
   });
-  // GET request for course information
-  app.get('/courses/:courseid', function(req, res) {
-    //var course = readDocument('courses', req.params.courseid);
-    //course.instructor = readDocument('professor', course.instructor);
 
-    //res.send(course);
+  // GET request for course information
+  // Nick is doing this
+  app.get('/courses/:courseid', function(req, res) {
+    var courseId = new ObjectID(req.params.courseid);
+
+  db.collection('courses').findOne({_id : courseId}, function (err, course) {
+    if (err) sendDatabaseError(res, err);
+    else res.send(course);
+  });
   });
 
   // GET request for available courses
   // May become more difficult when we extend functionality
+  // Nick is doing this
   app.get('/courses/available/:day/:start', function(req, res) {
     var available = [];
     var courses = database.getCollection('courses');
@@ -266,6 +271,17 @@ MongoClient.connect(databaseUrl, function(err, db) {
       });
     }
     res.send(available);
+  //   var available = [];
+  //   var blockStart = new Date(req.params.start);
+  //
+  //  var cursor = db.collection('courses').find({$where: 'this.days.indexOf(req.params.day) > -1'}, {start : req.params.start});
+  //  cursor.forEach( function(course) {
+  //    var courseStart = new Date(course.start);
+  //    var courseEnd   = new Date(course.end);
+  //    if (courseStart <= blockStart && courseEnd >= blockStart) available.push(course);
+  // }, function () {
+  //   res.send(available);
+  // });
   });
 
   // GET request for student's enrolled courses
@@ -345,12 +361,15 @@ MongoClient.connect(databaseUrl, function(err, db) {
     }
   });
 
-  // MADE CHANGES HERE FIX THIS EVENTUALLY
   //GET request for professor Information
+  // Nick is doing this
   app.get('/professor/:professorid', function(req, res) {
-    var id = req.params.professorid;
-    //var professor = readDocument('professor', id);
-    //res.send(professor);
+    var professorId = new ObjectID(req.params.professorid);
+
+  db.collection('professor').findOne({_id : professorId}, function (err, professor) {
+    if (err) sendDatabaseError(res, err);
+    else res.send(professor);
+  });
   });
 
   /*
