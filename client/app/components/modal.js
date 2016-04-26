@@ -159,7 +159,7 @@ class ClassInfo extends React.Component {
           </span>;
         break;
       default:
-        button = <button type="button" className="btn btn-default" data-dismiss="modal" onClick={(e) => this.handleDropClass(e)}>Drop Class</button>;
+        button = <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={(e) => this.handleDropClass(e)}>Drop Class</button>;
     }
 
     // The denominator is the number of columns
