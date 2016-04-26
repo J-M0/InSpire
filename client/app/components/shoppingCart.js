@@ -18,10 +18,9 @@ export default class ShoppingCart extends React.Component {
   refresh() {
     getEnrolledCourses(this.props.params.id, (enrolled) => {
       this.setState({enrolled});
-    });
-
-    getShoppingCart(this.props.params.id, (cart) => {
-      this.setState({cart});
+      getShoppingCart(this.props.params.id, (cart) => {
+        this.setState({cart});
+      });
     });
   }
 
