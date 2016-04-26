@@ -5,10 +5,7 @@ import {hhMMToString, meridiemToString} from '../util';
 
 /*
  * TODO: STEPHEN PALAGI
- * reflect schedule conflict in glyphicons
  * schedule conflicts on calendar are orange
- * display class times on search results
- * glyphicons on available modals
  */
 
 export default class SearchPanel extends React.Component {
