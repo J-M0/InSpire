@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from './modal';
-import {getShoppingCart, enrollInClass, dropCourseFromCart} from '../server';
+import {getShoppingCart, enrollInClass, dropCourseFromCart, getEnrolledCourses} from '../server';
 import {hhMMToString, meridiemToString} from '../util';
 
 export default class ShoppingCart extends React.Component {
@@ -10,6 +10,7 @@ export default class ShoppingCart extends React.Component {
     getShoppingCart(this.props.params.id, (cart) =>  {
       this.setState({cart});
     });
+    this.refresh();
   }
 
   componentDidMount() {
@@ -18,6 +19,9 @@ export default class ShoppingCart extends React.Component {
   }
 
   refresh() {
+    getEnrolledCourses(this.props.params.id, (enrolled) => {
+      this.setState({enrolled});
+    });
   }
 
   handleClick(e, id) {
@@ -79,6 +83,10 @@ export default class ShoppingCart extends React.Component {
             for (var i = 0; i < course.days.length; i++) {
                 days[i] = course.days[i].substring(0,1);
             }
+
+            var timeOrConflict = <span>{days} / {start} - {end}</span>;
+            var buttonType = 'add';
+
             var courseId = course._id;
             selected = (this.state.selected.indexOf(courseId) !== -1) ? "selected" : "";
             if (course.enrolled.length >= course.capacity) {
@@ -88,15 +96,29 @@ export default class ShoppingCart extends React.Component {
             } else {
               englyph = <span className="glyphicon glyphicon-asterisk pull-right" style={{color: '#348531', fontSize: '1.2em'}} />;
             }
+
+            if (this.state.enrolled !== undefined) {
+              this.state.enrolled.map((enrolledCourse) => {
+                // Crazy array intersection code
+                if (enrolledCourse.days.filter(function (n) { return course.days.indexOf(n) != -1;}).length !== 0 && 
+                    ((course.start >=  enrolledCourse.start && course.start <= enrolledCourse.end) ||
+                    (course.end >=  enrolledCourse.start && course.end <= enrolledCourse.end))) {
+                  timeOrConflict = <span style={{fontWeight: 'bold'}}>Conflicts with {enrolledCourse.courseTag} {enrolledCourse.courseNumber}</span>;
+                  buttonType = 'conflict';
+                }
+              });
+            }
+
             return (
               <li className={"list-group-item shop-cart-item " + selected} key={courseId} onClick={(e) => this.handleClick(e, courseId)}>
                 <span>{course.courseNumber} - {course.courseName}</span>
                 <span className="glyphicon glyphicon-remove pull-right glyph-show-hover" style={{color: '#FFFFFF', display: 'none'}} 
                       onClick={(e) => this.handleRemoveClick(e, course._id)}/>
                 <span className="glyph-hide-hover" style={{marginLeft: '10px'}}>{englyph}</span>
-                <Modal type="ClassInformation" data={course} id={"CourseInfoModal" + courseId} addClass={(c) => this.addClass(c)} button='add' reload={this.props.reload}/>
+                <Modal type="ClassInformation" data={course} id={"CourseInfoModal" + courseId} addClass={(c) => this.addClass(c)} 
+                       button={buttonType} conflict={timeOrConflict} reload={this.props.reload}/>
                 <br/><br/>
-                <span>{days} / {start} - {end}</span>
+                {timeOrConflict}
                 <a key={courseId} data-toggle="modal" href={"#CourseInfoModal" + courseId}>More info</a>
               </li>
             );

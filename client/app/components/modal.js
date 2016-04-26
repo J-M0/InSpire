@@ -15,7 +15,8 @@ export default class Modal extends React.Component {
     var size = "modal-lg";
     switch (modalType) {
       case "ClassInformation":
-        modalContent = <ClassInfo id={modalId} data={data} button={this.props.button} removeClass={this.props.removeClass} addClass={this.props.addClass}/>;
+        modalContent = <ClassInfo id={modalId} data={data} button={this.props.button} removeClass={this.props.removeClass} addClass={this.props.addClass}
+                                  conflict = {this.props.conflict}/>;
         modalTitle = "Class Information";
         break;
       case "UnofficialTranscript":
@@ -131,22 +132,34 @@ class ClassInfo extends React.Component {
   }
 
   render() {
-    var button;
+    var button, conflict, isDisabled;
     var data = this.state;
     var prof = this.state.professor;
     var start = hhMMToString(new Date(data.start));
     var end = meridiemToString(new Date(data.end));
 
-    if(this.props.button == 'add') {
-      var parentModalId = this.props.id.substring(0, this.props.id.length-1);
-      button =
-       <span style={{display: 'inline-block', marginRight: '5px'}} data-toggle="modal" data-target={"#"+parentModalId}>
-          <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={(e) => this.handleAddClass(e)}>
-            Add Class
-          </button>
-        </span>;
-    } else {
-      button = <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={(e) => this.handleDropClass(e)}>Drop Class</button>;
+    switch(this.props.button) {
+      case 'conflict':
+        this.props.conflict.props.style.color = 'black';
+        this.props.conflict.props.style.marginRight = '10px';
+        conflict = this.props.conflict;
+        isDisabled = true;
+      case 'add':
+        var parentModalId = this.props.id.substring(0, this.props.id.length-1);
+        button = (isDisabled) ?
+          <span style={{display: 'inline-block', marginRight: '5px'}} data-toggle="modal" data-target={"#"+parentModalId}>
+            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={(e) => this.handleAddClass(e)} disabled>
+              Add Class
+            </button>
+          </span> :
+          <span style={{display: 'inline-block', marginRight: '5px'}} data-toggle="modal" data-target={"#"+parentModalId}>
+            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={(e) => this.handleAddClass(e)}>
+              Add Class
+            </button>
+          </span>;
+        break;
+      default:
+        button = <button type="button" className="btn btn-default" data-dismiss="modal" onClick={(e) => this.handleDropClass(e)}>Drop Class</button>;
     }
 
     // The denominator is the number of columns
@@ -201,6 +214,7 @@ class ClassInfo extends React.Component {
           <div className="panel-body" style={{color:'#354066'}}>{data.description}</div>
         </div>
         <div className="modal-footer">
+          {conflict}
           {button}
           <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
         </div>
