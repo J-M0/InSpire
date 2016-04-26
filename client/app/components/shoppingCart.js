@@ -79,7 +79,6 @@ export default class ShoppingCart extends React.Component {
             for (var i = 0; i < course.days.length; i++) {
                 days[i] = course.days[i].substring(0,1);
             }
-            console.log(days + "/" + start + "-" + end);
             var courseId = course._id;
             selected = (this.state.selected.indexOf(courseId) !== -1) ? "selected" : "";
             if (course.enrolled.length >= course.capacity) {

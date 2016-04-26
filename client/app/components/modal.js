@@ -149,6 +149,7 @@ class ClassInfo extends React.Component {
       button = <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={(e) => this.handleDropClass(e)}>Drop Class</button>;
     }
 
+    // The denominator is the number of columns
     return (
       <div>
         <div className="modal-body">
@@ -156,20 +157,20 @@ class ClassInfo extends React.Component {
             <table className="table">
               <thead>
                 <tr>
-                  <th>Number</th>
-                  <th>Section</th>
-                  <th>Units</th>
-                  <th>Enrolled</th>
-                  <th>Cap</th>
+                  <th style={{width: '22%'}}>Number</th>
+                  <th style={{width: '22%'}}>Section</th>
+                  <th style={{width: '22%'}}>Units</th>
+                  <th style={{width: '14%'}}>Enrolled</th>
+                  <th style={{width: '30%'}}>Cap</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>{data.courseTag} {data.courseNumber}</td>
-                  <td>{data.section}</td>
-                  <td>{data.credits}</td>
-                  <td>{data.enrolled.length}</td>
-                  <td>{data.capacity}</td>
+                  <td style={{width: '22%'}}>{data.courseTag} {data.courseNumber}</td>
+                  <td style={{width: '22%'}}>{data.section}</td>
+                  <td style={{width: '22%'}}>{data.credits}</td>
+                  <td style={{width: '14%'}}>{data.enrolled.length}</td>
+                  <td style={{width: '30%'}}>{data.capacity}</td>
                 </tr>
               </tbody>
             </table>
@@ -179,18 +180,20 @@ class ClassInfo extends React.Component {
             <table className="table">
               <thead>
                 <tr>
-                  <th>Title</th>
-                  <th>Time</th>
-                  <th>Room</th>
-                  <th>Instructor</th>
+                  <th style={{width: '22%'}}>Title</th>
+                  <th style={{width: '22%'}}>Time</th>
+                  <th style={{width: '22%'}}>Room</th>
+                  <th style={{width: '14%'}}>Instructor</th>
+                  <th style={{width: '30%'}}>Restrictions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>{data.courseName}</td>
-                  <td>{this.getDays()} <br/> {start} - {end}</td>
-                  <td>{data.location}</td>
-                  <td>{prof}</td>
+                  <td style={{width: '22%'}}>{data.courseName}</td>
+                  <td style={{width: '22%'}}>{this.getDays()} <br/> {start} - {end}</td>
+                  <td style={{width: '22%'}}>{data.location}</td>
+                  <td style={{width: '14%'}}>{prof}</td>
+                  <td style={{width: '30%'}}>{data.restrictions}</td>
                 </tr>
               </tbody>
             </table>

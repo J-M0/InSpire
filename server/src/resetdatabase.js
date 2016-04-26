@@ -193,7 +193,7 @@ var initialData = {
           "credits": 3,
           "capacity": 100,
           "enrolled": [],
-          "restrictions": "Must have completed CS 220 with a C or higher.",
+          "restrictions": "Completion of CS 220 with grade of C or higher.",
           "instructor": new ObjectID("000000000000000023810589"),
           "final": [new Date(2017, 4, 22, 15, 0, 0), new Date(2017, 4, 22 ,17, 0, 0), "Lederle Grad Res Ctr rm A301"],
           "start" : new Date(0,0,0,15,0),
