@@ -223,10 +223,11 @@ MongoClient.connect(databaseUrl, function(err, db) {
                       newCart.push(doc);
                     },
                     function() {
-                      res.send(newCart);
+                      res.send(newCart.sort(function(a, b) {
+                        return a.courseNumber > b.courseNumber;
+                      }));
                     }
                   );
-                  //res.send(student.cart);
                 }
               });
          });
