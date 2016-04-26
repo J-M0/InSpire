@@ -16,7 +16,7 @@ export default class Modal extends React.Component {
     switch (modalType) {
       case "ClassInformation":
         modalContent = <ClassInfo id={modalId} data={data} button={this.props.button} removeClass={this.props.removeClass} addClass={this.props.addClass}
-                                  conflict = {this.props.conflict}/>;
+                                  addToCart={this.props.addToCart} conflict = {this.props.conflict}/>;
         modalTitle = "Class Information";
         break;
       case "UnofficialTranscript":
@@ -131,6 +131,11 @@ class ClassInfo extends React.Component {
     this.props.removeClass(this.state._id);
   }
 
+  handleAddCart(e) {
+    e.preventDefault();
+    this.props.addToCart(this.state._id);
+  }
+
   render() {
     var button, conflict, isDisabled;
     var data = this.state;
@@ -138,13 +143,22 @@ class ClassInfo extends React.Component {
     var start = hhMMToString(new Date(data.start));
     var end = meridiemToString(new Date(data.end));
     var restrictions = (data.restrictions !== "") ? data.restrictions : "None";
-
+    var addToCartBtn;
     switch(this.props.button) {
+      case 'addToCart':
+        addToCartBtn =
+          <span style={{display: 'inline-block', marginRight: '5px'}} data-toggle="modal" data-target={"#"+parentModalId}>
+            <button type="button" className="btn btn-primary" data-dismiss="modal" onClick={(e) => this.handleAddCart(e)}>
+              Add To Cart
+            </button>
+          </span>;
       case 'conflict':
-        this.props.conflict.props.style.color = 'black';
-        this.props.conflict.props.style.marginRight = '10px';
+        if (this.props.conflict !== undefined) {
+          this.props.conflict.props.style.color = 'black';
+          this.props.conflict.props.style.marginRight = '10px';
+          isDisabled = true;
+        }
         conflict = this.props.conflict;
-        isDisabled = true;
       case 'add':
         var parentModalId = this.props.id.substring(0, this.props.id.length-1);
         button = (isDisabled) ?
@@ -216,6 +230,7 @@ class ClassInfo extends React.Component {
         </div>
         <div className="modal-footer">
           {conflict}
+          {addToCartBtn}
           {button}
           <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
         </div>

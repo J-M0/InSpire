@@ -231,6 +231,38 @@ MongoClient.connect(databaseUrl, function(err, db) {
     }
   });
 
+  app.post('/addtocart', function(req, res) {
+    var course = new ObjectID(req.body.courseId);
+    var fromUser = getUserIdFromToken(req.get('Authorization'));
+    var id = new ObjectID(req.body.userId);
+    if (fromUser == id) {
+      db.collection('students').updateOne({_id: id}, { $push: {cart: course}}, function(err) {
+        if(err) {
+          return sendDatabaseError(res, err);
+        }
+        db.collection('students').findOne({_id : id}, function (err, student) {
+          if (err) {
+            sendDatabaseError(res, err);
+          } else {
+            var newCart = [];
+            db.collection('courses').find({_id : {$in:student.cart}}).forEach(
+              function(doc) {
+                newCart.push(doc);
+              },
+              function() {
+                res.send(newCart.sort(function(a, b) {
+                  return a.courseNumber > b.courseNumber;
+                }));
+              }
+            );
+          }
+        });
+      });
+    } else {
+      res.status(401).end();
+    }
+  });
+
   // GET request for course information
   app.get('/courses/:courseid', function(req, res) {
     var courseId = new ObjectID(req.params.courseid);

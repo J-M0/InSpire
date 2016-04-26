@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from './modal';
-import {getSearchResults, enrollInClass} from '../server';
+import {getSearchResults, enrollInClass, addCourseToCart} from '../server';
 import {hhMMToString, meridiemToString} from '../util';
 
 /*
@@ -243,6 +243,12 @@ class SearchResultItem extends React.Component {
       });
   }
 
+  addCourseToCart(course) { 
+    addCourseToCart(this.props.userId.id, course, () => {
+      this.props.reload();
+    });
+  }
+
   render() {
     var data = this.state;
     var body;
@@ -287,7 +293,7 @@ class SearchResultItem extends React.Component {
     return (
       <li className="list-group-item">
         {englyph}
-        <Modal type="ClassInformation" data={data} id={modalId} button='add' addClass={(c) => this.addClass(c)}/>
+        <Modal type="ClassInformation" data={data} id={modalId} button='addToCart' addClass={(c) => this.addClass(c)} addToCart={(c) => this.addCourseToCart(c)}/>
         {data.courseTag} {data.courseNumber} - {data.courseName} <a href="#" onClick={(e) => this.handleChevronClick(e)}>{chevron}</a>
         <br></br>
         {days} / {start} - {end}

@@ -102,9 +102,14 @@ export function getShoppingCart(userId, cb) {
   });
 }
 
-// MADE CHANGES HERE
 export function dropCourseFromCart(userId, courseId, cb) {
   sendXHR('POST', '/dropfromcart', { userId:userId, courseId:courseId }, (xhr) => {
+    cb(JSON.parse(xhr.responseText));
+  });
+}
+
+export function addCourseToCart(userId, courseId, cb) {
+  sendXHR('POST', '/addtocart', { userId:userId, courseId:courseId }, (xhr) => {
     cb(JSON.parse(xhr.responseText));
   });
 }
