@@ -33,7 +33,7 @@ export default class Modal extends React.Component {
         modalTitle = "Time Selection";
         break;
       case "AvailableCourses":
-        modalContent = <AvailableModal data={data} id={modalId}/>;
+        modalContent = <AvailableModal data={data} enrolled={this.props.enrolled} id={modalId} conflict={this.props.conflict}/>;
         modalTitle = "Available Courses";
         style={zIndex: '1049'};
         size = "modal-sm";
@@ -137,6 +137,7 @@ class ClassInfo extends React.Component {
     var prof = this.state.professor;
     var start = hhMMToString(new Date(data.start));
     var end = meridiemToString(new Date(data.end));
+    var restrictions = (data.restrictions !== "") ? data.restrictions : "None";
 
     switch(this.props.button) {
       case 'conflict':
@@ -206,7 +207,7 @@ class ClassInfo extends React.Component {
                   <td style={{width: '22%'}}>{this.getDays()} <br/> {start} - {end}</td>
                   <td style={{width: '22%'}}>{data.location}</td>
                   <td style={{width: '14%'}}>{prof}</td>
-                  <td style={{width: '30%'}}>{data.restrictions}</td>
+                  <td style={{width: '30%'}}>{restrictions}</td>
                 </tr>
               </tbody>
             </table>
@@ -280,13 +281,31 @@ class UoTranscript extends React.Component {
 class AvailableModal extends React.Component {
   render() {
     var body;
-
+    var englyph;
+    var conflict;
     body =
       (this.props.data.length > 0)
       ? this.props.data.map((course, i) => {
+          conflict = "";
+          if (course.enrolled.length >= course.capacity) {
+            englyph = <span className="glyphicon glyphicon-asterisk" style={{color: '#C9363E', fontSize: '1.2em'}} />;
+          } else if (course.restrictions !== "") {
+            englyph = <span className="glyphicon glyphicon-asterisk" style={{color: '#D9D762', fontSize: '1.2em'}} />;
+          }
+
+          this.props.enrolled.map((enrolledCourse) => {
+            if (enrolledCourse.days.filter(function (n) { return course.days.indexOf(n) != -1;}).length !== 0
+                && ((course.start >=  enrolledCourse.start && course.start <= enrolledCourse.end)
+                ||  (course.end   >=  enrolledCourse.start && course.end   <= enrolledCourse.end)
+                ||  (course.start <= enrolledCourse.start  && course.end   >= enrolledCourse.end))) 
+            {
+              conflict = <span className="glyphicon glyphicon-exclamation-sign" style={{color: '#C9363E', fontSize: '1.2em'}} />;
+            }
+          });
+
           return(
             <button key={"btn"+i} type="button" className="course-modal-btn" data-toggle="modal" data-target={"#"+this.props.id+i}>
-              {course.courseTag} {course.courseNumber} - {course.courseName}
+              {conflict} {englyph} {course.courseTag} {course.courseNumber} - {course.courseName}
             </button>
           );
         })

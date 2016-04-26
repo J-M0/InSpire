@@ -54,13 +54,26 @@ class CalendarBlock extends React.Component {
 
     if(this.state.available !== undefined) {
       var data = this.state.available;
+      var buttonType;
+      var conflict;
       modal =
         <div>
           {this.state.available.map((course, i) => {
+            buttonType = 'add';
+            this.props.enrolled.map((enrolledCourse) => {
+              if (enrolledCourse.days.filter(function (n) { return course.days.indexOf(n) != -1;}).length !== 0
+                    && ((course.start >=  enrolledCourse.start && course.start <= enrolledCourse.end)
+                    ||  (course.end   >=  enrolledCourse.start && course.end   <= enrolledCourse.end)
+                    ||  (course.start <= enrolledCourse.start  && course.end   >= enrolledCourse.end))) 
+              {
+                buttonType = 'conflict';
+                conflict = <span style={{fontWeight: 'bold'}}>Conflicts with {enrolledCourse.courseTag} {enrolledCourse.courseNumber}</span>;
+              } 
+            });
             if (this.state.id === undefined) return(<span/>);
-            return(<Modal key={"modal"+i} type="ClassInformation" data={course} id={this.state.id+i} addClass={this.props.addClass} button='add'/>)
+            return(<Modal key={"modal"+i} type="ClassInformation" data={course} id={this.state.id+i} addClass={this.props.addClass} button={buttonType} conflict={conflict}/>)
           })}
-          <Modal data={data} type="AvailableCourses" id={this.state.id} />
+          <Modal data={data} enrolled={this.props.enrolled} type="AvailableCourses" id={this.state.id} conflict={buttonType}/>
         </div>
     }
 
