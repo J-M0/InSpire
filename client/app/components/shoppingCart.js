@@ -24,8 +24,9 @@ export default class ShoppingCart extends React.Component {
     });
   }
 
-  handleClick(e, id) {
+  handleClick(e, id, isDisabled) {
     e.preventDefault();
+    if (isDisabled === true) { return; }
     var idx = this.state.selected.indexOf(id);
     var selected = this.state.selected;
     (idx === -1) ? selected.push(id) : selected.splice(idx, 1);
@@ -86,6 +87,7 @@ export default class ShoppingCart extends React.Component {
 
             var timeOrConflict = <span>{days} / {start} - {end}</span>;
             var buttonType = 'add';
+            var isDisabled = 'false';
 
             var courseId = course._id;
             selected = (this.state.selected.indexOf(courseId) !== -1) ? "selected" : "";
@@ -105,12 +107,12 @@ export default class ShoppingCart extends React.Component {
                     (course.end >=  enrolledCourse.start && course.end <= enrolledCourse.end))) {
                   timeOrConflict = <span style={{fontWeight: 'bold'}}>Conflicts with {enrolledCourse.courseTag} {enrolledCourse.courseNumber}</span>;
                   buttonType = 'conflict';
+                  isDisabled = true;
                 }
               });
             }
-
             return (
-              <li className={"list-group-item shop-cart-item " + selected} key={courseId} onClick={(e) => this.handleClick(e, courseId)}>
+              <li className={"list-group-item shop-cart-item " + selected} key={courseId} onClick={(e) => this.handleClick(e, courseId, isDisabled)}>
                 <span>{course.courseNumber} - {course.courseName}</span>
                 <span className="glyphicon glyphicon-remove pull-right glyph-show-hover" style={{color: '#FFFFFF', display: 'none'}} 
                       onClick={(e) => this.handleRemoveClick(e, course._id)}/>
