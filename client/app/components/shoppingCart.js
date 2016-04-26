@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from './modal';
 import {getShoppingCart, enrollInClass, dropCourseFromCart} from '../server';
+import {hhMMToString, meridiemToString} from '../util';
 
 export default class ShoppingCart extends React.Component {
   constructor(props) {
@@ -57,7 +58,6 @@ export default class ShoppingCart extends React.Component {
     var body;
     var englyph;
     var selected;
-
     var enroll =
       <button name="singlebutton" className="btn btn-primary center-block" style={{backgroundColor:'#354066', marginTop:'5px'}} onClick={()=>this.batchAddClass()}>
         Enroll
@@ -73,6 +73,13 @@ export default class ShoppingCart extends React.Component {
       if (this.state.cart.length !== 0) {
         body =
           this.state.cart.map((course) => {
+            var start = hhMMToString(new Date(course.start));
+            var end = meridiemToString(new Date(course.end));
+            var days = [];
+            for (var i = 0; i < course.days.length; i++) {
+                days[i] = course.days[i].substring(0,1);
+            }
+            console.log(days + "/" + start + "-" + end);
             var courseId = course._id;
             selected = (this.state.selected.indexOf(courseId) !== -1) ? "selected" : "";
             if (course.enrolled.length >= course.capacity) {
@@ -89,7 +96,8 @@ export default class ShoppingCart extends React.Component {
                       onClick={(e) => this.handleRemoveClick(e, course._id)}/>
                 <span className="glyph-hide-hover" style={{marginLeft: '10px'}}>{englyph}</span>
                 <Modal type="ClassInformation" data={course} id={"CourseInfoModal" + courseId} addClass={(c) => this.addClass(c)} button='add' reload={this.props.reload}/>
-                <br/>
+                <br/><br/>
+                <span>{days} / {start} - {end}</span>
                 <a key={courseId} data-toggle="modal" href={"#CourseInfoModal" + courseId}>More info</a>
               </li>
             );
