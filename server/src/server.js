@@ -252,9 +252,10 @@ MongoClient.connect(databaseUrl, function(err, db) {
   // GET request for available courses
   // May become more difficult when we extend functionality
   // Nick is doing this
-  app.get('/courses/available/:day/:start', function(req, res) {
+  app.get('/courses/available/:day/:start/:end', function(req, res) {
     var available = [];
     var blockStart = new Date(req.params.start);
+	var blockEnd = new Date(req.params.end);
 
   /* Nick Merlino's
     var cursor = db.collection('courses').find();
@@ -270,7 +271,10 @@ MongoClient.connect(databaseUrl, function(err, db) {
   */
 
 	// Alternative approach that leverages MongoDBs operators
-    var cursor = db.collection('courses').find({days: req.params.day, start: {$lte:blockStart}, end: {$gte: blockStart}});
+    var cursor = db.collection('courses').find(
+	  {days: req.params.day, 
+	  $or: [{start: {$gte:blockStart , $lte:blockEnd}}, {end: {$gte:blockStart, $lte:blockEnd}}, {start: {$lte:blockStart}, end: {$gte: blockEnd}}]}
+	);
     cursor.forEach(function (doc) {
         available.push(doc);
     }, function() {

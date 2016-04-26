@@ -109,7 +109,7 @@ var initialData = {
           "instructor": new ObjectID("000000000000000012345678"),
           "final": [new Date(2017, 0, 22,10,0,0,0),new Date(2017,0,22,12,0,0,0), "School of Management rm 135"],
           "start": new Date(0,0,0,8,0),
-          "end": new Date(0,0,0,8,55),
+          "end": new Date(0,0,0,8,50),
           "days": ["Monday","Wednesday","Friday"]
       },
       "92819522": {
@@ -130,8 +130,8 @@ var initialData = {
           "restrictions": "",
           "instructor": new ObjectID("000000000000000083719683"),
           "final": [new Date(2017, 0, 22,8,0,0,0),new Date(2017,0,22,10,0,0,0), "School of Management rm 136"],
-          "start": new Date(0,0,0,8,30),
-          "end": new Date(0,0,0,9,45),
+          "start": new Date(0,0,0,16,00),
+          "end": new Date(0,0,0,17,15),
           "days": ["Tuesday", "Thursday"]
       },
       "19103958": {

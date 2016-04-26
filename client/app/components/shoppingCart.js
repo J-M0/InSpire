@@ -102,9 +102,11 @@ export default class ShoppingCart extends React.Component {
             if (this.state.enrolled !== undefined) {
               this.state.enrolled.map((enrolledCourse) => {
                 // Crazy array intersection code
-                if (enrolledCourse.days.filter(function (n) { return course.days.indexOf(n) != -1;}).length !== 0 && 
-                    ((course.start >=  enrolledCourse.start && course.start <= enrolledCourse.end) ||
-                    (course.end >=  enrolledCourse.start && course.end <= enrolledCourse.end))) {
+                if (enrolledCourse.days.filter(function (n) { return course.days.indexOf(n) != -1;}).length !== 0
+                    && ((course.start >=  enrolledCourse.start && course.start <= enrolledCourse.end)
+                    ||  (course.end >=  enrolledCourse.start && course.end <= enrolledCourse.end)
+                    ||  (course.start <= enrolledCourse.start && course.end >= enrolledCourse.end))) 
+                {
                   timeOrConflict = <span style={{fontWeight: 'bold'}}>Conflicts with {enrolledCourse.courseTag} {enrolledCourse.courseNumber}</span>;
                   buttonType = 'conflict';
                   isDisabled = true;

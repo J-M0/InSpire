@@ -123,7 +123,7 @@ export function getSearchResults(searchOptions, cb) {
 
 // gets available courses
 export function getAvailableCourses(day, start, end, cb) {
-  sendXHR('GET', '/courses/available/' + day + '/' + start, undefined, (xhr) => {
+  sendXHR('GET', '/courses/available/' + day + '/' + start + '/' + end, undefined, (xhr) => {
     cb(JSON.parse(xhr.responseText));
   });
 }
