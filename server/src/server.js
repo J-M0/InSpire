@@ -199,40 +199,34 @@ MongoClient.connect(databaseUrl, function(err, db) {
     }
   });
 
-  // MADE CHANGES HERE
-  // POST request for removing a class from the shopping cart
   app.post('/dropfromcart', function(req, res) {
-
     var course = new ObjectID(req.body.courseId);
     var fromUser = getUserIdFromToken(req.get('Authorization'));
     var id = new ObjectID(req.body.userId);
     if (fromUser == id) {
-
-          db.collection('students').updateOne({_id: id}, { $pull: {cart: course }}, function(err) {
-              if(err) {
-                  return sendDatabaseError(res, err);
+      db.collection('students').updateOne({_id: id}, { $pull: {cart: course}}, function(err) {
+        if(err) {
+          return sendDatabaseError(res, err);
+        }
+        db.collection('students').findOne({_id : id}, function (err, student) {
+          if (err) {
+            sendDatabaseError(res, err);
+          } else {
+            var newCart = [];
+            db.collection('courses').find({_id : {$in:student.cart}}).forEach(
+              function(doc) {
+                newCart.push(doc);
+              },
+              function() {
+                res.send(newCart.sort(function(a, b) {
+                  return a.courseNumber > b.courseNumber;
+                }));
               }
-              db.collection('students').findOne({_id : id}, function (err, student) {
-                if (err) {
-                  sendDatabaseError(res, err);
-                }
-                else {
-                  var newCart = [];
-                  db.collection('courses').find({_id : {$in:student.cart}}).forEach(
-                    function(doc) {
-                      newCart.push(doc);
-                    },
-                    function() {
-                      res.send(newCart.sort(function(a, b) {
-                        return a.courseNumber > b.courseNumber;
-                      }));
-                    }
-                  );
-                }
-              });
-         });
-       }
-      else {
+            );
+          }
+        });
+      });
+    } else {
       res.status(401).end();
     }
   });
@@ -256,7 +250,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
   app.get('/courses/available/:day/:start/:end', function(req, res) {
     var available = [];
     var blockStart = new Date(req.params.start);
-	var blockEnd = new Date(req.params.end);
+    var blockEnd = new Date(req.params.end);
 
   /* Nick Merlino's
     var cursor = db.collection('courses').find();
@@ -271,11 +265,11 @@ MongoClient.connect(databaseUrl, function(err, db) {
     });
   */
 
-	// Alternative approach that leverages MongoDBs operators
+    // Alternative approach that leverages MongoDBs operators
     var cursor = db.collection('courses').find(
-	  {days: req.params.day, 
-	  $or: [{start: {$gte:blockStart , $lte:blockEnd}}, {end: {$gte:blockStart, $lte:blockEnd}}, {start: {$lte:blockStart}, end: {$gte: blockEnd}}]}
-	);
+      {days: req.params.day, 
+      $or: [{start: {$gte:blockStart , $lte:blockEnd}}, {end: {$gte:blockStart, $lte:blockEnd}}, {start: {$lte:blockStart}, end: {$gte: blockEnd}}]}
+    );
     cursor.forEach(function (doc) {
         available.push(doc);
     }, function() {
@@ -322,7 +316,7 @@ MongoClient.connect(databaseUrl, function(err, db) {
         var cart = [];
         // A cursor is analogous to a pointer from C/C++. You need to iterate over the cursor object
         // which is a lot like a LinkedList from Java.
-        var cursor = db.collection('courses').find({_id:{ $in : student.cart}});
+        var cursor = db.collection('courses').find({_id: {$in : student.cart, $nin : student.enrolledCourses}});
         cursor.forEach( function(doc) {                 // From the Node.js MongoDB driver API
           cart.push(doc);                            // forEach takes 2 functions as parameters
         }, function () {                                // First function is applied every iteration
@@ -335,10 +329,6 @@ MongoClient.connect(databaseUrl, function(err, db) {
   } else {
     res.status(400).end();
   }
-    //for (var i = 0, cart=[]; i < student.cart.length; i++) {
-    //cart.push(readDocument('courses', student.cart[i]));
-    //}
-    //res.send(cart);
 });
 
   // GET request for student information

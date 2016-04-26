@@ -7,9 +7,6 @@ export default class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
     this.state = props;
-    getShoppingCart(this.props.params.id, (cart) =>  {
-      this.setState({cart});
-    });
     this.refresh();
   }
 
@@ -21,6 +18,10 @@ export default class ShoppingCart extends React.Component {
   refresh() {
     getEnrolledCourses(this.props.params.id, (enrolled) => {
       this.setState({enrolled});
+    });
+
+    getShoppingCart(this.props.params.id, (cart) => {
+      this.setState({cart});
     });
   }
 
@@ -117,6 +118,7 @@ export default class ShoppingCart extends React.Component {
                 }
               });
             }
+
             return (
               <li className={"list-group-item shop-cart-item " + selected} key={courseId} onClick={(e) => this.handleClick(e, courseId, isDisabled)}>
                 <span>{course.courseNumber} - {course.courseName}</span>
