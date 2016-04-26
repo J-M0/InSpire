@@ -36,7 +36,7 @@ export default class UserInfo extends React.Component {
     return (
       <div className="panel panel-default" id="userinfo">
         <div className="panel-heading">
-          <strong>{studentName} ({studentId})</strong>
+          <span><img src="img/umass_logo.png" alt="UMass Logo" id="logo"></img></span><strong>{studentName} ({studentId})</strong>
         </div>
         <div className="panel-body">
           {TModal}
